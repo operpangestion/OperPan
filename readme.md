@@ -17,9 +17,19 @@
 
  <img src="./img/img.readme/crear repositorio.png">
 
- Creado nuestro primer repsotorio podemos continuar con git bash que es la extension de git para subir nuestra documentacion de git hub donde nos entregara los comando para poder subir nuestro repositorio
+ Creado nuestro primer repsotorio podemos continuar con git bash que es la extension de git para subir nuestra documentacion de git hub donde nos entregara los comandos para poder subir nuestro repositorio
 
- <img src="">
+ <img src="./img/img.readme/github.jpg">
+
+ Para subir un archivo sin la necesidad de subirlo con codigo en git podemos subirlo con el apartado de uploading an existing file 
+
+ <img src="./img/img.readme/subirArchivo.jpg">
+
+
+## Como Subimos nuestros archivo con codigo?
+
+Para subir un archivo a git hub conn codigo debemos descargar git bash que es una delasterminales de git para subir archvivos a la nube solo tenemos que ir a su pagina oficial <a href="https://git-scm.com/install/window">git 
+
 
 ---
 
