@@ -1,8 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root{
+    --color-rojo: #A40706;
+    --color-rojo-oscuro: #6F0303;
+    --color-rojo-ceniza: #E6B1B0;
+    --color-gris-carbon: #2B2B2B;
+    --color-gris-claro: #E5E5E5;
+    --color-negro: #000000;
+    --color-blanco: #ffffff;
+}
+
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+}
+
+h1, 
+h2, 
+h3, 
+h4{
+font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: weight;
+  font-style: normal;
+  font-variation-settings:"wdth" 100;
+}
+
+p, li{
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .admin__nav {
@@ -20,15 +49,16 @@ li {
 }
 
 .nav__btn {
-    background-color: black;
-    color: white;
+    background-color: var(--color-gris-carbon);
+    color: var(--color-gris-claro);
     transition: 0.5s;
     border-radius: 5px;
     padding: 5px;
 }
 
 .nav__btn:hover {
-    background-color: red;
+    background-color: var(--color-rojo-oscuro);
+    color: var(--color-blanco);
 }
 
 section {
