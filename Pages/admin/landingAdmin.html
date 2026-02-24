@@ -76,15 +76,38 @@
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum nobis iure nisi debitis nulla quae dolore veniam atque a nesciunt?</p>
         </section>
 
+
         <!-- SECCIÓN CUENTAS -->
-        <section id="cuentas" class="admin__section">
+        <section id="cuentas" class="admin__section" style="align-items: center; margin: 120px;" >
             <fieldset>
                 <legend>Crear Cuenta</legend>
-                <label for="_nombre">Nombre : <input type="text" value="Escriba su nombre."></label>
-                
-                <label  for="Apellido">Apellido : <input type="text" value="Escriba su Apellido"></label>
-                
-                <label for=""></label>
+                <br>
+                <label   for="_nombre"><input  style="margin: 12px;" type="text" placeholder="Escriba su nombre."></label>
+                <label  for="_Apellido"><input type="text" placeholder="Escriba su Apellido"></label>
+                <label for="_TipoCedula"><input type="text" placeholder="Escriba su Cedula"></label>
+                <br>
+                <label for="_Correo"><input style="margin: 12px;" type="text" placeholder="Correo"></label>
+                <label for="_Celular"><input type="text" placeholder="Celular"></label>    
+                <label for="_direccion"><input type="text" placeholder="Direccion"></label>
+                <br>
+                <label for="_Rh"></label>
+                    <select id="_Rh" name="_Rh">
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B-">B+</option>
+                        <option value="B+">B-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                    </select>
+                <label for="_area"><input style="margin: 12px;"  type="text" placeholder="Area"></label>
+                <label for="_IDempleado"></label><input placeholder="Id Empleado"></label>
+                <br>
+                <label for="_Eps"><input style="margin: 12px;" type="text " placeholder="Eps"></label>
+                <label for="_Arl"><input type="text " placeholder="Arl"></label>
+                <br>
+                <input type="button" value="Crear Cuenta">
             </fieldset>
         </section>
 
