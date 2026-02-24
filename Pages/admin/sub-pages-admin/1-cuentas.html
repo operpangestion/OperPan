@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OperPan | Cuentas</title>
+    <link rel="stylesheet" href="../Assets/style.css">
+</head>
+<body>
+    <!-- HEADER PRINCIPAL -->
+    <header class="admin__header">
+        <h1 class="admin__title">Estación Paisa</h1>
+
+        <div class="admin__user">
+            <span class="admin__role">Vista Gerente / Administrador</span>
+        </div>
+    </header>
+
+
+    <!-- NAVEGACIÓN PRINCIPAL -->
+    <nav class="admin__nav">
+        <ul class="admin__menu">
+            <li><a class="nav__btn" href="../landingAdmin.html">Horarios</a></li>
+            <li><a class="nav__btn" href="./1-cuentas.html">Cuentas</a></li>
+            <li><a class="nav__btn" href="./2-tareas.html">Tareas</a></li>
+            <li><a class="nav__btn" href="./3-permisos.html">Permisos</a></li>
+            <li><a class="nav__btn" href="./4-reportes.html">Reportes</a></li>
+            <li><a class="nav__btn" href="./5-incapacidad.html">Incapacidad</a></li>
+            <li><a class="nav__btn" href="./6-certificados.html">Certificados</a></li>
+        </ul>
+    </nav>
+
+    <!-- SECCIÓN CUENTAS -->
+    <section id="cuentas" class="admin__section">
+    <header class="section__header">
+        <h2 class="section__title">Gestión de Cuentas</h2>
+        <p class="section__description">Administra la información del personal de Estación Paisa</p>
+    </header>
+
+    <!-- Buscador de empleados -->
+    <div class="employee-search">
+        <div class="employee-search__field">
+        <label for="search-empleado" class="employee-search__label">Buscar empleado</label>
+        <div class="employee-search__input-group">
+            <input type="text" 
+                id="search-empleado" 
+                class="employee-search__input" 
+                placeholder="ID, nombre, documento o correo"
+                aria-label="Buscar empleado por ID, nombre, documento o correo">
+            <button class="employee-search__btn" aria-label="Buscar">
+            🔍 Buscar
+            </button>
+        </div>
+        </div>
+        
+        <!-- Acciones CRUD -->
+        <div class="crud-actions">
+        <button class="button button--primary" data-action="crear">
+            <span class="button__icon">+</span> Crear
+        </button>
+        <button class="button button--secondary" data-action="modificar">
+            <span class="button__icon">✎</span> Modificar
+        </button>
+        <button class="button button--danger" data-action="eliminar">
+            <span class="button__icon">🗑</span> Eliminar
+        </button>
+        </div>
+    </div>
+
+    <!-- Formulario de empleado -->
+    <form class="employee-form">
+        <!-- Fila 1: Nombres y Apellidos -->
+        <div class="form__row">
+        <div class="form__group form__group--half">
+            <label for="nombres" class="form__label">
+            Nombres <span class="form__required">*</span>
+            </label>
+            <input type="text" 
+                id="nombres" 
+                class="form__input" 
+                placeholder="Ej: Juan Carlos"
+                required>
+        </div>
+        
+        <div class="form__group form__group--half">
+            <label for="apellidos" class="form__label">
+            Apellidos <span class="form__required">*</span>
+            </label>
+            <input type="text" 
+                id="apellidos" 
+                class="form__input" 
+                placeholder="Ej: Rodríguez Méndez"
+                required>
+        </div>
+        </div>
+
+        <!-- Fila 2: Tipo y Cédula -->
+        <div class="form__row">
+        <div class="form__group form__group--quarter">
+            <label for="tipo-documento" class="form__label">
+            Tipo <span class="form__required">*</span>
+            </label>
+            <select id="tipo-documento" class="form__select" required>
+            <option value="" disabled selected>Seleccionar</option>
+            <option value="cc">Cédula Ciudadanía (CC)</option>
+            <option value="ce">Cédula Extranjería (CE)</option>
+            <option value="ti">Tarjeta Identidad (TI)</option>
+            <option value="pasaporte">Pasaporte</option>
+            </select>
+        </div>
+        
+        <div class="form__group form__group--three-quarters">
+            <label for="cedula" class="form__label">
+            Número de documento <span class="form__required">*</span>
+            </label>
+            <input type="text" 
+                id="cedula" 
+                class="form__input" 
+                placeholder="Ej: 1234567890"
+                required>
+        </div>
+        </div>
+
+        <!-- Fila 3: Correo y Celular -->
+        <div class="form__row">
+        <div class="form__group form__group--half">
+            <label for="correo" class="form__label">
+            Correo electrónico <span class="form__required">*</span>
+            </label>
+            <input type="email" 
+                id="correo" 
+                class="form__input" 
+                placeholder="ejemplo@estacionpaisa.com"
+                required>
+        </div>
+        
+        <div class="form__group form__group--half">
+            <label for="celular" class="form__label">
+            Celular <span class="form__required">*</span>
+            </label>
+            <input type="tel" 
+                id="celular" 
+                class="form__input" 
+                placeholder="Ej: 3001234567"
+                pattern="[0-9]{10}"
+                required>
+        </div>
+        </div>
+
+        <!-- Fila 4: Dirección y RH + A -->
+        <div class="form__row">
+        <div class="form__group form__group--half">
+            <label for="direccion" class="form__label">
+            Dirección <span class="form__required">*</span>
+            </label>
+            <input type="text" 
+                id="direccion" 
+                class="form__input" 
+                placeholder="Ej: Cra 45 #23-12"
+                required>
+        </div>
+        
+        <div class="form__group form__group--half">
+            <label for="rh" class="form__label">
+            RH + Factor <span class="form__required">*</span>
+            </label>
+            <select id="rh" class="form__select" required>
+            <option value="" disabled selected>Seleccionar RH</option>
+            <option value="a+">A+</option>
+            <option value="a-">A-</option>
+            <option value="b+">B+</option>
+            <option value="b-">B-</option>
+            <option value="ab+">AB+</option>
+            <option value="ab-">AB-</option>
+            <option value="o+">O+</option>
+            <option value="o-">O-</option>
+            </select>
+        </div>
+        </div>
+
+        <!-- Fila 5: Área y ID Empleado -->
+        <div class="form__row">
+        <div class="form__group form__group--half">
+            <label for="area" class="form__label">
+            Área / Cargo <span class="form__required">*</span>
+            </label>
+            <select id="area" class="form__select" required>
+            <option value="" disabled selected>Seleccionar área</option>
+            <option value="panadero">Panadería - Panadero</option>
+            <option value="panadero-maestro">Panadería - Panadero Maestro</option>
+            <option value="repostero">Repostería - Repostero</option>
+            <option value="decorador">Repostería - Decorador</option>
+            <option value="atencion">Servicio al Cliente - Mesero</option>
+            <option value="caja">Servicio al Cliente - Cajero</option>
+            <option value="aseo">Aseo y Limpieza</option>
+            <option value="produccion">Producción - Operario</option>
+            <option value="supervisor">Supervisor de Turno</option>
+            <option value="administrativo">Administrativo</option>
+            </select>
+        </div>
+        
+        <div class="form__group form__group--half">
+            <label for="id-empleado" class="form__label">
+            ID Empleado <span class="form__required">*</span>
+            </label>
+            <input type="text" 
+                id="id-empleado" 
+                class="form__input" 
+                placeholder="Ej: EMP-2024-001"
+                pattern="EMP-[0-9]{4}-[0-9]{3}"
+                required>
+            <small class="form__hint">Formato: EMP-2024-001</small>
+        </div>
+        </div>
+
+        <!-- Fila 6: EPS y ARL -->
+        <div class="form__row">
+        <div class="form__group form__group--half">
+            <label for="eps" class="form__label">
+            EPS <span class="form__required">*</span>
+            </label>
+            <select id="eps" class="form__select" required>
+            <option value="" disabled selected>Seleccionar EPS</option>
+            <option value="sura">Sura</option>
+            <option value="sanitas">Sanitas</option>
+            <option value="nuevaeps">Nueva EPS</option>
+            <option value="famisanar">Famisanar</option>
+            <option value="saludtotal">Salud Total</option>
+            <option value="coomeva">Coomeva</option>
+            <option value="compensar">Compensar</option>
+            </select>
+        </div>
+        
+        <div class="form__group form__group--half">
+            <label for="arl" class="form__label">
+            ARL <span class="form__required">*</span>
+            </label>
+            <select id="arl" class="form__select" required>
+            <option value="" disabled selected>Seleccionar ARL</option>
+            <option value="sura">ARL Sura</option>
+            <option value="bolivar">ARL Bolívar</option>
+            <option value="colpatria">ARL Colpatria</option>
+            <option value="positiva">ARL Positiva</option>
+            <option value="equidad">ARL La Equidad</option>
+            </select>
+        </div>
+        </div>
+
+        <!-- Información adicional de contacto emergencia -->
+        <details class="form__details">
+        <summary class="form__details-summary">Contacto de emergencia (opcional)</summary>
+        <div class="form__details-content">
+            <div class="form__row">
+            <div class="form__group form__group--half">
+                <label for="contacto-nombre" class="form__label">Nombre contacto</label>
+                <input type="text" id="contacto-nombre" class="form__input" placeholder="Nombre completo">
+            </div>
+            <div class="form__group form__group--half">
+                <label for="contacto-telefono" class="form__label">Teléfono contacto</label>
+                <input type="tel" id="contacto-telefono" class="form__input" placeholder="Ej: 3001234567">
+            </div>
+            </div>
+            <div class="form__row">
+            <div class="form__group form__group--full">
+                <label for="contacto-parentesco" class="form__label">Parentesco</label>
+                <input type="text" id="contacto-parentesco" class="form__input" placeholder="Ej: Esposo/a, Hijo/a, Padre/Madre">
+            </div>
+            </div>
+        </div>
+        </details>
+
+        <!-- Checkbox Crear Cuenta -->
+        <div class="form__row form__row--checkbox">
+        <label class="checkbox checkbox--primary">
+            <input type="checkbox" id="crear-cuenta" class="checkbox__input" checked>
+            <span class="checkbox__label">
+            <span class="checkbox__box">☑</span>
+            Crear cuenta de acceso para el empleado
+            </span>
+        </label>
+        <small class="form__helper">Se enviarán credenciales al correo electrónico registrado</small>
+        </div>
+
+        <!-- Botones de acción -->
+        <div class="form__actions">
+        <button type="submit" class="button button--primary button--large">
+            Guardar empleado
+        </button>
+        <button type="reset" class="button button--secondary button--large">
+            Limpiar formulario
+        </button>
+        </div>
+    </form>
+
+    <!-- Vista previa de empleados recientes -->
+    <div class="recent-employees">
+        <header class="recent-employees__header">
+        <h3 class="recent-employees__title">Empleados activos recientemente</h3>
+        <a href="#" class="link link--primary">Ver todos →</a>
+        </header>
+        
+        <div class="table-responsive">
+        <table class="table">
+            <thead class="table__head">
+            <tr>
+                <th>ID</th>
+                <th>Nombre completo</th>
+                <th>Área</th>
+                <th>Contacto</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody class="table__body">
+            <tr>
+                <td><span class="table__badge">EMP-2024-156</span></td>
+                <td><strong>Eddie R Paz Pardo</strong><br><small>eddie.paz@estacionpaisa.com</small></td>
+                <td>Panadero Principal</td>
+                <td>3001234567</td>
+                <td><span class="badge badge--success">Activo</span></td>
+                <td>
+                <button class="table__action" aria-label="Editar">✎</button>
+                <button class="table__action" aria-label="Eliminar">🗑</button>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="table__badge">EMP-2024-155</span></td>
+                <td><strong>María González Torres</strong><br><small>maria.gonzalez@estacionpaisa.com</small></td>
+                <td>Repostera</td>
+                <td>3009876543</td>
+                <td><span class="badge badge--success">Activo</span></td>
+                <td>
+                <button class="table__action" aria-label="Editar">✎</button>
+                <button class="table__action" aria-label="Eliminar">🗑</button>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="table__badge">EMP-2024-154</span></td>
+                <td><strong>Carlos Rodríguez Ruiz</strong><br><small>carlos.rodriguez@estacionpaisa.com</small></td>
+                <td>Servicio al Cliente</td>
+                <td>3005551234</td>
+                <td><span class="badge badge--warning">En proceso</span></td>
+                <td>
+                <button class="table__action" aria-label="Editar">✎</button>
+                <button class="table__action" aria-label="Eliminar">🗑</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+    </section>
+</body>
+</html>

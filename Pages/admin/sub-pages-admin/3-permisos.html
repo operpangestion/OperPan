@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OperPan | Permisos</title>
+    <link rel="stylesheet" href="../Assets/style.css">
+</head>
+<body>
+    <!-- HEADER PRINCIPAL -->
+    <header class="admin__header">
+        <h1 class="admin__title">Estación Paisa</h1>
+
+        <div class="admin__user">
+            <span class="admin__role">Vista Gerente / Administrador</span>
+        </div>
+    </header>
+
+
+    <!-- NAVEGACIÓN PRINCIPAL -->
+    <nav class="admin__nav">
+        <ul class="admin__menu">
+            <li><a class="nav__btn" href="../landingAdmin.html">Horarios</a></li>
+            <li><a class="nav__btn" href="./1-cuentas.html">Cuentas</a></li>
+            <li><a class="nav__btn" href="./2-tareas.html">Tareas</a></li>
+            <li><a class="nav__btn" href="./3-permisos.html">Permisos</a></li>
+            <li><a class="nav__btn" href="./4-reportes.html">Reportes</a></li>
+            <li><a class="nav__btn" href="./5-incapacidad.html">Incapacidad</a></li>
+            <li><a class="nav__btn" href="./6-certificados.html">Certificados</a></li>
+        </ul>
+    </nav>
+
+    <!-- SECCIÓN PERMISOS -->
+    <section id="permisos" class="admin__section">
+    <header class="section__header">
+        <h2 class="section__title">Gestión de Permisos</h2>
+        <p class="section__description">Administra solicitudes de permisos, cambios de turno y ausencias del personal</p>
+    </header>
+
+    <!-- Vista toggle: Empleado vs Administrador (según el rol) -->
+    <div class="permission-tabs" role="tablist">
+        <button class="permission-tabs__tab permission-tabs__tab--active" role="tab" data-view="employee" aria-selected="true">
+        👤 Vista Empleado
+        </button>
+        <button class="permission-tabs__tab" role="tab" data-view="admin" aria-selected="false">
+        👑 Vista Administrador
+        </button>
+    </div>
+
+    <!-- VISTA EMPLEADO (lo que ve el empleado) -->
+    <div class="permission-view permission-view--employee" data-view="employee-content">
+        <!-- Información del empleado actual (basado en el mockup) -->
+        <div class="employee-context">
+        <div class="employee-context__card">
+            <div class="employee-context__avatar">EP</div>
+            <div class="employee-context__info">
+            <h3 class="employee-context__name">Eddier Paz Pardo</h3>
+            <div class="employee-context__meta">
+                <span class="employee-context__badge">ID: EMP-2024-156</span>
+                <span class="employee-context__badge">Panadero Principal</span>
+                <span class="employee-context__badge">Turno: Mañana (6am - 2pm)</span>
+            </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- Formulario de solicitud de permiso (HU-PR-01) -->
+        <form class="permission-form">
+        <h3 class="permission-form__title">Solicitar nuevo permiso</h3>
+        
+        <div class="form__grid">
+            <!-- Tipo de permiso -->
+            <div class="form__field form__field--full">
+            <label for="tipo-permiso" class="form__label">
+                Tipo de permiso <span class="form__required">*</span>
+            </label>
+            <select id="tipo-permiso" class="form__select" required>
+                <option value="" disabled selected>Seleccionar tipo</option>
+                <option value="personal">📋 Permiso personal</option>
+                <option value="cambio-turno">🔄 Cambio de turno</option>
+                <option value="medico">⚕️ Cita médica</option>
+                <option value="familiar">👪 Asunto familiar</option>
+                <option value="estudio">📚 Estudio / Capacitación</option>
+                <option value="calamidad">⚠️ Calamidad doméstica</option>
+                <option value="vacaciones">🏖️ Vacaciones</option>
+            </select>
+            </div>
+
+            <!-- Fecha del permiso (inicio y fin) -->
+            <div class="form__row">
+            <div class="form__group form__group--half">
+                <label for="fecha-inicio-permiso" class="form__label">
+                Fecha inicio <span class="form__required">*</span>
+                </label>
+                <input type="date" 
+                    id="fecha-inicio-permiso" 
+                    class="form__input" 
+                    min="2025-08-12"
+                    required>
+            </div>
+            
+            <div class="form__group form__group--half">
+                <label for="fecha-fin-permiso" class="form__label">
+                Fecha fin <span class="form__required">*</span>
+                </label>
+                <input type="date" 
+                    id="fecha-fin-permiso" 
+                    class="form__input" 
+                    min="2025-08-12"
+                    required>
+            </div>
+            </div>
+
+            <!-- Hora (especial para cambio de turno) -->
+            <div class="form__row form__row--toggle" id="hora-cambio-container">
+            <div class="form__group form__group--half">
+                <label for="hora-nueva" class="form__label">
+                Nueva hora de entrada (si aplica)
+                </label>
+                <input type="time" id="hora-nueva" class="form__input">
+            </div>
+            
+            <div class="form__group form__group--half">
+                <label for="hora-salida" class="form__label">
+                Nueva hora de salida (si aplica)
+                </label>
+                <input type="time" id="hora-salida" class="form__input">
+            </div>
+            </div>
+
+            <!-- Justificación -->
+            <div class="form__field form__field--full">
+            <label for="justificacion" class="form__label">
+                Justificación <span class="form__required">*</span>
+            </label>
+            <textarea id="justificacion" 
+                        class="form__textarea" 
+                        rows="4"
+                        placeholder="Explica el motivo de tu solicitud de permiso..."
+                        required></textarea>
+            <small class="form__hint">Máximo 500 caracteres</small>
+            </div>
+
+            <!-- Adjuntar soporte (opcional) -->
+            <div class="form__field form__field--full">
+            <label for="soporte" class="form__label">
+                Adjuntar soporte (opcional)
+            </label>
+            <input type="file" id="soporte" class="form__file" accept=".pdf,.jpg,.jpeg,.png">
+            <small class="form__hint">Formatos: PDF, JPG, PNG. Máx 5MB</small>
+            </div>
+
+            <!-- Checkbox términos -->
+            <div class="form__row form__row--checkbox">
+            <label class="checkbox checkbox--primary">
+                <input type="checkbox" id="acepto-terminos" class="checkbox__input" required>
+                <span class="checkbox__label">
+                Confirmo que la información proporcionada es verídica
+                </span>
+            </label>
+            </div>
+
+            <!-- Botones -->
+            <div class="form__actions">
+            <button type="submit" class="button button--primary">
+                Enviar solicitud
+            </button>
+            <button type="reset" class="button button--secondary">
+                Cancelar
+            </button>
+            </div>
+        </div>
+        </form>
+
+        <!-- Mis solicitudes recientes (HU-PR-02) -->
+        <div class="my-requests">
+        <header class="my-requests__header">
+            <h3 class="my-requests__title">Mis solicitudes recientes</h3>
+            <a href="#" class="link link--primary">Ver historial completo →</a>
+        </header>
+
+        <div class="requests-list">
+            <!-- Solicitud 1 - Pendiente -->
+            <article class="request-card">
+            <div class="request-card__header">
+                <span class="request-card__badge request-card__badge--pending">Pendiente</span>
+                <span class="request-card__date">12/08/2025</span>
+            </div>
+            <div class="request-card__body">
+                <h4 class="request-card__title">Permiso personal</h4>
+                <p class="request-card__description">Trámite bancario - Media jornada</p>
+                <div class="request-card__meta">
+                <span>📅 15/08/2025</span>
+                <span>⏰ 8:00 am - 12:00 pm</span>
+                </div>
+            </div>
+            </article>
+
+            <!-- Solicitud 2 - Aprobada -->
+            <article class="request-card">
+            <div class="request-card__header">
+                <span class="request-card__badge request-card__badge--approved">Aprobado</span>
+                <span class="request-card__date">10/08/2025</span>
+            </div>
+            <div class="request-card__body">
+                <h4 class="request-card__title">Cambio de turno</h4>
+                <p class="request-card__description">Intercambio con Santiago Muñeton</p>
+                <div class="request-card__meta">
+                <span>📅 13/08/2025</span>
+                <span>⏰ Turno tarde (2pm - 10pm)</span>
+                </div>
+            </div>
+            <div class="request-card__footer">
+                <span class="request-card__approved-by">Aprobado por: Admin</span>
+            </div>
+            </article>
+
+            <!-- Solicitud 3 - Rechazada -->
+            <article class="request-card">
+            <div class="request-card__header">
+                <span class="request-card__badge request-card__badge--rejected">Rechazado</span>
+                <span class="request-card__date">05/08/2025</span>
+            </div>
+            <div class="request-card__body">
+                <h4 class="request-card__title">Vacaciones</h4>
+                <p class="request-card__description">Semana de vacaciones - Sin cobertura</p>
+                <div class="request-card__meta">
+                <span>📅 20-27/08/2025</span>
+                </div>
+            </div>
+            <div class="request-card__footer">
+                <span class="request-card__reject-reason">Motivo: Sin personal suficiente esa semana</span>
+            </div>
+            </article>
+        </div>
+        </div>
+    </div>
+
+    <!-- VISTA ADMINISTRADOR (lo que ve el admin) - HU-PR-03 -->
+    <div class="permission-view permission-view--admin hidden" data-view="admin-content">
+        <div class="admin-permission-header">
+        <h3 class="admin-permission-header__title">Solicitudes pendientes de revisión</h3>
+        
+        <!-- Filtros para administrador -->
+        <div class="admin-filters">
+            <select class="admin-filters__select">
+            <option value="todos">Todos los tipos</option>
+            <option value="personal">Permiso personal</option>
+            <option value="cambio-turno">Cambio de turno</option>
+            <option value="medico">Cita médica</option>
+            <option value="vacaciones">Vacaciones</option>
+            </select>
+            
+            <select class="admin-filters__select">
+            <option value="pendiente">Pendientes</option>
+            <option value="aprobado">Aprobados</option>
+            <option value="rechazado">Rechazados</option>
+            <option value="todos">Todos los estados</option>
+            </select>
+            
+            <input type="text" class="admin-filters__search" placeholder="Buscar empleado...">
+        </div>
+        </div>
+
+        <!-- Lista de solicitudes para admin (con acciones aprobar/rechazar) -->
+        <div class="admin-requests-list">
+        <!-- Solicitud 1 - Pendiente -->
+        <article class="admin-request-card">
+            <div class="admin-request-card__employee">
+            <div class="admin-request-card__avatar">SM</div>
+            <div class="admin-request-card__info">
+                <h4 class="admin-request-card__name">Santiago Muñeton</h4>
+                <span class="admin-request-card__role">Panadero</span>
+                <span class="admin-request-card__id">ID: EMP-2024-157</span>
+            </div>
+            </div>
+
+            <div class="admin-request-card__details">
+            <span class="admin-request-card__type">🔴 Permiso personal</span>
+            <span class="admin-request-card__date-solicitud">Solicitado: 12/08/2025 10:30 am</span>
+            
+            <div class="admin-request-card__period">
+                <span>📅 14/08/2025</span>
+                <span>⏰ 8:00 am - 12:00 pm</span>
+            </div>
+            
+            <p class="admin-request-card__justification">
+                <strong>Justificación:</strong> Cita médica especialista
+            </p>
+            
+            <div class="admin-request-card__soporte">
+                <span class="badge badge--info">📎 Soporte adjunto</span>
+            </div>
+            </div>
+
+            <div class="admin-request-card__actions">
+            <button class="button button--success button--small" data-action="aprobar" data-id="1">
+                ✓ Aprobar
+            </button>
+            <button class="button button--danger button--small" data-action="negar" data-id="1">
+                ✗ Negar
+            </button>
+            <button class="button button--secondary button--small" data-action="ver-detalle">
+                👁️ Ver
+            </button>
+            </div>
+        </article>
+
+        <!-- Solicitud 2 - Cambio de turno (basado en mockup) -->
+        <article class="admin-request-card admin-request-card--priority">
+            <div class="admin-request-card__employee">
+            <div class="admin-request-card__avatar">EP</div>
+            <div class="admin-request-card__info">
+                <h4 class="admin-request-card__name">Eddier Paz Pardo</h4>
+                <span class="admin-request-card__role">Panadero Principal</span>
+                <span class="admin-request-card__id">ID: EMP-2024-156</span>
+            </div>
+            </div>
+
+            <div class="admin-request-card__details">
+            <span class="admin-request-card__type admin-request-card__type--cambio">🔄 Cambio de turno</span>
+            <span class="admin-request-card__date-solicitud">Solicitado: 12/08/2025 9:15 am</span>
+            
+            <div class="admin-request-card__change-details">
+                <div class="admin-request-card__old-shift">
+                <span class="label">Turno actual:</span>
+                <span>Mañana (6am - 2pm)</span>
+                </div>
+                <div class="admin-request-card__new-shift">
+                <span class="label">Turno solicitado:</span>
+                <span>Tarde (2pm - 10pm)</span>
+                </div>
+                <span class="admin-request-card__date-shift">📅 15/08/2025</span>
+            </div>
+            
+            <p class="admin-request-card__justification">
+                <strong>Justificación:</strong> Necesito atender un asunto familiar en la mañana
+            </p>
+            </div>
+
+            <div class="admin-request-card__actions">
+            <button class="button button--success button--small" data-action="aprobar" data-id="2">
+                ✓ Aprobar
+            </button>
+            <button class="button button--danger button--small" data-action="negar" data-id="2">
+                ✗ Negar
+            </button>
+            <button class="button button--secondary button--small" data-action="ver-detalle">
+                👁️ Ver
+            </button>
+            </div>
+        </article>
+
+        <!-- Solicitud 3 - Permiso médico -->
+        <article class="admin-request-card">
+            <div class="admin-request-card__employee">
+            <div class="admin-request-card__avatar">PH</div>
+            <div class="admin-request-card__info">
+                <h4 class="admin-request-card__name">Paula Herrera</h4>
+                <span class="admin-request-card__role">Servicio al Cliente</span>
+                <span class="admin-request-card__id">ID: EMP-2024-158</span>
+            </div>
+            </div>
+
+            <div class="admin-request-card__details">
+            <span class="admin-request-card__type">⚕️ Cita médica</span>
+            <span class="admin-request-card__date-solicitud">Solicitado: 11/08/2025 2:45 pm</span>
+            
+            <div class="admin-request-card__period">
+                <span>📅 16/08/2025</span>
+                <span>⏰ Todo el día</span>
+            </div>
+            
+            <p class="admin-request-card__justification">
+                <strong>Justificación:</strong> Cirugía programada - Adjunto incapacidad médica
+            </p>
+            
+            <div class="admin-request-card__soporte">
+                <span class="badge badge--info">📎 Incapacidad médica.pdf</span>
+            </div>
+            </div>
+
+            <div class="admin-request-card__actions">
+            <button class="button button--success button--small" data-action="aprobar" data-id="3">
+                ✓ Aprobar
+            </button>
+            <button class="button button--danger button--small" data-action="negar" data-id="3">
+                ✗ Negar
+            </button>
+            <button class="button button--secondary button--small" data-action="ver-detalle">
+                👁️ Ver
+            </button>
+            </div>
+        </article>
+        </div>
+
+        <!-- Modal para negar con justificación (RNF-PR-01, RN-PR-03) -->
+        <dialog class="modal modal--reject" id="reject-modal">
+        <div class="modal__content">
+            <h3 class="modal__title">Negar solicitud de permiso</h3>
+            
+            <form class="modal__form">
+            <div class="form__field">
+                <label for="reject-justification" class="form__label">
+                Motivo del rechazo <span class="form__required">*</span>
+                </label>
+                <textarea id="reject-justification" 
+                        class="form__textarea" 
+                        rows="4"
+                        placeholder="Explica al empleado por qué se niega su solicitud..."
+                        required></textarea>
+                <small class="form__hint">Este motivo será notificado al empleado</small>
+            </div>
+            
+            <div class="modal__actions">
+                <button type="submit" class="button button--danger">
+                Confirmar negación
+                </button>
+                <button type="button" class="button button--secondary" onclick="this.closest('dialog').close()">
+                Cancelar
+                </button>
+            </div>
+            </form>
+        </div>
+        </dialog>
+
+        <!-- Historial completo de permisos (RF-PR-07, RNF-PR-03) -->
+        <div class="permission-history">
+        <header class="permission-history__header">
+            <h3 class="permission-history__title">Historial completo de permisos</h3>
+            <button class="button button--secondary button--small">
+            📥 Exportar reporte
+            </button>
+        </header>
+
+        <div class="table-responsive">
+            <table class="table table--permissions">
+            <thead class="table__head">
+                <tr>
+                <th>Fecha solicitud</th>
+                <th>Empleado</th>
+                <th>Tipo</th>
+                <th>Fecha permiso</th>
+                <th>Estado</th>
+                <th>Aprobado por</th>
+                <th>Fecha decisión</th>
+                <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="table__body">
+                <tr>
+                <td>12/08/2025 9:15</td>
+                <td>Eddier Paz Pardo</td>
+                <td>Cambio turno</td>
+                <td>15/08/2025</td>
+                <td><span class="badge badge--warning">Pendiente</span></td>
+                <td>—</td>
+                <td>—</td>
+                <td><button class="table__action">👁️</button></td>
+                </tr>
+                <tr>
+                <td>11/08/2025 14:45</td>
+                <td>Paula Herrera</td>
+                <td>Cita médica</td>
+                <td>16/08/2025</td>
+                <td><span class="badge badge--warning">Pendiente</span></td>
+                <td>—</td>
+                <td>—</td>
+                <td><button class="table__action">👁️</button></td>
+                </tr>
+                <tr>
+                <td>10/08/2025 8:30</td>
+                <td>Santiago Muñeton</td>
+                <td>Permiso personal</td>
+                <td>14/08/2025</td>
+                <td><span class="badge badge--success">Aprobado</span></td>
+                <td>Admin</td>
+                <td>11/08/2025</td>
+                <td><button class="table__action">👁️</button></td>
+                </tr>
+                <tr>
+                <td>05/08/2025 11:20</td>
+                <td>Eddier Paz Pardo</td>
+                <td>Vacaciones</td>
+                <td>20-27/08/2025</td>
+                <td><span class="badge badge--danger">Rechazado</span></td>
+                <td>Admin</td>
+                <td>06/08/2025</td>
+                <td><button class="table__action">👁️</button></td>
+                </tr>
+                <tr>
+                <td>04/08/2025 16:10</td>
+                <td>Camila Parra</td>
+                <td>Calamidad</td>
+                <td>05-07/08/2025</td>
+                <td><span class="badge badge--success">Aprobado</span></td>
+                <td>Admin</td>
+                <td>04/08/2025</td>
+                <td><button class="table__action">👁️</button></td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+        
+        <div class="pagination">
+            <button class="pagination__btn pagination__btn--prev" disabled>← Anterior</button>
+            <span class="pagination__info">Página 1 de 3</span>
+            <button class="pagination__btn pagination__btn--next">Siguiente →</button>
+        </div>
+        </div>
+    </div>
+
+    <!-- Resumen de permisos (dashboard) -->
+    <div class="permission-summary">
+        <div class="permission-summary__card permission-summary__card--pending">
+        <span class="permission-summary__label">Pendientes</span>
+        <span class="permission-summary__value">4</span>
+        </div>
+        <div class="permission-summary__card permission-summary__card--approved">
+        <span class="permission-summary__label">Aprobados hoy</span>
+        <span class="permission-summary__value">3</span>
+        </div>
+        <div class="permission-summary__card permission-summary__card--rejected">
+        <span class="permission-summary__label">Rechazados hoy</span>
+        <span class="permission-summary__value">1</span>
+        </div>
+        <div class="permission-summary__card permission-summary__card--total">
+        <span class="permission-summary__label">Total mes</span>
+        <span class="permission-summary__value">18</span>
+        </div>
+    </div>
+    </section>
+</body>
+</html>

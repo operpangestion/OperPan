@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OperPan | Tareas</title>
+    <link rel="stylesheet" href="../Assets/style.css">
+</head>
+<body>
+    <!-- HEADER PRINCIPAL -->
+    <header class="admin__header">
+        <h1 class="admin__title">Estación Paisa</h1>
+
+        <div class="admin__user">
+            <span class="admin__role">Vista Gerente / Administrador</span>
+        </div>
+    </header>
+
+
+    <!-- NAVEGACIÓN PRINCIPAL -->
+    <nav class="admin__nav">
+        <ul class="admin__menu">
+            <li><a class="nav__btn" href="../landingAdmin.html">Horarios</a></li>
+            <li><a class="nav__btn" href="./1-cuentas.html">Cuentas</a></li>
+            <li><a class="nav__btn" href="./2-tareas.html">Tareas</a></li>
+            <li><a class="nav__btn" href="./3-permisos.html">Permisos</a></li>
+            <li><a class="nav__btn" href="./4-reportes.html">Reportes</a></li>
+            <li><a class="nav__btn" href="./5-incapacidad.html">Incapacidad</a></li>
+            <li><a class="nav__btn" href="./6-certificados.html">Certificados</a></li>
+        </ul>
+    </nav>
+
+    <!-- SECCIÓN TAREAS -->
+    <section id="tareas" class="admin__section">
+    <header class="section__header">
+        <h2 class="section__title">Gestión de Tareas</h2>
+        <p class="section__description">Asigna y da seguimiento a las tareas operativas del personal</p>
+    </header>
+
+    <!-- Buscador y selector de empleado -->
+    <div class="task-search">
+        <div class="task-search__field">
+        <label for="task-empleado-id" class="task-search__label">ID Empleado</label>
+        <div class="task-search__input-group">
+            <input type="text" 
+                id="task-empleado-id" 
+                class="task-search__input" 
+                placeholder="Buscar por ID, nombre o documento"
+                aria-label="Buscar empleado para asignar tarea">
+            <button class="task-search__btn" aria-label="Buscar empleado">
+            🔍 Buscar
+            </button>
+        </div>
+        </div>
+        
+        <!-- Acción Crear (como en el mockup) -->
+        <div class="task-actions">
+        <button class="button button--primary button--large" data-action="crear-tarea">
+            <span class="button__icon">+</span> Crear nueva tarea
+        </button>
+        </div>
+    </div>
+
+    <!-- Formulario de creación de tareas -->
+    <form class="task-form">
+        <h3 class="task-form__title">Asignar nueva tarea</h3>
+        
+        <div class="form__grid">
+        <!-- Fila 1: Título de la tarea -->
+        <div class="form__field form__field--full">
+            <label for="titulo-tarea" class="form__label">
+            Título de la tarea <span class="form__required">*</span>
+            </label>
+            <input type="text" 
+                id="titulo-tarea" 
+                class="form__input" 
+                placeholder="Ej: Limpieza de vitrina de postres, Baños, etc."
+                required>
+        </div>
+
+        <!-- Fila 2: Asignar a empleado -->
+        <div class="form__field form__field--full">
+            <label for="empleado-asignado" class="form__label">
+            Asignar a <span class="form__required">*</span>
+            </label>
+            <select id="empleado-asignado" class="form__select" required>
+            <option value="" disabled selected>Seleccionar empleado</option>
+            <option value="1">ID 01 - Santiago Muñeton (Panadero)</option>
+            <option value="2">ID 02 - Eddier Paz (Repostero)</option>
+            <option value="3">ID 03 - Paula Herrera (Servicio al Cliente)</option>
+            <option value="4">ID 04 - Camila Parra (Aseo)</option>
+            <option value="5">ID 05 - Cristian Motta (Producción)</option>
+            </select>
+        </div>
+
+        <!-- Fila 3: Descripción de la tarea -->
+        <div class="form__field form__field--full">
+            <label for="descripcion-tarea" class="form__label">
+            Descripción detallada <span class="form__required">*</span>
+            </label>
+            <textarea id="descripcion-tarea" 
+                    class="form__textarea" 
+                    rows="3"
+                    placeholder="Describe los detalles de la tarea, instrucciones específicas, materiales necesarios, etc."
+                    required></textarea>
+        </div>
+
+        <!-- Fila 4: Fecha de inicio y hora de inicio -->
+        <div class="form__row">
+            <div class="form__group form__group--half">
+            <label for="fecha-inicio" class="form__label">
+                Fecha de inicio <span class="form__required">*</span>
+            </label>
+            <input type="date" 
+                    id="fecha-inicio" 
+                    class="form__input" 
+                    value="2025-08-12"
+                    min="2025-08-12"
+                    required>
+            </div>
+            
+            <div class="form__group form__group--half">
+            <label for="hora-inicio" class="form__label">
+                Hora de inicio <span class="form__required">*</span>
+            </label>
+            <input type="time" 
+                    id="hora-inicio" 
+                    class="form__input" 
+                    value="14:00"
+                    required>
+            </div>
+        </div>
+
+        <!-- Fila 5: Fecha de cierre y hora de cierre (opcional pero recomendado) -->
+        <div class="form__row">
+            <div class="form__group form__group--half">
+            <label for="fecha-cierre" class="form__label">
+                Fecha de cierre (opcional)
+            </label>
+            <input type="date" 
+                    id="fecha-cierre" 
+                    class="form__input" 
+                    min="2025-08-12">
+            <small class="form__hint">Si es tarea de un solo día, dejar vacío</small>
+            </div>
+            
+            <div class="form__group form__group--half">
+            <label for="hora-cierre" class="form__label">
+                Hora de cierre (opcional)
+            </label>
+            <input type="time" 
+                    id="hora-cierre" 
+                    class="form__input">
+            </div>
+        </div>
+
+        <!-- Fila 6: Prioridad y área relacionada -->
+        <div class="form__row">
+            <div class="form__group form__group--half">
+            <label for="prioridad" class="form__label">
+                Prioridad <span class="form__required">*</span>
+            </label>
+            <select id="prioridad" class="form__select" required>
+                <option value="alta">🔴 Alta</option>
+                <option value="media" selected>🟡 Media</option>
+                <option value="baja">🟢 Baja</option>
+            </select>
+            </div>
+            
+            <div class="form__group form__group--half">
+            <label for="area-tarea" class="form__label">
+                Área relacionada
+            </label>
+            <select id="area-tarea" class="form__select">
+                <option value="" selected>Sin área específica</option>
+                <option value="panaderia">Panadería</option>
+                <option value="reposteria">Repostería</option>
+                <option value="atencion">Servicio al Cliente</option>
+                <option value="aseo">Aseo y Limpieza</option>
+                <option value="produccion">Producción</option>
+                <option value="administracion">Administración</option>
+            </select>
+            </div>
+        </div>
+
+        <!-- Fila 7: Recordatorio y notificaciones -->
+        <div class="form__row form__row--checkbox">
+            <label class="checkbox checkbox--primary">
+            <input type="checkbox" id="notificar-email" class="checkbox__input" checked>
+            <span class="checkbox__label">Notificar por correo electrónico</span>
+            </label>
+            
+            <label class="checkbox checkbox--primary">
+            <input type="checkbox" id="recordatorio-app" class="checkbox__input" checked>
+            <span class="checkbox__label">Enviar recordatorio 15 min antes</span>
+            </label>
+            
+            <label class="checkbox checkbox--primary">
+            <input type="checkbox" id="tarea-recurrente" class="checkbox__input">
+            <span class="checkbox__label">Tarea recurrente (diaria/semanal)</span>
+            </label>
+        </div>
+
+        <!-- Botones del formulario -->
+        <div class="form__actions">
+            <button type="submit" class="button button--primary">
+            Asignar tarea
+            </button>
+            <button type="reset" class="button button--secondary">
+            Limpiar
+            </button>
+        </div>
+        </div>
+    </form>
+
+    <!-- LISTA DE TAREAS ASIGNADAS (basado en el mockup) -->
+    <div class="tasks-list">
+        <header class="tasks-list__header">
+        <h3 class="tasks-list__title">Tareas asignadas - 12/08/2025</h3>
+        <div class="tasks-list__filters">
+            <select class="tasks-list__filter">
+            <option value="hoy">Hoy</option>
+            <option value="semana">Esta semana</option>
+            <option value="mes">Este mes</option>
+            <option value="todas">Todas</option>
+            </select>
+            <select class="tasks-list__filter">
+            <option value="todas">Todas las áreas</option>
+            <option value="panaderia">Panadería</option>
+            <option value="reposteria">Repostería</option>
+            <option value="aseo">Aseo</option>
+            </select>
+        </div>
+        </header>
+
+        <!-- Tarjeta de tarea 1 - Como en el mockup -->
+        <article class="task-card">
+        <div class="task-card__header">
+            <div class="task-card__employee">
+            <span class="task-card__badge">ID 01</span>
+            <h4 class="task-card__employee-name">Santiago Muñeton</h4>
+            <span class="task-card__role">Panadero</span>
+            </div>
+            <div class="task-card__priority task-card__priority--high">🔴 Alta</div>
+        </div>
+        
+        <div class="task-card__body">
+            <h5 class="task-card__title">LIMPIEZA DE VITRINA DE POSTRES</h5>
+            <p class="task-card__description">Realizar limpieza profunda de vitrinas de exhibición de postres, incluyendo bandejas y herramientas de exhibición.</p>
+            
+            <div class="task-card__datetime">
+            <div class="task-card__date">
+                <span class="task-card__icon">📅</span>
+                <span>12/08/2025</span>
+            </div>
+            <div class="task-card__time">
+                <span class="task-card__icon">⏰</span>
+                <span>2:00 p.m. - 4:00 p.m.</span>
+            </div>
+            </div>
+            
+            <div class="task-card__status">
+            <span class="badge badge--warning">Pendiente</span>
+            </div>
+        </div>
+        
+        <div class="task-card__actions">
+            <button class="task-card__btn task-card__btn--edit" aria-label="Modificar tarea" title="Modificar">
+            ✎ Modificar
+            </button>
+            <button class="task-card__btn task-card__btn--delete" aria-label="Eliminar tarea" title="Eliminar">
+            🗑 Eliminar
+            </button>
+            <button class="task-card__btn task-card__btn--complete" aria-label="Marcar como completada" title="Completar">
+            ✓ Completar
+            </button>
+        </div>
+        </article>
+
+        <!-- Tarjeta de tarea 2 - Como en el mockup -->
+        <article class="task-card">
+        <div class="task-card__header">
+            <div class="task-card__employee">
+            <span class="task-card__badge">ID 02</span>
+            <h4 class="task-card__employee-name">Eddier Paz</h4>
+            <span class="task-card__role">Repostero</span>
+            </div>
+            <div class="task-card__priority task-card__priority--medium">🟡 Media</div>
+        </div>
+        
+        <div class="task-card__body">
+            <h5 class="task-card__title">BAÑOS</h5>
+            <p class="task-card__description">Limpieza y desinfección de baños de personal y baños de clientes. Reponer papel higiénico, jabón y toallas.</p>
+            
+            <div class="task-card__datetime">
+            <div class="task-card__date">
+                <span class="task-card__icon">📅</span>
+                <span>12/08/2025</span>
+            </div>
+            <div class="task-card__time">
+                <span class="task-card__icon">⏰</span>
+                <span>2:00 p.m. - 3:00 p.m.</span>
+            </div>
+            </div>
+            
+            <div class="task-card__status">
+            <span class="badge badge--warning">Pendiente</span>
+            </div>
+        </div>
+        
+        <div class="task-card__actions">
+            <button class="task-card__btn task-card__btn--edit" aria-label="Modificar tarea">
+            ✎ Modificar
+            </button>
+            <button class="task-card__btn task-card__btn--delete" aria-label="Eliminar tarea">
+            🗑 Eliminar
+            </button>
+            <button class="task-card__btn task-card__btn--complete" aria-label="Marcar como completada">
+            ✓ Completar
+            </button>
+        </div>
+        </article>
+
+        <!-- Tarjeta de tarea 3 - Adicional para mostrar variedad -->
+        <article class="task-card">
+        <div class="task-card__header">
+            <div class="task-card__employee">
+            <span class="task-card__badge">ID 03</span>
+            <h4 class="task-card__employee-name">Paula Herrera</h4>
+            <span class="task-card__role">Servicio al Cliente</span>
+            </div>
+            <div class="task-card__priority task-card__priority--low">🟢 Baja</div>
+        </div>
+        
+        <div class="task-card__body">
+            <h5 class="task-card__title">ORGANIZACIÓN DE MESAS</h5>
+            <p class="task-card__description">Organizar mesas del área de comedor, reponer servilletas, limpiar mesas y sillas para la hora pico de la tarde.</p>
+            
+            <div class="task-card__datetime">
+            <div class="task-card__date">
+                <span class="task-card__icon">📅</span>
+                <span>12/08/2025</span>
+            </div>
+            <div class="task-card__time">
+                <span class="task-card__icon">⏰</span>
+                <span>3:00 p.m. - 4:30 p.m.</span>
+            </div>
+            </div>
+            
+            <div class="task-card__status">
+            <span class="badge badge--success">Completada</span>
+            </div>
+        </div>
+        
+        <div class="task-card__actions">
+            <button class="task-card__btn task-card__btn--edit" aria-label="Modificar tarea" disabled>
+            ✎ Modificar
+            </button>
+            <button class="task-card__btn task-card__btn--delete" aria-label="Eliminar tarea">
+            🗑 Eliminar
+            </button>
+            <button class="task-card__btn task-card__btn--complete" aria-label="Marcar como completada" disabled>
+            ✓ Completada
+            </button>
+        </div>
+        </article>
+    </div>
+
+    <!-- Resumen de tareas -->
+    <div class="tasks-summary">
+        <div class="tasks-summary__item">
+        <span class="tasks-summary__label">Pendientes:</span>
+        <span class="tasks-summary__value tasks-summary__value--warning">5</span>
+        </div>
+        <div class="tasks-summary__item">
+        <span class="tasks-summary__label">En progreso:</span>
+        <span class="tasks-summary__value tasks-summary__value--info">3</span>
+        </div>
+        <div class="tasks-summary__item">
+        <span class="tasks-summary__label">Completadas hoy:</span>
+        <span class="tasks-summary__value tasks-summary__value--success">8</span>
+        </div>
+        <div class="tasks-summary__item">
+        <span class="tasks-summary__label">Totales:</span>
+        <span class="tasks-summary__value">16</span>
+        </div>
+    </div>
+    </section>
+</body>
+</html>

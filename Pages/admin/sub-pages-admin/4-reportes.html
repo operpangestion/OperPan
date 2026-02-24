@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OperPan | Reportes</title>
+    <link rel="stylesheet" href="../Assets/style.css">
+</head>
+<body>
+    <!-- HEADER PRINCIPAL -->
+    <header class="admin__header">
+        <h1 class="admin__title">Estación Paisa</h1>
+
+        <div class="admin__user">
+            <span class="admin__role">Vista Gerente / Administrador</span>
+        </div>
+    </header>
+
+
+    <!-- NAVEGACIÓN PRINCIPAL -->
+    <nav class="admin__nav">
+        <ul class="admin__menu">
+            <li><a class="nav__btn" href="../landingAdmin.html">Horarios</a></li>
+            <li><a class="nav__btn" href="./1-cuentas.html">Cuentas</a></li>
+            <li><a class="nav__btn" href="./2-tareas.html">Tareas</a></li>
+            <li><a class="nav__btn" href="./3-permisos.html">Permisos</a></li>
+            <li><a class="nav__btn" href="./4-reportes.html">Reportes</a></li>
+            <li><a class="nav__btn" href="./5-incapacidad.html">Incapacidad</a></li>
+            <li><a class="nav__btn" href="./6-certificados.html">Certificados</a></li>
+        </ul>
+    </nav>
+
+    <!-- SECCIÓN REPORTES -->
+    <section id="reportes" class="admin__section">
+    <header class="section__header">
+        <h2 class="section__title">Centro de Reportes</h2>
+        <p class="section__description">Comunicación interna para novedades, incidentes y solicitudes</p>
+    </header>
+
+    <!-- Toggle de vistas: Empleado vs Administrador -->
+    <div class="reports-tabs" role="tablist">
+        <button class="reports-tabs__tab reports-tabs__tab--active" role="tab" data-view="employee" aria-selected="true">
+        📤 Vista Empleado - Enviar reporte
+        </button>
+        <button class="reports-tabs__tab" role="tab" data-view="admin" aria-selected="false">
+        📥 Vista Administrador - Revisar reportes
+        </button>
+    </div>
+
+    <!-- ========================================= -->
+    <!-- VISTA EMPLEADO: Enviar reporte tipo correo -->
+    <!-- ========================================= -->
+    <div class="reports-view reports-view--employee" data-view="employee-content">
+        
+        <!-- Contexto del empleado (basado en mockup) -->
+        <div class="employee-context">
+        <div class="employee-context__card">
+            <div class="employee-context__avatar">EP</div>
+            <div class="employee-context__info">
+            <h3 class="employee-context__name">Eddier Paz Pardo</h3>
+            <div class="employee-context__meta">
+                <span class="employee-context__badge">ID: EMP-2024-156</span>
+                <span class="employee-context__badge">Panadero Principal</span>
+                <span class="employee-context__badge">Turno: Mañana (6am - 2pm)</span>
+            </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- Formulario de reporte estilo correo electrónico -->
+        <form class="report-form report-form--email-style">
+        <h3 class="report-form__title">Redactar nuevo reporte</h3>
+        
+        <!-- Campo: ID Empleado (del mockup) - automático pero editable -->
+        <div class="form__field">
+            <label for="report-empleado-id" class="form__label">ID Empleado</label>
+            <div class="form__input-group">
+            <input type="text" 
+                    id="report-empleado-id" 
+                    class="form__input" 
+                    value="EMP-2024-156 - Eddier Paz Pardo"
+                    readonly
+                    aria-label="ID de empleado (automático)">
+            <span class="form__input-icon" title="Campo automático">🔒</span>
+            </div>
+            <small class="form__hint">Este campo se completa automáticamente</small>
+        </div>
+
+        <!-- Campo: Destinatarios (simulación de correo) -->
+        <div class="form__field">
+            <label for="destinatarios" class="form__label">Para</label>
+            <div class="form__recipients">
+            <span class="form__recipient-badge">Administración <button type="button" class="form__recipient-remove">✕</button></span>
+            <span class="form__recipient-badge">Supervisor de turno <button type="button" class="form__recipient-remove">✕</button></span>
+            <input type="text" 
+                    id="destinatarios" 
+                    class="form__input form__input--recipients" 
+                    placeholder="Añadir destinatario...">
+            </div>
+            <small class="form__hint">Los reportes siempre se envían a administración</small>
+        </div>
+
+        <!-- Campo: CC (copia) - opcional -->
+        <div class="form__field">
+            <label for="cc" class="form__label">CC</label>
+            <input type="text" 
+                id="cc" 
+                class="form__input" 
+                placeholder="Ej: jefe.produccion@estacionpaisa.com">
+        </div>
+
+        <!-- Campo: TIPO DE REPORTE (del mockup) - ASUNTO del correo -->
+        <div class="form__field">
+            <label for="tipo-reporte" class="form__label">
+            Tipo de reporte <span class="form__required">*</span>
+            </label>
+            <select id="tipo-reporte" class="form__select" required>
+            <option value="" disabled selected>Seleccionar tipo de reporte</option>
+            <option value="incidente">🚨 Incidente / Accidente</option>
+            <option value="daño-equipo">🔧 Daño en equipo o maquinaria</option>
+            <option value="falta-insumos">📦 Falta de insumos / materiales</option>
+            <option value="problema-calidad">🥖 Problema de calidad en producto</option>
+            <option value="sugerencia">💡 Sugerencia de mejora</option>
+            <option value="queja-cliente">👤 Queja de cliente</option>
+            <option value="novedad-turno">⏰ Novedad en turno</option>
+            <option value="acoso">⚠️ Situación de acoso o conflicto</option>
+            <option value="otro">📝 Otro (especificar)</option>
+            </select>
+        </div>
+
+        <!-- Campo: ASUNTO (para completar el estilo correo) -->
+        <div class="form__field">
+            <label for="asunto" class="form__label">Asunto</label>
+            <input type="text" 
+                id="asunto" 
+                class="form__input" 
+                placeholder="Breve resumen del reporte"
+                value="Daño en horno industrial - Turno mañana">
+        </div>
+
+        <!-- Campo: ARGUMENTACIÓN (del mockup) - CUERPO del correo -->
+        <div class="form__field">
+            <label for="argumentacion" class="form__label">
+            Argumentación / Descripción <span class="form__required">*</span>
+            </label>
+            <textarea id="argumentacion" 
+                    class="form__textarea form__textarea--email-body" 
+                    rows="8"
+                    placeholder="Describe detalladamente la situación, incluyendo:
+    - ¿Qué ocurrió?
+    - ¿Cuándo ocurrió?
+    - ¿Quiénes estaban involucrados?
+    - ¿Qué acciones se tomaron?
+    - ¿Qué necesitas que hagan?"
+                    required></textarea>
+            <div class="form__textarea-toolbar">
+            <button type="button" class="form__toolbar-btn" title="Negrita">B</button>
+            <button type="button" class="form__toolbar-btn" title="Cursiva">I</button>
+            <button type="button" class="form__toolbar-btn" title="Lista">•</button>
+            <button type="button" class="form__toolbar-btn" title="Enlace">🔗</button>
+            <span class="form__toolbar-separator"></span>
+            <span class="form__char-counter">0/2000 caracteres</span>
+            </div>
+        </div>
+
+        <!-- Campo: ADJUNTAR PRUEBA (del mockup) - ARCHIVOS ADJUNTOS -->
+        <div class="form__field">
+            <label for="adjuntos" class="form__label">
+            Adjuntar prueba <span class="form__optional">(opcional)</span>
+            </label>
+            
+            <!-- Área de archivos adjuntos (simulando correo) -->
+            <div class="form__attachments">
+            <div class="form__attachment-item">
+                <span class="form__attachment-icon">📷</span>
+                <span class="form__attachment-name">foto_horno_dañado.jpg</span>
+                <span class="form__attachment-size">2.4 MB</span>
+                <button type="button" class="form__attachment-remove" aria-label="Eliminar archivo">✕</button>
+            </div>
+            <div class="form__attachment-item">
+                <span class="form__attachment-icon">📄</span>
+                <span class="form__attachment-name">reporte_incidente.docx</span>
+                <span class="form__attachment-size">1.1 MB</span>
+                <button type="button" class="form__attachment-remove" aria-label="Eliminar archivo">✕</button>
+            </div>
+            </div>
+            
+            <!-- Botón para adjuntar archivos -->
+            <div class="form__file-upload">
+            <input type="file" id="adjuntos" class="form__file-input" multiple accept=".jpg,.jpeg,.png,.pdf,.doc,.docx,.xls,.xlsx">
+            <label for="adjuntos" class="form__file-label">
+                <span class="form__file-icon">📎</span>
+                Adjuntar archivos
+            </label>
+            <small class="form__hint">Máximo 10 archivos, 25MB total. Formatos: JPG, PNG, PDF, DOC, XLS</small>
+            </div>
+        </div>
+
+        <!-- Prioridad del reporte -->
+        <div class="form__row">
+            <div class="form__group form__group--half">
+            <label for="prioridad-reporte" class="form__label">Prioridad</label>
+            <select id="prioridad-reporte" class="form__select">
+                <option value="baja">🟢 Baja - Sin urgencia</option>
+                <option value="media" selected>🟡 Media - Requiere atención</option>
+                <option value="alta">🔴 Alta - Urgente</option>
+                <option value="critica">🔥 Crítica - Detiene operación</option>
+            </select>
+            </div>
+            
+            <div class="form__group form__group--half">
+            <label for="fecha-evento" class="form__label">Fecha del evento</label>
+            <input type="datetime-local" id="fecha-evento" class="form__input" value="2025-08-12T14:00">
+            </div>
+        </div>
+
+        <!-- Checkbox de confidencialidad -->
+        <div class="form__row form__row--checkbox">
+            <label class="checkbox checkbox--primary">
+            <input type="checkbox" id="confidencial" class="checkbox__input">
+            <span class="checkbox__label">🔒 Marcar como confidencial (solo visible para administración)</span>
+            </label>
+        </div>
+
+        <!-- Botones de acción (como en correo) -->
+        <div class="form__actions form__actions--email">
+            <button type="submit" class="button button--primary button--large">
+            <span class="button__icon">📤</span> Enviar reporte
+            </button>
+            <button type="button" class="button button--secondary button--large">
+            <span class="button__icon">💾</span> Guardar borrador
+            </button>
+            <button type="reset" class="button button--tertiary button--large">
+            Descartar
+            </button>
+        </div>
+        </form>
+
+        <!-- Bandeja de salida - Reportes enviados recientemente -->
+        <div class="sent-reports">
+        <header class="sent-reports__header">
+            <h3 class="sent-reports__title">📨 Reportes enviados recientemente</h3>
+            <a href="#" class="link link--primary">Ver todos →</a>
+        </header>
+
+        <div class="sent-reports__list">
+            <!-- Reporte 1 -->
+            <article class="sent-report-card">
+            <div class="sent-report-card__status sent-report-card__status--read">✓✓</div>
+            <div class="sent-report-card__content">
+                <div class="sent-report-card__header">
+                <span class="sent-report-card__type">🔧 Daño en equipo</span>
+                <span class="sent-report-card__date">12/08/2025 9:30</span>
+                </div>
+                <h4 class="sent-report-card__subject">Horno industrial #3 no enciende</h4>
+                <p class="sent-report-card__preview">El horno de la línea de pan francés dejó de funcionar a las 8am. Se reinició pero no calienta...</p>
+                <div class="sent-report-card__meta">
+                <span class="badge badge--info">📎 2 adjuntos</span>
+                <span class="badge badge--warning">Pendiente</span>
+                </div>
+            </div>
+            </article>
+
+            <!-- Reporte 2 -->
+            <article class="sent-report-card">
+            <div class="sent-report-card__status sent-report-card__status--read">✓✓</div>
+            <div class="sent-report-card__content">
+                <div class="sent-report-card__header">
+                <span class="sent-report-card__type">📦 Falta de insumos</span>
+                <span class="sent-report-card__date">11/08/2025 16:15</span>
+                </div>
+                <h4 class="sent-report-card__subject">Harina de trigo - Stock crítico</h4>
+                <p class="sent-report-card__preview">Quedan solo 3 bultos de harina para mañana. Necesitamos pedido urgente...</p>
+                <div class="sent-report-card__meta">
+                <span class="badge badge--success">Resuelto</span>
+                </div>
+            </div>
+            </article>
+
+            <!-- Reporte 3 -->
+            <article class="sent-report-card">
+            <div class="sent-report-card__status">✓</div>
+            <div class="sent-report-card__content">
+                <div class="sent-report-card__header">
+                <span class="sent-report-card__type">💡 Sugerencia</span>
+                <span class="sent-report-card__date">10/08/2025 11:20</span>
+                </div>
+                <h4 class="sent-report-card__subject">Mejora en organización de vitrinas</h4>
+                <p class="sent-report-card__preview">Propongo reorganizar las vitrinas de postres para mejor visibilidad de productos...</p>
+                <div class="sent-report-card__meta">
+                <span class="badge badge--info">En revisión</span>
+                </div>
+            </div>
+            </article>
+        </div>
+        </div>
+    </div>
+
+    <!-- ========================================= -->
+    <!-- VISTA ADMINISTRADOR: Revisar reportes -->
+    <!-- ========================================= -->
+    <div class="reports-view reports-view--admin hidden" data-view="admin-content">
+        
+        <!-- Header con filtros y búsqueda -->
+        <div class="admin-reports-header">
+        <div class="admin-reports-header__top">
+            <h3 class="admin-reports-header__title">Bandeja de entrada - Reportes recibidos</h3>
+            <div class="admin-reports-header__actions">
+            <button class="button button--secondary button--small">
+                📥 Marcar todos como leídos
+            </button>
+            <button class="button button--secondary button--small">
+                📊 Ver estadísticas
+            </button>
+            </div>
+        </div>
+        
+        <!-- Filtros avanzados -->
+        <div class="admin-reports-filters">
+            <div class="admin-reports-filters__row">
+            <select class="admin-reports-filters__select">
+                <option value="todos">Todos los tipos</option>
+                <option value="incidente">Incidente</option>
+                <option value="daño">Daño en equipo</option>
+                <option value="insumos">Falta insumos</option>
+                <option value="sugerencia">Sugerencia</option>
+                <option value="queja">Queja cliente</option>
+            </select>
+            
+            <select class="admin-reports-filters__select">
+                <option value="todos">Todos los estados</option>
+                <option value="pendiente">Pendientes</option>
+                <option value="revisado">Revisados</option>
+                <option value="resuelto">Resueltos</option>
+                <option value="archivado">Archivados</option>
+            </select>
+            
+            <select class="admin-reports-filters__select">
+                <option value="recientes">Más recientes</option>
+                <option value="antiguos">Más antiguos</option>
+                <option value="urgentes">Prioridad alta</option>
+            </select>
+            
+            <div class="admin-reports-filters__search">
+                <input type="text" placeholder="Buscar por empleado, asunto...">
+                <button class="admin-reports-filters__search-btn">🔍</button>
+            </div>
+            </div>
+            
+            <!-- Filtro rápido por fecha -->
+            <div class="admin-reports-filters__dates">
+            <span>Fecha:</span>
+            <button class="admin-reports-filters__date-btn admin-reports-filters__date-btn--active">Hoy</button>
+            <button class="admin-reports-filters__date-btn">Ayer</button>
+            <button class="admin-reports-filters__date-btn">Esta semana</button>
+            <button class="admin-reports-filters__date-btn">Este mes</button>
+            <button class="admin-reports-filters__date-btn">Personalizar</button>
+            </div>
+        </div>
+        </div>
+
+        <!-- Lista de reportes (bandeja de entrada) -->
+        <div class="admin-reports-inbox">
+        
+        <!-- Reporte 1 - No leído, prioridad alta -->
+        <article class="admin-report-card admin-report-card--unread admin-report-card--priority-high">
+            <div class="admin-report-card__indicator"></div>
+            <div class="admin-report-card__checkbox">
+            <input type="checkbox" id="report-1">
+            </div>
+            <div class="admin-report-card__avatar">EP</div>
+            <div class="admin-report-card__content">
+            <div class="admin-report-card__header">
+                <div class="admin-report-card__sender">
+                <span class="admin-report-card__name">Eddier Paz Pardo</span>
+                <span class="admin-report-card__role">Panadero Principal</span>
+                <span class="admin-report-card__id">EMP-2024-156</span>
+                </div>
+                <span class="admin-report-card__date">12/08/2025 9:30</span>
+            </div>
+            
+            <div class="admin-report-card__subject">
+                <span class="admin-report-card__type-badge">🔧 Daño en equipo</span>
+                <span class="admin-report-card__priority admin-report-card__priority--high">🔴 Alta</span>
+                <h4 class="admin-report-card__title">Horno industrial #3 no enciende - Producción detenida</h4>
+            </div>
+            
+            <p class="admin-report-card__preview">
+                El horno de la línea de pan francés dejó de funcionar a las 8am. Se reinició el sistema pero no calienta. Ya revisaron termostato y resistencias. Necesitamos técnico urgente porque tenemos pedidos para las 11am...
+            </p>
+            
+            <div class="admin-report-card__meta">
+                <span class="badge badge--info">📎 2 adjuntos</span>
+                <span class="badge badge--warning">No leído</span>
+                <span class="admin-report-card__tags">
+                <span class="tag">📋 Producción</span>
+                <span class="tag">🔧 Mantenimiento</span>
+                </span>
+            </div>
+            </div>
+            <div class="admin-report-card__actions">
+            <button class="button button--primary button--small" title="Ver reporte">👁️</button>
+            <button class="button button--success button--small" title="Marcar como resuelto">✓</button>
+            <button class="button button--secondary button--small" title="Asignar responsable">👤</button>
+            <button class="button button--danger button--small" title="Archivar">📦</button>
+            <button class="button button--icon button--small" title="Más opciones">⋯</button>
+            </div>
+        </article>
+
+        <!-- Reporte 2 - Leído, prioridad media -->
+        <article class="admin-report-card">
+            <div class="admin-report-card__indicator"></div>
+            <div class="admin-report-card__checkbox">
+            <input type="checkbox" id="report-2" checked>
+            </div>
+            <div class="admin-report-card__avatar">PH</div>
+            <div class="admin-report-card__content">
+            <div class="admin-report-card__header">
+                <div class="admin-report-card__sender">
+                <span class="admin-report-card__name">Paula Herrera</span>
+                <span class="admin-report-card__role">Servicio al Cliente</span>
+                <span class="admin-report-card__id">EMP-2024-158</span>
+                </div>
+                <span class="admin-report-card__date">11/08/2025 16:45</span>
+            </div>
+            
+            <div class="admin-report-card__subject">
+                <span class="admin-report-card__type-badge">📦 Falta de insumos</span>
+                <span class="admin-report-card__priority admin-report-card__priority--medium">🟡 Media</span>
+                <h4 class="admin-report-card__title">Empaques para llevar - Stock bajo</h4>
+            </div>
+            
+            <p class="admin-report-card__preview">
+                Quedan aproximadamente 50 empaques para llevar. Con el movimiento de fin de semana, no alcanzarán. Se necesita pedido urgente de cajas de cartón y bolsas kraft...
+            </p>
+            
+            <div class="admin-report-card__meta">
+                <span class="badge">Leído</span>
+                <span class="badge badge--info">📎 1 adjunto</span>
+                <span class="admin-report-card__assignee">
+                <span class="tag tag--assigned">Asignado a: Compras</span>
+                </span>
+            </div>
+            </div>
+            <div class="admin-report-card__actions">
+            <button class="button button--primary button--small">👁️</button>
+            <button class="button button--success button--small">✓</button>
+            <button class="button button--secondary button--small">👤</button>
+            <button class="button button--danger button--small">📦</button>
+            </div>
+        </article>
+
+        <!-- Reporte 3 - Confidencial -->
+        <article class="admin-report-card admin-report-card--confidential">
+            <div class="admin-report-card__indicator"></div>
+            <div class="admin-report-card__checkbox">
+            <input type="checkbox" id="report-3">
+            </div>
+            <div class="admin-report-card__avatar">SM</div>
+            <div class="admin-report-card__content">
+            <div class="admin-report-card__header">
+                <div class="admin-report-card__sender">
+                <span class="admin-report-card__name">Santiago Muñeton</span>
+                <span class="admin-report-card__role">Panadero</span>
+                <span class="admin-report-card__id">EMP-2024-157</span>
+                </div>
+                <span class="admin-report-card__date">11/08/2025 10:20</span>
+            </div>
+            
+            <div class="admin-report-card__subject">
+                <span class="admin-report-card__type-badge">⚠️ Conflicto</span>
+                <span class="admin-report-card__priority admin-report-card__priority--high">🔴 Alta</span>
+                <span class="badge badge--danger">🔒 Confidencial</span>
+                <h4 class="admin-report-card__title">Situación de acoso laboral</h4>
+            </div>
+            
+            <p class="admin-report-card__preview">
+                [Contenido confidencial - Solo visible para administración y RRHH]
+            </p>
+            
+            <div class="admin-report-card__meta">
+                <span class="badge badge--danger">Requiere atención inmediata</span>
+                <span class="admin-report-card__tags">
+                <span class="tag">⚖️ RRHH</span>
+                <span class="tag">🔒 Confidencial</span>
+                </span>
+            </div>
+            </div>
+            <div class="admin-report-card__actions">
+            <button class="button button--primary button--small">👁️</button>
+            <button class="button button--secondary button--small">👤 Asignar</button>
+            </div>
+        </article>
+
+        <!-- Reporte 4 - Resuelto -->
+        <article class="admin-report-card admin-report-card--resolved">
+            <div class="admin-report-card__indicator"></div>
+            <div class="admin-report-card__checkbox">
+            <input type="checkbox" id="report-4">
+            </div>
+            <div class="admin-report-card__avatar">CP</div>
+            <div class="admin-report-card__content">
+            <div class="admin-report-card__header">
+                <div class="admin-report-card__sender">
+                <span class="admin-report-card__name">Camila Parra</span>
+                <span class="admin-report-card__role">Aseo</span>
+                <span class="admin-report-card__id">EMP-2024-160</span>
+                </div>
+                <span class="admin-report-card__date">10/08/2025 7:30</span>
+            </div>
+            
+            <div class="admin-report-card__subject">
+                <span class="admin-report-card__type-badge">🚨 Incidente</span>
+                <span class="admin-report-card__priority admin-report-card__priority--low">🟢 Baja</span>
+                <h4 class="admin-report-card__title">Derrame de aceite en zona de producción</h4>
+            </div>
+            
+            <p class="admin-report-card__preview">
+                Se derramó aceite cerca del área de freidoras. Se limpió inmediatamente pero reporto para que revisen posibles riesgos...
+            </p>
+            
+            <div class="admin-report-card__meta">
+                <span class="badge badge--success">Resuelto</span>
+                <span class="admin-report-card__resolution">
+                Resuelto por: Supervisor Carlos - 10/08/2025 8:15
+                </span>
+            </div>
+            </div>
+            <div class="admin-report-card__actions">
+            <button class="button button--primary button--small">👁️</button>
+            <button class="button button--secondary button--small" disabled>✓</button>
+            </div>
+        </article>
+        </div>
+
+        <!-- Panel de detalle de reporte (simulación de visualización) -->
+        <div class="report-detail-panel">
+        <header class="report-detail-panel__header">
+            <h4 class="report-detail-panel__title">Detalle del reporte</h4>
+            <button class="report-detail-panel__close">✕</button>
+        </header>
+        
+        <div class="report-detail-panel__content">
+            <!-- Este contenido se llenaría dinámicamente al hacer clic en un reporte -->
+            <div class="report-detail">
+            <div class="report-detail__header">
+                <span class="report-detail__type">🔧 Daño en equipo</span>
+                <span class="report-detail__priority report-detail__priority--high">Prioridad Alta</span>
+            </div>
+            
+            <h3 class="report-detail__subject">Horno industrial #3 no enciende - Producción detenida</h3>
+            
+            <div class="report-detail__sender">
+                <span class="report-detail__label">De:</span>
+                <span class="report-detail__name">Eddier Paz Pardo</span>
+                <span class="report-detail__role">Panadero Principal</span>
+                <span class="report-detail__date">12/08/2025 9:30</span>
+            </div>
+            
+            <div class="report-detail__recipients">
+                <span class="report-detail__label">Para:</span>
+                <span class="report-detail__recipient">Administración</span>
+                <span class="report-detail__recipient">Supervisor de turno</span>
+            </div>
+            
+            <div class="report-detail__body">
+                <p>El horno de la línea de pan francés dejó de funcionar a las 8am. Se reinició el sistema pero no calienta.</p>
+                <p>Ya revisaron:</p>
+                <ul>
+                <li>Termostato - parece funcionar</li>
+                <li>Resistencias - una se ve quemada</li>
+                <li>Suministro de gas - está llegando normalmente</li>
+                </ul>
+                <p>Necesitamos técnico urgente porque tenemos pedidos para las 11am y producción de pan francés para el fin de semana.</p>
+                <p>Quedé de turno hasta las 2pm. Por favor confirmar.</p>
+            </div>
+            
+            <div class="report-detail__attachments">
+                <span class="report-detail__label">Adjuntos:</span>
+                <div class="report-detail__attachment-list">
+                <div class="attachment-item">
+                    <span class="attachment-item__icon">📷</span>
+                    <span class="attachment-item__name">foto_horno_dañado.jpg</span>
+                    <span class="attachment-item__size">2.4 MB</span>
+                    <button class="attachment-item__download">⬇️</button>
+                </div>
+                <div class="attachment-item">
+                    <span class="attachment-item__icon">📄</span>
+                    <span class="attachment-item__name">reporte_tecnico_previo.pdf</span>
+                    <span class="attachment-item__size">1.1 MB</span>
+                    <button class="attachment-item__download">⬇️</button>
+                </div>
+                </div>
+            </div>
+            
+            <div class="report-detail__actions">
+                <button class="button button--success">✓ Marcar como resuelto</button>
+                <button class="button button--primary">📝 Responder</button>
+                <button class="button button--secondary">👤 Asignar a...</button>
+                <button class="button button--danger">📦 Archivar</button>
+            </div>
+            
+            <div class="report-detail__history">
+                <h5>Historial del reporte</h5>
+                <div class="history-timeline">
+                <div class="history-item">
+                    <span class="history-item__time">12/08/2025 9:30</span>
+                    <span class="history-item__event">Reporte creado por Eddier Paz Pardo</span>
+                </div>
+                <div class="history-item">
+                    <span class="history-item__time">12/08/2025 9:35</span>
+                    <span class="history-item__event">Administrador marcó como "En revisión"</span>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- Resumen de reportes para admin -->
+        <div class="reports-summary">
+        <div class="reports-summary__card reports-summary__card--total">
+            <span class="reports-summary__label">Total reportes</span>
+            <span class="reports-summary__value">24</span>
+        </div>
+        <div class="reports-summary__card reports-summary__card--pending">
+            <span class="reports-summary__label">Pendientes</span>
+            <span class="reports-summary__value">8</span>
+        </div>
+        <div class="reports-summary__card reports-summary__card--urgent">
+            <span class="reports-summary__label">Urgentes</span>
+            <span class="reports-summary__value">3</span>
+        </div>
+        <div class="reports-summary__card reports-summary__card--resolved">
+            <span class="reports-summary__label">Resueltos hoy</span>
+            <span class="reports-summary__value">5</span>
+        </div>
+        </div>
+    </div>
+    </section>
+</body>
+</html>
