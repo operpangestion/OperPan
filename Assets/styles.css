@@ -81,6 +81,15 @@ input {
     border-radius:10px;
 }
 
+.login__buttons{
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+
+    padding: 30px;
+    margin: 52px;
+}
+
 .login__button {
     margin-top: 5px;
     margin-left: 19px;

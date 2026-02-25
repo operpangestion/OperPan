@@ -27,13 +27,13 @@
     <!-- NAVEGACIÓN PRINCIPAL -->
     <nav class="admin__nav">
         <ul class="admin__menu">
-            <li><button class="nav__btn" data-section="horarios">Horarios</button></li>
-            <li><button class="nav__btn" data-section="cuentas">Cuentas</button></li>
-            <li><button class="nav__btn" data-section="tareas">Tareas</button></li>
-            <li><button class="nav__btn" data-section="permisos">Permisos</button></li>
-            <li><button class="nav__btn" data-section="reportes">Reportes</button></li>
-            <li><button class="nav__btn" data-section="incapacidad">Incapacidad</button></li>
-            <li><button class="nav__btn" data-section="certificados">Certificados</button></li>
+            <li><a class="nav__btn" href="#horarios">Horarios</a></li>
+            <li><a class="nav__btn" href="./sub-pages-admin/1-cuentas.html">Cuentas</a></li>
+            <li><a class="nav__btn" href="./sub-pages-admin/2-tareas.html">Tareas</a></li>
+            <li><a class="nav__btn" href="./sub-pages-admin/3-permisos.html">Permisos</a></li>
+            <li><a class="nav__btn" href="./sub-pages-admin/4-reportes.html">Reportes</a></li>
+            <li><a class="nav__btn" href="./sub-pages-admin/5-incapacidad.html">Incapacidad</a></li>
+            <li><a class="nav__btn" href="./sub-pages-admin/6-certificados.html">Certificados</a></li>
         </ul>
     </nav>
 
@@ -41,53 +41,182 @@
     <!-- CONTENIDO PRINCIPAL -->
     <main class="admin__main">
 
-        <!-- SECCIÓN HORARIOS -->
-        <section id="horarios" class="admin__section">
-            <h2>Horarios</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum nobis iure nisi debitis nulla quae dolore veniam atque a nesciunt?</p>
+    <!-- SECCIÓN HORARIOS -->
+    <section id="horarios" class="admin__section">
+    <header class="section__header">
+        <h2 class="section__title">Gestión de Horarios</h2>
+        <p class="section__description">Asigna y administra los horarios del personal</p>
+    </header>
 
-        </section>
+    <!-- Buscador y selector de empleado -->
+    <div class="employee-selector">
+        <div class="employee-selector__search">
+        <label for="empleado-id" class="employee-selector__label">ID Empleado</label>
+        <div class="employee-selector__field">
+            <input type="text" 
+                id="empleado-id" 
+                class="employee-selector__input" 
+                placeholder="Buscar por ID, nombre o documento"
+                aria-label="Buscar empleado">
+            <button class="employee-selector__search-btn" aria-label="Buscar">
+            🔍
+            </button>
+        </div>
+        </div>
 
-        <!-- SECCIÓN CUENTAS -->
-        <section id="cuentas" class="admin__section">
-            <h2>Cuentas</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum nobis iure nisi debitis nulla quae dolore veniam atque a nesciunt?</p>
+        <!-- Acciones rápidas del empleado -->
+        <div class="employee-actions">
+        <button class="button button--primary button--small" data-action="crear">
+            Crear
+        </button>
+        <button class="button button--secondary button--small" data-action="modificar">
+            Modificar
+        </button>
+        <button class="button button--danger button--small" data-action="eliminar">
+            Eliminar
+        </button>
+        </div>
+    </div>
 
-        </section>
+    <!-- Información del empleado seleccionado -->
+    <div class="employee-info">
+        <div class="employee-info__card">
+        <div class="employee-info__avatar" aria-hidden="true">ERP</div>
+        <div class="employee-info__details">
+            <h3 class="employee-info__name">EDDIER PAZ PARDO</h3>
+            <div class="employee-info__meta">
+            <span class="employee-info__badge">ID: EMP-2024-156</span>
+            <span class="employee-info__badge employee-info__badge--role">Panadero Principal</span>
+            <span class="employee-info__badge">Turno: Mañana (6am - 2pm)</span>
+            </div>
+        </div>
+        </div>
+    </div>
 
-        <!-- SECCIÓN TAREAS -->
-        <section id="tareas" class="admin__section">
-            <h2>Tareas</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum nobis iure nisi debitis nulla quae dolore veniam atque a nesciunt?</p>
+    <!-- Formulario principal de horarios -->
+    <form class="schedule-form">
+        <div class="form__grid">
+        <!-- Selector de días -->
+        <div class="form__field">
+            <label for="dias" class="form__label">
+            Días de la semana
+            <span class="form__required" aria-label="campo requerido">*</span>
+            </label>
+            <select id="dias" class="form__select" required>
+            <option value="" disabled selected>Seleccionar días</option>
+            <option value="lunes-viernes">Lunes a Viernes</option>
+            <option value="lunes-sabado">Lunes a Sábado</option>
+            <option value="semana-completa">Semana Completa (Lun-Dom)</option>
+            <option value="finde-semana">Fin de Semana (Sáb-Dom)</option>
+            <option value="personalizado">Personalizar días...</option>
+            </select>
+        </div>
 
-        </section>
+        <!-- Selector de horarios -->
+        <div class="form__field">
+            <label for="horario" class="form__label">
+            Horario / Turno
+            <span class="form__required" aria-label="campo requerido">*</span>
+            </label>
+            <select id="horario" class="form__select" required>
+            <option value="" disabled selected>Seleccionar turno</option>
+            <option value="madrugada">Madrugada (4am - 12pm)</option>
+            <option value="mañana">Mañana (6am - 2pm)</option>
+            <option value="tarde">Tarde (2pm - 10pm)</option>
+            <option value="noche">Noche (10pm - 6am)</option>
+            <option value="partido">Partido (6am-10am / 4pm-8pm)</option>
+            </select>
+        </div>
+        </div>
 
-        <!-- SECCIÓN PERMISOS -->
-        <section id="permisos" class="admin__section">
-            <h2>Permisos</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum nobis iure nisi debitis nulla quae dolore veniam atque a nesciunt?</p>
+        <!-- Sección de cargos (opcional - mejora profesional) -->
+        <details class="form__details">
+        <summary class="form__details-summary">Asignación por cargo (opcional)</summary>
+        <div class="form__details-content">
+            <div class="role-selector">
+            <span class="role-selector__label">Aplicar horario a:</span>
+            <div class="role-selector__options">
+                <label class="checkbox">
+                <input type="checkbox" value="panadero"> Panaderos
+                </label>
+                <label class="checkbox">
+                <input type="checkbox" value="repostero"> Reposteros
+                </label>
+                <label class="checkbox">
+                <input type="checkbox" value="atencion"> Servicio al Cliente
+                </label>
+                <label class="checkbox">
+                <input type="checkbox" value="aseo"> Aseo y Limpieza
+                </label>
+                <label class="checkbox">
+                <input type="checkbox" value="produccion"> Producción
+                </label>
+            </div>
+            </div>
+        </div>
+        </details>
 
-        </section>
+        <!-- Observaciones adicionales -->
+        <div class="form__field">
+        <label for="observaciones" class="form__label">Observaciones (opcional)</label>
+        <textarea id="observaciones" 
+                    class="form__textarea" 
+                    rows="2"
+                    placeholder="Notas adicionales sobre el horario..."></textarea>
+        </div>
 
-        <!-- SECCIÓN REPORTES -->
-        <section id="reportes" class="admin__section">
-            <h2>Reportes</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum nobis iure nisi debitis nulla quae dolore veniam atque a nesciunt?</p>
+        <!-- Botones de acción del formulario -->
+        <div class="form__actions">
+        <button type="submit" class="button button--primary">
+            Aceptar
+        </button>
+        <button type="button" class="button button--secondary">
+            Cancelar
+        </button>
+        </div>
+    </form>
 
-        </section>
-
-        <!-- SECCIÓN INCAPACIDAD -->
-        <section id="incapacidad" class="admin__section">
-            <h2>Incapacidad</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum nobis iure nisi debitis nulla quae dolore veniam atque a nesciunt?</p>
-
-        </section>
-
-        <!-- SECCIÓN CERTIFICADOS -->
-        <section id="certificados" class="admin__section">
-            <h2>Certificados</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum nobis iure nisi debitis nulla quae dolore veniam atque a nesciunt?</p>
-        </section>
+    <!-- Tabla de horarios recientes (para contexto) -->
+    <div class="recent-schedules">
+        <h3 class="recent-schedules__title">Horarios asignados recientemente</h3>
+        <div class="table-responsive">
+        <table class="table">
+            <thead class="table__head">
+            <tr>
+                <th>Empleado</th>
+                <th>Cargo</th>
+                <th>Días</th>
+                <th>Horario</th>
+                <th>Estado</th>
+            </tr>
+            </thead>
+            <tbody class="table__body">
+            <tr>
+                <td>María González</td>
+                <td>Repostera</td>
+                <td>Lun - Vie</td>
+                <td>6am - 2pm</td>
+                <td><span class="badge badge--success">Activo</span></td>
+            </tr>
+            <tr>
+                <td>Carlos Rodríguez</td>
+                <td>Panadero</td>
+                <td>Mar - Sáb</td>
+                <td>2pm - 10pm</td>
+                <td><span class="badge badge--success">Activo</span></td>
+            </tr>
+            <tr>
+                <td>Ana Martínez</td>
+                <td>Atención al cliente</td>
+                <td>Lun - Dom</td>
+                <td>Partido</td>
+                <td><span class="badge badge--warning">Por confirmar</span></td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+    </section>
 
     </main>
 

@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OperPan | Incapacidad</title>
+    <link rel="stylesheet" href="../Assets/style.css">
+</head>
+<body>
+    <!-- HEADER PRINCIPAL -->
+    <header class="admin__header">
+        <h1 class="admin__title">Estación Paisa</h1>
+
+        <div class="admin__user">
+            <span class="admin__role">Vista Gerente / Administrador</span>
+        </div>
+    </header>
+
+
+    <!-- NAVEGACIÓN PRINCIPAL -->
+    <nav class="admin__nav">
+        <ul class="admin__menu">
+            <li><a class="nav__btn" href="../landingAdmin.html">Horarios</a></li>
+            <li><a class="nav__btn" href="./1-cuentas.html">Cuentas</a></li>
+            <li><a class="nav__btn" href="./2-tareas.html">Tareas</a></li>
+            <li><a class="nav__btn" href="./3-permisos.html">Permisos</a></li>
+            <li><a class="nav__btn" href="./4-reportes.html">Reportes</a></li>
+            <li><a class="nav__btn" href="./5-incapacidad.html">Incapacidad</a></li>
+            <li><a class="nav__btn" href="./6-certificados.html">Certificados</a></li>
+        </ul>
+    </nav>
+
+    <!-- SECCIÓN INCAPACIDAD -->
+    <section id="incapacidad" class="admin__section">
+    <header class="section__header">
+        <h2 class="section__title">Gestión de Incapacidades</h2>
+        <p class="section__description">Administra y da seguimiento a las incapacidades médicas del personal</p>
+    </header>
+
+    <!-- Toggle de vistas: Empleado vs Administrador -->
+    <div class="incapacity-tabs" role="tablist">
+        <button class="incapacity-tabs__tab incapacity-tabs__tab--active" role="tab" data-view="employee" aria-selected="true">
+        👤 Vista Empleado - Mis incapacidades
+        </button>
+        <button class="incapacity-tabs__tab" role="tab" data-view="admin" aria-selected="false">
+        👑 Vista Administrador - Revisar incapacidades
+        </button>
+    </div>
+
+    <!-- ========================================= -->
+    <!-- VISTA EMPLEADO: Adjuntar incapacidades -->
+    <!-- ========================================= -->
+    <div class="incapacity-view incapacity-view--employee" data-view="employee-content">
+        
+        <!-- Contexto del empleado (basado en mockup) -->
+        <div class="employee-context">
+        <div class="employee-context__card">
+            <div class="employee-context__avatar">EP</div>
+            <div class="employee-context__info">
+            <h3 class="employee-context__name">Eddier Paz Pardo</h3>
+            <div class="employee-context__meta">
+                <span class="employee-context__badge">ID: EMP-2024-156</span>
+                <span class="employee-context__badge">Panadero Principal</span>
+                <span class="employee-context__badge">EPS: Sura</span>
+            </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- Formulario para adjuntar nueva incapacidad -->
+        <form class="incapacity-form">
+        <h3 class="incapacity-form__title">Adjuntar nueva incapacidad</h3>
+        
+        <div class="form__grid">
+            <!-- Título de la incapacidad -->
+            <div class="form__field form__field--full">
+            <label for="incapacity-title" class="form__label">
+                Título de la incapacidad <span class="form__required">*</span>
+            </label>
+            <input type="text" 
+                    id="incapacity-title" 
+                    class="form__input" 
+                    placeholder="Ej: Incapacidad médica - Gripa, Cirugía, etc."
+                    value="Incapacidad médica - Procedimiento odontológico"
+                    required>
+            </div>
+
+            <!-- Fechas de la incapacidad -->
+            <div class="form__row">
+            <div class="form__group form__group--half">
+                <label for="incapacity-start" class="form__label">
+                Fecha inicio <span class="form__required">*</span>
+                </label>
+                <input type="date" 
+                    id="incapacity-start" 
+                    class="form__input" 
+                    value="2025-08-10"
+                    required>
+            </div>
+            
+            <div class="form__group form__group--half">
+                <label for="incapacity-end" class="form__label">
+                Fecha fin <span class="form__required">*</span>
+                </label>
+                <input type="date" 
+                    id="incapacity-end" 
+                    class="form__input" 
+                    value="2025-08-15"
+                    required>
+            </div>
+            </div>
+
+            <!-- Descripción / Detalles adicionales -->
+            <div class="form__field form__field--full">
+            <label for="incapacity-description" class="form__label">
+                Descripción / Detalles adicionales
+            </label>
+            <textarea id="incapacity-description" 
+                        class="form__textarea" 
+                        rows="3"
+                        placeholder="Información adicional sobre la incapacidad (diagnóstico, recomendaciones médicas, etc.)">Procedimiento de endodoncia realizado el 10/08. Reposo recomendado por 5 días. Control el 16/08.</textarea>
+            </div>
+
+            <!-- Adjuntar archivo (como en el mockup) -->
+            <div class="form__field form__field--full">
+            <label for="incapacity-file" class="form__label">
+                Adjuntar incapacidad (PDF) <span class="form__required">*</span>
+            </label>
+            
+            <!-- Vista previa de archivo adjunto (simulando lo del mockup) -->
+            <div class="form__file-preview">
+                <div class="file-attachment">
+                <span class="file-attachment__icon">📄</span>
+                <div class="file-attachment__info">
+                    <span class="file-attachment__name">INCAPACIDAD_EDDIER_PAZ_PARDO.pdf</span>
+                    <span class="file-attachment__size">1.2 MB</span>
+                </div>
+                <button type="button" class="file-attachment__remove" aria-label="Eliminar archivo">✕</button>
+                </div>
+            </div>
+            
+            <!-- Botón para adjuntar (si se quiere cambiar) -->
+            <div class="form__file-upload">
+                <input type="file" id="incapacity-file" class="form__file-input" accept=".pdf">
+                <label for="incapacity-file" class="form__file-label">
+                <span class="form__file-icon">📎</span>
+                Reemplazar archivo
+                </label>
+                <small class="form__hint">Solo formato PDF. Máximo 10MB</small>
+            </div>
+            </div>
+
+            <!-- Checkbox de términos -->
+            <div class="form__row form__row--checkbox">
+            <label class="checkbox checkbox--primary">
+                <input type="checkbox" id="incapacity-confirm" class="checkbox__input" checked>
+                <span class="checkbox__label">
+                Confirmo que la información y el documento adjunto son verídicos
+                </span>
+            </label>
+            </div>
+
+            <!-- Botones de acción -->
+            <div class="form__actions">
+            <button type="submit" class="button button--primary">
+                <span class="button__icon">📤</span> Enviar incapacidad
+            </button>
+            <button type="reset" class="button button--secondary">
+                Cancelar
+            </button>
+            </div>
+        </div>
+        </form>
+
+        <!-- Historial de incapacidades del empleado -->
+        <div class="my-incapacities">
+        <header class="my-incapacities__header">
+            <h3 class="my-incapacities__title">Mis incapacidades</h3>
+            <div class="my-incapacities__summary">
+            <span class="my-incapacities__badge my-incapacities__badge--total">Total: 3</span>
+            <span class="my-incapacities__badge my-incapacities__badge--pending">Pendientes: 1</span>
+            <span class="my-incapacities__badge my-incapacities__badge--approved">Aprobadas: 2</span>
+            </div>
+        </header>
+
+        <div class="incapacity-timeline">
+            <!-- Incapacidad 1 - Pendiente (como en el mockup) -->
+            <article class="incapacity-card incapacity-card--pending">
+            <div class="incapacity-card__status">
+                <span class="badge badge--warning">Pendiente de revisión</span>
+            </div>
+            
+            <div class="incapacity-card__header">
+                <h4 class="incapacity-card__title">Incapacidad médica - Procedimiento odontológico</h4>
+                <span class="incapacity-card__date">Adjuntado: 12/08/2025 20:00</span>
+            </div>
+            
+            <p class="incapacity-card__description">
+                Procedimiento de endodoncia. Reposo recomendado por 5 días.
+            </p>
+            
+            <div class="incapacity-card__dates">
+                <span class="incapacity-card__date-badge">
+                <span class="incapacity-card__date-label">Inicio:</span> 10/08/2025
+                </span>
+                <span class="incapacity-card__date-badge">
+                <span class="incapacity-card__date-label">Fin:</span> 15/08/2025
+                </span>
+                <span class="incapacity-card__date-badge">
+                <span class="incapacity-card__date-label">Días:</span> 6 días
+                </span>
+            </div>
+            
+            <div class="incapacity-card__attachment">
+                <span class="incapacity-card__attachment-icon">📄</span>
+                <a href="#" class="incapacity-card__attachment-link">INCAPACIDAD_EDDIER_PAZ_PARDO.pdf</a>
+                <span class="incapacity-card__attachment-size">(1.2 MB)</span>
+            </div>
+            
+            <div class="incapacity-card__footer">
+                <button class="button button--secondary button--small">
+                <span class="button__icon">👁️</span> Ver documento
+                </button>
+                <button class="button button--danger button--small">
+                <span class="button__icon">🗑</span> Eliminar
+                </button>
+            </div>
+            </article>
+
+            <!-- Incapacidad 2 - Aprobada -->
+            <article class="incapacity-card incapacity-card--approved">
+            <div class="incapacity-card__status">
+                <span class="badge badge--success">Aprobada</span>
+            </div>
+            
+            <div class="incapacity-card__header">
+                <h4 class="incapacity-card__title">Incapacidad - Gripa estacional</h4>
+                <span class="incapacity-card__date">Adjuntado: 05/07/2025</span>
+            </div>
+            
+            <p class="incapacity-card__description">
+                Incapacidad por 3 días debido a cuadro gripal severo.
+            </p>
+            
+            <div class="incapacity-card__dates">
+                <span class="incapacity-card__date-badge">01/07/2025 - 03/07/2025</span>
+                <span class="incapacity-card__date-badge">3 días</span>
+            </div>
+            
+            <div class="incapacity-card__attachment">
+                <span class="incapacity-card__attachment-icon">📄</span>
+                <a href="#" class="incapacity-card__attachment-link">INCAPACIDAD_EDDIER_PARDO_GIPA.pdf</a>
+            </div>
+            
+            <div class="incapacity-card__footer">
+                <span class="incapacity-card__approved-by">Aprobado por: Admin - 06/07/2025</span>
+            </div>
+            </article>
+
+            <!-- Incapacidad 3 - Rechazada -->
+            <article class="incapacity-card incapacity-card--rejected">
+            <div class="incapacity-card__status">
+                <span class="badge badge--danger">Rechazada</span>
+            </div>
+            
+            <div class="incapacity-card__header">
+                <h4 class="incapacity-card__title">Incapacidad - Dolor lumbar</h4>
+                <span class="incapacity-card__date">Adjuntado: 20/06/2025</span>
+            </div>
+            
+            <p class="incapacity-card__description">
+                Incapacidad por dolor lumbar - 2 días
+            </p>
+            
+            <div class="incapacity-card__dates">
+                <span class="incapacity-card__date-badge">18/06/2025 - 19/06/2025</span>
+            </div>
+            
+            <div class="incapacity-card__attachment">
+                <span class="incapacity-card__attachment-icon">📄</span>
+                <a href="#" class="incapacity-card__attachment-link">INCAPACIDAD_EDDIER_PARDO_LUMBAR.pdf</a>
+            </div>
+            
+            <div class="incapacity-card__footer">
+                <span class="incapacity-card__reject-reason">Motivo: Documento ilegible, por favor adjuntar nuevamente</span>
+            </div>
+            </article>
+        </div>
+        </div>
+    </div>
+
+    <!-- ========================================= -->
+    <!-- VISTA ADMINISTRADOR: Revisar incapacidades -->
+    <!-- ========================================= -->
+    <div class="incapacity-view incapacity-view--admin hidden" data-view="admin-content">
+        
+        <!-- Header con filtros y resumen -->
+        <div class="admin-incapacity-header">
+        <div class="admin-incapacity-header__top">
+            <h3 class="admin-incapacity-header__title">Bandeja de incapacidades - Pendientes de revisión</h3>
+            <div class="admin-incapacity-header__actions">
+            <button class="button button--secondary button--small">
+                📊 Ver estadísticas
+            </button>
+            <button class="button button--secondary button--small">
+                📥 Exportar reporte
+            </button>
+            </div>
+        </div>
+        
+        <!-- Filtros -->
+        <div class="admin-incapacity-filters">
+            <select class="admin-incapacity-filters__select">
+            <option value="pendientes" selected>Pendientes</option>
+            <option value="aprobadas">Aprobadas</option>
+            <option value="rechazadas">Rechazadas</option>
+            <option value="todas">Todas</option>
+            </select>
+            
+            <select class="admin-incapacity-filters__select">
+            <option value="recientes">Más recientes</option>
+            <option value="antiguas">Más antiguas</option>
+            </select>
+            
+            <div class="admin-incapacity-filters__search">
+            <input type="text" placeholder="Buscar por empleado...">
+            <button class="admin-incapacity-filters__search-btn">🔍</button>
+            </div>
+        </div>
+        </div>
+
+        <!-- Resumen rápido -->
+        <div class="incapacity-summary">
+        <div class="incapacity-summary__card incapacity-summary__card--pending">
+            <span class="incapacity-summary__label">Pendientes</span>
+            <span class="incapacity-summary__value">4</span>
+        </div>
+        <div class="incapacity-summary__card incapacity-summary__card--approved">
+            <span class="incapacity-summary__label">Aprobadas hoy</span>
+            <span class="incapacity-summary__value">2</span>
+        </div>
+        <div class="incapacity-summary__card incapacity-summary__card--rejected">
+            <span class="incapacity-summary__label">Rechazadas hoy</span>
+            <span class="incapacity-summary__value">1</span>
+        </div>
+        <div class="incapacity-summary__card incapacity-summary__card--total">
+            <span class="incapacity-summary__label">Total mes</span>
+            <span class="incapacity-summary__value">12</span>
+        </div>
+        </div>
+
+        <!-- Lista de incapacidades para admin -->
+        <div class="admin-incapacity-list">
+        
+        <!-- Incapacidad 1 - Pendiente (basada en el mockup) -->
+        <article class="admin-incapacity-card">
+            <div class="admin-incapacity-card__employee">
+            <div class="admin-incapacity-card__avatar">EP</div>
+            <div class="admin-incapacity-card__info">
+                <h4 class="admin-incapacity-card__name">Eddier Paz Pardo</h4>
+                <span class="admin-incapacity-card__role">Panadero Principal</span>
+                <span class="admin-incapacity-card__id">ID: EMP-2024-156</span>
+                <span class="admin-incapacity-card__eps">EPS: Sura</span>
+            </div>
+            </div>
+
+            <div class="admin-incapacity-card__content">
+            <div class="admin-incapacity-card__header">
+                <h5 class="admin-incapacity-card__title">Incapacidad médica - Procedimiento odontológico</h5>
+                <span class="admin-incapacity-card__date">Recibido: 12/08/2025 20:00</span>
+            </div>
+            
+            <p class="admin-incapacity-card__description">
+                Procedimiento de endodoncia. Reposo recomendado por 5 días. Control el 16/08.
+            </p>
+            
+            <div class="admin-incapacity-card__dates">
+                <span class="admin-incapacity-card__date-badge">
+                <span class="label">Inicio:</span> 10/08/2025
+                </span>
+                <span class="admin-incapacity-card__date-badge">
+                <span class="label">Fin:</span> 15/08/2025
+                </span>
+                <span class="admin-incapacity-card__date-badge">
+                <span class="label">Días:</span> 6 días
+                </span>
+            </div>
+            
+            <!-- Archivo adjunto (como en el mockup) -->
+            <div class="admin-incapacity-card__attachment">
+                <span class="admin-incapacity-card__attachment-count">
+                <span class="attachment-count__number">1</span>
+                <span class="attachment-count__text">archivo adjunto</span>
+                </span>
+                
+                <div class="attachment-preview">
+                <span class="attachment-preview__icon">📄</span>
+                <span class="attachment-preview__name">INCAPACIDAD_EDDIER_PAZ_PARDO.pdf</span>
+                <span class="attachment-preview__size">1.2 MB</span>
+                <button class="attachment-preview__download" title="Descargar">⬇️</button>
+                <button class="attachment-preview__view" title="Ver">👁️</button>
+                </div>
+            </div>
+            </div>
+
+            <!-- Acciones: Aprobar / Rechazar (como en el mockup) -->
+            <div class="admin-incapacity-card__actions">
+            <button class="button button--success button--medium" data-action="approve" data-id="1">
+                ✓ Aprobar
+            </button>
+            <button class="button button--danger button--medium" data-action="reject" data-id="1">
+                ✗ Rechazar
+            </button>
+            <button class="button button--secondary button--medium" data-action="view">
+                👁️ Ver detalle
+            </button>
+            </div>
+        </article>
+
+        <!-- Incapacidad 2 - Pendiente (otro empleado) -->
+        <article class="admin-incapacity-card">
+            <div class="admin-incapacity-card__employee">
+            <div class="admin-incapacity-card__avatar">SM</div>
+            <div class="admin-incapacity-card__info">
+                <h4 class="admin-incapacity-card__name">Santiago Muñeton</h4>
+                <span class="admin-incapacity-card__role">Panadero</span>
+                <span class="admin-incapacity-card__id">ID: EMP-2024-157</span>
+                <span class="admin-incapacity-card__eps">EPS: Sanitas</span>
+            </div>
+            </div>
+
+            <div class="admin-incapacity-card__content">
+            <div class="admin-incapacity-card__header">
+                <h5 class="admin-incapacity-card__title">Incapacidad - Fractura dedo</h5>
+                <span class="admin-incapacity-card__date">Recibido: 12/08/2025 15:30</span>
+            </div>
+            
+            <p class="admin-incapacity-card__description">
+                Accidente en casa: fractura del dedo meñique. Incapacidad por 15 días según médico.
+            </p>
+            
+            <div class="admin-incapacity-card__dates">
+                <span class="admin-incapacity-card__date-badge">11/08/2025 - 25/08/2025</span>
+                <span class="admin-incapacity-card__date-badge">15 días</span>
+            </div>
+            
+            <div class="admin-incapacity-card__attachment">
+                <div class="attachment-preview">
+                <span class="attachment-preview__icon">📄</span>
+                <span class="attachment-preview__name">INCAPACIDAD_SANTIAGO_FRACTURA.pdf</span>
+                <span class="attachment-preview__size">2.1 MB</span>
+                <button class="attachment-preview__download">⬇️</button>
+                </div>
+            </div>
+            </div>
+
+            <div class="admin-incapacity-card__actions">
+            <button class="button button--success button--medium">✓ Aprobar</button>
+            <button class="button button--danger button--medium">✗ Rechazar</button>
+            <button class="button button--secondary button--medium">👁️ Ver</button>
+            </div>
+        </article>
+
+        <!-- Incapacidad 3 - Con múltiples archivos -->
+        <article class="admin-incapacity-card">
+            <div class="admin-incapacity-card__employee">
+            <div class="admin-incapacity-card__avatar">PH</div>
+            <div class="admin-incapacity-card__info">
+                <h4 class="admin-incapacity-card__name">Paula Herrera</h4>
+                <span class="admin-incapacity-card__role">Servicio al Cliente</span>
+                <span class="admin-incapacity-card__id">ID: EMP-2024-158</span>
+                <span class="admin-incapacity-card__eps">EPS: Sura</span>
+            </div>
+            </div>
+
+            <div class="admin-incapacity-card__content">
+            <div class="admin-incapacity-card__header">
+                <h5 class="admin-incapacity-card__title">Incapacidad prenatal</h5>
+                <span class="admin-incapacity-card__date">Recibido: 11/08/2025 09:15</span>
+            </div>
+            
+            <p class="admin-incapacity-card__description">
+                Incapacidad prenatal según control médico. Adjunto certificado médico y fórmula.
+            </p>
+            
+            <div class="admin-incapacity-card__dates">
+                <span class="admin-incapacity-card__date-badge">10/08/2025 - 24/08/2025</span>
+                <span class="admin-incapacity-card__date-badge">15 días</span>
+            </div>
+            
+            <!-- Múltiples archivos -->
+            <div class="admin-incapacity-card__attachment">
+                <span class="admin-incapacity-card__attachment-count">
+                <span class="attachment-count__number">2</span>
+                <span class="attachment-count__text">archivos adjuntos</span>
+                </span>
+                
+                <div class="attachment-list">
+                <div class="attachment-preview attachment-preview--small">
+                    <span class="attachment-preview__icon">📄</span>
+                    <span class="attachment-preview__name">CERTIFICADO_MEDICO.pdf</span>
+                </div>
+                <div class="attachment-preview attachment-preview--small">
+                    <span class="attachment-preview__icon">📄</span>
+                    <span class="attachment-preview__name">FORMULA_CONTROL.pdf</span>
+                </div>
+                </div>
+            </div>
+            </div>
+
+            <div class="admin-incapacity-card__actions">
+            <button class="button button--success button--medium">✓ Aprobar</button>
+            <button class="button button--danger button--medium">✗ Rechazar</button>
+            <button class="button button--secondary button--medium">👁️ Ver</button>
+            </div>
+        </article>
+
+        <!-- Incapacidad 4 - Ya aprobada (para contexto) -->
+        <article class="admin-incapacity-card admin-incapacity-card--approved">
+            <div class="admin-incapacity-card__employee">
+            <div class="admin-incapacity-card__avatar">CP</div>
+            <div class="admin-incapacity-card__info">
+                <h4 class="admin-incapacity-card__name">Camila Parra</h4>
+                <span class="admin-incapacity-card__role">Aseo</span>
+                <span class="admin-incapacity-card__id">ID: EMP-2024-160</span>
+            </div>
+            </div>
+
+            <div class="admin-incapacity-card__content">
+            <div class="admin-incapacity-card__header">
+                <h5 class="admin-incapacity-card__title">Incapacidad - Cirugía vesícula</h5>
+                <span class="admin-incapacity-card__date">Aprobado: 10/08/2025</span>
+            </div>
+            
+            <div class="admin-incapacity-card__dates">
+                <span class="admin-incapacity-card__date-badge">05/08/2025 - 19/08/2025</span>
+            </div>
+            
+            <div class="admin-incapacity-card__attachment">
+                <span class="badge badge--success">Aprobada por Admin</span>
+            </div>
+            </div>
+
+            <div class="admin-incapacity-card__actions">
+            <button class="button button--secondary button--medium" disabled>✓ Aprobada</button>
+            </div>
+        </article>
+        </div>
+
+        <!-- Modal para rechazar con justificación (RNF-IN-04) -->
+        <dialog class="modal modal--reject" id="reject-incapacity-modal">
+        <div class="modal__content">
+            <h3 class="modal__title">Rechazar incapacidad</h3>
+            
+            <form class="modal__form">
+            <div class="form__field">
+                <label for="reject-reason" class="form__label">
+                Motivo del rechazo <span class="form__required">*</span>
+                </label>
+                <textarea id="reject-reason" 
+                        class="form__textarea" 
+                        rows="4"
+                        placeholder="Explica al empleado por qué se rechaza su incapacidad (ej: documento ilegible, incompleto, no válido...)"
+                        required></textarea>
+                <small class="form__hint">Este motivo será notificado al empleado</small>
+            </div>
+            
+            <div class="form__field">
+                <label class="checkbox checkbox--primary">
+                <input type="checkbox" id="notify-email" class="checkbox__input" checked>
+                <span class="checkbox__label">Notificar al empleado por correo</span>
+                </label>
+            </div>
+            
+            <div class="modal__actions">
+                <button type="submit" class="button button--danger">
+                Confirmar rechazo
+                </button>
+                <button type="button" class="button button--secondary" onclick="this.closest('dialog').close()">
+                Cancelar
+                </button>
+            </div>
+            </form>
+        </div>
+        </dialog>
+
+        <!-- Panel de detalle de incapacidad (para ver información completa) -->
+        <div class="incapacity-detail-panel hidden" id="incapacity-detail">
+        <header class="incapacity-detail-panel__header">
+            <h4 class="incapacity-detail-panel__title">Detalle de incapacidad</h4>
+            <button class="incapacity-detail-panel__close">✕</button>
+        </header>
+        
+        <div class="incapacity-detail-panel__content">
+            <div class="incapacity-detail">
+            <div class="incapacity-detail__row">
+                <span class="incapacity-detail__label">Empleado:</span>
+                <span class="incapacity-detail__value">Eddier Paz Pardo</span>
+            </div>
+            <div class="incapacity-detail__row">
+                <span class="incapacity-detail__label">ID:</span>
+                <span class="incapacity-detail__value">EMP-2024-156</span>
+            </div>
+            <div class="incapacity-detail__row">
+                <span class="incapacity-detail__label">EPS:</span>
+                <span class="incapacity-detail__value">Sura</span>
+            </div>
+            <div class="incapacity-detail__row">
+                <span class="incapacity-detail__label">Título:</span>
+                <span class="incapacity-detail__value">Incapacidad médica - Procedimiento odontológico</span>
+            </div>
+            <div class="incapacity-detail__row">
+                <span class="incapacity-detail__label">Descripción:</span>
+                <span class="incapacity-detail__value">Procedimiento de endodoncia. Reposo recomendado por 5 días. Control el 16/08.</span>
+            </div>
+            <div class="incapacity-detail__row">
+                <span class="incapacity-detail__label">Período:</span>
+                <span class="incapacity-detail__value">10/08/2025 - 15/08/2025 (6 días)</span>
+            </div>
+            <div class="incapacity-detail__row">
+                <span class="incapacity-detail__label">Fecha de envío:</span>
+                <span class="incapacity-detail__value">12/08/2025 20:00</span>
+            </div>
+            <div class="incapacity-detail__row">
+                <span class="incapacity-detail__label">Archivos adjuntos:</span>
+                <div class="incapacity-detail__attachments">
+                <div class="attachment-item">
+                    <span class="attachment-item__icon">📄</span>
+                    <span class="attachment-item__name">INCAPACIDAD_EDDIER_PAZ_PARDO.pdf</span>
+                    <span class="attachment-item__size">1.2 MB</span>
+                    <button class="attachment-item__download">⬇️ Descargar</button>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- Historial de incapacidades (para admin) -->
+        <div class="incapacity-history">
+        <header class="incapacity-history__header">
+            <h4 class="incapacity-history__title">Historial de incapacidades</h4>
+            <button class="button button--secondary button--small">
+            📥 Exportar historial
+            </button>
+        </header>
+
+        <div class="table-responsive">
+            <table class="table table--incapacity">
+            <thead class="table__head">
+                <tr>
+                <th>Fecha solicitud</th>
+                <th>Empleado</th>
+                <th>Título</th>
+                <th>Período</th>
+                <th>Días</th>
+                <th>Estado</th>
+                <th>Aprobado por</th>
+                <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="table__body">
+                <tr>
+                <td>12/08/2025</td>
+                <td>Eddier Paz Pardo</td>
+                <td>Procedimiento odontológico</td>
+                <td>10-15/08</td>
+                <td>6</td>
+                <td><span class="badge badge--warning">Pendiente</span></td>
+                <td>—</td>
+                <td><button class="table__action">👁️</button></td>
+                </tr>
+                <tr>
+                <td>12/08/2025</td>
+                <td>Santiago Muñeton</td>
+                <td>Fractura dedo</td>
+                <td>11-25/08</td>
+                <td>15</td>
+                <td><span class="badge badge--warning">Pendiente</span></td>
+                <td>—</td>
+                <td><button class="table__action">👁️</button></td>
+                </tr>
+                <tr>
+                <td>10/08/2025</td>
+                <td>Camila Parra</td>
+                <td>Cirugía vesícula</td>
+                <td>05-19/08</td>
+                <td>15</td>
+                <td><span class="badge badge--success">Aprobada</span></td>
+                <td>Admin</td>
+                <td><button class="table__action">👁️</button></td>
+                </tr>
+                <tr>
+                <td>05/07/2025</td>
+                <td>Eddier Paz Pardo</td>
+                <td>Gripa estacional</td>
+                <td>01-03/07</td>
+                <td>3</td>
+                <td><span class="badge badge--success">Aprobada</span></td>
+                <td>Admin</td>
+                <td><button class="table__action">👁️</button></td>
+                </tr>
+                <tr>
+                <td>20/06/2025</td>
+                <td>Eddier Paz Pardo</td>
+                <td>Dolor lumbar</td>
+                <td>18-19/06</td>
+                <td>2</td>
+                <td><span class="badge badge--danger">Rechazada</span></td>
+                <td>Admin</td>
+                <td><button class="table__action">👁️</button></td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+        
+        <div class="pagination">
+            <button class="pagination__btn pagination__btn--prev" disabled>← Anterior</button>
+            <span class="pagination__info">Página 1 de 3</span>
+            <button class="pagination__btn pagination__btn--next">Siguiente →</button>
+        </div>
+        </div>
+    </div>
+    </section>
+</body>
+</html>
