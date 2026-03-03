@@ -132,13 +132,13 @@ input {
 
 .login__button {
     margin-top: 5px;
-    margin-left: 19px;
-    width: 251px;
+    /* margin-left: 19px; */
+    width: 280px;
     padding: 10px;
     background-color: white;
     color: #A40706;
     display: block;
-    border-radius: 5px;
+    border-radius: 1px;
     text-decoration: none;
 
     /* Animación CSS para Hover - Tiempo para cambio de color */
@@ -152,13 +152,16 @@ input {
     color: var(--color-gris-claro);
 }
 
-.reset_password{
-    color: var(--color-gris-claro);
+/* Login - ¿Olvidaste tu contraseña? */
+    .reset_password{
+        color: var(--color-gris-claro);
 
-    /* Animación Hover (Tiempo de Transición) */
-    transition: 0.5s all;
-}
+        /* Animación Hover (Tiempo de Transición) */
+        transition: 0.5s all;
 
-.reset_password:hover {
-    color: var(--color-rojo)
-}
+        text-decoration: none;
+    }
+
+    .reset_password:hover {
+        color: var(--color-rojo)
+    }
