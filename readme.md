@@ -1,7 +1,6 @@
 # Operpan Gestion de Personal
 
-
-Mira nuestro Proyecto <a href="https://github.com/operpangestion/OperPan.git">Ingresa
+Mira nuestro Proyecto <a href="https://operpangestion.github.io/OperPan/">Ingresa
 
 ---
 # Git & GitHub – Tutorial Básico Desde Cero
