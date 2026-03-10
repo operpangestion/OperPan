@@ -91,7 +91,7 @@ html {
         border-radius: 1px;
         width: auto;
         background: transparent;
-        color: white;
+        color: rgb(224, 220, 220);
         outline: none;
         transition: border-color 0.5s;
     }
