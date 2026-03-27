@@ -5,7 +5,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 /* Variables */
-:root{
+:root {
     --color-rojo: #A40706;
     --color-rojo-oscuro: #6F0303;
     --color-rojo-ceniza: #E6B1B0;
@@ -21,12 +21,13 @@
 }
 
 
-h1, p{
-  font-family: "Open Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: weight;
-  font-style: normal;
-  font-variation-settings: "wdth" 100;
+h1,
+p {
+    font-family: "Open Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
 }
 
 html {
@@ -42,27 +43,33 @@ html {
 
 .login {
     margin-top: 5rem;
-
     /* Espaciado Interno (Lo que le da el color BLACK) */
     padding: 5rem;
-    background: black;
+    background: #A40706;
     color: white;
-    gap: 2px; 
+    gap: 2px;
 
     /* Bordeado Redondeado */
-    border-radius:10px;
+    border-radius: 10px;
 }
 
 .login__title {
-    color: var(--color-rojo);
+    color: white;
     font-size: 3rem;
 }
 
-.login__form{
-    margin: 20px;
+.login__form {
+    margin: 30px;
 }
 
-.login__user, .login__password{
+div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login__user,
+.login__password {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -70,11 +77,11 @@ html {
     border: none;
 }
 
-.img-login-user{
+.img-login-user {
     height: 30px;
     width: 32px;
     padding: 1px;
-    border: 2px solid var(--color-gris-claro);
+    border: 2px solid white;
     border-radius: 1px;
     transition: border-color 0.5s;
     display: block;
@@ -82,46 +89,46 @@ html {
 
 
 /* Inputs Login */
-    #usuario, #password{
-        flex: 1;
-        margin: 0 0 0 5px;
-        padding: 8px 12px;
-        height: auto;
-        border: 2px solid var(--color-gris-claro);
-        border-radius: 1px;
-        width: auto;
-        background: transparent;
-        color: rgb(224, 220, 220);
-        outline: none;
-        transition: border-color 0.5s;
-    }
+#usuario,
+#password {
+    flex: 1;
+    margin: 0 0 0 5px;
+    padding: 8px 12px;
+    height: auto;
+    border: 2px solid white;
+    border-radius: 1px;
+    width: auto;
+    background: transparent;
+    color: white;
+    outline: none;
+    transition: border-color 0.5s;
+}
 
-    /* Cuando el input está en focus */
-    #usuario:focus, #password:focus {
-        border-color: var(--color-rojo);
-    }
+/* Cuando el input está en focus */
+#usuario:focus,
+#password:focus {
+    border-color: var(--color-rojo);
 
-    /* Cambiar el borde del icono cuando el input está en focus */
-    .login__user:has(#usuario:focus) .img-login-user,
-    .login__password:has(#password:focus) .img-login-user {
-        border-color: var(--color-rojo);
-    }
+}
+
+/* Cambiar el borde del icono cuando el input está en focus */
+.login__user:has(#usuario:focus) .img-login-user,
+.login__password:has(#password:focus) .img-login-user {
+    border-color: var(--color-rojo);
+}
 
 
-    
-
-
-.login__subtitle{
-    margin-top:15px;
+.login__subtitle {
+    margin-top: 15px;
 }
 
 input {
     margin: 20px;
     padding: 10px;
-    border-radius:10px;
+    border-radius: 10px;
 }
 
-.login__buttons{
+.login__buttons {
     display: flex;
     flex-direction: row;
     gap: 12px;
@@ -148,20 +155,28 @@ input {
 
 .login__button:hover {
     /* transform: scale(1.1); */
-    background-color: var(--color-rojo-oscuro);
-    color: var(--color-gris-claro);
+    background-color: white;
+    color: white;
 }
 
 /* Login - ¿Olvidaste tu contraseña? */
-    .reset_password{
-        color: var(--color-gris-claro);
+.reset_password {
+    color: white;
 
-        /* Animación Hover (Tiempo de Transición) */
-        transition: 0.5s all;
+    /* Animación Hover (Tiempo de Transición) */
+    transition: 0.5s all;
 
-        text-decoration: none;
-    }
+    text-decoration: none;
+}
 
-    .reset_password:hover {
-        color: var(--color-rojo)
-    }
+.reset_password:hover {
+    color: var(--color-rojo)
+}
+
+.logo {
+    display: flex;
+    width: 150px;
+    border: 2px  var(--color-gris-claro);
+    border-radius: 1px;
+    transition: border-color 0.5s;
+}
