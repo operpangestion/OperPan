@@ -1,67 +1,1196 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-:root{
-    --color-rojo: #A40706;
-    --color-rojo-oscuro: #6F0303;
-    --color-rojo-ceniza: #E6B1B0;
-    --color-gris-carbon: #2B2B2B;
-    --color-gris-claro: #E5E5E5;
-    --color-negro: #000000;
-    --color-blanco: #ffffff;
+/* ============================================
+   VARIABLES GLOBALES Y RESET
+   ============================================ */
+:root {
+  --primary-color: #A40706;
+  --primary-dark: #000;
+  --primary-light: #4a7c4b;
+  --secondary-color: #ffd166;
+  --secondary-dark: #e6b800;
+  --accent-color: #d62828;
+  --success-color: #2ecc71;
+  --warning-color: #4a5574;
+  --danger-color: #e74c3c;
+  --info-color: #3498db;
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
 }
 
-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-h1, 
-h2, 
-h3, 
-h4{
-font-family: "Open Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: weight;
-  font-style: normal;
-  font-variation-settings:"wdth" 100;
+body.admin {
+  font-family: var(--font-sans);
+  background-color: var(--gray-50);
+  color: var(--gray-800);
+  line-height: 1.5;
 }
 
-p, li{
-  font-family: "Poppins", sans-serif;
-  font-weight: 400;
-  font-style: normal;
+/* ============================================
+   HEADER Y NAVEGACIÓN PRINCIPAL
+   ============================================ */
+.admin__header {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  box-shadow: var(--shadow-md);
 }
 
+.admin__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.admin__user {
+  background-color: rgba(255, 255, 255, 0.15);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-lg);
+}
+
+.admin__role {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Selector de navegación entre roles */
+label[for="_nav"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+#_nav {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--gray-100);
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-md);
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  z-index: 100;
+}
+
+/* Navegación principal */
 .admin__nav {
-    margin-top: 2rem;
+  background-color: white;
+  border-bottom: 1px solid var(--gray-200);
+  box-shadow: var(--shadow-sm);
+  overflow-x: auto;
 }
 
 .admin__menu {
-    display: flex;
-    flex-direction: row;
-    gap: 50px;
-}
-
-li {
-    list-style: none;
+  display: flex;
+  list-style: none;
+  gap: 0.25rem;
+  padding: 0.5rem 1rem;
+  margin: 0;
 }
 
 .nav__btn {
-    background-color: var(--color-gris-carbon);
-    color: var(--color-gris-claro);
-    transition: 0.5s;
-    border-radius: 5px;
-    padding: 5px;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  color: var(--gray-700);
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
 .nav__btn:hover {
-    background-color: var(--color-rojo-oscuro);
-    color: var(--color-blanco);
+  background-color: var(--gray-100);
+  color: var(--primary-color);
 }
 
-section {
-    display:flex;
+/* Contenido principal */
+.admin__main {
+  max-width: 1400px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+.admin__section {
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* ============================================
+   SECCIÓN HEADERS
+   ============================================ */
+.section__header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--gray-200);
+}
+
+.section__title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--gray-800);
+  margin-bottom: 0.25rem;
+}
+
+.section__description {
+  color: var(--gray-500);
+  font-size: 0.875rem;
+}
+
+/* ============================================
+   SELECTOR DE EMPLEADO (Horarios)
+   ============================================ */
+.employee-selector {
+  background: var(--gray-50);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.employee-selector__search {
+  flex: 2;
+  min-width: 200px;
+}
+
+.employee-selector__label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--gray-500);
+  margin-bottom: 0.25rem;
+}
+
+.employee-selector__field {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.employee-selector__input {
+  flex: 1;
+  padding: 0.625rem;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  transition: border 0.2s;
+}
+
+.employee-selector__input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(44, 95, 45, 0.1);
+}
+
+.employee-selector__search-btn {
+  background: var(--gray-200);
+  border: none;
+  padding: 0 1rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+
+.employee-selector__search-btn:hover {
+  background: var(--gray-300);
+}
+
+.employee-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* ============================================
+   BOTONES GLOBALES
+   ============================================ */
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font-sans);
+}
+
+.button--primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.button--primary:hover {
+  background-color: var(--primary-dark);
+}
+
+.button--secondary {
+  background-color: var(--gray-200);
+  color: var(--gray-700);
+  border-color: var(--gray-300);
+}
+
+.button--secondary:hover {
+  background-color: var(--gray-300);
+}
+
+.button--danger {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+.button--danger:hover {
+  background-color: #c0392b;
+}
+
+.button--success {
+  background-color: var(--success-color);
+  color: white;
+}
+
+.button--success:hover {
+  background-color: #27ae60;
+}
+
+.button--small {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+}
+
+.button--large {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+}
+
+.button--medium {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+.button--tertiary {
+  background: transparent;
+  color: var(--gray-600);
+  border-color: var(--gray-300);
+}
+
+.button--icon {
+  padding: 0.5rem;
+}
+
+/* ============================================
+   INFO DE EMPLEADO (tarjeta)
+   ============================================ */
+.employee-info {
+  margin-bottom: 1.5rem;
+}
+
+.employee-info__card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: linear-gradient(135deg, var(--gray-50), white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+}
+
+.employee-info__avatar {
+  width: 48px;
+  height: 48px;
+  background: var(--primary-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+.employee-info__name {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.employee-info__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.employee-info__badge {
+  background: var(--gray-200);
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  color: var(--gray-700);
+}
+
+.employee-info__badge--role {
+  background: var(--primary-light);
+  color: white;
+}
+
+/* ============================================
+   FORMULARIOS (estilos comunes)
+   ============================================ */
+.form__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.form__field--full {
+  grid-column: 1 / -1;
+}
+
+.form__label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--gray-700);
+}
+
+.form__required {
+  color: var(--danger-color);
+  margin-left: 0.25rem;
+}
+
+.form__optional {
+  font-size: 0.75rem;
+  font-weight: normal;
+  color: var(--gray-500);
+}
+
+.form__input, .form__select, .form__textarea {
+  padding: 0.625rem;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-family: var(--font-sans);
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.form__input:focus, .form__select:focus, .form__textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(44, 95, 45, 0.1);
+}
+
+.form__textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form__row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.form__group {
+  flex: 1;
+  min-width: 150px;
+}
+
+.form__group--half {
+  flex: 1 1 calc(50% - 0.5rem);
+}
+
+.form__hint {
+  font-size: 0.75rem;
+  color: var(--gray-500);
+  margin-top: 0.25rem;
+}
+
+.form__actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--gray-200);
+}
+
+.form__details {
+  background: var(--gray-50);
+  border-radius: var(--radius-md);
+  padding: 0.5rem;
+}
+
+.form__details-summary {
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--primary-color);
+  padding: 0.5rem;
+}
+
+.form__details-content {
+  padding: 1rem;
+  margin-top: 0.5rem;
+}
+
+/* Checkbox */
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.checkbox__input {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--primary-color);
+}
+
+.role-selector__label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.role-selector__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* ============================================
+   TABLAS
+   ============================================ */
+.table-responsive {
+  overflow-x: auto;
+  margin-top: 1rem;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.table__head {
+  background-color: var(--gray-100);
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.table__head th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--gray-700);
+}
+
+.table__body td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.table__body tr:hover {
+  background-color: var(--gray-50);
+}
+
+/* ============================================
+   BADGES Y ETIQUETAS
+   ============================================ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.badge--success {
+  background-color: #d1f7e5;
+  color: #0e6b3e;
+}
+
+.badge--warning {
+  background-color: #fef3c7;
+  color: #b45309;
+}
+
+.badge--danger {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.badge--info {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+/* ============================================
+   TABS (Certificados, Incapacidad, Reportes, Permisos)
+   ============================================ */
+.certificate-tabs,
+.incapacity-tabs,
+.reports-tabs,
+.permission-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--gray-200);
+  padding-bottom: 0.5rem;
+}
+
+.certificate-tabs__tab,
+.incapacity-tabs__tab,
+.reports-tabs__tab,
+.permission-tabs__tab {
+  background: transparent;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--gray-600);
+  cursor: pointer;
+  border-radius: var(--radius-md);
+  transition: all 0.2s;
+}
+
+.certificate-tabs__tab--active,
+.incapacity-tabs__tab--active,
+.reports-tabs__tab--active,
+.permission-tabs__tab--active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ============================================
+   VISTA EMPLEADO / ADMIN (contenedores)
+   ============================================ */
+.certificate-view,
+.incapacity-view,
+.reports-view,
+.permission-view {
+  transition: all 0.2s;
+}
+
+.employee-context {
+  margin-bottom: 1.5rem;
+}
+
+.employee-context__card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--gray-50);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  border: 1px solid var(--gray-200);
+}
+
+.employee-context__avatar {
+  width: 48px;
+  height: 48px;
+  background: var(--primary-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+.employee-context__name {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.employee-context__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.employee-context__badge {
+  background: var(--gray-200);
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+}
+
+/* ============================================
+   CERTIFICADOS - COMPONENTES ESPECÍFICOS
+   ============================================ */
+.certificate-request__card {
+  background: linear-gradient(135deg, #f0fdf4, white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.certificate-request__title {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.certificate-request__features {
+  list-style: none;
+  margin: 1rem 0;
+}
+
+.certificate-request__features li {
+  margin: 0.5rem 0;
+}
+
+.certificate-status__card {
+  background: var(--gray-50);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.certificate-status__spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--gray-200);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.certificate-ready__card {
+  background: #d1f7e5;
+  border-left: 4px solid var(--success-color);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.my-certificates__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.certificates-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.certificate-history-card {
+  display: flex;
+  gap: 1rem;
+  background: var(--gray-50);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.certificate-history-card__date {
+  text-align: center;
+  background: white;
+  padding: 0.5rem;
+  border-radius: var(--radius-md);
+  min-width: 60px;
+}
+
+/* Admin certificados */
+.admin-certificate-search {
+  margin-bottom: 1.5rem;
+}
+
+.admin-certificate-search__input-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.certificate-summary {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.certificate-summary__card {
+  background: var(--gray-50);
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  flex: 1;
+  text-align: center;
+}
+
+.selected-employee {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--gray-50);
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  flex-wrap: wrap;
+}
+
+/* ============================================
+   INCAPACIDADES - COMPONENTES
+   ============================================ */
+.incapacity-form {
+  background: var(--gray-50);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.form__file-preview {
+  margin-bottom: 0.5rem;
+}
+
+.file-attachment {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: white;
+  padding: 0.5rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--gray-200);
+}
+
+.form__file-upload {
+  margin-top: 0.5rem;
+}
+
+.form__file-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--gray-200);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.form__file-input {
+  display: none;
+}
+
+.incapacity-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.incapacity-card {
+  background: white;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  transition: box-shadow 0.2s;
+}
+
+.incapacity-card--pending {
+  border-left: 4px solid var(--warning-color);
+}
+
+.incapacity-card--approved {
+  border-left: 4px solid var(--success-color);
+}
+
+.incapacity-card--rejected {
+  border-left: 4px solid var(--danger-color);
+}
+
+.admin-incapacity-card {
+  background: white;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.admin-incapacity-card__employee {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.admin-incapacity-card__avatar {
+  width: 40px;
+  height: 40px;
+  background: var(--primary-color);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+.incapacity-summary {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.incapacity-summary__card {
+  background: var(--gray-50);
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  flex: 1;
+  text-align: center;
+}
+
+/* ============================================
+   REPORTES - ESTILO CORREO
+   ============================================ */
+.report-form--email-style {
+  background: white;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.form__recipients {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-md);
+  padding: 0.5rem;
+  background: white;
+}
+
+.form__recipient-badge {
+  background: var(--gray-200);
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.form__textarea--email-body {
+  font-family: monospace;
+  background: white;
+}
+
+.form__textarea-toolbar {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+  margin-top: 0.5rem;
+  border-top: 1px solid var(--gray-200);
+  padding-top: 0.5rem;
+}
+
+.form__toolbar-btn {
+  background: transparent;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-sm);
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.sent-reports__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.sent-report-card {
+  display: flex;
+  gap: 0.75rem;
+  background: var(--gray-50);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  border-left: 3px solid var(--primary-color);
+}
+
+.admin-reports-inbox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+
+.admin-report-card {
+  display: flex;
+  gap: 0.75rem;
+  background: white;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.admin-report-card--unread {
+  background: #fefce8;
+  border-left: 3px solid var(--warning-color);
+}
+
+.admin-report-card__priority--high {
+  color: var(--danger-color);
+}
+
+.report-detail-panel {
+  background: white;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  margin-top: 1.5rem;
+  padding: 1rem;
+}
+
+/* ============================================
+   PERMISOS - COMPONENTES
+   ============================================ */
+.permission-form {
+  background: white;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.my-requests__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.requests-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.request-card {
+  background: var(--gray-50);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  border-left: 3px solid var(--gray-400);
+}
+
+.request-card__badge--pending {
+  color: var(--warning-color);
+  font-weight: 600;
+}
+
+.request-card__badge--approved {
+  color: var(--success-color);
+}
+
+.request-card__badge--rejected {
+  color: var(--danger-color);
+}
+
+.admin-requests-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.admin-request-card {
+  background: white;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-request-card__employee {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+/* ============================================
+   MODALES
+   ============================================ */
+.modal {
+  border: none;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  width: 90%;
+  max-width: 500px;
+  padding: 0;
+  background: white;
+}
+
+.modal::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal__content {
+  padding: 1.5rem;
+}
+
+.modal__title {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.modal__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+/* ============================================
+   PAGINACIÓN
+   ============================================ */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.pagination__btn {
+  background: var(--gray-200);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.pagination__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ============================================
+   LINKS
+   ============================================ */
+.link {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+  .admin__header {
     flex-direction: column;
+    text-align: center;
+  }
+  
+  .admin__menu {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .admin__main {
+    padding: 0 1rem;
+  }
+  
+  .form__row {
+    flex-direction: column;
+  }
+  
+  .form__group--half {
+    flex: 1 1 100%;
+  }
+  
+  .employee-selector {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .certificate-tabs, .incapacity-tabs, .reports-tabs, .permission-tabs {
+    flex-wrap: wrap;
+  }
+  
+  .admin-request-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .admin-report-card {
+    flex-direction: column;
+  }
 }
