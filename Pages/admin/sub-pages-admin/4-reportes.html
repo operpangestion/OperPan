@@ -7,12 +7,24 @@
     <link rel="stylesheet" href="../Assets/style.css">
 </head>
 <body>
+    
     <!-- HEADER PRINCIPAL -->
     <header class="admin__header">
         <h1 class="admin__title">Estación Paisa</h1>
 
-        <div class="admin__user">
-            <span class="admin__role">Vista Gerente / Administrador</span>
+        <label for="_nav">navegar</label>
+        <div class="nav-container">
+            <span class="nav-label">Vista</span>
+            <div class="nav-select-wrapper">
+                <select name="_nav" id="_nav" onchange="navegar()">
+                    <option value="../admin/landingAdmin.html" selected>Gerente / Admin</option>
+                    <option value="../../Pages/Empleado/landingEmpleado.html">Empleado</option>
+                </select>
+                <span class="nav-chevron">▼</span>
+            </div>
+            <button class="button button--secondary" onclick="cerrarSesion()">
+                Cerrar sesión
+            </button>
         </div>
     </header>
 
@@ -24,7 +36,7 @@
             <li><a class="nav__btn" href="./1-cuentas.html">Cuentas</a></li>
             <li><a class="nav__btn" href="./2-tareas.html">Tareas</a></li>
             <li><a class="nav__btn" href="./3-permisos.html">Permisos</a></li>
-            <li><a class="nav__btn" href="./4-reportes.html">Reportes</a></li>
+            <li><a class="nav__btn nav__btn--active" href="./4-reportes.html">Reportes</a></li>
             <li><a class="nav__btn" href="./5-incapacidad.html">Incapacidad</a></li>
             <li><a class="nav__btn" href="./6-certificados.html">Certificados</a></li>
         </ul>
@@ -638,5 +650,8 @@
         </div>
     </div>
     </section>
+
+    <script src="../../../Scripts/script.js"></script>
+
 </body>
 </html>

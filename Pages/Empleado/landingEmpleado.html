@@ -1,30 +1,26 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OperPan | Panel Empleado</title>
     <link rel="stylesheet" href="../admin/Assets/style.css">
 </head>
-<body class="admin">
 
-   
+<body class="admin">
 
     <!-- HEADER PRINCIPAL -->
     <header class="admin__header">
         <h1 class="admin__title">Estación Paisa</h1>
 
-        <div class="admin__user">
-            <span class="admin__role">Vista Empleado</span>
+        <div class="nav-container">
+            <span class="nav-label">Vista Empleado</span>
+            <button class="button button--secondary" onclick="cerrarSesion()">
+                Cerrar sesión
+            </button>
         </div>
     </header>
-
-    <!--- Navegacion entre Roles --->
-      <label for="_nav">navegar</label>
-    <select name="_nav" id="_nav" onchange="navegar()">
-        <option value="../../Pages/Empleado/landingEmpleado.html">Empleado</option>
-        <option value="../admin/landingAdmin.html">Gerente/Admin</option>
-    </select>
 
     <!-- NAVEGACIÓN PRINCIPAL -->
     <nav class="admin__nav">
@@ -47,7 +43,7 @@
                 <li>Registrar entrada.</li>
                 <li>Registrar salida.</li>
                 <li>Consultar sus horas trabajadas.</li>
-                <li>horas extra calculadas automáticamente.</li> 
+                <li>horas extra calculadas automáticamente.</li>
             </ul>
         </section>
 
@@ -60,7 +56,7 @@
                 <li>Solicitar vacaciones.</li>
                 <li>Registrar incapacidades.</li>
                 <li>Adjuntar soportes.</li>
-                <li>Registrar novedades laborales.</li> 
+                <li>Registrar novedades laborales.</li>
             </ul>
         </section>
 
@@ -86,8 +82,8 @@
                 <li>Consultar documentos laborales propios</li>
             </ul>
         </section>
-         
+
 
     </main>
 
-<script src="../../Scripts/script.js"></script>
+    <script src="../../Scripts/script.js"></script>

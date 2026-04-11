@@ -78,6 +78,7 @@ body.admin {
 }
 
 /* Selector de navegación entre roles */
+/* Selector de navegación entre roles */
 label[for="_nav"] {
   position: absolute;
   width: 1px;
@@ -89,17 +90,62 @@ label[for="_nav"] {
   border: 0;
 }
 
+.nav-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-label {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 400;
+}
+
+.nav-select-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
 #_nav {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: var(--gray-100);
-  border: 1px solid var(--gray-300);
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: var(--radius-md);
-  padding: 0.5rem;
+  padding: 7px 36px 7px 14px;
   font-size: 0.875rem;
+  font-weight: 500;
+  font-family: var(--font-sans);
   cursor: pointer;
-  z-index: 100;
+  outline: none;
+  transition: background 0.2s, border-color 0.2s;
+  min-width: 150px;
+}
+
+#_nav:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+#_nav:focus {
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+#_nav option {
+  background-color: var(--primary-dark);
+  color: #ffffff;
+}
+
+.nav-chevron {
+  position: absolute;
+  right: 10px;
+  pointer-events: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 11px;
 }
 
 /* Navegación principal */
@@ -125,12 +171,25 @@ label[for="_nav"] {
   text-decoration: none;
   border-radius: var(--radius-md);
   font-weight: 500;
+  font-size: 0.875rem;        
+  font-family: var(--font-sans); 
+  background: none;           
+  border: none;               
+  cursor: pointer;            
   transition: all 0.2s ease;
+}
+
+.nav__btn--active {
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--primary-color);
+  border-radius: 0;
 }
 
 .nav__btn:hover {
   background-color: var(--gray-100);
   color: var(--primary-color);
+  border-bottom: 2px solid var(--primary-color);
+  border-radius: 0;
 }
 
 /* Contenido principal */

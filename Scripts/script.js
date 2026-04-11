@@ -5,3 +5,9 @@ function navegar() {
         window.location.href = ruta;
     }
 }
+
+//Cerrar Sesion  
+function cerrarSesion() {
+    // redirige al login o página de inicio
+    window.location.href = "../../index.html";
+}

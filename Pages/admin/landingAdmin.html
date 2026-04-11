@@ -1,28 +1,34 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OperPan | Panel Administrador</title>
     <link rel="stylesheet" href="./Assets/style.css">
 </head>
+
 <body class="admin">
 
     <!-- HEADER PRINCIPAL -->
     <header class="admin__header">
         <h1 class="admin__title">Estación Paisa</h1>
 
-        <div class="admin__user">
-            <span class="admin__role">Vista Gerente / Administrador</span>
+        <label for="_nav">navegar</label>
+        <div class="nav-container">
+            <span class="nav-label">Vista</span>
+            <div class="nav-select-wrapper">
+                <select name="_nav" id="_nav" onchange="navegar()">
+                    <option value="../landingAdmin.html" selected>Gerente / Admin</option>
+                    <option value="../../../Pages/Empleado/landingEmpleado.html">Empleado</option>
+                </select>
+                <span class="nav-chevron">▼</span>
+            </div>
+            <button class="button button--secondary" onclick="cerrarSesion()">
+                Cerrar sesión
+            </button>
         </div>
     </header>
-
-    <!--- Navegacion entre Roles --->
-    <label for="_nav">navegar</label>
-    <select name="_nav" id="_nav" onchange="navegar()">
-        <option value="../admin/landingAdmin.html">Gerente/Admin</option>
-        <option value="../../Pages/Empleado/landingEmpleado.html">Empleado</option>
-    </select>
 
     <!-- NAVEGACIÓN PRINCIPAL -->
     <nav class="admin__nav">
@@ -41,186 +47,182 @@
     <!-- CONTENIDO PRINCIPAL -->
     <main class="admin__main">
 
-    <!-- SECCIÓN HORARIOS -->
-    <section id="horarios" class="admin__section">
-    <header class="section__header">
-        <h2 class="section__title">Gestión de Horarios</h2>
-        <p class="section__description">Asigna y administra los horarios del personal</p>
-    </header>
+        <!-- SECCIÓN HORARIOS -->
+        <section id="horarios" class="admin__section">
+            <header class="section__header">
+                <h2 class="section__title">Gestión de Horarios</h2>
+                <p class="section__description">Asigna y administra los horarios del personal</p>
+            </header>
 
-    <!-- Buscador y selector de empleado -->
-    <div class="employee-selector">
-        <div class="employee-selector__search">
-        <label for="empleado-id" class="employee-selector__label">ID Empleado</label>
-        <div class="employee-selector__field">
-            <input type="text" 
-                id="empleado-id" 
-                class="employee-selector__input" 
-                placeholder="Buscar por ID, nombre o documento"
-                aria-label="Buscar empleado">
-            <button class="employee-selector__search-btn" aria-label="Buscar">
-            🔍
-            </button>
-        </div>
-        </div>
+            <!-- Buscador y selector de empleado -->
+            <div class="employee-selector">
+                <div class="employee-selector__search">
+                    <label for="empleado-id" class="employee-selector__label">ID Empleado</label>
+                    <div class="employee-selector__field">
+                        <input type="text" id="empleado-id" class="employee-selector__input"
+                            placeholder="Buscar por ID, nombre o documento" aria-label="Buscar empleado">
+                        <button class="employee-selector__search-btn" aria-label="Buscar">
+                            🔍
+                        </button>
+                    </div>
+                </div>
 
-        <!-- Acciones rápidas del empleado -->
-        <div class="employee-actions">
-        <button class="button button--primary button--small" data-action="crear">
-            Crear
-        </button>
-        <button class="button button--secondary button--small" data-action="modificar">
-            Modificar
-        </button>
-        <button class="button button--danger button--small" data-action="eliminar">
-            Eliminar
-        </button>
-        </div>
-    </div>
-
-    <!-- Información del empleado seleccionado -->
-    <div class="employee-info">
-        <div class="employee-info__card">
-        <div class="employee-info__avatar" aria-hidden="true">ERP</div>
-        <div class="employee-info__details">
-            <h3 class="employee-info__name">EDDIER PAZ PARDO</h3>
-            <div class="employee-info__meta">
-            <span class="employee-info__badge">ID: EMP-2024-156</span>
-            <span class="employee-info__badge employee-info__badge--role">Panadero Principal</span>
-            <span class="employee-info__badge">Turno: Mañana (6am - 2pm)</span>
+                <!-- Acciones rápidas del empleado -->
+                <div class="employee-actions">
+                    <button class="button button--primary button--small" data-action="crear">
+                        Crear
+                    </button>
+                    <button class="button button--secondary button--small" data-action="modificar">
+                        Modificar
+                    </button>
+                    <button class="button button--danger button--small" data-action="eliminar">
+                        Eliminar
+                    </button>
+                </div>
             </div>
-        </div>
-        </div>
-    </div>
 
-    <!-- Formulario principal de horarios -->
-    <form class="schedule-form">
-        <div class="form__grid">
-        <!-- Selector de días -->
-        <div class="form__field">
-            <label for="dias" class="form__label">
-            Días de la semana
-            <span class="form__required" aria-label="campo requerido">*</span>
-            </label>
-            <select id="dias" class="form__select" required>
-            <option value="" disabled selected>Seleccionar días</option>
-            <option value="lunes-viernes">Lunes a Viernes</option>
-            <option value="lunes-sabado">Lunes a Sábado</option>
-            <option value="semana-completa">Semana Completa (Lun-Dom)</option>
-            <option value="finde-semana">Fin de Semana (Sáb-Dom)</option>
-            <option value="personalizado">Personalizar días...</option>
-            </select>
-        </div>
-
-        <!-- Selector de horarios -->
-        <div class="form__field">
-            <label for="horario" class="form__label">
-            Horario / Turno
-            <span class="form__required" aria-label="campo requerido">*</span>
-            </label>
-            <select id="horario" class="form__select" required>
-            <option value="" disabled selected>Seleccionar turno</option>
-            <option value="madrugada">Madrugada (4am - 12pm)</option>
-            <option value="mañana">Mañana (6am - 2pm)</option>
-            <option value="tarde">Tarde (2pm - 10pm)</option>
-            <option value="noche">Noche (10pm - 6am)</option>
-            <option value="partido">Partido (6am-10am / 4pm-8pm)</option>
-            </select>
-        </div>
-        </div>
-
-        <!-- Sección de cargos (opcional - mejora profesional) -->
-        <details class="form__details">
-        <summary class="form__details-summary">Asignación por cargo (opcional)</summary>
-        <div class="form__details-content">
-            <div class="role-selector">
-            <span class="role-selector__label">Aplicar horario a:</span>
-            <div class="role-selector__options">
-                <label class="checkbox">
-                <input type="checkbox" value="panadero"> Panaderos
-                </label>
-                <label class="checkbox">
-                <input type="checkbox" value="repostero"> Reposteros
-                </label>
-                <label class="checkbox">
-                <input type="checkbox" value="atencion"> Servicio al Cliente
-                </label>
-                <label class="checkbox">
-                <input type="checkbox" value="aseo"> Aseo y Limpieza
-                </label>
-                <label class="checkbox">
-                <input type="checkbox" value="produccion"> Producción
-                </label>
+            <!-- Información del empleado seleccionado -->
+            <div class="employee-info">
+                <div class="employee-info__card">
+                    <div class="employee-info__avatar" aria-hidden="true">ERP</div>
+                    <div class="employee-info__details">
+                        <h3 class="employee-info__name">EDDIER PAZ PARDO</h3>
+                        <div class="employee-info__meta">
+                            <span class="employee-info__badge">ID: EMP-2024-156</span>
+                            <span class="employee-info__badge employee-info__badge--role">Panadero Principal</span>
+                            <span class="employee-info__badge">Turno: Mañana (6am - 2pm)</span>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <!-- Formulario principal de horarios -->
+            <form class="schedule-form">
+                <div class="form__grid">
+                    <!-- Selector de días -->
+                    <div class="form__field">
+                        <label for="dias" class="form__label">
+                            Días de la semana
+                            <span class="form__required" aria-label="campo requerido">*</span>
+                        </label>
+                        <select id="dias" class="form__select" required>
+                            <option value="" disabled selected>Seleccionar días</option>
+                            <option value="lunes-viernes">Lunes a Viernes</option>
+                            <option value="lunes-sabado">Lunes a Sábado</option>
+                            <option value="semana-completa">Semana Completa (Lun-Dom)</option>
+                            <option value="finde-semana">Fin de Semana (Sáb-Dom)</option>
+                            <option value="personalizado">Personalizar días...</option>
+                        </select>
+                    </div>
+
+                    <!-- Selector de horarios -->
+                    <div class="form__field">
+                        <label for="horario" class="form__label">
+                            Horario / Turno
+                            <span class="form__required" aria-label="campo requerido">*</span>
+                        </label>
+                        <select id="horario" class="form__select" required>
+                            <option value="" disabled selected>Seleccionar turno</option>
+                            <option value="madrugada">Madrugada (4am - 12pm)</option>
+                            <option value="mañana">Mañana (6am - 2pm)</option>
+                            <option value="tarde">Tarde (2pm - 10pm)</option>
+                            <option value="noche">Noche (10pm - 6am)</option>
+                            <option value="partido">Partido (6am-10am / 4pm-8pm)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Sección de cargos (opcional - mejora profesional) -->
+                <details class="form__details">
+                    <summary class="form__details-summary">Asignación por cargo (opcional)</summary>
+                    <div class="form__details-content">
+                        <div class="role-selector">
+                            <span class="role-selector__label">Aplicar horario a:</span>
+                            <div class="role-selector__options">
+                                <label class="checkbox">
+                                    <input type="checkbox" value="panadero"> Panaderos
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" value="repostero"> Reposteros
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" value="atencion"> Servicio al Cliente
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" value="aseo"> Aseo y Limpieza
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" value="produccion"> Producción
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- Observaciones adicionales -->
+                <div class="form__field">
+                    <label for="observaciones" class="form__label">Observaciones (opcional)</label>
+                    <textarea id="observaciones" class="form__textarea" rows="2"
+                        placeholder="Notas adicionales sobre el horario..."></textarea>
+                </div>
+
+                <!-- Botones de acción del formulario -->
+                <div class="form__actions">
+                    <button type="submit" class="button button--primary">
+                        Aceptar
+                    </button>
+                    <button type="button" class="button button--secondary">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+
+            <!-- Tabla de horarios recientes (para contexto) -->
+            <div class="recent-schedules">
+                <h3 class="recent-schedules__title">Horarios asignados recientemente</h3>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="table__head">
+                            <tr>
+                                <th>Empleado</th>
+                                <th>Cargo</th>
+                                <th>Días</th>
+                                <th>Horario</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table__body">
+                            <tr>
+                                <td>María González</td>
+                                <td>Repostera</td>
+                                <td>Lun - Vie</td>
+                                <td>6am - 2pm</td>
+                                <td><span class="badge badge--success">Activo</span></td>
+                            </tr>
+                            <tr>
+                                <td>Carlos Rodríguez</td>
+                                <td>Panadero</td>
+                                <td>Mar - Sáb</td>
+                                <td>2pm - 10pm</td>
+                                <td><span class="badge badge--success">Activo</span></td>
+                            </tr>
+                            <tr>
+                                <td>Ana Martínez</td>
+                                <td>Atención al cliente</td>
+                                <td>Lun - Dom</td>
+                                <td>Partido</td>
+                                <td><span class="badge badge--warning">Por confirmar</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-        </details>
-
-        <!-- Observaciones adicionales -->
-        <div class="form__field">
-        <label for="observaciones" class="form__label">Observaciones (opcional)</label>
-        <textarea id="observaciones" 
-                    class="form__textarea" 
-                    rows="2"
-                    placeholder="Notas adicionales sobre el horario..."></textarea>
-        </div>
-
-        <!-- Botones de acción del formulario -->
-        <div class="form__actions">
-        <button type="submit" class="button button--primary">
-            Aceptar
-        </button>
-        <button type="button" class="button button--secondary">
-            Cancelar
-        </button>
-        </div>
-    </form>
-
-    <!-- Tabla de horarios recientes (para contexto) -->
-    <div class="recent-schedules">
-        <h3 class="recent-schedules__title">Horarios asignados recientemente</h3>
-        <div class="table-responsive">
-        <table class="table">
-            <thead class="table__head">
-            <tr>
-                <th>Empleado</th>
-                <th>Cargo</th>
-                <th>Días</th>
-                <th>Horario</th>
-                <th>Estado</th>
-            </tr>
-            </thead>
-            <tbody class="table__body">
-            <tr>
-                <td>María González</td>
-                <td>Repostera</td>
-                <td>Lun - Vie</td>
-                <td>6am - 2pm</td>
-                <td><span class="badge badge--success">Activo</span></td>
-            </tr>
-            <tr>
-                <td>Carlos Rodríguez</td>
-                <td>Panadero</td>
-                <td>Mar - Sáb</td>
-                <td>2pm - 10pm</td>
-                <td><span class="badge badge--success">Activo</span></td>
-            </tr>
-            <tr>
-                <td>Ana Martínez</td>
-                <td>Atención al cliente</td>
-                <td>Lun - Dom</td>
-                <td>Partido</td>
-                <td><span class="badge badge--warning">Por confirmar</span></td>
-            </tr>
-            </tbody>
-        </table>
-        </div>
-    </div>
-    </section>
+        </section>
 
     </main>
 
     <script src="../../Scripts/script.js"></script>
 
 </body>
+
 </html>
