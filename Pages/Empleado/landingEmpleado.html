@@ -13,7 +13,6 @@
     <!-- HEADER PRINCIPAL -->
     <header class="admin__header">
         <h1 class="admin__title">Estación Paisa</h1>
-
         <div class="nav-container">
             <span class="nav-label">Vista Empleado</span>
             <button class="button button--secondary" onclick="cerrarSesion()">
@@ -25,65 +24,40 @@
     <!-- NAVEGACIÓN PRINCIPAL -->
     <nav class="admin__nav">
         <ul class="admin__menu">
-            <li><button class="nav__btn" data-section="Registro">Registro de asistencia</button></li>
-            <li><button class="nav__btn" data-section="Gestión de solicitudes">Gestión de solicitudes</button></li>
-            <li><button class="nav__btn" data-section="Tareas">Gestión de tareas</button></li>
-            <li><button class="nav__btn" data-section="información personal">información personal</button></li>
+            <li><a class="nav__btn" href="./sub-pages-empleado/1-asistencia.html">Registro de asistencia</a></li>
+            <li><a class="nav__btn" href="./sub-pages-empleado/2-solicitudes.html">Gestión de solicitudes</a></li>
+            <li><a class="nav__btn" href="./sub-pages-empleado/3-tareas.html">Gestión de tareas</a></li>
+            <li><a class="nav__btn" href="./sub-pages-empleado/4-personal.html">Información personal</a></li>
         </ul>
     </nav>
-
 
     <!-- CONTENIDO PRINCIPAL -->
     <main class="admin__main">
 
-        <!-- SECCIÓN REGISTRO DE ASISTENCIA -->
-        <section id="Registro" class="admin__section">
-            <h2>Registro de asistencia</h2>
-            <ul>
-                <li>Registrar entrada.</li>
-                <li>Registrar salida.</li>
-                <li>Consultar sus horas trabajadas.</li>
-                <li>horas extra calculadas automáticamente.</li>
-            </ul>
-        </section>
+        <section class="admin__section">
+            <header class="section__header">
+                <h2 class="section__title">Bienvenido, Eddier</h2>
+                <p class="section__description">Selecciona una sección del menú para comenzar</p>
+            </header>
 
-        <!-- SECCIÓN GESTION DE SOLICITUDES -->
-        <section id="Gestión de solicitudes" class="admin__section">
-            <h2>gestion de solicitudes</h2>
-            <ul>
-                <li>Solicitar cambio de turno.</li>
-                <li>Reportar ausencias.</li>
-                <li>Solicitar vacaciones.</li>
-                <li>Registrar incapacidades.</li>
-                <li>Adjuntar soportes.</li>
-                <li>Registrar novedades laborales.</li>
-            </ul>
+            <div class="employee-info">
+                <div class="employee-info__card">
+                    <div class="employee-info__avatar" aria-hidden="true">ERP</div>
+                    <div class="employee-info__details">
+                        <h3 class="employee-info__name">EDDIER PAZ PARDO</h3>
+                        <div class="employee-info__meta">
+                            <span class="employee-info__badge">ID: EMP-2024-156</span>
+                            <span class="employee-info__badge employee-info__badge--role">Panadero Principal</span>
+                            <span class="employee-info__badge">Turno: Mañana (6am - 2pm)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
-
-        <!-- SECCIÓN GESTION DE TAREAS -->
-        <section id="Tareas" class="admin__section">
-            <h2>Gestión de tareas</h2>
-            <ul>
-                <li>Visualizar tareas asignadas.</li>
-                <li>Actualizar estado de tareas.</li>
-                <li>Confirmar cumplimiento.</li>
-            </ul>
-        </section>
-
-        <!-- SECTIÓN INFROMACIÓN PERSONAL--->
-        <section id="información personal" class="admin__section">
-            <h2>información personal</h2>
-            <ul>
-                <li>Ver historial de asistencia</li>
-                <li>Ver turnos asignados</li>
-                <li>Ver tareas asignadas</li>
-                <li>Consultar desempeño</li>
-                <li>Ver llamados de atención</li>
-                <li>Consultar documentos laborales propios</li>
-            </ul>
-        </section>
-
 
     </main>
 
     <script src="../../Scripts/script.js"></script>
+
+</body>
+</html>

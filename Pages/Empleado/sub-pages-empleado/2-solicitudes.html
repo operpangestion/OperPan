@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OperPan | Gestión de Solicitudes</title>
+    <link rel="stylesheet" href="../../admin/Assets/style.css">
+</head>
+
+<body class="admin">
+
+    <!-- HEADER PRINCIPAL -->
+    <header class="admin__header">
+        <h1 class="admin__title">Estación Paisa</h1>
+        <div class="nav-container">
+            <span class="nav-label">Vista Empleado</span>
+            <button class="button button--secondary" onclick="cerrarSesion()">
+                Cerrar sesión
+            </button>
+        </div>
+    </header>
+
+    <!-- NAVEGACIÓN PRINCIPAL -->
+    <nav class="admin__nav">
+        <ul class="admin__menu">
+            <li><a class="nav__btn" href="./1-asistencia.html">Registro de asistencia</a></li>
+            <li><a class="nav__btn nav__btn--active" href="./2-solicitudes.html">Gestión de solicitudes</a></li>
+            <li><a class="nav__btn" href="./3-tareas.html">Gestión de tareas</a></li>
+            <li><a class="nav__btn" href="./4-personal.html">Información personal</a></li>
+        </ul>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="admin__main">
+
+        <section id="solicitudes" class="admin__section">
+            <header class="section__header">
+                <h2 class="section__title">Gestión de solicitudes</h2>
+                <p class="section__description">Solicita permisos, reporta ausencias y registra novedades laborales</p>
+            </header>
+
+            <!-- Formulario de solicitud -->
+            <form class="permission-form">
+                <div class="form__grid">
+
+                    <div class="form__field">
+                        <label for="tipo-solicitud" class="form__label">
+                            Tipo de solicitud <span class="form__required">*</span>
+                        </label>
+                        <select id="tipo-solicitud" class="form__select" required>
+                            <option value="" disabled selected>Seleccionar tipo</option>
+                            <option value="cambio-turno">Cambio de turno</option>
+                            <option value="ausencia">Reportar ausencia</option>
+                            <option value="vacaciones">Solicitar vacaciones</option>
+                            <option value="incapacidad">Registrar incapacidad</option>
+                            <option value="novedad">Registrar novedad laboral</option>
+                        </select>
+                    </div>
+
+                    <div class="form__row">
+                        <div class="form__group form__group--half">
+                            <label for="fecha-inicio-sol" class="form__label">
+                                Fecha inicio <span class="form__required">*</span>
+                            </label>
+                            <input type="date" id="fecha-inicio-sol" class="form__input" required>
+                        </div>
+                        <div class="form__group form__group--half">
+                            <label for="fecha-fin-sol" class="form__label">Fecha fin</label>
+                            <input type="date" id="fecha-fin-sol" class="form__input">
+                        </div>
+                    </div>
+
+                    <div class="form__field">
+                        <label for="motivo" class="form__label">
+                            Motivo / Descripción <span class="form__required">*</span>
+                        </label>
+                        <textarea id="motivo" class="form__textarea" rows="3"
+                            placeholder="Describe el motivo de tu solicitud..." required></textarea>
+                    </div>
+
+                    <div class="form__field">
+                        <label class="form__label">Adjuntar soporte (opcional)</label>
+                        <div class="form__file-upload">
+                            <label class="form__file-label">
+                                📎 Adjuntar archivo
+                                <input type="file" class="form__file-input" accept=".pdf,.jpg,.png">
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form__actions">
+                    <button type="submit" class="button button--primary">Enviar solicitud</button>
+                    <button type="reset" class="button button--secondary">Limpiar</button>
+                </div>
+            </form>
+
+            <!-- Mis solicitudes -->
+            <div class="my-requests__header" style="margin-top: 2rem;">
+                <h3>Mis solicitudes recientes</h3>
+            </div>
+
+            <div class="requests-list">
+                <div class="request-card">
+                    <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
+                        <div>
+                            <strong>Cambio de turno</strong>
+                            <p style="font-size:0.875rem; color:var(--gray-500); margin-top:0.25rem;">
+                                Del 10/04/2025 al 12/04/2025
+                            </p>
+                        </div>
+                        <span class="request-card__badge--pending">● Pendiente</span>
+                    </div>
+                </div>
+                <div class="request-card">
+                    <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
+                        <div>
+                            <strong>Vacaciones</strong>
+                            <p style="font-size:0.875rem; color:var(--gray-500); margin-top:0.25rem;">
+                                Del 01/05/2025 al 15/05/2025
+                            </p>
+                        </div>
+                        <span class="request-card__badge--approved">● Aprobada</span>
+                    </div>
+                </div>
+                <div class="request-card">
+                    <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
+                        <div>
+                            <strong>Ausencia</strong>
+                            <p style="font-size:0.875rem; color:var(--gray-500); margin-top:0.25rem;">
+                                03/04/2025
+                            </p>
+                        </div>
+                        <span class="request-card__badge--rejected">● Rechazada</span>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="../../../Scripts/script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OperPan | Registro de Asistencia</title>
+    <link rel="stylesheet" href="../../admin/Assets/style.css">
+</head>
+
+<body class="admin">
+
+    <!-- HEADER PRINCIPAL -->
+    <header class="admin__header">
+        <h1 class="admin__title">Estación Paisa</h1>
+        <div class="nav-container">
+            <span class="nav-label">Vista Empleado</span>
+            <button class="button button--secondary" onclick="cerrarSesion()">
+                Cerrar sesión
+            </button>
+        </div>
+    </header>
+
+    <!-- NAVEGACIÓN PRINCIPAL -->
+    <nav class="admin__nav">
+        <ul class="admin__menu">
+            <li><a class="nav__btn nav__btn--active" href="./1-asistencia.html">Registro de asistencia</a></li>
+            <li><a class="nav__btn" href="./2-solicitudes.html">Gestión de solicitudes</a></li>
+            <li><a class="nav__btn" href="./3-tareas.html">Gestión de tareas</a></li>
+            <li><a class="nav__btn" href="./4-personal.html">Información personal</a></li>
+        </ul>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="admin__main">
+
+        <section id="asistencia" class="admin__section">
+            <header class="section__header">
+                <h2 class="section__title">Registro de asistencia</h2>
+                <p class="section__description">Registra tu entrada, salida y consulta tus horas trabajadas</p>
+            </header>
+
+            <!-- Acciones rápidas -->
+            <div class="employee-selector">
+                <div class="employee-actions">
+                    <button class="button button--primary" data-action="entrada">
+                        Registrar entrada
+                    </button>
+                    <button class="button button--danger" data-action="salida">
+                        Registrar salida
+                    </button>
+                </div>
+            </div>
+
+            <!-- Info del empleado -->
+            <div class="employee-info">
+                <div class="employee-info__card">
+                    <div class="employee-info__avatar" aria-hidden="true">ERP</div>
+                    <div class="employee-info__details">
+                        <h3 class="employee-info__name">EDDIER PAZ PARDO</h3>
+                        <div class="employee-info__meta">
+                            <span class="employee-info__badge">ID: EMP-2024-156</span>
+                            <span class="employee-info__badge employee-info__badge--role">Panadero Principal</span>
+                            <span class="employee-info__badge">Turno: Mañana (6am - 2pm)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabla de asistencia -->
+            <div class="table-responsive">
+                <table class="table">
+                    <thead class="table__head">
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Entrada</th>
+                            <th>Salida</th>
+                            <th>Horas trabajadas</th>
+                            <th>Horas extra</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table__body">
+                        <tr>
+                            <td>Lun 07/04/2025</td>
+                            <td>6:02 am</td>
+                            <td>2:05 pm</td>
+                            <td>8h 03m</td>
+                            <td>0h 03m</td>
+                            <td><span class="badge badge--success">Completo</span></td>
+                        </tr>
+                        <tr>
+                            <td>Mar 08/04/2025</td>
+                            <td>6:10 am</td>
+                            <td>2:00 pm</td>
+                            <td>7h 50m</td>
+                            <td>—</td>
+                            <td><span class="badge badge--warning">Incompleto</span></td>
+                        </tr>
+                        <tr>
+                            <td>Mié 09/04/2025</td>
+                            <td>5:58 am</td>
+                            <td>2:30 pm</td>
+                            <td>8h 32m</td>
+                            <td>0h 32m</td>
+                            <td><span class="badge badge--success">Completo</span></td>
+                        </tr>
+                        <tr>
+                            <td>Jue 10/04/2025</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td><span class="badge badge--danger">Ausente</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="form__actions">
+                <button class="button button--secondary">Ver mes completo</button>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="../../../Scripts/script.js"></script>
+
+</body>
+
+</html>

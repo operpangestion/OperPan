@@ -6,8 +6,7 @@ function navegar() {
     }
 }
 
-//Cerrar Sesion  
+// Cerrar Sesion  
 function cerrarSesion() {
-    // redirige al login o página de inicio
-    window.location.href = "../../index.html";
+    window.location.href = "/OperPan/index.html";
 }

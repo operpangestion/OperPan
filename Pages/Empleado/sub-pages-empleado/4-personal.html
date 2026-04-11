@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OperPan | Información Personal</title>
+    <link rel="stylesheet" href="../../admin/Assets/style.css">
+</head>
+
+<body class="admin">
+
+    <!-- HEADER PRINCIPAL -->
+    <header class="admin__header">
+        <h1 class="admin__title">Estación Paisa</h1>
+        <div class="nav-container">
+            <span class="nav-label">Vista Empleado</span>
+            <button class="button button--secondary" onclick="cerrarSesion()">
+                Cerrar sesión
+            </button>
+        </div>
+    </header>
+
+    <!-- NAVEGACIÓN PRINCIPAL -->
+    <nav class="admin__nav">
+        <ul class="admin__menu">
+            <li><a class="nav__btn" href="./1-asistencia.html">Registro de asistencia</a></li>
+            <li><a class="nav__btn" href="./2-solicitudes.html">Gestión de solicitudes</a></li>
+            <li><a class="nav__btn" href="./3-tareas.html">Gestión de tareas</a></li>
+            <li><a class="nav__btn nav__btn--active" href="./4-personal.html">Información personal</a></li>
+        </ul>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="admin__main">
+
+        <section id="personal" class="admin__section">
+            <header class="section__header">
+                <h2 class="section__title">Información personal</h2>
+                <p class="section__description">Consulta tu perfil, historial y documentos laborales</p>
+            </header>
+
+            <!-- Tarjeta del empleado -->
+            <div class="employee-info">
+                <div class="employee-info__card">
+                    <div class="employee-info__avatar" aria-hidden="true">ERP</div>
+                    <div class="employee-info__details">
+                        <h3 class="employee-info__name">EDDIER PAZ PARDO</h3>
+                        <div class="employee-info__meta">
+                            <span class="employee-info__badge">ID: EMP-2024-156</span>
+                            <span class="employee-info__badge employee-info__badge--role">Panadero Principal</span>
+                            <span class="employee-info__badge">Turno: Mañana (6am - 2pm)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs de información -->
+            <div class="certificate-tabs">
+                <button class="certificate-tabs__tab certificate-tabs__tab--active" onclick="mostrarTab('historial', this)">Historial asistencia</button>
+                <button class="certificate-tabs__tab" onclick="mostrarTab('turnos', this)">Turnos asignados</button>
+                <button class="certificate-tabs__tab" onclick="mostrarTab('desempeno', this)">Desempeño</button>
+                <button class="certificate-tabs__tab" onclick="mostrarTab('documentos', this)">Documentos</button>
+            </div>
+
+            <!-- Historial asistencia -->
+            <div id="historial" class="certificate-view">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="table__head">
+                            <tr>
+                                <th>Mes</th>
+                                <th>Días trabajados</th>
+                                <th>Ausencias</th>
+                                <th>Horas extra</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table__body">
+                            <tr>
+                                <td>Abril 2025</td>
+                                <td>8</td>
+                                <td>1</td>
+                                <td>3h 15m</td>
+                                <td><span class="badge badge--success">Al día</span></td>
+                            </tr>
+                            <tr>
+                                <td>Marzo 2025</td>
+                                <td>24</td>
+                                <td>0</td>
+                                <td>5h 40m</td>
+                                <td><span class="badge badge--success">Al día</span></td>
+                            </tr>
+                            <tr>
+                                <td>Febrero 2025</td>
+                                <td>20</td>
+                                <td>2</td>
+                                <td>0h</td>
+                                <td><span class="badge badge--warning">Con novedades</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Turnos asignados -->
+            <div id="turnos" class="certificate-view hidden">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="table__head">
+                            <tr>
+                                <th>Semana</th>
+                                <th>Días</th>
+                                <th>Horario</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table__body">
+                            <tr>
+                                <td>07 - 12 Abr 2025</td>
+                                <td>Lun - Sáb</td>
+                                <td>6am - 2pm</td>
+                                <td><span class="badge badge--success">Activo</span></td>
+                            </tr>
+                            <tr>
+                                <td>14 - 19 Abr 2025</td>
+                                <td>Lun - Sáb</td>
+                                <td>6am - 2pm</td>
+                                <td><span class="badge badge--info">Próximo</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Desempeño -->
+            <div id="desempeno" class="certificate-view hidden">
+                <div class="incapacity-summary">
+                    <div class="incapacity-summary__card">
+                        <p style="font-size:0.75rem; color:var(--gray-500);">Puntualidad</p>
+                        <p style="font-size:1.5rem; font-weight:600; color:var(--success-color);">92%</p>
+                    </div>
+                    <div class="incapacity-summary__card">
+                        <p style="font-size:0.75rem; color:var(--gray-500);">Tareas completadas</p>
+                        <p style="font-size:1.5rem; font-weight:600; color:var(--success-color);">87%</p>
+                    </div>
+                    <div class="incapacity-summary__card">
+                        <p style="font-size:0.75rem; color:var(--gray-500);">Llamados de atención</p>
+                        <p style="font-size:1.5rem; font-weight:600; color:var(--danger-color);">1</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Documentos -->
+            <div id="documentos" class="certificate-view hidden">
+                <div class="certificates-timeline">
+                    <div class="certificate-history-card">
+                        <div class="certificate-history-card__date">
+                            <p style="font-size:0.75rem; font-weight:600;">ENE</p>
+                            <p style="font-size:1.25rem; font-weight:700;">15</p>
+                            <p style="font-size:0.75rem;">2025</p>
+                        </div>
+                        <div style="flex:1;">
+                            <strong>Contrato de trabajo</strong>
+                            <p style="font-size:0.875rem; color:var(--gray-500);">Contrato indefinido - Panadero Principal</p>
+                        </div>
+                        <button class="button button--secondary button--small">Descargar</button>
+                    </div>
+                    <div class="certificate-history-card">
+                        <div class="certificate-history-card__date">
+                            <p style="font-size:0.75rem; font-weight:600;">MAR</p>
+                            <p style="font-size:1.25rem; font-weight:700;">01</p>
+                            <p style="font-size:0.75rem;">2025</p>
+                        </div>
+                        <div style="flex:1;">
+                            <strong>Certificado laboral</strong>
+                            <p style="font-size:0.875rem; color:var(--gray-500);">Certificado de trabajo activo</p>
+                        </div>
+                        <button class="button button--secondary button--small">Descargar</button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="../../../Scripts/script.js"></script>
+    <script>
+        function mostrarTab(id, btn) {
+            document.querySelectorAll('.certificate-view').forEach(v => v.classList.add('hidden'));
+            document.querySelectorAll('.certificate-tabs__tab').forEach(t => t.classList.remove('certificate-tabs__tab--active'));
+            document.getElementById(id).classList.remove('hidden');
+            btn.classList.add('certificate-tabs__tab--active');
+        }
+    </script>
+
+</body>
+</html>

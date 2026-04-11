@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OperPan | Gestión de Tareas</title>
+    <link rel="stylesheet" href="../../admin/Assets/style.css">
+</head>
+
+<body class="admin">
+
+    <!-- HEADER PRINCIPAL -->
+    <header class="admin__header">
+        <h1 class="admin__title">Estación Paisa</h1>
+        <div class="nav-container">
+            <span class="nav-label">Vista Empleado</span>
+            <button class="button button--secondary" onclick="cerrarSesion()">
+                Cerrar sesión
+            </button>
+        </div>
+    </header>
+
+    <!-- NAVEGACIÓN PRINCIPAL -->
+    <nav class="admin__nav">
+        <ul class="admin__menu">
+            <li><a class="nav__btn" href="./1-asistencia.html">Registro de asistencia</a></li>
+            <li><a class="nav__btn" href="./2-solicitudes.html">Gestión de solicitudes</a></li>
+            <li><a class="nav__btn nav__btn--active" href="./3-tareas.html">Gestión de tareas</a></li>
+            <li><a class="nav__btn" href="./4-personal.html">Información personal</a></li>
+        </ul>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="admin__main">
+
+        <section id="tareas" class="admin__section">
+            <header class="section__header">
+                <h2 class="section__title">Gestión de tareas</h2>
+                <p class="section__description">Visualiza y actualiza el estado de tus tareas asignadas</p>
+            </header>
+
+            <!-- Resumen -->
+            <div class="incapacity-summary">
+                <div class="incapacity-summary__card">
+                    <p style="font-size:0.75rem; color:var(--gray-500);">Pendientes</p>
+                    <p style="font-size:1.5rem; font-weight:600; color:var(--warning-color);">2</p>
+                </div>
+                <div class="incapacity-summary__card">
+                    <p style="font-size:0.75rem; color:var(--gray-500);">En progreso</p>
+                    <p style="font-size:1.5rem; font-weight:600; color:var(--info-color);">1</p>
+                </div>
+                <div class="incapacity-summary__card">
+                    <p style="font-size:0.75rem; color:var(--gray-500);">Completadas hoy</p>
+                    <p style="font-size:1.5rem; font-weight:600; color:var(--success-color);">3</p>
+                </div>
+            </div>
+
+            <!-- Lista de tareas -->
+            <div class="incapacity-timeline">
+
+                <div class="incapacity-card incapacity-card--pending">
+                    <div
+                        style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.75rem;">
+                        <div>
+                            <strong>LIMPIEZA DE VITRINA DE POSTRES</strong>
+                            <p style="font-size:0.875rem; color:var(--gray-500); margin-top:0.25rem;">
+                                📅 10/04/2025 &nbsp; ⏰ 2:00 pm - 4:00 pm
+                            </p>
+                        </div>
+                        <span class="badge badge--warning">Pendiente</span>
+                    </div>
+                    <p style="font-size:0.875rem; margin-bottom:0.75rem;">
+                        Realizar limpieza profunda de vitrinas de exhibición de postres, incluyendo bandejas y
+                        herramientas de exhibición.
+                    </p>
+                    <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                        <button class="button button--primary button--small">✓ Marcar completada</button>
+                        <button class="button button--secondary button--small">Ver detalle</button>
+                    </div>
+                </div>
+
+                <div class="incapacity-card incapacity-card--pending">
+                    <div
+                        style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.75rem;">
+                        <div>
+                            <strong>BAÑOS</strong>
+                            <p style="font-size:0.875rem; color:var(--gray-500); margin-top:0.25rem;">
+                                📅 10/04/2025 &nbsp; ⏰ 2:00 pm - 3:00 pm
+                            </p>
+                        </div>
+                        <span class="badge badge--warning">Pendiente</span>
+                    </div>
+                    <p style="font-size:0.875rem; margin-bottom:0.75rem;">
+                        Limpieza y desinfección de baños de personal y clientes. Reponer papel higiénico, jabón y
+                        toallas.
+                    </p>
+                    <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                        <button class="button button--primary button--small">✓ Marcar completada</button>
+                        <button class="button button--secondary button--small">Ver detalle</button>
+                    </div>
+                </div>
+
+                <div class="incapacity-card incapacity-card--approved">
+                    <div
+                        style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.75rem;">
+                        <div>
+                            <strong>ORGANIZACIÓN DE MESAS</strong>
+                            <p style="font-size:0.875rem; color:var(--gray-500); margin-top:0.25rem;">
+                                📅 10/04/2025 &nbsp; ⏰ 3:00 pm - 4:30 pm
+                            </p>
+                        </div>
+                        <span class="badge badge--success">Completada</span>
+                    </div>
+                    <p style="font-size:0.875rem; margin-bottom:0.75rem;">
+                        Organizar mesas del área de comedor, reponer servilletas y limpiar sillas para la hora pico.
+                    </p>
+                    <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                        <button class="button button--secondary button--small" disabled>✓ Completada</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script src="../../../Scripts/script.js"></script>
+
+</body>
+
+</html>
