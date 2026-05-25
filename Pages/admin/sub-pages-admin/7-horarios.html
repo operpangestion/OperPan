@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>OperPan | Gestión de Horarios</title>
+  <!-- Bootstrap 5 + Bootstrap Icons + Google Fonts -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ==============================================
+       GLOBALES (OperPan - Estación Paisa)
+    ============================================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #F4F7FC;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4, h5 {
+      font-weight: 700;
+      color: #000000;
+    }
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+    h3 { font-size: 1.5rem; }
+    p, span, a, li, input, button, label {
+      font-size: 1rem;
+    }
+    /* Layout principal */
+    .wrapper {
+      display: flex;
+      min-height: 100vh;
+    }
+    /* SIDEBAR NEGRA CORPORATIVA */
+    .sidebar {
+      width: 280px;
+      background-color: #000000;
+      color: #FFFFFF;
+      transition: all 0.3s;
+      position: fixed;
+      height: 100vh;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar-header {
+      padding: 1.8rem 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: #A40706;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.5rem;
+    }
+    .logo-text h4 {
+      color: white;
+      margin-bottom: 0;
+      font-size: 1.3rem;
+    }
+    .logo-text span {
+      font-size: 0.7rem;
+      color: #ccc;
+    }
+    .nav-menu {
+      flex: 1;
+      padding: 2rem 0;
+    }
+    .nav-menu ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .nav-menu li {
+      margin-bottom: 0.5rem;
+    }
+    .nav-menu a {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 0.8rem 1.8rem;
+      color: #E0E0E0;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s;
+      border-left: 3px solid transparent;
+    }
+    .nav-menu a i {
+      font-size: 1.3rem;
+      width: 28px;
+    }
+    .nav-menu a:hover {
+      background: rgba(164, 7, 6, 0.15);
+      color: white;
+      border-left-color: #A40706;
+    }
+    .nav-menu .active a {
+      background: rgba(164, 7, 6, 0.2);
+      color: white;
+      border-left-color: #A40706;
+      font-weight: 600;
+    }
+    /* CONTENIDO PRINCIPAL */
+    .main-content {
+      flex: 1;
+      margin-left: 280px;
+      transition: all 0.3s;
+    }
+    /* TOPBAR NEGRO */
+    .topbar {
+      background: #000000;
+      padding: 0.8rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      border-bottom: 1px solid #2C2C2C;
+    }
+    .company-info h2 {
+      color: white;
+      font-size: 1.3rem;
+      margin-bottom: 0;
+      font-weight: 600;
+    }
+    .company-info p {
+      color: #BBBBBB;
+      font-size: 0.75rem;
+      margin-bottom: 0;
+    }
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .user-badge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #1E1E1E;
+      padding: 0.4rem 1rem;
+      border-radius: 60px;
+    }
+    .user-badge i {
+      font-size: 1.5rem;
+      color: #A40706;
+    }
+    .user-badge span {
+      color: white;
+      font-weight: 500;
+    }
+    .btn-logout {
+      background: transparent;
+      border: 1px solid #A40706;
+      color: white;
+      padding: 0.4rem 1rem;
+      border-radius: 30px;
+      transition: 0.2s;
+    }
+    .btn-logout:hover {
+      background: #A40706;
+      color: white;
+    }
+    /* DASHBOARD */
+    .dashboard-container {
+      padding: 2rem;
+    }
+    /* Cards */
+    .stat-card {
+      background: white;
+      border-radius: 20px;
+      padding: 1rem 1.2rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+      border: 1px solid #EDF2F7;
+      transition: 0.2s;
+    }
+    .card-modern {
+      background: white;
+      border-radius: 24px;
+      border: none;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+    }
+    .card-header {
+      background: transparent;
+      border-bottom: 1px solid #EDF2F7;
+      padding: 1rem 1.5rem;
+      font-weight: 700;
+    }
+    /* Formularios */
+    .form-label {
+      font-weight: 600;
+      color: #1E293B;
+      margin-bottom: 0.5rem;
+    }
+    .form-control, .form-select {
+      border-radius: 16px;
+      border: 1.5px solid #E2E8F0;
+      padding: 0.7rem 1rem;
+      font-family: 'Poppins', sans-serif;
+    }
+    .form-control:focus, .form-select:focus {
+      border-color: #A40706;
+      box-shadow: 0 0 0 3px rgba(164,7,6,0.2);
+    }
+    .btn-primary-corporate {
+      background: #A40706;
+      border: none;
+      padding: 0.6rem 1.5rem;
+      border-radius: 40px;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+    .btn-primary-corporate:hover {
+      background: #8a0504;
+      transform: translateY(-2px);
+    }
+    .btn-outline-corporate {
+      border: 1.5px solid #A40706;
+      background: transparent;
+      color: #A40706;
+      padding: 0.6rem 1.5rem;
+      border-radius: 40px;
+      font-weight: 600;
+    }
+    /* Tablas */
+    .table-custom {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .table-custom thead {
+      background: #F8F9FC;
+    }
+    .badge {
+      padding: 0.4rem 0.8rem;
+      border-radius: 40px;
+    }
+    .badge-active {
+      background: #E0F2E9;
+      color: #1E7B48;
+    }
+    /* Toast */
+    .toast-message {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1100;
+    }
+    /* Responsive */
+    @media (max-width: 992px) {
+      .sidebar {
+        margin-left: -280px;
+      }
+      .sidebar.active {
+        margin-left: 0;
+      }
+      .main-content {
+        margin-left: 0;
+      }
+      .menu-toggle {
+        display: block;
+        background: black;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        margin-right: 1rem;
+        border-radius: 12px;
+      }
+    }
+    @media (min-width: 993px) {
+      .menu-toggle {
+        display: none;
+      }
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      color: #5F6C7A;
+      font-size: 0.75rem;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+  <!-- SIDEBAR NEGRA -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-area">
+        <div class="logo-icon">OP</div>
+        <div class="logo-text">
+          <h4>OperPan</h4>
+          <span>Estación Paisa</span>
+        </div>
+      </div>
+    </div>
+    <nav class="nav-menu">
+      <ul>
+        <li><a href="../landingAdmin.html"><i class="bi bi-grid-3x3-gap-fill"></i> Inicio</a></li>
+        <li class="active"><a href="./horarios.html"><i class="bi bi-calendar3-week"></i> Horarios</a></li>
+        <li><a href="./1-cuentas.html"><i class="bi bi-people"></i> Cuentas</a></li>
+        <li><a href="./2-tareas.html"><i class="bi bi-list-task"></i> Tareas</a></li>
+        <li><a href="./3-permisos.html"><i class="bi bi-file-earmark-text"></i> Permisos</a></li>
+        <li><a href="./4-reportes.html"><i class="bi bi-bar-chart"></i> Reportes</a></li>
+        <li><a href="./5-incapacidad.html"><i class="bi bi-clipboard2-pulse"></i> Incapacidad</a></li>
+        <li><a href="./6-certificados.html"><i class="bi bi-award"></i> Certificados</a></li>
+      </ul>
+    </nav>
+    <div class="p-3 border-top border-secondary">
+      <small class="text-white-50"><i class="bi bi-shield-lock"></i> v2.0 · Administrador</small>
+    </div>
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="main-content">
+    <header class="topbar">
+      <div class="d-flex align-items-center gap-3">
+        <button class="menu-toggle btn btn-dark" id="menuToggle"><i class="bi bi-list"></i></button>
+        <div class="company-info">
+          <h2>Gestión de Horarios</h2>
+          <p>Asigna turnos y controla asistencia del personal</p>
+        </div>
+      </div>
+      <div class="user-info">
+        <div class="user-badge">
+          <i class="bi bi-shield-fill-check"></i>
+          <span>Administrador</span>
+        </div>
+        <button class="btn-logout" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> Salir</button>
+      </div>
+    </header>
+
+    <main class="dashboard-container">
+      <!-- KPIs -->
+      <div class="row g-3 mb-4">
+        <div class="col-md-3">
+          <div class="stat-card d-flex justify-content-between align-items-center">
+            <div><span class="text-muted">Total empleados</span><h3 class="mt-1" id="totalEmpleados">0</h3></div>
+            <i class="bi bi-people-fill fs-2" style="color:#A40706;"></i>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="stat-card d-flex justify-content-between align-items-center">
+            <div><span class="text-muted">Horarios activos</span><h3 class="mt-1" id="horariosActivos">0</h3></div>
+            <i class="bi bi-calendar-check fs-2" style="color:#A40706;"></i>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="stat-card d-flex justify-content-between align-items-center">
+            <div><span class="text-muted">Asistencias hoy</span><h3 class="mt-1" id="asistenciasHoy">0</h3></div>
+            <i class="bi bi-clock-history fs-2" style="color:#1E7B48;"></i>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="stat-card d-flex justify-content-between align-items-center">
+            <div><span class="text-muted">Retardos (hoy)</span><h3 class="mt-1" id="retardosHoy">0</h3></div>
+            <i class="bi bi-exclamation-triangle-fill fs-2" style="color:#B91C1C;"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulario para asignar/modificar horario -->
+      <div class="card-modern">
+        <div class="card-header">
+          <h3 class="mb-0"><i class="bi bi-plus-circle me-2"></i> <span id="formTitle">Asignar nuevo horario</span></h3>
+        </div>
+        <div class="p-4">
+          <form id="horarioForm">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Empleado *</label>
+                <select class="form-select" id="empleadoSelect" required></select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Tipo de turno *</label>
+                <select class="form-select" id="turnoTipo" required>
+                  <option value="">Seleccionar</option>
+                  <option value="Mañana">Mañana (6:00 - 14:00)</option>
+                  <option value="Tarde">Tarde (14:00 - 22:00)</option>
+                  <option value="Noche">Noche (22:00 - 6:00)</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Hora entrada *</label>
+                <input type="time" class="form-control" id="horaEntrada" required>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Hora salida *</label>
+                <input type="time" class="form-control" id="horaSalida" required>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Días laborales *</label>
+                <select class="form-select" id="diasLaborales" required>
+                  <option value="Lun-Vie">Lunes a Viernes</option>
+                  <option value="Lun-Sáb">Lunes a Sábado</option>
+                  <option value="Lun-Dom">Todos los días</option>
+                </select>
+              </div>
+              <div class="col-12 d-flex gap-3">
+                <button type="submit" class="btn btn-primary-corporate"><i class="bi bi-save"></i> Guardar horario</button>
+                <button type="button" class="btn btn-outline-corporate" id="cancelarEdicion" style="display:none;">Cancelar</button>
+                <button type="reset" class="btn btn-outline-secondary">Limpiar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Horarios asignados (CRUD) -->
+      <div class="card-modern">
+        <div class="card-header">
+          <h3 class="mb-0"><i class="bi bi-table me-2"></i> Horarios asignados</h3>
+        </div>
+        <div class="p-3">
+          <div class="table-responsive">
+            <table class="table table-custom">
+              <thead><tr><th>Empleado</th><th>Turno</th><th>Horario</th><th>Días</th><th>Estado</th><th>Acciones</th></tr></thead>
+              <tbody id="tablaHorariosBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Registro de asistencias (entradas/salidas recientes) -->
+      <div class="card-modern">
+        <div class="card-header">
+          <h3 class="mb-0"><i class="bi bi-clock-history me-2"></i> Asistencias recientes (entradas/salidas)</h3>
+        </div>
+        <div class="p-3">
+          <div class="table-responsive">
+            <table class="table table-custom">
+              <thead><tr><th>Empleado</th><th>Fecha</th><th>Entrada</th><th>Salida</th><th>Estado</th></tr></thead>
+              <tbody id="tablaAsistenciasBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <footer><i class="bi bi-shield-check"></i> Trazabilidad garantizada - Cada acción queda registrada</footer>
+    </main>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast-message" id="liveToast" style="display:none;">
+  <div class="bg-white rounded-3 shadow p-3 border-start border-4 border-danger">
+    <div class="d-flex gap-2"><i class="bi bi-info-circle-fill text-danger fs-5"></i><span id="toastMsg"></span></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // ============================================================
+  // MÓDULO DE HORARIOS - OPERPAN (ADMINISTRADOR)
+  // Cumple RF-HR-06 a RF-HR-11, RNF-HR-01 a RNF-HR-04, RN-HR-03 a RN-HR-05
+  // Persistencia localStorage, trazabilidad, CRUD horarios, visualización asistencias
+  // ============================================================
+  
+  const STORAGE_HORARIOS = "operpan_horarios";
+  const STORAGE_ASISTENCIAS = "operpan_asistencias";
+  const STORAGE_USERS = "operpan_usuarios";
+  const STORAGE_AUDIT = "operpan_audit_horarios";
+  
+  let horarios = [];
+  let asistencias = [];
+  let empleados = [];
+  let auditLog = [];
+  let editandoId = null;
+  
+  // Inicializar datos de ejemplo
+  function inicializarDatos() {
+    // Cargar empleados desde módulo cuentas
+    const storedUsers = localStorage.getItem(STORAGE_USERS);
+    if (storedUsers) empleados = JSON.parse(storedUsers).filter(u => u.estado === "activo");
+    else empleados = [
+      { id: "EMP-2024-156", nombres: "Eddier", apellidos: "Paz Pardo", cargo: "Panadero Principal", estado: "activo" },
+      { id: "EMP-2024-157", nombres: "Santiago", apellidos: "Muñeton", cargo: "Panadero", estado: "activo" },
+      { id: "EMP-2024-158", nombres: "Paula", apellidos: "Herrera", cargo: "Servicio al Cliente", estado: "activo" }
+    ];
+    
+    // Horarios ejemplo
+    const storedHorarios = localStorage.getItem(STORAGE_HORARIOS);
+    if (!storedHorarios) {
+      horarios = [
+        { id: "h1", empleadoId: "EMP-2024-156", turnoTipo: "Mañana", horaEntrada: "06:00", horaSalida: "14:00", diasLaborales: "Lun-Vie", estado: "activo" },
+        { id: "h2", empleadoId: "EMP-2024-157", turnoTipo: "Tarde", horaEntrada: "14:00", horaSalida: "22:00", diasLaborales: "Lun-Sáb", estado: "activo" }
+      ];
+      localStorage.setItem(STORAGE_HORARIOS, JSON.stringify(horarios));
+    } else horarios = JSON.parse(storedHorarios);
+    
+    // Asistencias ejemplo (simuladas)
+    const storedAsistencias = localStorage.getItem(STORAGE_ASISTENCIAS);
+    if (!storedAsistencias) {
+      const hoy = new Date().toISOString().split('T')[0];
+      asistencias = [
+        { id: "a1", empleadoId: "EMP-2024-156", fecha: hoy, entrada: "06:05", salida: "14:10", estado: "Completo" },
+        { id: "a2", empleadoId: "EMP-2024-157", fecha: hoy, entrada: "14:02", salida: "22:00", estado: "Completo" },
+        { id: "a3", empleadoId: "EMP-2024-158", fecha: hoy, entrada: "08:30", salida: "", estado: "Retardo" }
+      ];
+      localStorage.setItem(STORAGE_ASISTENCIAS, JSON.stringify(asistencias));
+    } else asistencias = JSON.parse(storedAsistencias);
+    
+    const storedAudit = localStorage.getItem(STORAGE_AUDIT);
+    auditLog = storedAudit ? JSON.parse(storedAudit) : [];
+  }
+  
+  function guardarDatos() {
+    localStorage.setItem(STORAGE_HORARIOS, JSON.stringify(horarios));
+    localStorage.setItem(STORAGE_ASISTENCIAS, JSON.stringify(asistencias));
+    localStorage.setItem(STORAGE_AUDIT, JSON.stringify(auditLog));
+  }
+  
+  function registrarAuditoria(accion, detalles, horarioId, empleadoAfectado) {
+    const registro = {
+      fecha: new Date().toISOString(),
+      administrador: "Administrador",
+      accion,
+      detalles,
+      horarioId,
+      empleadoAfectado,
+      timestamp: Date.now()
+    };
+    auditLog.unshift(registro);
+    if (auditLog.length > 200) auditLog.pop();
+    guardarDatos();
+    console.log("[AUDITORÍA HORARIO]", registro);
+  }
+  
+  function mostrarMensaje(msg) {
+    const toast = document.getElementById("liveToast");
+    document.getElementById("toastMsg").innerText = msg;
+    toast.style.display = "block";
+    setTimeout(() => toast.style.display = "none", 3000);
+  }
+  
+  function actualizarKPIs() {
+    const totalEmpleados = empleados.length;
+    const horariosActivos = horarios.filter(h => h.estado === "activo").length;
+    const hoy = new Date().toISOString().split('T')[0];
+    const asistenciasHoy = asistencias.filter(a => a.fecha === hoy).length;
+    const retardosHoy = asistencias.filter(a => a.fecha === hoy && a.estado === "Retardo").length;
+    document.getElementById("totalEmpleados").innerText = totalEmpleados;
+    document.getElementById("horariosActivos").innerText = horariosActivos;
+    document.getElementById("asistenciasHoy").innerText = asistenciasHoy;
+    document.getElementById("retardosHoy").innerText = retardosHoy;
+  }
+  
+  function cargarSelectEmpleados() {
+    const select = document.getElementById("empleadoSelect");
+    if (!select) return;
+    select.innerHTML = '<option value="">Seleccionar empleado</option>';
+    empleados.forEach(emp => {
+      select.innerHTML += `<option value="${emp.id}">${emp.nombres} ${emp.apellidos} (${emp.cargo})</option>`;
+    });
+  }
+  
+  function renderizarHorarios() {
+    const tbody = document.getElementById("tablaHorariosBody");
+    if (!tbody) return;
+    tbody.innerHTML = "";
+    horarios.forEach(h => {
+      const empleado = empleados.find(e => e.id === h.empleadoId) || { nombres: "Desconocido", apellidos: "" };
+      tbody.innerHTML += `
+        <tr>
+          <td>${empleado.nombres} ${empleado.apellidos}</td>
+          <td>${h.turnoTipo}</td>
+          <td>${h.horaEntrada} - ${h.horaSalida}</td>
+          <td>${h.diasLaborales}</td>
+          <td><span class="badge badge-active">Activo</span></td>
+          <td>
+            <button class="btn btn-sm btn-outline-primary editarHorario me-1" data-id="${h.id}"><i class="bi bi-pencil"></i></button>
+            <button class="btn btn-sm btn-outline-danger eliminarHorario" data-id="${h.id}"><i class="bi bi-trash"></i></button>
+          </td>
+        </tr>
+      `;
+    });
+    document.querySelectorAll(".editarHorario").forEach(btn => btn.addEventListener("click", () => editarHorario(btn.dataset.id)));
+    document.querySelectorAll(".eliminarHorario").forEach(btn => btn.addEventListener("click", () => eliminarHorario(btn.dataset.id)));
+  }
+  
+  function renderizarAsistencias() {
+    const tbody = document.getElementById("tablaAsistenciasBody");
+    if (!tbody) return;
+    const ultimas = [...asistencias].sort((a,b) => new Date(b.fecha) - new Date(a.fecha)).slice(0, 10);
+    tbody.innerHTML = "";
+    ultimas.forEach(a => {
+      const empleado = empleados.find(e => e.id === a.empleadoId) || { nombres: "Desconocido", apellidos: "" };
+      let estadoBadge = a.estado === "Completo" ? '<span class="badge bg-success">Completo</span>' : (a.estado === "Retardo" ? '<span class="badge bg-warning">Retardo</span>' : '<span class="badge bg-danger">Ausente</span>');
+      tbody.innerHTML += `
+        <tr>
+          <td>${empleado.nombres} ${empleado.apellidos}</td>
+          <td>${a.fecha}</td>
+          <td>${a.entrada || "—"}</td>
+          <td>${a.salida || "—"}</td>
+          <td>${estadoBadge}</td>
+        </tr>
+      `;
+    });
+  }
+  
+  // CRUD Horarios
+  function editarHorario(id) {
+    const horario = horarios.find(h => h.id === id);
+    if (!horario) return;
+    editandoId = id;
+    document.getElementById("formTitle").innerText = "Editar horario";
+    document.getElementById("empleadoSelect").value = horario.empleadoId;
+    document.getElementById("turnoTipo").value = horario.turnoTipo;
+    document.getElementById("horaEntrada").value = horario.horaEntrada;
+    document.getElementById("horaSalida").value = horario.horaSalida;
+    document.getElementById("diasLaborales").value = horario.diasLaborales;
+    document.getElementById("cancelarEdicion").style.display = "inline-block";
+  }
+  
+  function cancelarEdicion() {
+    editandoId = null;
+    document.getElementById("formTitle").innerText = "Asignar nuevo horario";
+    document.getElementById("horarioForm").reset();
+    document.getElementById("cancelarEdicion").style.display = "none";
+  }
+  
+  function eliminarHorario(id) {
+    if (confirm("¿Eliminar este horario? Se registrará en auditoría.")) {
+      const horario = horarios.find(h => h.id === id);
+      if (horario) {
+        const idx = horarios.findIndex(h => h.id === id);
+        horarios.splice(idx, 1);
+        registrarAuditoria("ELIMINAR HORARIO", `Horario eliminado para empleado ${horario.empleadoId}`, id, horario.empleadoId);
+        mostrarMensaje("Horario eliminado correctamente.");
+        guardarDatos();
+        renderizarHorarios();
+        actualizarKPIs();
+      }
+    }
+  }
+  
+  document.getElementById("horarioForm")?.addEventListener("submit", function(e) {
+    e.preventDefault();
+    const empleadoId = document.getElementById("empleadoSelect").value;
+    const turnoTipo = document.getElementById("turnoTipo").value;
+    const horaEntrada = document.getElementById("horaEntrada").value;
+    const horaSalida = document.getElementById("horaSalida").value;
+    const diasLaborales = document.getElementById("diasLaborales").value;
+    
+    if (!empleadoId || !turnoTipo || !horaEntrada || !horaSalida || !diasLaborales) {
+      mostrarMensaje("Complete todos los campos obligatorios.");
+      return;
+    }
+    if (horaEntrada >= horaSalida) {
+      mostrarMensaje("La hora de salida debe ser posterior a la hora de entrada.");
+      return;
+    }
+    const empleado = empleados.find(e => e.id === empleadoId);
+    if (!empleado) return;
+    
+    if (editandoId) {
+      const idx = horarios.findIndex(h => h.id === editandoId);
+      if (idx !== -1) {
+        const old = horarios[idx];
+        horarios[idx] = { ...old, empleadoId, turnoTipo, horaEntrada, horaSalida, diasLaborales };
+        registrarAuditoria("MODIFICAR HORARIO", `Horario modificado para ${empleado.nombres} ${empleado.apellidos}`, editandoId, empleadoId);
+        mostrarMensaje("Horario actualizado correctamente.");
+      }
+      cancelarEdicion();
+    } else {
+      const nuevoId = Date.now().toString();
+      const nuevoHorario = {
+        id: nuevoId,
+        empleadoId,
+        turnoTipo,
+        horaEntrada,
+        horaSalida,
+        diasLaborales,
+        estado: "activo"
+      };
+      horarios.push(nuevoHorario);
+      registrarAuditoria("CREAR HORARIO", `Horario asignado a ${empleado.nombres} ${empleado.apellidos}`, nuevoId, empleadoId);
+      mostrarMensaje("Horario asignado correctamente.");
+      document.getElementById("horarioForm").reset();
+    }
+    guardarDatos();
+    renderizarHorarios();
+    actualizarKPIs();
+  });
+  
+  document.getElementById("cancelarEdicion")?.addEventListener("click", cancelarEdicion);
+  
+  // Cerrar sesión
+  document.getElementById("logoutBtn")?.addEventListener("click", () => {
+    mostrarMensaje("Cerrando sesión...");
+    setTimeout(() => window.location.href = "../../login.html", 800);
+  });
+  
+  // Sidebar toggle
+  const menuToggle = document.getElementById("menuToggle");
+  const sidebar = document.getElementById("sidebar");
+  if(menuToggle) menuToggle.addEventListener("click", () => sidebar.classList.toggle("active"));
+  
+  inicializarDatos();
+  cargarSelectEmpleados();
+  renderizarHorarios();
+  renderizarAsistencias();
+  actualizarKPIs();
+</script>
+</body>
+</html>

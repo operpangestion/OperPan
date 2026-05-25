@@ -192,3 +192,21 @@ Si es la primera vez:
 Después solo necesitaremos:
 
 > git push
+
+---
+
+adminAccounts:
+
+"admin": username "admin", password "Admin123!"
+
+"gerente": username "gerente", password "Gerente123!"
+
+empleadosDB:
+
+"EMP001": codigo "EMP001", nombre "Carlos Méndez"
+
+"EMP002": codigo "EMP002", suspended true (inactive)
+
+"EMP003": codigo "EMP003", active
+
+---

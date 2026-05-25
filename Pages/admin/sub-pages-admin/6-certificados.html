@@ -1,714 +1,530 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OperPan | Certificados</title>
-    <link rel="stylesheet" href="../Assets/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>OperPan | Certificados Laborales</title>
+  <!-- Bootstrap 5 + Icons + Google Fonts -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ==============================================
+       GLOBALES Y RESET (OperPan - Estación Paisa)
+    ============================================== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #F4F7FC;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4, h5 { font-weight: 700; color: #000000; }
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+    h3 { font-size: 1.5rem; }
+    p, span, a, li, input, button, label { font-size: 1rem; }
+
+    /* Layout principal */
+    .wrapper { display: flex; min-height: 100vh; }
+    .sidebar {
+      width: 280px;
+      background-color: #000000;
+      color: #FFFFFF;
+      transition: all 0.3s;
+      position: fixed;
+      height: 100vh;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar-header { padding: 1.8rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .logo-area { display: flex; align-items: center; gap: 12px; }
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: #A40706;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.5rem;
+    }
+    .logo-text h4 { color: white; margin-bottom: 0; font-size: 1.3rem; }
+    .logo-text span { font-size: 0.7rem; color: #ccc; }
+    .nav-menu { flex: 1; padding: 2rem 0; }
+    .nav-menu ul { list-style: none; padding-left: 0; }
+    .nav-menu li { margin-bottom: 0.5rem; }
+    .nav-menu a {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 0.8rem 1.8rem;
+      color: #E0E0E0;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s;
+      border-left: 3px solid transparent;
+    }
+    .nav-menu a i { font-size: 1.3rem; width: 28px; }
+    .nav-menu a:hover { background: rgba(164,7,6,0.15); color: white; border-left-color: #A40706; }
+    .nav-menu .active a { background: rgba(164,7,6,0.2); color: white; border-left-color: #A40706; font-weight: 600; }
+
+    /* Contenido principal */
+    .main-content { flex: 1; margin-left: 280px; transition: all 0.3s; }
+    .topbar {
+      background: #000000;
+      padding: 0.8rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      border-bottom: 1px solid #2C2C2C;
+    }
+    .company-info h2 { color: white; font-size: 1.3rem; margin-bottom: 0; font-weight: 600; }
+    .company-info p { color: #BBBBBB; font-size: 0.75rem; margin-bottom: 0; }
+    .user-info { display: flex; align-items: center; gap: 20px; }
+    .user-badge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #1E1E1E;
+      padding: 0.4rem 1rem;
+      border-radius: 60px;
+    }
+    .user-badge i { font-size: 1.5rem; color: #A40706; }
+    .user-badge span { color: white; font-weight: 500; }
+    .btn-logout {
+      background: transparent;
+      border: 1px solid #A40706;
+      color: white;
+      padding: 0.4rem 1rem;
+      border-radius: 30px;
+      transition: 0.2s;
+    }
+    .btn-logout:hover { background: #A40706; color: white; }
+
+    /* Dashboard */
+    .dashboard-container { padding: 2rem; }
+    .card-modern {
+      background: white;
+      border-radius: 24px;
+      border: none;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+    }
+    .card-header {
+      background: transparent;
+      border-bottom: 1px solid #EDF2F7;
+      padding: 1rem 1.5rem;
+      font-weight: 700;
+    }
+    /* Tabs */
+    .view-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid #E9ECF3;
+      padding-bottom: 0.5rem;
+    }
+    .view-tab {
+      background: transparent;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      font-weight: 600;
+      border-radius: 40px;
+      transition: 0.2s;
+      color: #475569;
+    }
+    .view-tab i { margin-right: 8px; }
+    .view-tab.active { background: #A40706; color: white; }
+    .view-pane { display: none; animation: fadeIn 0.2s ease; }
+    .view-pane.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(5px);} to { opacity: 1; transform: translateY(0);} }
+
+    /* Formularios */
+    .form-label { font-weight: 600; color: #1E293B; margin-bottom: 0.5rem; }
+    .form-control, .form-select {
+      border-radius: 16px;
+      border: 1.5px solid #E2E8F0;
+      padding: 0.7rem 1rem;
+      font-family: 'Poppins', sans-serif;
+    }
+    .form-control:focus, .form-select:focus {
+      border-color: #A40706;
+      box-shadow: 0 0 0 3px rgba(164,7,6,0.2);
+    }
+    .btn-primary-corporate {
+      background: #A40706;
+      border: none;
+      padding: 0.6rem 1.5rem;
+      border-radius: 40px;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+    .btn-primary-corporate:hover { background: #8a0504; transform: translateY(-2px); }
+    .btn-outline-corporate {
+      border: 1.5px solid #A40706;
+      background: transparent;
+      color: #A40706;
+      padding: 0.6rem 1.5rem;
+      border-radius: 40px;
+      font-weight: 600;
+    }
+    /* Tabla */
+    .table-custom {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .table-custom thead { background: #F8F9FC; }
+    .badge { padding: 0.4rem 0.8rem; border-radius: 40px; }
+    /* Toast */
+    .toast-message {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1100;
+    }
+    @media (max-width: 992px) {
+      .sidebar { margin-left: -280px; }
+      .sidebar.active { margin-left: 0; }
+      .main-content { margin-left: 0; }
+      .menu-toggle { display: block; background: black; color: white; border: none; padding: 0.5rem 1rem; margin-right: 1rem; border-radius: 12px; }
+    }
+    @media (min-width: 993px) { .menu-toggle { display: none; } }
+    footer { text-align: center; padding: 1rem; color: #5F6C7A; font-size: 0.75rem; margin-top: 2rem; }
+  </style>
 </head>
 <body>
-    
-    <!-- HEADER PRINCIPAL -->
-    <header class="admin__header">
-        <h1 class="admin__title">Estación Paisa</h1>
-
-        <label for="_nav">navegar</label>
-        <div class="nav-container">
-            <span class="nav-label">Vista</span>
-            <div class="nav-select-wrapper">
-                <select name="_nav" id="_nav" onchange="navegar()">
-                    <option value="/OperPan/Pages/admin/landingAdmin.html">Gerente / Admin</option>
-                    <option value="/OperPan/Pages/Empleado/landingEmpleado.html">Empleado</option>
-                </select>
-                <span class="nav-chevron">▼</span>
-            </div>
-            <button class="button button--secondary" onclick="cerrarSesion()">
-                Cerrar sesión
-            </button>
-        </div>
-    </header>
-
-
-    <!-- NAVEGACIÓN PRINCIPAL -->
-    <nav class="admin__nav">
-        <ul class="admin__menu">
-            <li><a class="nav__btn" href="../landingAdmin.html">Horarios</a></li>
-            <li><a class="nav__btn" href="./1-cuentas.html">Cuentas</a></li>
-            <li><a class="nav__btn" href="./2-tareas.html">Tareas</a></li>
-            <li><a class="nav__btn" href="./3-permisos.html">Permisos</a></li>
-            <li><a class="nav__btn" href="./4-reportes.html">Reportes</a></li>
-            <li><a class="nav__btn" href="./5-incapacidad.html">Incapacidad</a></li>
-            <li><a class="nav__btn nav__btn--active" href="./6-certificados.html">Certificados</a></li>
-        </ul>
+<div class="wrapper">
+  <!-- SIDEBAR NEGRA -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-area"><div class="logo-icon">OP</div><div class="logo-text"><h4>OperPan</h4><span>Estación Paisa</span></div></div>
+    </div>
+    <nav class="nav-menu">
+      <ul>
+        <li><a href="../landingAdmin.html"><i class="bi bi-grid-3x3-gap-fill"></i> Inicio</a></li>
+        <li><a href="./7-horarios.html"><i class="bi bi-calendar3-week"></i> Horarios</a></li>
+        <li><a href="./1-cuentas.html"><i class="bi bi-people"></i> Cuentas</a></li>
+        <li><a href="./2-tareas.html"><i class="bi bi-list-task"></i> Tareas</a></li>
+        <li><a href="./3-permisos.html"><i class="bi bi-file-earmark-text"></i> Permisos</a></li>
+        <li><a href="./4-reportes.html"><i class="bi bi-bar-chart"></i> Reportes</a></li>
+        <li><a href="./5-incapacidad.html"><i class="bi bi-clipboard2-pulse"></i> Incapacidad</a></li>
+        <li class="active"><a href="./6-certificados.html"><i class="bi bi-award"></i> Certificados</a></li>
+      </ul>
     </nav>
+    <div class="p-3 border-top border-secondary"><small class="text-white-50"><i class="bi bi-shield-lock"></i> v2.0 · Administrador</small></div>
+  </aside>
 
-    <!-- SECCIÓN CERTIFICADOS -->
-    <section id="certificados" class="admin__section">
-    <header class="section__header">
-        <h2 class="section__title">Gestión de Certificados Laborales</h2>
-        <p class="section__description">Solicita y descarga tus certificados laborales o adminístralos como administrador</p>
+  <div class="main-content">
+    <header class="topbar">
+      <div class="d-flex align-items-center gap-3">
+        <button class="menu-toggle btn btn-dark" id="menuToggle"><i class="bi bi-list"></i></button>
+        <div class="company-info"><h2>Gestión de Certificados</h2><p>Solicita y genera certificados laborales</p></div>
+      </div>
+      <div class="user-info">
+        <div class="user-badge"><i class="bi bi-shield-fill-check"></i><span>Administrador</span></div>
+        <button class="btn-logout" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> Salir</button>
+      </div>
     </header>
 
-    <!-- Toggle de vistas: Empleado vs Administrador -->
-    <div class="certificate-tabs" role="tablist">
-        <button class="certificate-tabs__tab certificate-tabs__tab--active" role="tab" data-view="employee" aria-selected="true">
-        👤 Vista Empleado - Mis certificados
-        </button>
-        <button class="certificate-tabs__tab" role="tab" data-view="admin" aria-selected="false">
-        👑 Vista Administrador - Generar certificados
-        </button>
-    </div>
+    <main class="dashboard-container">
+      <!-- Tabs de vista -->
+      <div class="view-tabs">
+        <button class="view-tab active" data-view="empleado"><i class="bi bi-person-badge"></i> Vista Empleado</button>
+        <button class="view-tab" data-view="admin"><i class="bi bi-shield-lock"></i> Vista Administrador</button>
+      </div>
 
-    <!-- ========================================= -->
-    <!-- VISTA EMPLEADO: Solicitar y descargar certificados -->
-    <!-- ========================================= -->
-    <div class="certificate-view certificate-view--employee" data-view="employee-content">
-        
-        <!-- Contexto del empleado (basado en mockup) -->
-        <div class="employee-context">
-        <div class="employee-context__card">
-            <div class="employee-context__avatar">EP</div>
-            <div class="employee-context__info">
-            <h3 class="employee-context__name">Eddier Paz Pardo</h3>
-            <div class="employee-context__meta">
-                <span class="employee-context__badge">ID: EMP-2024-156</span>
-                <span class="employee-context__badge">Panadero Principal</span>
-                <span class="employee-context__badge">Fecha ingreso: 15/03/2022</span>
+      <!-- VISTA EMPLEADO -->
+      <div id="viewEmpleado" class="view-pane active">
+        <div class="card-modern">
+          <div class="card-header"><h3 class="mb-0"><i class="bi bi-person-circle me-2"></i> Mis datos</h3></div>
+          <div class="p-3">
+            <div class="d-flex align-items-center gap-3">
+              <div class="bg-light rounded-circle d-flex align-items-center justify-content-center" style="width: 70px; height: 70px;"><i class="bi bi-person fs-1 text-muted"></i></div>
+              <div><h4 id="empleadoNombre">Eddier Paz Pardo</h4><div class="d-flex gap-2 flex-wrap"><span class="badge bg-secondary">ID: EMP-2024-156</span><span class="badge bg-dark">Panadero Principal</span><span class="badge bg-dark">Ingreso: 15/03/2022</span></div></div>
             </div>
-            </div>
-        </div>
+          </div>
         </div>
 
-        <!-- Buscador de empleado (como en el mockup) - solo para referencia visual -->
-        <div class="certificate-search">
-        <div class="certificate-search__field">
-            <label for="cert-empleado-id" class="certificate-search__label">ID Empleado</label>
-            <div class="certificate-search__input-group">
-            <input type="text" 
-                    id="cert-empleado-id" 
-                    class="certificate-search__input" 
-                    value="EMP-2024-156 - Eddier Paz Pardo"
-                    readonly
-                    aria-label="ID de empleado (automático)">
-            <span class="certificate-search__icon" title="Campo automático">🔒</span>
-            </div>
-            <small class="certificate-search__hint">Tu identificación automática</small>
-        </div>
+        <div class="card-modern">
+          <div class="card-header"><h3 class="mb-0"><i class="bi bi-file-text"></i> Solicitar certificado laboral</h3></div>
+          <div class="p-4">
+            <form id="solicitudCertificadoForm">
+              <div class="row g-3">
+                <div class="col-12"><label class="form-label">Tipo de certificado *</label><select class="form-select" id="tipoCertificadoEmpleado" required><option value="laboral">Certificado laboral general</option><option value="ingresos">Certificado de ingresos</option><option value="antiguedad">Certificado de antigüedad</option></select></div>
+                <div class="col-12"><label class="form-label">Propósito *</label><input type="text" class="form-control" id="propositoEmpleado" required placeholder="Ej: Trámite bancario, nuevo empleo..."></div>
+                <div class="col-12"><button type="submit" class="btn btn-primary-corporate"><i class="bi bi-send"></i> Solicitar certificado</button></div>
+              </div>
+            </form>
+          </div>
         </div>
 
-        <!-- Tarjeta de solicitud de certificado (basada en mockup) -->
-        <div class="certificate-request">
-        <div class="certificate-request__card">
-            <div class="certificate-request__header">
-            <h3 class="certificate-request__title">Solicitar certificado laboral</h3>
-            <span class="certificate-request__badge">Nuevo</span>
-            </div>
-            
-            <div class="certificate-request__body">
-            <p class="certificate-request__description">
-                Genera un certificado laboral oficial que acredita tu relación laboral con <strong>Estación Paisa</strong>, incluyendo:
-            </p>
-            
-            <ul class="certificate-request__features">
-                <li>✅ Fecha de ingreso y antigüedad</li>
-                <li>✅ Cargo actual y funciones</li>
-                <li>✅ Tipo de contrato y salario (si aplica)</li>
-                <li>✅ Firma digital y sello de la empresa</li>
-            </ul>
-            
-            <div class="certificate-request__info">
-                <span class="certificate-request__info-item">
-                <span class="certificate-request__info-label">Tiempo estimado:</span>
-                <span class="certificate-request__info-value">⏱️ Menos de 5 segundos</span>
-                </span>
-                <span class="certificate-request__info-item">
-                <span class="certificate-request__info-label">Formato:</span>
-                <span class="certificate-request__info-value">📄 PDF</span>
-                </span>
-            </div>
-            </div>
-            
-            <!-- Botón de solicitud/descarga (como en el mockup) -->
-            <div class="certificate-request__actions">
-            <button class="button button--primary button--large" id="solicitar-certificado" data-action="solicitar">
-                <span class="button__icon">📄</span>
-                DESCARGAR CERTIFICADO LABORAL
-            </button>
-            <p class="certificate-request__note">
-                Al hacer clic, se generará tu certificado automáticamente. Puedes descargarlo una vez esté listo.
-            </p>
-            </div>
+        <!-- Mis certificados previos -->
+        <div class="card-modern">
+          <div class="card-header"><h3 class="mb-0"><i class="bi bi-clock-history"></i> Mis certificados anteriores</h3></div>
+          <div class="p-3" id="misCertificadosContainer"></div>
         </div>
+      </div>
+
+      <!-- VISTA ADMINISTRADOR -->
+      <div id="viewAdmin" class="view-pane">
+        <div class="card-modern">
+          <div class="card-header"><h3 class="mb-0"><i class="bi bi-plus-circle"></i> Generar certificado para empleado</h3></div>
+          <div class="p-4">
+            <form id="generarCertificadoForm">
+              <div class="row g-3">
+                <div class="col-md-6"><label class="form-label">Empleado *</label><select class="form-select" id="empleadoSelect" required></select></div>
+                <div class="col-md-6"><label class="form-label">Tipo de certificado *</label><select class="form-select" id="tipoCertificadoAdmin" required><option value="laboral">Certificado laboral general</option><option value="ingresos">Certificado de ingresos</option><option value="antiguedad">Certificado de antigüedad</option></select></div>
+                <div class="col-12"><label class="form-label">Propósito *</label><input type="text" class="form-control" id="propositoAdmin" required placeholder="Ej: Crédito hipotecario"></div>
+                <div class="col-12"><label class="form-label">Observaciones (opcional)</label><textarea class="form-control" id="observacionesAdmin" rows="2"></textarea></div>
+                <div class="col-12"><button type="submit" class="btn btn-primary-corporate"><i class="bi bi-file-pdf"></i> Generar certificado PDF</button></div>
+              </div>
+            </form>
+          </div>
         </div>
 
-        <!-- Estado de la solicitud (cuando está en proceso) -->
-        <div class="certificate-status certificate-status--generating hidden" id="certificate-generating">
-        <div class="certificate-status__card">
-            <div class="certificate-status__spinner"></div>
-            <h4 class="certificate-status__title">Generando certificado...</h4>
-            <p class="certificate-status__message">Esto tomará solo unos segundos. Por favor espera.</p>
-            <div class="certificate-status__progress">
-            <div class="certificate-status__progress-bar" style="width: 0%"></div>
+        <!-- Historial de certificados generados (admin) -->
+        <div class="card-modern">
+          <div class="card-header"><h3 class="mb-0"><i class="bi bi-table"></i> Historial de certificados emitidos</h3></div>
+          <div class="p-3">
+            <div class="table-responsive">
+              <table class="table table-custom">
+                <thead><tr><th>Fecha</th><th>Empleado</th><th>Tipo</th><th>Propósito</th><th>Generado por</th><th>Acciones</th></tr></thead>
+                <tbody id="historialCertificadosBody"></tbody>
+              </table>
             </div>
+          </div>
         </div>
-        </div>
+      </div>
+      <footer><i class="bi bi-shield-check"></i> Trazabilidad garantizada - Todos los certificados quedan registrados</footer>
+    </main>
+  </div>
+</div>
 
-        <!-- Certificado generado (para descarga inmediata) -->
-        <div class="certificate-ready hidden" id="certificate-ready">
-        <div class="certificate-ready__card">
-            <div class="certificate-ready__icon">✅</div>
-            <div class="certificate-ready__content">
-            <h4 class="certificate-ready__title">¡Certificado generado con éxito!</h4>
-            <p class="certificate-ready__message">Tu certificado laboral está listo para descargar.</p>
-            <div class="certificate-ready__file">
-                <span class="certificate-ready__file-icon">📄</span>
-                <span class="certificate-ready__file-name">CERTIFICADO_LABORAL_EDDIER_PAZ_20250812.pdf</span>
-                <span class="certificate-ready__file-size">245 KB</span>
-                <button class="button button--success button--small" data-action="download">
-                ⬇️ Descargar
-                </button>
-            </div>
-            <p class="certificate-ready__note">
-                El certificado también ha sido enviado a tu correo: eddier.paz@estacionpaisa.com
-            </p>
-            </div>
-        </div>
-        </div>
+<!-- Toast -->
+<div class="toast-message" id="liveToast" style="display:none;"><div class="bg-white rounded-3 shadow p-3 border-start border-4 border-danger"><div class="d-flex gap-2"><i class="bi bi-info-circle-fill text-danger fs-5"></i><span id="toastMsg"></span></div></div></div>
 
-        <!-- Historial de certificados del empleado (RNF-CR-02) -->
-        <div class="my-certificates">
-        <header class="my-certificates__header">
-            <h3 class="my-certificates__title">Mis certificados anteriores</h3>
-            <span class="my-certificates__count">Total: 3 certificados</span>
-        </header>
-
-        <div class="certificates-timeline">
-            <!-- Certificado 1 - Reciente -->
-            <article class="certificate-history-card">
-            <div class="certificate-history-card__date">
-                <span class="certificate-history-card__day">12</span>
-                <span class="certificate-history-card__month">AGO</span>
-                <span class="certificate-history-card__year">2025</span>
-            </div>
-            <div class="certificate-history-card__content">
-                <h4 class="certificate-history-card__title">Certificado laboral - Panadero Principal</h4>
-                <p class="certificate-history-card__description">
-                Certificado general con antigüedad y salario (confidencial)
-                </p>
-                <div class="certificate-history-card__meta">
-                <span class="badge badge--success">Descargado</span>
-                <span class="certificate-history-card__time">10:30 am</span>
-                </div>
-            </div>
-            <div class="certificate-history-card__actions">
-                <button class="button button--secondary button--small" title="Descargar nuevamente">
-                ⬇️
-                </button>
-                <button class="button button--secondary button--small" title="Ver detalles">
-                👁️
-                </button>
-            </div>
-            </article>
-
-            <!-- Certificado 2 -->
-            <article class="certificate-history-card">
-            <div class="certificate-history-card__date">
-                <span class="certificate-history-card__day">05</span>
-                <span class="certificate-history-card__month">JUL</span>
-                <span class="certificate-history-card__year">2025</span>
-            </div>
-            <div class="certificate-history-card__content">
-                <h4 class="certificate-history-card__title">Certificado laboral - Para trámite bancario</h4>
-                <p class="certificate-history-card__description">
-                Certificado con información específica para crédito hipotecario
-                </p>
-                <div class="certificate-history-card__meta">
-                <span class="badge badge--success">Descargado</span>
-                <span class="certificate-history-card__time">2 veces</span>
-                </div>
-            </div>
-            <div class="certificate-history-card__actions">
-                <button class="button button--secondary button--small">
-                ⬇️
-                </button>
-            </div>
-            </article>
-
-            <!-- Certificado 3 -->
-            <article class="certificate-history-card">
-            <div class="certificate-history-card__date">
-                <span class="certificate-history-card__day">10</span>
-                <span class="certificate-history-card__month">MAR</span>
-                <span class="certificate-history-card__year">2025</span>
-            </div>
-            <div class="certificate-history-card__content">
-                <h4 class="certificate-history-card__title">Certificado de ingresos y retenciones</h4>
-                <p class="certificate-history-card__description">
-                Certificado para declaración de renta año fiscal 2024
-                </p>
-                <div class="certificate-history-card__meta">
-                <span class="badge badge--success">Descargado</span>
-                </div>
-            </div>
-            <div class="certificate-history-card__actions">
-                <button class="button button--secondary button--small">
-                ⬇️
-                </button>
-            </div>
-            </article>
-        </div>
-        
-        <div class="my-certificates__footer">
-            <a href="#" class="link link--primary">Ver historial completo →</a>
-        </div>
-        </div>
-    </div>
-
-    <!-- ========================================= -->
-    <!-- VISTA ADMINISTRADOR: Generar certificados -->
-    <!-- ========================================= -->
-    <div class="certificate-view certificate-view--admin hidden" data-view="admin-content">
-        
-        <!-- Header con resumen y acciones -->
-        <div class="admin-certificate-header">
-        <div class="admin-certificate-header__top">
-            <h3 class="admin-certificate-header__title">Generar certificados laborales</h3>
-            <div class="admin-certificate-header__actions">
-            <button class="button button--secondary button--small">
-                📊 Ver estadísticas
-            </button>
-            <button class="button button--secondary button--small">
-                📋 Solicitudes pendientes
-            </button>
-            </div>
-        </div>
-        
-        <!-- Resumen rápido -->
-        <div class="certificate-summary">
-            <div class="certificate-summary__card">
-            <span class="certificate-summary__label">Solicitudes hoy</span>
-            <span class="certificate-summary__value">3</span>
-            </div>
-            <div class="certificate-summary__card">
-            <span class="certificate-summary__label">Generados hoy</span>
-            <span class="certificate-summary__value">5</span>
-            </div>
-            <div class="certificate-summary__card">
-            <span class="certificate-summary__label">Pendientes</span>
-            <span class="certificate-summary__value">2</span>
-            </div>
-            <div class="certificate-summary__card">
-            <span class="certificate-summary__label">Total mes</span>
-            <span class="certificate-summary__value">24</span>
-            </div>
-        </div>
-        </div>
-
-        <!-- Buscador de empleados para admin -->
-        <div class="admin-certificate-search">
-        <div class="admin-certificate-search__field">
-            <label for="admin-empleado-search" class="admin-certificate-search__label">
-            Buscar empleado para generar certificado
-            </label>
-            <div class="admin-certificate-search__input-group">
-            <input type="text" 
-                    id="admin-empleado-search" 
-                    class="admin-certificate-search__input" 
-                    placeholder="Buscar por ID, nombre, documento o correo"
-                    value="Eddier Paz Pardo">
-            <button class="admin-certificate-search__btn" aria-label="Buscar">
-                🔍 Buscar
-            </button>
-            </div>
-        </div>
-        </div>
-
-        <!-- Formulario de generación de certificado (admin) -->
-        <form class="certificate-generate-form">
-        <h3 class="certificate-generate-form__title">Generar nuevo certificado laboral</h3>
-        
-        <div class="form__grid">
-            <!-- Información del empleado seleccionado (basado en búsqueda) -->
-            <div class="form__field form__field--full">
-            <div class="selected-employee">
-                <div class="selected-employee__avatar">EP</div>
-                <div class="selected-employee__info">
-                <h4 class="selected-employee__name">Eddier Paz Pardo</h4>
-                <div class="selected-employee__meta">
-                    <span class="selected-employee__badge">ID: EMP-2024-156</span>
-                    <span class="selected-employee__badge">Panadero Principal</span>
-                    <span class="selected-employee__badge">Ingreso: 15/03/2022</span>
-                    <span class="selected-employee__badge">CC: 1234567890</span>
-                </div>
-                </div>
-                <button type="button" class="button button--secondary button--small" data-action="cambiar-empleado">
-                Cambiar
-                </button>
-            </div>
-            </div>
-
-            <!-- Tipo de certificado -->
-            <div class="form__field form__field--full">
-            <label for="tipo-certificado" class="form__label">
-                Tipo de certificado <span class="form__required">*</span>
-            </label>
-            <select id="tipo-certificado" class="form__select" required>
-                <option value="" disabled selected>Seleccionar tipo</option>
-                <option value="laboral-general" selected>📄 Certificado laboral general</option>
-                <option value="ingresos">💰 Certificado de ingresos y retenciones</option>
-                <option value="funciones">⚙️ Certificado de funciones específicas</option>
-                <option value="antiguedad">📅 Certificado de antigüedad</option>
-                <option value="salario">💵 Certificado salarial</option>
-                <option value="personalizado">✏️ Certificado personalizado</option>
-            </select>
-            </div>
-
-            <!-- Fechas del certificado -->
-            <div class="form__row">
-            <div class="form__group form__group--half">
-                <label for="fecha-expedicion" class="form__label">
-                Fecha de expedición <span class="form__required">*</span>
-                </label>
-                <input type="date" 
-                    id="fecha-expedicion" 
-                    class="form__input" 
-                    value="2025-08-12"
-                    required>
-            </div>
-            
-            <div class="form__group form__group--half">
-                <label for="fecha-corte" class="form__label">
-                Fecha de corte (opcional)
-                </label>
-                <input type="date" 
-                    id="fecha-corte" 
-                    class="form__input" 
-                    value="2025-08-12">
-                <small class="form__hint">Si se requiere información hasta una fecha específica</small>
-            </div>
-            </div>
-
-            <!-- Información a incluir -->
-            <div class="form__field form__field--full">
-            <label class="form__label">Información a incluir en el certificado</label>
-            <div class="form__checkbox-group">
-                <label class="checkbox checkbox--primary">
-                <input type="checkbox" id="incluir-fechaIngreso" class="checkbox__input" checked>
-                <span class="checkbox__label">Fecha de ingreso</span>
-                </label>
-                <label class="checkbox checkbox--primary">
-                <input type="checkbox" id="incluir-antiguedad" class="checkbox__input" checked>
-                <span class="checkbox__label">Antigüedad (años/meses)</span>
-                </label>
-                <label class="checkbox checkbox--primary">
-                <input type="checkbox" id="incluir-cargo" class="checkbox__input" checked>
-                <span class="checkbox__label">Cargo actual</span>
-                </label>
-                <label class="checkbox checkbox--primary">
-                <input type="checkbox" id="incluir-funciones" class="checkbox__input">
-                <span class="checkbox__label">Funciones del cargo</span>
-                </label>
-                <label class="checkbox checkbox--primary">
-                <input type="checkbox" id="incluir-salario" class="checkbox__input">
-                <span class="checkbox__label">Salario (confidencial)</span>
-                </label>
-                <label class="checkbox checkbox--primary">
-                <input type="checkbox" id="incluir-contrato" class="checkbox__input" checked>
-                <span class="checkbox__label">Tipo de contrato</span>
-                </label>
-                <label class="checkbox checkbox--primary">
-                <input type="checkbox" id="incluir-horario" class="checkbox__input">
-                <span class="checkbox__label">Horario laboral</span>
-                </label>
-            </div>
-            </div>
-
-            <!-- Propósito del certificado -->
-            <div class="form__field form__field--full">
-            <label for="proposito" class="form__label">
-                Propósito del certificado <span class="form__required">*</span>
-            </label>
-            <select id="proposito" class="form__select" required>
-                <option value="" disabled selected>Seleccionar propósito</option>
-                <option value="banco" selected>Trámite bancario / Crédito</option>
-                <option value="empleo">Nuevo empleo / Hoja de vida</option>
-                <option value="estudio">Estudio / Universidad</option>
-                <option value="arriendo">Arriendo / Vivienda</option>
-                <option value="legal">Trámite legal / Notaría</option>
-                <option value="personal">Uso personal</option>
-                <option value="otro">Otro</option>
-            </select>
-            </div>
-
-            <!-- Observaciones / texto personalizado -->
-            <div class="form__field form__field--full">
-            <label for="observaciones-cert" class="form__label">
-                Observaciones o texto personalizado (opcional)
-            </label>
-            <textarea id="observaciones-cert" 
-                        class="form__textarea" 
-                        rows="3"
-                        placeholder="Ej: Certificado para entidad bancaria, especificar que el empleado no tiene codeudor...">Certificado para solicitud de crédito hipotecario en Bancolombia.</textarea>
-            </div>
-
-            <!-- Firma y sello -->
-            <div class="form__row">
-            <div class="form__group form__group--half">
-                <label for="firmado-por" class="form__label">
-                Firmado por <span class="form__required">*</span>
-                </label>
-                <input type="text" 
-                    id="firmado-por" 
-                    class="form__input" 
-                    value="Administrador - Estación Paisa"
-                    required>
-            </div>
-            
-            <div class="form__group form__group--half">
-                <label for="cargo-firma" class="form__label">
-                Cargo del firmante <span class="form__required">*</span>
-                </label>
-                <input type="text" 
-                    id="cargo-firma" 
-                    class="form__input" 
-                    value="Gerente de Recursos Humanos"
-                    required>
-            </div>
-            </div>
-
-            <!-- Notificaciones -->
-            <div class="form__row form__row--checkbox">
-            <label class="checkbox checkbox--primary">
-                <input type="checkbox" id="notificar-empleado" class="checkbox__input" checked>
-                <span class="checkbox__label">Notificar al empleado por correo electrónico</span>
-            </label>
-            
-            <label class="checkbox checkbox--primary">
-                <input type="checkbox" id="enviar-copia" class="checkbox__input" checked>
-                <span class="checkbox__label">Guardar en historial del empleado</span>
-            </label>
-            </div>
-
-            <!-- Botones de acción -->
-            <div class="form__actions">
-            <button type="submit" class="button button--primary button--large" id="generar-certificado-admin">
-                <span class="button__icon">📄</span> Generar certificado PDF
-            </button>
-            <button type="reset" class="button button--secondary button--large">
-                Limpiar formulario
-            </button>
-            </div>
-        </div>
-        </form>
-
-        <!-- Previsualización del certificado (opcional) -->
-        <div class="certificate-preview">
-        <header class="certificate-preview__header">
-            <h4 class="certificate-preview__title">Vista previa del certificado</h4>
-            <button class="button button--secondary button--small" data-action="actualizar-preview">
-                🔄 Actualizar vista previa
-            </button>
-            </header>
-            
-            <div class="certificate-preview__content">
-            <div class="certificate-template">
-                <div class="certificate-template__header">
-                <h2 class="certificate-template__company">ESTACIÓN PAISA</h2>
-                <p class="certificate-template__subtitle">Panadería y Repostería</p>
-                <p class="certificate-template__nit">NIT. 901.234.567-8</p>
-                </div>
-                
-                <h3 class="certificate-template__title">CERTIFICADO LABORAL</h3>
-                
-                <p class="certificate-template__date">Fecha de expedición: 12 de agosto de 2025</p>
-                
-                <div class="certificate-template__body">
-                <p>El suscrito <strong>Administrador - Estación Paisa</strong>, en su calidad de <strong>Gerente de Recursos Humanos</strong>, certifica que:</p>
-                
-                <p class="certificate-template__employee-name"><strong>EDDIER RAFAEL PAZ PARDO</strong></p>
-                
-                <p>identificado con cédula de ciudadanía No. <strong>1.234.567.890</strong>, labora en esta empresa desde el <strong>15 de marzo de 2022</strong>, desempeñando el cargo de <strong>PANADERO PRINCIPAL</strong>.</p>
-                
-                <p>El tipo de contrato es <strong>INDEFINIDO</strong>, con una antigüedad de <strong>3 años y 5 meses</strong>.</p>
-                
-                <p>El presente certificado se expide a solicitud del interesado para <strong>trámite bancario / crédito hipotecario</strong>.</p>
-                </div>
-                
-                <div class="certificate-template__footer">
-                <p>Atentamente,</p>
-                <br><br>
-                <p>_________________________</p>
-                <p><strong>Administrador - Estación Paisa</strong></p>
-                <p>Gerente de Recursos Humanos</p>
-                <p class="certificate-template__footer-note">Este certificado es válido sin firma digital - Documento generado electrónicamente</p>
-                </div>
-            </div>
-            </div>
-            
-            <div class="certificate-preview__actions">
-            <button class="button button--success button--medium">
-                ⬇️ Descargar PDF
-            </button>
-            <button class="button button--secondary button--medium">
-                📧 Enviar por correo
-            </button>
-            <button class="button button--secondary button--medium">
-                🖨️ Imprimir
-            </button>
-            </div>
-        </div>
-
-        <!-- Solicitudes pendientes de certificados -->
-        <div class="pending-certificates">
-        <header class="pending-certificates__header">
-            <h4 class="pending-certificates__title">Solicitudes pendientes de certificados</h4>
-            <span class="pending-certificates__count">2 solicitudes</span>
-        </header>
-
-        <div class="pending-certificates__list">
-            <!-- Solicitud 1 -->
-            <article class="pending-certificate-card">
-            <div class="pending-certificate-card__avatar">PH</div>
-            <div class="pending-certificate-card__info">
-                <h5 class="pending-certificate-card__name">Paula Herrera</h5>
-                <p class="pending-certificate-card__details">Servicio al Cliente · ID: EMP-2024-158</p>
-                <span class="pending-certificate-card__date">Solicitado: 12/08/2025 9:30 am</span>
-            </div>
-            <div class="pending-certificate-card__type">
-                <span class="badge">Certificado laboral</span>
-            </div>
-            <div class="pending-certificate-card__actions">
-                <button class="button button--primary button--small">Generar</button>
-                <button class="button button--secondary button--small">Ver</button>
-            </div>
-            </article>
-
-            <!-- Solicitud 2 -->
-            <article class="pending-certificate-card">
-            <div class="pending-certificate-card__avatar">SM</div>
-            <div class="pending-certificate-card__info">
-                <h5 class="pending-certificate-card__name">Santiago Muñeton</h5>
-                <p class="pending-certificate-card__details">Panadero · ID: EMP-2024-157</p>
-                <span class="pending-certificate-card__date">Solicitado: 11/08/2025 4:15 pm</span>
-            </div>
-            <div class="pending-certificate-card__type">
-                <span class="badge">Certificado de ingresos</span>
-            </div>
-            <div class="pending-certificate-card__actions">
-                <button class="button button--primary button--small">Generar</button>
-                <button class="button button--secondary button--small">Ver</button>
-            </div>
-            </article>
-        </div>
-        </div>
-
-        <!-- Historial completo de certificados generados (RNF-CR-02) -->
-        <div class="certificates-history">
-        <header class="certificates-history__header">
-            <h4 class="certificates-history__title">Historial de certificados generados</h4>
-            <div class="certificates-history__filters">
-            <input type="text" placeholder="Buscar por empleado...">
-            <select>
-                <option>Todos los tipos</option>
-            </select>
-            <button class="button button--secondary button--small">📥 Exportar</button>
-            </div>
-        </header>
-
-        <div class="table-responsive">
-            <table class="table table--certificates">
-            <thead class="table__head">
-                <tr>
-                <th>Fecha</th>
-                <th>Empleado</th>
-                <th>ID</th>
-                <th>Tipo</th>
-                <th>Propósito</th>
-                <th>Generado por</th>
-                <th>Descargas</th>
-                <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody class="table__body">
-                <tr>
-                <td>12/08/2025 10:30</td>
-                <td>Eddier Paz Pardo</td>
-                <td>EMP-2024-156</td>
-                <td>Laboral general</td>
-                <td>Crédito bancario</td>
-                <td>Admin</td>
-                <td>2</td>
-                <td>
-                    <button class="table__action" title="Ver">👁️</button>
-                    <button class="table__action" title="Descargar">⬇️</button>
-                </td>
-                </tr>
-                <tr>
-                <td>12/08/2025 09:15</td>
-                <td>Paula Herrera</td>
-                <td>EMP-2024-158</td>
-                <td>Ingresos</td>
-                <td>Declaración renta</td>
-                <td>Admin</td>
-                <td>1</td>
-                <td>
-                    <button class="table__action">👁️</button>
-                    <button class="table__action">⬇️</button>
-                </td>
-                </tr>
-                <tr>
-                <td>11/08/2025 16:45</td>
-                <td>Santiago Muñeton</td>
-                <td>EMP-2024-157</td>
-                <td>Funciones</td>
-                <td>Nuevo empleo</td>
-                <td>Admin</td>
-                <td>0</td>
-                <td>
-                    <button class="table__action">👁️</button>
-                    <button class="table__action">⬇️</button>
-                </td>
-                </tr>
-                <tr>
-                <td>10/08/2025 11:20</td>
-                <td>Camila Parra</td>
-                <td>EMP-2024-160</td>
-                <td>Laboral general</td>
-                <td>Arriendo</td>
-                <td>Admin</td>
-                <td>3</td>
-                <td>
-                    <button class="table__action">👁️</button>
-                    <button class="table__action">⬇️</button>
-                </td>
-                </tr>
-                <tr>
-                <td>05/08/2025 14:10</td>
-                <td>Eddier Paz Pardo</td>
-                <td>EMP-2024-156</td>
-                <td>Antigüedad</td>
-                <td>Personal</td>
-                <td>Admin</td>
-                <td>1</td>
-                <td>
-                    <button class="table__action">👁️</button>
-                    <button class="table__action">⬇️</button>
-                </td>
-                </tr>
-            </tbody>
-            </table>
-        </div>
-        
-        <div class="pagination">
-            <button class="pagination__btn pagination__btn--prev" disabled>← Anterior</button>
-            <span class="pagination__info">Página 1 de 4</span>
-            <button class="pagination__btn pagination__btn--next">Siguiente →</button>
-        </div>
-        </div>
-    </div>
-    </section>
-
-    <script src="../../../Scripts/script.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // ============================================================
+  // MÓDULO DE CERTIFICADOS - OPERPAN (ADMIN + EMPLEADO)
+  // Cumple RF-CR-01, RF-CR-02, RNF-CR-01 a RNF-CR-04, RN-CR-01 a RN-CR-03
+  // Persistencia localStorage, trazabilidad, simulación de PDF
+  // ============================================================
+  
+  const STORAGE_CERTIFICADOS = "operpan_certificados";
+  const STORAGE_AUDIT = "operpan_audit_certificados";
+  const STORAGE_USERS = "operpan_usuarios";
+  
+  let certificados = [];
+  let auditLog = [];
+  let empleados = [];
+  
+  const empleadoActual = {
+    id: "EMP-2024-156",
+    nombre: "Eddier Paz Pardo",
+    cargo: "Panadero Principal",
+    ingreso: "2022-03-15",
+    email: "eddier.paz@estacionpaisa.com"
+  };
+  
+  function inicializarDatos() {
+    const storedUsers = localStorage.getItem(STORAGE_USERS);
+    if (storedUsers) empleados = JSON.parse(storedUsers).filter(u => u.estado === "activo");
+    else empleados = [
+      { id: "EMP-2024-156", nombres: "Eddier", apellidos: "Paz Pardo", cargo: "Panadero Principal", email: "eddier.paz@estacionpaisa.com", fechaIngreso: "2022-03-15" },
+      { id: "EMP-2024-157", nombres: "Santiago", apellidos: "Muñeton", cargo: "Panadero", email: "santiago@estacionpaisa.com", fechaIngreso: "2023-01-10" }
+    ];
+    
+    const stored = localStorage.getItem(STORAGE_CERTIFICADOS);
+    if (!stored) {
+      certificados = [
+        { id: "cert1", empleadoId: "EMP-2024-156", empleadoNombre: "Eddier Paz Pardo", tipo: "laboral", proposito: "Crédito bancario", fecha: "2025-04-10T10:30:00", generadoPor: "Administrador", descargas: 2 }
+      ];
+      localStorage.setItem(STORAGE_CERTIFICADOS, JSON.stringify(certificados));
+    } else certificados = JSON.parse(stored);
+    
+    const storedAudit = localStorage.getItem(STORAGE_AUDIT);
+    auditLog = storedAudit ? JSON.parse(storedAudit) : [];
+  }
+  
+  function guardarDatos() {
+    localStorage.setItem(STORAGE_CERTIFICADOS, JSON.stringify(certificados));
+    localStorage.setItem(STORAGE_AUDIT, JSON.stringify(auditLog));
+  }
+  
+  function registrarAuditoria(accion, detalles, certificadoId, empleadoAfectado) {
+    const registro = {
+      fecha: new Date().toISOString(),
+      administrador: "Administrador",
+      accion,
+      detalles,
+      certificadoId,
+      empleadoAfectado,
+      timestamp: Date.now()
+    };
+    auditLog.unshift(registro);
+    if (auditLog.length > 200) auditLog.pop();
+    guardarDatos();
+    console.log("[AUDITORÍA CERTIFICADO]", registro);
+  }
+  
+  function mostrarMensaje(msg) {
+    const toast = document.getElementById("liveToast");
+    document.getElementById("toastMsg").innerText = msg;
+    toast.style.display = "block";
+    setTimeout(() => toast.style.display = "none", 3000);
+  }
+  
+  // Simular descarga de PDF (RNF-CR-04)
+  function descargarPDF(certificado) {
+    const contenido = `CERTIFICADO LABORAL\n\nEmpresa: Estación Paisa\nEmpleado: ${certificado.empleadoNombre}\nTipo: ${certificado.tipo}\nPropósito: ${certificado.proposito}\nFecha emisión: ${new Date(certificado.fecha).toLocaleString()}\n\nEste certificado es generado electrónicamente y tiene validez oficial.`;
+    const blob = new Blob([contenido], {type: "application/pdf"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `Certificado_${certificado.empleadoNombre.replace(/\s/g,"_")}.pdf`;
+    a.click();
+    URL.revokeObjectURL(url);
+    mostrarMensaje("PDF descargado exitosamente.");
+  }
+  
+  // Renderizar mis certificados (vista empleado)
+  function renderizarMisCertificados() {
+    const container = document.getElementById("misCertificadosContainer");
+    if (!container) return;
+    const misCertificados = certificados.filter(c => c.empleadoId === empleadoActual.id).sort((a,b) => new Date(b.fecha) - new Date(a.fecha));
+    if (misCertificados.length === 0) { container.innerHTML = '<div class="alert alert-light">No tienes certificados previos.</div>'; return; }
+    let html = "";
+    misCertificados.forEach(c => {
+      html += `<div class="incapacidad-card d-flex justify-content-between align-items-center"><div><strong>${c.tipo === "laboral" ? "Certificado laboral" : (c.tipo === "ingresos" ? "Certificado ingresos" : "Antigüedad")}</strong><br><small>${new Date(c.fecha).toLocaleDateString()} - ${c.proposito}</small></div><div><button class="btn btn-sm btn-outline-primary descargarCertificadoBtn" data-id="${c.id}"><i class="bi bi-download"></i> Descargar</button></div></div>`;
+    });
+    container.innerHTML = html;
+    document.querySelectorAll(".descargarCertificadoBtn").forEach(btn => btn.addEventListener("click", () => {
+      const cert = certificados.find(c => c.id === btn.dataset.id);
+      if (cert) descargarPDF(cert);
+    }));
+  }
+  
+  // Renderizar historial admin
+  function renderizarHistorialAdmin() {
+    const tbody = document.getElementById("historialCertificadosBody");
+    if (!tbody) return;
+    const todos = [...certificados].sort((a,b) => new Date(b.fecha) - new Date(a.fecha));
+    tbody.innerHTML = "";
+    todos.forEach(c => {
+      tbody.innerHTML += `<tr>
+        <td>${new Date(c.fecha).toLocaleString()}</td>
+        <td>${c.empleadoNombre}</td>
+        <td>${c.tipo}</td>
+        <td>${c.proposito}</td>
+        <td>${c.generadoPor}</td>
+        <td><button class="btn btn-sm btn-outline-primary descargarHistorialBtn" data-id="${c.id}"><i class="bi bi-download"></i> PDF</button></td>
+      </tr>`;
+    });
+    document.querySelectorAll(".descargarHistorialBtn").forEach(btn => btn.addEventListener("click", () => {
+      const cert = certificados.find(c => c.id === btn.dataset.id);
+      if (cert) descargarPDF(cert);
+    }));
+  }
+  
+  // Llenar select de empleados en admin
+  function cargarSelectEmpleados() {
+    const select = document.getElementById("empleadoSelect");
+    if (!select) return;
+    select.innerHTML = '<option value="">Seleccionar empleado</option>';
+    empleados.forEach(emp => {
+      select.innerHTML += `<option value="${emp.id}" data-nombre="${emp.nombres} ${emp.apellidos}">${emp.nombres} ${emp.apellidos} (${emp.cargo})</option>`;
+    });
+  }
+  
+  // Solicitud de certificado (empleado) -> registra en historial y notifica al admin (simulado)
+  document.getElementById("solicitudCertificadoForm")?.addEventListener("submit", function(e) {
+    e.preventDefault();
+    const tipo = document.getElementById("tipoCertificadoEmpleado").value;
+    const proposito = document.getElementById("propositoEmpleado").value.trim();
+    if (!proposito) { mostrarMensaje("Indique el propósito del certificado."); return; }
+    
+    // Simular solicitud: creamos un certificado pendiente? Pero según requerimiento, el admin genera. Aquí solo notificamos.
+    // Para cumplir HU-CR-01, registramos la solicitud en auditoría y mostramos mensaje.
+    const solicitud = {
+      empleadoId: empleadoActual.id,
+      empleadoNombre: empleadoActual.nombre,
+      tipo,
+      proposito,
+      fechaSolicitud: new Date().toISOString()
+    };
+    registrarAuditoria("SOLICITAR CERTIFICADO", `Solicitud de ${tipo} para ${proposito}`, "solicitud", empleadoActual.id);
+    mostrarMensaje("Solicitud enviada al administrador. Recibirás el certificado cuando sea generado.");
+    // Opcional: guardar en localStorage solicitudes pendientes, pero para simplificar, notificamos.
+    document.getElementById("solicitudCertificadoForm").reset();
+  });
+  
+  // Generar certificado (admin)
+  document.getElementById("generarCertificadoForm")?.addEventListener("submit", function(e) {
+    e.preventDefault();
+    const empleadoId = document.getElementById("empleadoSelect").value;
+    if (!empleadoId) { mostrarMensaje("Seleccione un empleado."); return; }
+    const empleado = empleados.find(e => e.id === empleadoId);
+    if (!empleado) return;
+    const tipo = document.getElementById("tipoCertificadoAdmin").value;
+    const proposito = document.getElementById("propositoAdmin").value.trim();
+    if (!proposito) { mostrarMensaje("Ingrese el propósito del certificado."); return; }
+    const observaciones = document.getElementById("observacionesAdmin").value;
+    
+    const nuevoCertificado = {
+      id: Date.now().toString(),
+      empleadoId: empleado.id,
+      empleadoNombre: `${empleado.nombres} ${empleado.apellidos}`,
+      tipo,
+      proposito,
+      observaciones,
+      fecha: new Date().toISOString(),
+      generadoPor: "Administrador",
+      descargas: 0
+    };
+    certificados.push(nuevoCertificado);
+    registrarAuditoria("GENERAR CERTIFICADO", `Certificado ${tipo} para ${empleado.nombres} ${empleado.apellidos}`, nuevoCertificado.id, empleado.id);
+    mostrarMensaje(`Certificado generado exitosamente. Se ha notificado al empleado.`);
+    guardarDatos();
+    renderizarHistorialAdmin();
+    renderizarMisCertificados(); // actualiza vista empleado si está activa
+    // Descargar automáticamente el PDF (RNF-CR-04)
+    descargarPDF(nuevoCertificado);
+    document.getElementById("generarCertificadoForm").reset();
+    document.getElementById("observacionesAdmin").value = "";
+  });
+  
+  // Cambio de vista
+  document.querySelectorAll(".view-tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+      document.querySelectorAll(".view-tab").forEach(t => t.classList.remove("active"));
+      tab.classList.add("active");
+      const view = tab.dataset.view;
+      document.getElementById("viewEmpleado").classList.toggle("active", view === "empleado");
+      document.getElementById("viewAdmin").classList.toggle("active", view === "admin");
+      if (view === "admin") renderizarHistorialAdmin();
+      else renderizarMisCertificados();
+    });
+  });
+  
+  document.getElementById("logoutBtn")?.addEventListener("click", () => {
+    mostrarMensaje("Cerrando sesión...");
+    setTimeout(() => window.location.href = "../../login.html", 800);
+  });
+  
+  const menuToggle = document.getElementById("menuToggle");
+  const sidebar = document.getElementById("sidebar");
+  if(menuToggle) menuToggle.addEventListener("click", () => sidebar.classList.toggle("active"));
+  
+  inicializarDatos();
+  cargarSelectEmpleados();
+  renderizarMisCertificados();
+  renderizarHistorialAdmin();
+</script>
 </body>
 </html>

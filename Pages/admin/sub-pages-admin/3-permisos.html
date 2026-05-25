@@ -1,548 +1,720 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OperPan | Permisos</title>
-    <link rel="stylesheet" href="../Assets/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>OperPan | Gestión de Permisos</title>
+  <!-- Bootstrap 5 + Icons + Google Fonts -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ==============================================
+       GLOBALES Y RESET (OperPan - Estación Paisa)
+    ============================================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #F4F7FC;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4, h5 {
+      font-weight: 700;
+      color: #000000;
+    }
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+    h3 { font-size: 1.5rem; }
+    p, span, a, li, input, button, label {
+      font-size: 1rem;
+    }
+    /* Layout principal (sidebar + contenido) */
+    .wrapper {
+      display: flex;
+      min-height: 100vh;
+    }
+    /* SIDEBAR NEGRA CORPORATIVA */
+    .sidebar {
+      width: 280px;
+      background-color: #000000;
+      color: #FFFFFF;
+      transition: all 0.3s;
+      position: fixed;
+      height: 100vh;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar-header {
+      padding: 1.8rem 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: #A40706;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.5rem;
+    }
+    .logo-text h4 {
+      color: white;
+      margin-bottom: 0;
+      font-size: 1.3rem;
+    }
+    .logo-text span {
+      font-size: 0.7rem;
+      color: #ccc;
+    }
+    .nav-menu {
+      flex: 1;
+      padding: 2rem 0;
+    }
+    .nav-menu ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .nav-menu li {
+      margin-bottom: 0.5rem;
+    }
+    .nav-menu a {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 0.8rem 1.8rem;
+      color: #E0E0E0;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s;
+      border-left: 3px solid transparent;
+    }
+    .nav-menu a i {
+      font-size: 1.3rem;
+      width: 28px;
+    }
+    .nav-menu a:hover {
+      background: rgba(164, 7, 6, 0.15);
+      color: white;
+      border-left-color: #A40706;
+    }
+    .nav-menu .active a {
+      background: rgba(164, 7, 6, 0.2);
+      color: white;
+      border-left-color: #A40706;
+      font-weight: 600;
+    }
+    /* CONTENIDO PRINCIPAL */
+    .main-content {
+      flex: 1;
+      margin-left: 280px;
+      transition: all 0.3s;
+    }
+    /* TOPBAR NEGRO */
+    .topbar {
+      background: #000000;
+      padding: 0.8rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      border-bottom: 1px solid #2C2C2C;
+    }
+    .company-info h2 {
+      color: white;
+      font-size: 1.3rem;
+      margin-bottom: 0;
+      font-weight: 600;
+    }
+    .company-info p {
+      color: #BBBBBB;
+      font-size: 0.75rem;
+      margin-bottom: 0;
+    }
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .user-badge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #1E1E1E;
+      padding: 0.4rem 1rem;
+      border-radius: 60px;
+    }
+    .user-badge i {
+      font-size: 1.5rem;
+      color: #A40706;
+    }
+    .user-badge span {
+      color: white;
+      font-weight: 500;
+    }
+    .btn-logout {
+      background: transparent;
+      border: 1px solid #A40706;
+      color: white;
+      padding: 0.4rem 1rem;
+      border-radius: 30px;
+      transition: 0.2s;
+    }
+    .btn-logout:hover {
+      background: #A40706;
+      color: white;
+    }
+    /* DASHBOARD */
+    .dashboard-container {
+      padding: 2rem;
+    }
+    /* Tarjetas */
+    .card-modern {
+      background: white;
+      border-radius: 24px;
+      border: none;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+    }
+    .card-header {
+      background: transparent;
+      border-bottom: 1px solid #EDF2F7;
+      padding: 1rem 1.5rem;
+      font-weight: 700;
+    }
+    /* Tabs de vista */
+    .view-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid #E9ECF3;
+      padding-bottom: 0.5rem;
+    }
+    .view-tab {
+      background: transparent;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      font-weight: 600;
+      border-radius: 40px;
+      transition: 0.2s;
+      color: #475569;
+    }
+    .view-tab i { margin-right: 8px; }
+    .view-tab.active {
+      background: #A40706;
+      color: white;
+    }
+    .view-pane {
+      display: none;
+      animation: fadeIn 0.2s ease;
+    }
+    .view-pane.active { display: block; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    /* Formularios */
+    .form-label {
+      font-weight: 600;
+      color: #1E293B;
+      margin-bottom: 0.5rem;
+    }
+    .form-control, .form-select {
+      border-radius: 16px;
+      border: 1.5px solid #E2E8F0;
+      padding: 0.7rem 1rem;
+      font-family: 'Poppins', sans-serif;
+    }
+    .form-control:focus, .form-select:focus {
+      border-color: #A40706;
+      box-shadow: 0 0 0 3px rgba(164,7,6,0.2);
+    }
+    .btn-primary-corporate {
+      background: #A40706;
+      border: none;
+      padding: 0.6rem 1.5rem;
+      border-radius: 40px;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+    .btn-primary-corporate:hover {
+      background: #8a0504;
+      transform: translateY(-2px);
+    }
+    .btn-outline-corporate {
+      border: 1.5px solid #A40706;
+      background: transparent;
+      color: #A40706;
+      padding: 0.6rem 1.5rem;
+      border-radius: 40px;
+      font-weight: 600;
+    }
+    /* Tarjetas de solicitud (empleado) */
+    .request-card {
+      background: white;
+      border-radius: 20px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border: 1px solid #EDF2F7;
+      transition: 0.2s;
+    }
+    .badge-pending { background: #FFF3E0; color: #C77A00; }
+    .badge-approved { background: #E0F2E9; color: #1E7B48; }
+    .badge-rejected { background: #FEF2F0; color: #B91C1C; }
+    /* Tarjetas admin */
+    .admin-request-card {
+      background: white;
+      border-radius: 20px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+      border: 1px solid #EDF2F7;
+    }
+    /* Tablas */
+    .table-custom {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .table-custom thead {
+      background: #F8F9FC;
+    }
+    /* KPIs resumen */
+    .kpi-card {
+      background: white;
+      border-radius: 20px;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    }
+    /* Toast */
+    .toast-message {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1100;
+    }
+    /* Responsive */
+    @media (max-width: 992px) {
+      .sidebar { margin-left: -280px; }
+      .sidebar.active { margin-left: 0; }
+      .main-content { margin-left: 0; }
+      .menu-toggle { display: block; background: black; color: white; border: none; padding: 0.5rem 1rem; margin-right: 1rem; border-radius: 12px; }
+    }
+    @media (min-width: 993px) { .menu-toggle { display: none; } }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      color: #5F6C7A;
+      font-size: 0.75rem;
+      margin-top: 2rem;
+    }
+  </style>
 </head>
 <body>
-    
-    <!-- HEADER PRINCIPAL -->
-    <header class="admin__header">
-        <h1 class="admin__title">Estación Paisa</h1>
-
-        <label for="_nav">navegar</label>
-        <div class="nav-container">
-            <span class="nav-label">Vista</span>
-            <div class="nav-select-wrapper">
-                <select name="_nav" id="_nav" onchange="navegar()">
-                    <option value="/OperPan/Pages/admin/landingAdmin.html">Gerente / Admin</option>
-                    <option value="/OperPan/Pages/Empleado/landingEmpleado.html">Empleado</option>
-                </select>
-                <span class="nav-chevron">▼</span>
-            </div>
-            <button class="button button--secondary" onclick="cerrarSesion()">
-                Cerrar sesión
-            </button>
-        </div>
-    </header>
-
-    <!-- NAVEGACIÓN PRINCIPAL -->
-    <nav class="admin__nav">
-        <ul class="admin__menu">
-            <li><a class="nav__btn" href="../landingAdmin.html#horarios">Horarios</a></li>
-            <li><a class="nav__btn" href="#">Cuentas</a></li>
-            <li><a class="nav__btn" href="./2-tareas.html">Tareas</a></li>
-            <li><a class="nav__btn nav__btn--active" href="./3-permisos.html">Permisos</a></li>
-            <li><a class="nav__btn" href="./4-reportes.html">Reportes</a></li>
-            <li><a class="nav__btn" href="./5-incapacidad.html">Incapacidad</a></li>
-            <li><a class="nav__btn" href="./6-certificados.html">Certificados</a></li>
-        </ul>
+<div class="wrapper">
+  <!-- SIDEBAR NEGRA -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-area">
+        <div class="logo-icon">OP</div>
+        <div class="logo-text"><h4>OperPan</h4><span>Estación Paisa</span></div>
+      </div>
+    </div>
+    <nav class="nav-menu">
+      <ul>
+        <li><a href="../landingAdmin.html"><i class="bi bi-grid-3x3-gap-fill"></i> Inicio</a></li>
+        <li><a href="./7-horarios.html"><i class="bi bi-calendar3-week"></i> Horarios</a></li>
+        <li><a href="./1-cuentas.html"><i class="bi bi-people"></i> Cuentas</a></li>
+        <li><a href="./2-tareas.html"><i class="bi bi-list-task"></i> Tareas</a></li>
+        <li class="active"><a href="./3-permisos.html"><i class="bi bi-file-earmark-text"></i> Permisos</a></li>
+        <li><a href="./4-reportes.html"><i class="bi bi-bar-chart"></i> Reportes</a></li>
+        <li><a href="./5-incapacidad.html"><i class="bi bi-clipboard2-pulse"></i> Incapacidad</a></li>
+        <li><a href="./6-certificados.html"><i class="bi bi-award"></i> Certificados</a></li>
+      </ul>
     </nav>
+    <div class="p-3 border-top border-secondary"><small class="text-white-50"><i class="bi bi-shield-lock"></i> v2.0 · Administrador</small></div>
+  </aside>
 
-    <!-- SECCIÓN PERMISOS -->
-    <section id="permisos" class="admin__section">
-    <header class="section__header">
-        <h2 class="section__title">Gestión de Permisos</h2>
-        <p class="section__description">Administra solicitudes de permisos, cambios de turno y ausencias del personal</p>
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="main-content">
+    <header class="topbar">
+      <div class="d-flex align-items-center gap-3">
+        <button class="menu-toggle btn btn-dark" id="menuToggle"><i class="bi bi-list"></i></button>
+        <div class="company-info"><h2>Gestión de Permisos</h2><p>Solicitudes, aprobaciones y cambios de turno</p></div>
+      </div>
+      <div class="user-info">
+        <div class="user-badge"><i class="bi bi-shield-fill-check"></i><span>Administrador</span></div>
+        <button class="btn-logout" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> Salir</button>
+      </div>
     </header>
 
-    <!-- Vista toggle: Empleado vs Administrador (según el rol) -->
-    <div class="permission-tabs" role="tablist">
-        <button class="permission-tabs__tab permission-tabs__tab--active" role="tab" data-view="employee" aria-selected="true">
-        👤 Vista Empleado
-        </button>
-        <button class="permission-tabs__tab" role="tab" data-view="admin" aria-selected="false">
-        👑 Vista Administrador
-        </button>
-    </div>
+    <main class="dashboard-container">
+      <!-- KPIs resumen -->
+      <div class="row g-3 mb-4">
+        <div class="col-md-3"><div class="kpi-card"><span class="text-muted">Pendientes</span><h3 id="kpiPendientes">0</h3></div></div>
+        <div class="col-md-3"><div class="kpi-card"><span class="text-muted">Aprobados hoy</span><h3 id="kpiAprobados">0</h3></div></div>
+        <div class="col-md-3"><div class="kpi-card"><span class="text-muted">Rechazados hoy</span><h3 id="kpiRechazados">0</h3></div></div>
+        <div class="col-md-3"><div class="kpi-card"><span class="text-muted">Total mes</span><h3 id="kpiTotalMes">0</h3></div></div>
+      </div>
 
-    <!-- VISTA EMPLEADO (lo que ve el empleado) -->
-    <div class="permission-view permission-view--employee" data-view="employee-content">
-        <!-- Información del empleado actual (basado en el mockup) -->
-        <div class="employee-context">
-        <div class="employee-context__card">
-            <div class="employee-context__avatar">EP</div>
-            <div class="employee-context__info">
-            <h3 class="employee-context__name">Eddier Paz Pardo</h3>
-            <div class="employee-context__meta">
-                <span class="employee-context__badge">ID: EMP-2024-156</span>
-                <span class="employee-context__badge">Panadero Principal</span>
-                <span class="employee-context__badge">Turno: Mañana (6am - 2pm)</span>
-            </div>
-            </div>
-        </div>
-        </div>
+      <!-- Tabs de vista (Empleado / Administrador) -->
+      <div class="view-tabs">
+        <button class="view-tab active" data-view="empleado"><i class="bi bi-person-badge"></i> Vista Empleado</button>
+        <button class="view-tab" data-view="admin"><i class="bi bi-shield-lock"></i> Vista Administrador</button>
+      </div>
 
-        <!-- Formulario de solicitud de permiso (HU-PR-01) -->
-        <form class="permission-form">
-        <h3 class="permission-form__title">Solicitar nuevo permiso</h3>
-        
-        <div class="form__grid">
-            <!-- Tipo de permiso -->
-            <div class="form__field form__field--full">
-            <label for="tipo-permiso" class="form__label">
-                Tipo de permiso <span class="form__required">*</span>
-            </label>
-            <select id="tipo-permiso" class="form__select" required>
-                <option value="" disabled selected>Seleccionar tipo</option>
-                <option value="personal">📋 Permiso personal</option>
-                <option value="cambio-turno">🔄 Cambio de turno</option>
-                <option value="medico">⚕️ Cita médica</option>
-                <option value="familiar">👪 Asunto familiar</option>
-                <option value="estudio">📚 Estudio / Capacitación</option>
-                <option value="calamidad">⚠️ Calamidad doméstica</option>
-                <option value="vacaciones">🏖️ Vacaciones</option>
-            </select>
+      <!-- VISTA EMPLEADO (simula empleado logueado) -->
+      <div id="viewEmpleado" class="view-pane active">
+        <div class="card-modern">
+          <div class="card-header"><h3 class="mb-0"><i class="bi bi-person-circle me-2"></i> Mis datos</h3></div>
+          <div class="p-3">
+            <div class="d-flex align-items-center gap-3">
+              <div class="bg-light rounded-circle d-flex align-items-center justify-content-center" style="width: 70px; height: 70px;"><i class="bi bi-person fs-1 text-muted"></i></div>
+              <div><h4 id="empleadoNombre">Eddier Paz Pardo</h4><div class="d-flex gap-2 flex-wrap"><span class="badge bg-secondary">ID: EMP-2024-156</span><span class="badge bg-dark">Panadero Principal</span><span class="badge bg-dark">Turno: Mañana (6am-2pm)</span></div></div>
             </div>
-
-            <!-- Fecha del permiso (inicio y fin) -->
-            <div class="form__row">
-            <div class="form__group form__group--half">
-                <label for="fecha-inicio-permiso" class="form__label">
-                Fecha inicio <span class="form__required">*</span>
-                </label>
-                <input type="date" 
-                    id="fecha-inicio-permiso" 
-                    class="form__input" 
-                    min="2025-08-12"
-                    required>
-            </div>
-            
-            <div class="form__group form__group--half">
-                <label for="fecha-fin-permiso" class="form__label">
-                Fecha fin <span class="form__required">*</span>
-                </label>
-                <input type="date" 
-                    id="fecha-fin-permiso" 
-                    class="form__input" 
-                    min="2025-08-12"
-                    required>
-            </div>
-            </div>
-
-            <!-- Hora (especial para cambio de turno) -->
-            <div class="form__row form__row--toggle" id="hora-cambio-container">
-            <div class="form__group form__group--half">
-                <label for="hora-nueva" class="form__label">
-                Nueva hora de entrada (si aplica)
-                </label>
-                <input type="time" id="hora-nueva" class="form__input">
-            </div>
-            
-            <div class="form__group form__group--half">
-                <label for="hora-salida" class="form__label">
-                Nueva hora de salida (si aplica)
-                </label>
-                <input type="time" id="hora-salida" class="form__input">
-            </div>
-            </div>
-
-            <!-- Justificación -->
-            <div class="form__field form__field--full">
-            <label for="justificacion" class="form__label">
-                Justificación <span class="form__required">*</span>
-            </label>
-            <textarea id="justificacion" 
-                        class="form__textarea" 
-                        rows="4"
-                        placeholder="Explica el motivo de tu solicitud de permiso..."
-                        required></textarea>
-            <small class="form__hint">Máximo 500 caracteres</small>
-            </div>
-
-            <!-- Adjuntar soporte (opcional) -->
-            <div class="form__field form__field--full">
-            <label for="soporte" class="form__label">
-                Adjuntar soporte (opcional)
-            </label>
-            <input type="file" id="soporte" class="form__file" accept=".pdf,.jpg,.jpeg,.png">
-            <small class="form__hint">Formatos: PDF, JPG, PNG. Máx 5MB</small>
-            </div>
-
-            <!-- Checkbox términos -->
-            <div class="form__row form__row--checkbox">
-            <label class="checkbox checkbox--primary">
-                <input type="checkbox" id="acepto-terminos" class="checkbox__input" required>
-                <span class="checkbox__label">
-                Confirmo que la información proporcionada es verídica
-                </span>
-            </label>
-            </div>
-
-            <!-- Botones -->
-            <div class="form__actions">
-            <button type="submit" class="button button--primary">
-                Enviar solicitud
-            </button>
-            <button type="reset" class="button button--secondary">
-                Cancelar
-            </button>
-            </div>
-        </div>
-        </form>
-
-        <!-- Mis solicitudes recientes (HU-PR-02) -->
-        <div class="my-requests">
-        <header class="my-requests__header">
-            <h3 class="my-requests__title">Mis solicitudes recientes</h3>
-            <a href="#" class="link link--primary">Ver historial completo →</a>
-        </header>
-
-        <div class="requests-list">
-            <!-- Solicitud 1 - Pendiente -->
-            <article class="request-card">
-            <div class="request-card__header">
-                <span class="request-card__badge request-card__badge--pending">Pendiente</span>
-                <span class="request-card__date">12/08/2025</span>
-            </div>
-            <div class="request-card__body">
-                <h4 class="request-card__title">Permiso personal</h4>
-                <p class="request-card__description">Trámite bancario - Media jornada</p>
-                <div class="request-card__meta">
-                <span>📅 15/08/2025</span>
-                <span>⏰ 8:00 am - 12:00 pm</span>
-                </div>
-            </div>
-            </article>
-
-            <!-- Solicitud 2 - Aprobada -->
-            <article class="request-card">
-            <div class="request-card__header">
-                <span class="request-card__badge request-card__badge--approved">Aprobado</span>
-                <span class="request-card__date">10/08/2025</span>
-            </div>
-            <div class="request-card__body">
-                <h4 class="request-card__title">Cambio de turno</h4>
-                <p class="request-card__description">Intercambio con Santiago Muñeton</p>
-                <div class="request-card__meta">
-                <span>📅 13/08/2025</span>
-                <span>⏰ Turno tarde (2pm - 10pm)</span>
-                </div>
-            </div>
-            <div class="request-card__footer">
-                <span class="request-card__approved-by">Aprobado por: Admin</span>
-            </div>
-            </article>
-
-            <!-- Solicitud 3 - Rechazada -->
-            <article class="request-card">
-            <div class="request-card__header">
-                <span class="request-card__badge request-card__badge--rejected">Rechazado</span>
-                <span class="request-card__date">05/08/2025</span>
-            </div>
-            <div class="request-card__body">
-                <h4 class="request-card__title">Vacaciones</h4>
-                <p class="request-card__description">Semana de vacaciones - Sin cobertura</p>
-                <div class="request-card__meta">
-                <span>📅 20-27/08/2025</span>
-                </div>
-            </div>
-            <div class="request-card__footer">
-                <span class="request-card__reject-reason">Motivo: Sin personal suficiente esa semana</span>
-            </div>
-            </article>
-        </div>
-        </div>
-    </div>
-
-    <!-- VISTA ADMINISTRADOR (lo que ve el admin) - HU-PR-03 -->
-    <div class="permission-view permission-view--admin hidden" data-view="admin-content">
-        <div class="admin-permission-header">
-        <h3 class="admin-permission-header__title">Solicitudes pendientes de revisión</h3>
-        
-        <!-- Filtros para administrador -->
-        <div class="admin-filters">
-            <select class="admin-filters__select">
-            <option value="todos">Todos los tipos</option>
-            <option value="personal">Permiso personal</option>
-            <option value="cambio-turno">Cambio de turno</option>
-            <option value="medico">Cita médica</option>
-            <option value="vacaciones">Vacaciones</option>
-            </select>
-            
-            <select class="admin-filters__select">
-            <option value="pendiente">Pendientes</option>
-            <option value="aprobado">Aprobados</option>
-            <option value="rechazado">Rechazados</option>
-            <option value="todos">Todos los estados</option>
-            </select>
-            
-            <input type="text" class="admin-filters__search" placeholder="Buscar empleado...">
-        </div>
+          </div>
         </div>
 
-        <!-- Lista de solicitudes para admin (con acciones aprobar/rechazar) -->
-        <div class="admin-requests-list">
-        <!-- Solicitud 1 - Pendiente -->
-        <article class="admin-request-card">
-            <div class="admin-request-card__employee">
-            <div class="admin-request-card__avatar">SM</div>
-            <div class="admin-request-card__info">
-                <h4 class="admin-request-card__name">Santiago Muñeton</h4>
-                <span class="admin-request-card__role">Panadero</span>
-                <span class="admin-request-card__id">ID: EMP-2024-157</span>
-            </div>
-            </div>
-
-            <div class="admin-request-card__details">
-            <span class="admin-request-card__type">🔴 Permiso personal</span>
-            <span class="admin-request-card__date-solicitud">Solicitado: 12/08/2025 10:30 am</span>
-            
-            <div class="admin-request-card__period">
-                <span>📅 14/08/2025</span>
-                <span>⏰ 8:00 am - 12:00 pm</span>
-            </div>
-            
-            <p class="admin-request-card__justification">
-                <strong>Justificación:</strong> Cita médica especialista
-            </p>
-            
-            <div class="admin-request-card__soporte">
-                <span class="badge badge--info">📎 Soporte adjunto</span>
-            </div>
-            </div>
-
-            <div class="admin-request-card__actions">
-            <button class="button button--success button--small" data-action="aprobar" data-id="1">
-                ✓ Aprobar
-            </button>
-            <button class="button button--danger button--small" data-action="negar" data-id="1">
-                ✗ Negar
-            </button>
-            <button class="button button--secondary button--small" data-action="ver-detalle">
-                👁️ Ver
-            </button>
-            </div>
-        </article>
-
-        <!-- Solicitud 2 - Cambio de turno (basado en mockup) -->
-        <article class="admin-request-card admin-request-card--priority">
-            <div class="admin-request-card__employee">
-            <div class="admin-request-card__avatar">EP</div>
-            <div class="admin-request-card__info">
-                <h4 class="admin-request-card__name">Eddier Paz Pardo</h4>
-                <span class="admin-request-card__role">Panadero Principal</span>
-                <span class="admin-request-card__id">ID: EMP-2024-156</span>
-            </div>
-            </div>
-
-            <div class="admin-request-card__details">
-            <span class="admin-request-card__type admin-request-card__type--cambio">🔄 Cambio de turno</span>
-            <span class="admin-request-card__date-solicitud">Solicitado: 12/08/2025 9:15 am</span>
-            
-            <div class="admin-request-card__change-details">
-                <div class="admin-request-card__old-shift">
-                <span class="label">Turno actual:</span>
-                <span>Mañana (6am - 2pm)</span>
-                </div>
-                <div class="admin-request-card__new-shift">
-                <span class="label">Turno solicitado:</span>
-                <span>Tarde (2pm - 10pm)</span>
-                </div>
-                <span class="admin-request-card__date-shift">📅 15/08/2025</span>
-            </div>
-            
-            <p class="admin-request-card__justification">
-                <strong>Justificación:</strong> Necesito atender un asunto familiar en la mañana
-            </p>
-            </div>
-
-            <div class="admin-request-card__actions">
-            <button class="button button--success button--small" data-action="aprobar" data-id="2">
-                ✓ Aprobar
-            </button>
-            <button class="button button--danger button--small" data-action="negar" data-id="2">
-                ✗ Negar
-            </button>
-            <button class="button button--secondary button--small" data-action="ver-detalle">
-                👁️ Ver
-            </button>
-            </div>
-        </article>
-
-        <!-- Solicitud 3 - Permiso médico -->
-        <article class="admin-request-card">
-            <div class="admin-request-card__employee">
-            <div class="admin-request-card__avatar">PH</div>
-            <div class="admin-request-card__info">
-                <h4 class="admin-request-card__name">Paula Herrera</h4>
-                <span class="admin-request-card__role">Servicio al Cliente</span>
-                <span class="admin-request-card__id">ID: EMP-2024-158</span>
-            </div>
-            </div>
-
-            <div class="admin-request-card__details">
-            <span class="admin-request-card__type">⚕️ Cita médica</span>
-            <span class="admin-request-card__date-solicitud">Solicitado: 11/08/2025 2:45 pm</span>
-            
-            <div class="admin-request-card__period">
-                <span>📅 16/08/2025</span>
-                <span>⏰ Todo el día</span>
-            </div>
-            
-            <p class="admin-request-card__justification">
-                <strong>Justificación:</strong> Cirugía programada - Adjunto incapacidad médica
-            </p>
-            
-            <div class="admin-request-card__soporte">
-                <span class="badge badge--info">📎 Incapacidad médica.pdf</span>
-            </div>
-            </div>
-
-            <div class="admin-request-card__actions">
-            <button class="button button--success button--small" data-action="aprobar" data-id="3">
-                ✓ Aprobar
-            </button>
-            <button class="button button--danger button--small" data-action="negar" data-id="3">
-                ✗ Negar
-            </button>
-            <button class="button button--secondary button--small" data-action="ver-detalle">
-                👁️ Ver
-            </button>
-            </div>
-        </article>
-        </div>
-
-        <!-- Modal para negar con justificación (RNF-PR-01, RN-PR-03) -->
-        <dialog class="modal modal--reject" id="reject-modal">
-        <div class="modal__content">
-            <h3 class="modal__title">Negar solicitud de permiso</h3>
-            
-            <form class="modal__form">
-            <div class="form__field">
-                <label for="reject-justification" class="form__label">
-                Motivo del rechazo <span class="form__required">*</span>
-                </label>
-                <textarea id="reject-justification" 
-                        class="form__textarea" 
-                        rows="4"
-                        placeholder="Explica al empleado por qué se niega su solicitud..."
-                        required></textarea>
-                <small class="form__hint">Este motivo será notificado al empleado</small>
-            </div>
-            
-            <div class="modal__actions">
-                <button type="submit" class="button button--danger">
-                Confirmar negación
-                </button>
-                <button type="button" class="button button--secondary" onclick="this.closest('dialog').close()">
-                Cancelar
-                </button>
-            </div>
+        <!-- Formulario de solicitud -->
+        <div class="card-modern">
+          <div class="card-header"><h3 class="mb-0"><i class="bi bi-plus-circle"></i> Solicitar nuevo permiso</h3></div>
+          <div class="p-4">
+            <form id="solicitudForm">
+              <div class="row g-3">
+                <div class="col-md-6"><label class="form-label">Tipo de permiso *</label><select class="form-select" id="tipoPermiso" required><option value="">Seleccionar</option><option value="personal">Permiso personal</option><option value="cambio_turno">Cambio de turno</option><option value="medico">Cita médica</option><option value="familiar">Asunto familiar</option><option value="vacaciones">Vacaciones</option></select></div>
+                <div class="col-md-3"><label class="form-label">Fecha inicio *</label><input type="date" class="form-control" id="fechaInicio" required></div>
+                <div class="col-md-3"><label class="form-label">Fecha fin *</label><input type="date" class="form-control" id="fechaFin" required></div>
+                <div class="col-md-6 d-none" id="horarioCambioGroup"><label class="form-label">Nuevo horario (cambio turno)</label><input type="text" class="form-control" id="nuevoHorario" placeholder="Ej: Tarde (2pm-10pm)"></div>
+                <div class="col-12"><label class="form-label">Justificación *</label><textarea class="form-control" id="justificacion" rows="2" required placeholder="Explique el motivo..."></textarea></div>
+                <div class="col-12"><label class="form-label">Adjuntar soporte (opcional)</label><input type="file" class="form-control" id="soporte" accept=".pdf,.jpg,.png"></div>
+                <div class="col-12"><button type="submit" class="btn btn-primary-corporate"><i class="bi bi-send"></i> Enviar solicitud</button></div>
+              </div>
             </form>
+          </div>
         </div>
-        </dialog>
 
-        <!-- Historial completo de permisos (RF-PR-07, RNF-PR-03) -->
-        <div class="permission-history">
-        <header class="permission-history__header">
-            <h3 class="permission-history__title">Historial completo de permisos</h3>
-            <button class="button button--secondary button--small">
-            📥 Exportar reporte
-            </button>
-        </header>
+        <!-- Mis solicitudes recientes -->
+        <div class="card-modern">
+          <div class="card-header"><h3 class="mb-0"><i class="bi bi-clock-history"></i> Mis solicitudes</h3></div>
+          <div class="p-3" id="misSolicitudesContainer"></div>
+        </div>
+      </div>
 
-        <div class="table-responsive">
-            <table class="table table--permissions">
-            <thead class="table__head">
-                <tr>
-                <th>Fecha solicitud</th>
-                <th>Empleado</th>
-                <th>Tipo</th>
-                <th>Fecha permiso</th>
-                <th>Estado</th>
-                <th>Aprobado por</th>
-                <th>Fecha decisión</th>
-                <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody class="table__body">
-                <tr>
-                <td>12/08/2025 9:15</td>
-                <td>Eddier Paz Pardo</td>
-                <td>Cambio turno</td>
-                <td>15/08/2025</td>
-                <td><span class="badge badge--warning">Pendiente</span></td>
-                <td>—</td>
-                <td>—</td>
-                <td><button class="table__action">👁️</button></td>
-                </tr>
-                <tr>
-                <td>11/08/2025 14:45</td>
-                <td>Paula Herrera</td>
-                <td>Cita médica</td>
-                <td>16/08/2025</td>
-                <td><span class="badge badge--warning">Pendiente</span></td>
-                <td>—</td>
-                <td>—</td>
-                <td><button class="table__action">👁️</button></td>
-                </tr>
-                <tr>
-                <td>10/08/2025 8:30</td>
-                <td>Santiago Muñeton</td>
-                <td>Permiso personal</td>
-                <td>14/08/2025</td>
-                <td><span class="badge badge--success">Aprobado</span></td>
-                <td>Admin</td>
-                <td>11/08/2025</td>
-                <td><button class="table__action">👁️</button></td>
-                </tr>
-                <tr>
-                <td>05/08/2025 11:20</td>
-                <td>Eddier Paz Pardo</td>
-                <td>Vacaciones</td>
-                <td>20-27/08/2025</td>
-                <td><span class="badge badge--danger">Rechazado</span></td>
-                <td>Admin</td>
-                <td>06/08/2025</td>
-                <td><button class="table__action">👁️</button></td>
-                </tr>
-                <tr>
-                <td>04/08/2025 16:10</td>
-                <td>Camila Parra</td>
-                <td>Calamidad</td>
-                <td>05-07/08/2025</td>
-                <td><span class="badge badge--success">Aprobado</span></td>
-                <td>Admin</td>
-                <td>04/08/2025</td>
-                <td><button class="table__action">👁️</button></td>
-                </tr>
-            </tbody>
-            </table>
+      <!-- VISTA ADMINISTRADOR -->
+      <div id="viewAdmin" class="view-pane">
+        <div class="card-modern">
+          <div class="card-header"><h3 class="mb-0"><i class="bi bi-inbox"></i> Solicitudes pendientes</h3></div>
+          <div class="p-3" id="solicitudesPendientesContainer"></div>
         </div>
-        
-        <div class="pagination">
-            <button class="pagination__btn pagination__btn--prev" disabled>← Anterior</button>
-            <span class="pagination__info">Página 1 de 3</span>
-            <button class="pagination__btn pagination__btn--next">Siguiente →</button>
+        <div class="card-modern">
+          <div class="card-header"><h3 class="mb-0"><i class="bi bi-table"></i> Historial completo de permisos</h3></div>
+          <div class="p-3">
+            <div class="table-responsive">
+              <table class="table table-custom" id="historialPermisosTable">
+                <thead><tr><th>Fecha solicitud</th><th>Empleado</th><th>Tipo</th><th>Fechas</th><th>Estado</th><th>Aprobado por</th><th>Acciones</th></tr></thead>
+                <tbody id="historialBody"></tbody>
+              </table>
+            </div>
+          </div>
         </div>
-        </div>
-    </div>
+      </div>
+      <footer><i class="bi bi-shield-check"></i> Trazabilidad completa - Cada acción queda registrada</footer>
+    </main>
+  </div>
+</div>
 
-    <!-- Resumen de permisos (dashboard) -->
-    <div class="permission-summary">
-        <div class="permission-summary__card permission-summary__card--pending">
-        <span class="permission-summary__label">Pendientes</span>
-        <span class="permission-summary__value">4</span>
-        </div>
-        <div class="permission-summary__card permission-summary__card--approved">
-        <span class="permission-summary__label">Aprobados hoy</span>
-        <span class="permission-summary__value">3</span>
-        </div>
-        <div class="permission-summary__card permission-summary__card--rejected">
-        <span class="permission-summary__label">Rechazados hoy</span>
-        <span class="permission-summary__value">1</span>
-        </div>
-        <div class="permission-summary__card permission-summary__card--total">
-        <span class="permission-summary__label">Total mes</span>
-        <span class="permission-summary__value">18</span>
-        </div>
-    </div>
-    </section>
+<!-- Modal para negar con justificación -->
+<div class="modal fade" id="rejectModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Negar solicitud</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><label class="form-label">Motivo del rechazo *</label><textarea class="form-control" id="rejectReason" rows="3" required placeholder="Explique al empleado por qué se niega..."></textarea></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button><button type="button" class="btn btn-danger" id="confirmRejectBtn">Confirmar negación</button></div></div></div></div>
 
-    <script src="../../../Scripts/script.js"></script>
+<!-- Toast -->
+<div class="toast-message" id="liveToast" style="display:none;"><div class="bg-white rounded-3 shadow p-3 border-start border-4 border-danger"><div class="d-flex gap-2"><i class="bi bi-info-circle-fill text-danger fs-5"></i><span id="toastMsg"></span></div></div></div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // ============================================================
+  // MÓDULO DE PERMISOS - OPERPAN (ADMIN + EMPLEADO)
+  // Cumple RF-PR-01 a RF-PR-07, RNF-PR-01 a RNF-PR-04, RN-PR-01 a RN-PR-04
+  // Persistencia localStorage, trazabilidad, notificaciones
+  // ============================================================
+  
+  const STORAGE_PERMISOS = "operpan_permisos";
+  const STORAGE_AUDIT = "operpan_audit_permisos";
+  const STORAGE_USERS = "operpan_usuarios";
+  
+  let permisos = [];
+  let auditLog = [];
+  let empleados = [];
+  let pendingRejectId = null;
+  
+  // Empleado actual (simulado, en producción vendría del login)
+  const empleadoActual = {
+    id: "EMP-2024-156",
+    nombre: "Eddier Paz Pardo",
+    rol: "empleado"
+  };
+  
+  function inicializarDatos() {
+    // Cargar empleados desde módulo cuentas
+    const storedUsers = localStorage.getItem(STORAGE_USERS);
+    if (storedUsers) empleados = JSON.parse(storedUsers);
+    else empleados = [{ id: "EMP-2024-156", nombres: "Eddier", apellidos: "Paz Pardo", cargo: "Panadero Principal", estado: "activo" },
+                      { id: "EMP-2024-155", nombres: "María", apellidos: "González", cargo: "Repostera", estado: "activo" },
+                      { id: "EMP-2024-157", nombres: "Santiago", apellidos: "Muñeton", cargo: "Panadero", estado: "activo" }];
+    
+    const storedPermisos = localStorage.getItem(STORAGE_PERMISOS);
+    if (!storedPermisos) {
+      permisos = [
+        { id: "p1", empleadoId: "EMP-2024-156", tipo: "cambio_turno", fechaInicio: "2025-04-15", fechaFin: "2025-04-15", justificacion: "Necesito atender asunto familiar", nuevoHorario: "Tarde (2pm-10pm)", estado: "pendiente", fechaSolicitud: "2025-04-14T09:15:00", adjunto: "", decisionFecha: null, decisionPor: null, motivoRechazo: null },
+        { id: "p2", empleadoId: "EMP-2024-157", tipo: "personal", fechaInicio: "2025-04-16", fechaFin: "2025-04-16", justificacion: "Cita médica especialista", nuevoHorario: "", estado: "pendiente", fechaSolicitud: "2025-04-13T10:30:00", adjunto: "", decisionFecha: null, decisionPor: null, motivoRechazo: null },
+        { id: "p3", empleadoId: "EMP-2024-155", tipo: "vacaciones", fechaInicio: "2025-05-01", fechaFin: "2025-05-07", justificacion: "Descanso anual", nuevoHorario: "", estado: "aprobado", fechaSolicitud: "2025-04-10T08:00:00", decisionFecha: "2025-04-11T14:00:00", decisionPor: "Administrador", motivoRechazo: null }
+      ];
+      localStorage.setItem(STORAGE_PERMISOS, JSON.stringify(permisos));
+    } else permisos = JSON.parse(storedPermisos);
+    
+    const storedAudit = localStorage.getItem(STORAGE_AUDIT);
+    auditLog = storedAudit ? JSON.parse(storedAudit) : [];
+  }
+  
+  function guardarDatos() {
+    localStorage.setItem(STORAGE_PERMISOS, JSON.stringify(permisos));
+    localStorage.setItem(STORAGE_AUDIT, JSON.stringify(auditLog));
+  }
+  
+  function registrarAuditoria(accion, detalles, permisoId, empleadoAfectado) {
+    const registro = {
+      fecha: new Date().toISOString(),
+      administrador: "Administrador",
+      accion,
+      detalles,
+      permisoId,
+      empleadoAfectado,
+      timestamp: Date.now()
+    };
+    auditLog.unshift(registro);
+    if (auditLog.length > 200) auditLog.pop();
+    guardarDatos();
+    console.log("[AUDITORÍA PERMISOS]", registro);
+  }
+  
+  function mostrarMensaje(msg, tipo = "success") {
+    const toast = document.getElementById("liveToast");
+    const span = document.getElementById("toastMsg");
+    span.innerText = msg;
+    toast.style.display = "block";
+    setTimeout(() => toast.style.display = "none", 3000);
+  }
+  
+  function actualizarKPIs() {
+    const hoy = new Date().toISOString().split('T')[0];
+    const pendientes = permisos.filter(p => p.estado === "pendiente").length;
+    const aprobadosHoy = permisos.filter(p => p.estado === "aprobado" && p.decisionFecha?.split('T')[0] === hoy).length;
+    const rechazadosHoy = permisos.filter(p => p.estado === "rechazado" && p.decisionFecha?.split('T')[0] === hoy).length;
+    const mesActual = new Date().getMonth();
+    const totalMes = permisos.filter(p => new Date(p.fechaSolicitud).getMonth() === mesActual).length;
+    document.getElementById("kpiPendientes").innerText = pendientes;
+    document.getElementById("kpiAprobados").innerText = aprobadosHoy;
+    document.getElementById("kpiRechazados").innerText = rechazadosHoy;
+    document.getElementById("kpiTotalMes").innerText = totalMes;
+  }
+  
+  // Renderizar vista empleado (mis solicitudes)
+  function renderizarMisSolicitudes() {
+    const container = document.getElementById("misSolicitudesContainer");
+    if (!container) return;
+    const misPermisos = permisos.filter(p => p.empleadoId === empleadoActual.id).sort((a,b) => new Date(b.fechaSolicitud) - new Date(a.fechaSolicitud));
+    if (misPermisos.length === 0) { container.innerHTML = '<div class="alert alert-light">No has realizado solicitudes aún.</div>'; return; }
+    let html = "";
+    misPermisos.forEach(p => {
+      let badgeClass = p.estado === "pendiente" ? "badge-pending" : (p.estado === "aprobado" ? "badge-approved" : "badge-rejected");
+      let estadoText = p.estado === "pendiente" ? "Pendiente" : (p.estado === "aprobado" ? "Aprobado" : "Rechazado");
+      html += `<div class="request-card"><div class="d-flex justify-content-between"><div><strong>${p.tipo === "cambio_turno" ? "Cambio de turno" : (p.tipo === "vacaciones" ? "Vacaciones" : "Permiso")}</strong><br><small class="text-muted">${p.fechaInicio} → ${p.fechaFin}</small><p class="mt-1 small">${p.justificacion}</p></div><div><span class="badge ${badgeClass}">${estadoText}</span></div></div>${p.motivoRechazo ? `<div class="alert alert-danger mt-2 small">Motivo: ${p.motivoRechazo}</div>` : ""}</div>`;
+    });
+    container.innerHTML = html;
+  }
+  
+  // Renderizar vista admin: solicitudes pendientes + historial
+  function renderizarVistaAdmin() {
+    const pendientes = permisos.filter(p => p.estado === "pendiente");
+    const containerPendientes = document.getElementById("solicitudesPendientesContainer");
+    if (containerPendientes) {
+      if (pendientes.length === 0) containerPendientes.innerHTML = '<div class="alert alert-light">No hay solicitudes pendientes.</div>';
+      else {
+        let html = "";
+        pendientes.forEach(p => {
+          const emp = empleados.find(e => e.id === p.empleadoId) || { nombres: "Desconocido", apellidos: "" };
+          html += `<div class="admin-request-card"><div class="d-flex justify-content-between flex-wrap"><div><strong>${emp.nombres} ${emp.apellidos}</strong><br><span class="badge bg-secondary">${p.tipo === "cambio_turno" ? "Cambio turno" : (p.tipo === "vacaciones" ? "Vacaciones" : "Permiso")}</span><p class="mt-2 small">${p.justificacion}</p><div><small>📅 ${p.fechaInicio} → ${p.fechaFin}</small>${p.nuevoHorario ? `<br><small>🕒 Nuevo horario: ${p.nuevoHorario}</small>` : ""}</div></div><div><button class="btn btn-sm btn-success me-2 aprobarBtn" data-id="${p.id}"><i class="bi bi-check-lg"></i> Aprobar</button><button class="btn btn-sm btn-danger negarBtn" data-id="${p.id}"><i class="bi bi-x-lg"></i> Negar</button></div></div></div>`;
+        });
+        containerPendientes.innerHTML = html;
+        document.querySelectorAll(".aprobarBtn").forEach(btn => btn.addEventListener("click", () => aprobarPermiso(btn.dataset.id)));
+        document.querySelectorAll(".negarBtn").forEach(btn => btn.addEventListener("click", () => abrirModalNegar(btn.dataset.id)));
+      }
+    }
+    
+    // Historial completo
+    const tbody = document.getElementById("historialBody");
+    if (tbody) {
+      const todos = [...permisos].sort((a,b) => new Date(b.fechaSolicitud) - new Date(a.fechaSolicitud));
+      tbody.innerHTML = "";
+      todos.forEach(p => {
+        const emp = empleados.find(e => e.id === p.empleadoId) || { nombres: "Desconocido", apellidos: "" };
+        let estadoBadge = "";
+        if (p.estado === "pendiente") estadoBadge = '<span class="badge badge-pending">Pendiente</span>';
+        else if (p.estado === "aprobado") estadoBadge = '<span class="badge badge-approved">Aprobado</span>';
+        else estadoBadge = '<span class="badge badge-rejected">Rechazado</span>';
+        tbody.innerHTML += `<tr><td>${new Date(p.fechaSolicitud).toLocaleString()}</td><td>${emp.nombres} ${emp.apellidos}</td><td>${p.tipo}</td><td>${p.fechaInicio} - ${p.fechaFin}</td><td>${estadoBadge}</td><td>${p.decisionPor || "—"}</td><td><button class="btn btn-sm btn-outline-secondary verDetalleBtn" data-id="${p.id}"><i class="bi bi-eye"></i></button></td></tr>`;
+      });
+      document.querySelectorAll(".verDetalleBtn").forEach(btn => btn.addEventListener("click", () => verDetallePermiso(btn.dataset.id)));
+    }
+  }
+  
+  function aprobarPermiso(id) {
+    const permiso = permisos.find(p => p.id === id);
+    if (!permiso) return;
+    permiso.estado = "aprobado";
+    permiso.decisionFecha = new Date().toISOString();
+    permiso.decisionPor = "Administrador";
+    permiso.motivoRechazo = null;
+    registrarAuditoria("APROBAR PERMISO", `Permiso ${permiso.tipo} aprobado`, id, permiso.empleadoId);
+    mostrarMensaje(`Permiso aprobado y notificado al empleado.`, "success");
+    guardarDatos();
+    actualizarKPIs();
+    renderizarVistaAdmin();
+    renderizarMisSolicitudes();
+  }
+  
+  let rejectPermisoId = null;
+  function abrirModalNegar(id) {
+    rejectPermisoId = id;
+    const modal = new bootstrap.Modal(document.getElementById("rejectModal"));
+    document.getElementById("rejectReason").value = "";
+    modal.show();
+  }
+  
+  document.getElementById("confirmRejectBtn")?.addEventListener("click", () => {
+    if (!rejectPermisoId) return;
+    const reason = document.getElementById("rejectReason").value.trim();
+    if (!reason) { mostrarMensaje("Debe ingresar un motivo de rechazo.", "error"); return; }
+    const permiso = permisos.find(p => p.id === rejectPermisoId);
+    if (permiso) {
+      permiso.estado = "rechazado";
+      permiso.decisionFecha = new Date().toISOString();
+      permiso.decisionPor = "Administrador";
+      permiso.motivoRechazo = reason;
+      registrarAuditoria("RECHAZAR PERMISO", `Permiso ${permiso.tipo} rechazado. Motivo: ${reason}`, rejectPermisoId, permiso.empleadoId);
+      mostrarMensaje(`Permiso rechazado. Notificación enviada al empleado.`, "warning");
+      guardarDatos();
+      actualizarKPIs();
+      renderizarVistaAdmin();
+      renderizarMisSolicitudes();
+    }
+    bootstrap.Modal.getInstance(document.getElementById("rejectModal")).hide();
+    rejectPermisoId = null;
+  });
+  
+  function verDetallePermiso(id) {
+    const permiso = permisos.find(p => p.id === id);
+    if (permiso) {
+      let msg = `Detalles:\nTipo: ${permiso.tipo}\nFechas: ${permiso.fechaInicio} a ${permiso.fechaFin}\nJustificación: ${permiso.justificacion}\nEstado: ${permiso.estado}`;
+      if (permiso.motivoRechazo) msg += `\nMotivo rechazo: ${permiso.motivoRechazo}`;
+      alert(msg);
+    }
+  }
+  
+  // Solicitar nuevo permiso (empleado)
+  document.getElementById("solicitudForm")?.addEventListener("submit", function(e) {
+    e.preventDefault();
+    const tipo = document.getElementById("tipoPermiso").value;
+    const fechaInicio = document.getElementById("fechaInicio").value;
+    const fechaFin = document.getElementById("fechaFin").value;
+    const justificacion = document.getElementById("justificacion").value.trim();
+    const nuevoHorario = document.getElementById("nuevoHorario").value;
+    
+    if (!tipo || !fechaInicio || !fechaFin || !justificacion) {
+      mostrarMensaje("Complete todos los campos obligatorios.", "error");
+      return;
+    }
+    if (new Date(fechaInicio) > new Date(fechaFin)) {
+      mostrarMensaje("La fecha fin no puede ser anterior a la fecha inicio.", "error");
+      return;
+    }
+    if (tipo === "cambio_turno" && !nuevoHorario) {
+      mostrarMensaje("Para cambio de turno, indique el nuevo horario.", "error");
+      return;
+    }
+    
+    const nuevaSolicitud = {
+      id: Date.now().toString(),
+      empleadoId: empleadoActual.id,
+      tipo,
+      fechaInicio,
+      fechaFin,
+      justificacion,
+      nuevoHorario: tipo === "cambio_turno" ? nuevoHorario : "",
+      estado: "pendiente",
+      fechaSolicitud: new Date().toISOString(),
+      adjunto: "",
+      decisionFecha: null,
+      decisionPor: null,
+      motivoRechazo: null
+    };
+    permisos.push(nuevaSolicitud);
+    registrarAuditoria("SOLICITAR PERMISO", `Nuevo permiso tipo ${tipo}`, nuevaSolicitud.id, empleadoActual.id);
+    mostrarMensaje("Solicitud enviada correctamente. Quedará pendiente de aprobación.", "success");
+    guardarDatos();
+    actualizarKPIs();
+    renderizarMisSolicitudes();
+    renderizarVistaAdmin();
+    document.getElementById("solicitudForm").reset();
+  });
+  
+  // Mostrar/ocultar campo horario según tipo
+  document.getElementById("tipoPermiso")?.addEventListener("change", function() {
+    const grupo = document.getElementById("horarioCambioGroup");
+    if (this.value === "cambio_turno") grupo.classList.remove("d-none");
+    else grupo.classList.add("d-none");
+  });
+  
+  // Cambio de vista (tabs)
+  document.querySelectorAll(".view-tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+      document.querySelectorAll(".view-tab").forEach(t => t.classList.remove("active"));
+      tab.classList.add("active");
+      const view = tab.dataset.view;
+      document.getElementById("viewEmpleado").classList.toggle("active", view === "empleado");
+      document.getElementById("viewAdmin").classList.toggle("active", view === "admin");
+      if (view === "admin") renderizarVistaAdmin();
+      else renderizarMisSolicitudes();
+    });
+  });
+  
+  // Cierre sesión
+  document.getElementById("logoutBtn")?.addEventListener("click", () => {
+    mostrarMensaje("Cerrando sesión...", "info");
+    setTimeout(() => window.location.href = "../../login.html", 800);
+  });
+  
+  // Sidebar toggle
+  const menuToggle = document.getElementById("menuToggle");
+  const sidebar = document.getElementById("sidebar");
+  if(menuToggle) menuToggle.addEventListener("click", () => sidebar.classList.toggle("active"));
+  
+  // Inicializar
+  inicializarDatos();
+  actualizarKPIs();
+  renderizarMisSolicitudes();
+  renderizarVistaAdmin();
+</script>
 </body>
 </html>

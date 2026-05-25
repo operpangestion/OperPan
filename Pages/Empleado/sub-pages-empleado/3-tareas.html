@@ -1,132 +1,649 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>OperPan | Gestión de Tareas</title>
-    <link rel="stylesheet" href="../../admin/Assets/style.css">
+    <!-- Bootstrap 5 + Icons + Google Fonts -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ==============================================
+           GLOBALES Y RESET (OperPan - Estación Paisa)
+        ============================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #F4F7FC;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, h5 {
+            font-weight: 700;
+            color: #000000;
+        }
+        h1 { font-size: 2.5rem; }
+        h2 { font-size: 2rem; }
+        h3 { font-size: 1.5rem; }
+        p, span, a, li, input, button, label {
+            font-size: 1rem;
+        }
+        /* Layout principal (sidebar + contenido) */
+        .wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+        /* SIDEBAR NEGRA CORPORATIVA */
+        .sidebar {
+            width: 280px;
+            background-color: #000000;
+            color: #FFFFFF;
+            transition: all 0.3s;
+            position: fixed;
+            height: 100vh;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar-header {
+            padding: 1.8rem 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: #A40706;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.5rem;
+        }
+        .logo-text h4 {
+            color: white;
+            margin-bottom: 0;
+            font-size: 1.3rem;
+        }
+        .logo-text span {
+            font-size: 0.7rem;
+            color: #ccc;
+        }
+        .nav-menu {
+            flex: 1;
+            padding: 2rem 0;
+        }
+        .nav-menu ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .nav-menu li {
+            margin-bottom: 0.5rem;
+        }
+        .nav-menu a {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 0.8rem 1.8rem;
+            color: #E0E0E0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+        .nav-menu a i {
+            font-size: 1.3rem;
+            width: 28px;
+        }
+        .nav-menu a:hover {
+            background: rgba(164, 7, 6, 0.15);
+            color: white;
+            border-left-color: #A40706;
+        }
+        .nav-menu .active a {
+            background: rgba(164, 7, 6, 0.2);
+            color: white;
+            border-left-color: #A40706;
+            font-weight: 600;
+        }
+        /* CONTENIDO PRINCIPAL */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            transition: all 0.3s;
+        }
+        /* TOPBAR NEGRO */
+        .topbar {
+            background: #000000;
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            border-bottom: 1px solid #2C2C2C;
+        }
+        .company-info h2 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 0;
+            font-weight: 600;
+        }
+        .company-info p {
+            color: #BBBBBB;
+            font-size: 0.75rem;
+            margin-bottom: 0;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .user-badge {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #1E1E1E;
+            padding: 0.4rem 1rem;
+            border-radius: 60px;
+        }
+        .user-badge i {
+            font-size: 1.5rem;
+            color: #A40706;
+        }
+        .user-badge span {
+            color: white;
+            font-weight: 500;
+        }
+        .btn-logout {
+            background: transparent;
+            border: 1px solid #A40706;
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 30px;
+            transition: 0.2s;
+        }
+        .btn-logout:hover {
+            background: #A40706;
+            color: white;
+        }
+        /* DASHBOARD */
+        .dashboard-container {
+            padding: 2rem;
+        }
+        /* Cards resumen */
+        .stat-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1rem 1.2rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+            border: 1px solid #EDF2F7;
+            transition: 0.2s;
+        }
+        .stat-card i {
+            font-size: 2rem;
+            color: #A40706;
+        }
+        /* Filtros y tabs */
+        .filter-bar {
+            background: white;
+            border-radius: 60px;
+            padding: 0.3rem;
+            display: inline-flex;
+            margin-bottom: 1.5rem;
+        }
+        /* Tarjetas de tareas */
+        .task-card {
+            background: white;
+            border-radius: 24px;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            transition: 0.2s;
+            border: 1px solid #F0F2F5;
+        }
+        .task-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.05);
+        }
+        .badge {
+            padding: 0.4rem 0.9rem;
+            border-radius: 40px;
+            font-weight: 500;
+        }
+        .badge-pending { background: #FFF3E0; color: #C77A00; }
+        .badge-progress { background: #E6F0FA; color: #1A5D9C; }
+        .badge-completed { background: #E0F2E9; color: #1E7B48; }
+        .badge-expired { background: #FEF2F0; color: #B91C1C; }
+        .btn-action {
+            background: transparent;
+            border: 1px solid #CBD5E1;
+            border-radius: 40px;
+            padding: 0.3rem 1rem;
+            transition: 0.2s;
+        }
+        .btn-action:hover {
+            background: #A40706;
+            color: white;
+            border-color: #A40706;
+        }
+        /* Toast */
+        .toast-message {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1100;
+        }
+        /* Responsive */
+        @media (max-width: 992px) {
+            .sidebar {
+                margin-left: -280px;
+            }
+            .sidebar.active {
+                margin-left: 0;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+            .menu-toggle {
+                display: block;
+                background: black;
+                color: white;
+                border: none;
+                padding: 0.5rem 1rem;
+                margin-right: 1rem;
+                border-radius: 12px;
+            }
+        }
+        @media (min-width: 993px) {
+            .menu-toggle {
+                display: none;
+            }
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            color: #5F6C7A;
+            font-size: 0.75rem;
+        }
+    </style>
 </head>
-
-<body class="admin">
-
-    <!-- HEADER PRINCIPAL -->
-    <header class="admin__header">
-        <h1 class="admin__title">Estación Paisa</h1>
-        <div class="nav-container">
-            <span class="nav-label">Vista Empleado</span>
-            <button class="button button--secondary" onclick="cerrarSesion()">
-                Cerrar sesión
-            </button>
+<body>
+<div class="wrapper">
+    <!-- SIDEBAR NEGRA CORPORATIVA -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo-area">
+                <div class="logo-icon">OP</div>
+                <div class="logo-text">
+                    <h4>OperPan</h4>
+                    <span>Estación Paisa</span>
+                </div>
+            </div>
         </div>
-    </header>
-
-    <!-- NAVEGACIÓN PRINCIPAL -->
-    <nav class="admin__nav">
-        <ul class="admin__menu">
-            <li><a class="nav__btn" href="./1-asistencia.html">Registro de asistencia</a></li>
-            <li><a class="nav__btn" href="./2-solicitudes.html">Gestión de solicitudes</a></li>
-            <li><a class="nav__btn nav__btn--active" href="./3-tareas.html">Gestión de tareas</a></li>
-            <li><a class="nav__btn" href="./4-personal.html">Información personal</a></li>
-        </ul>
-    </nav>
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="./1-asistencia.html"><i class="bi bi-clock-history"></i> Asistencia</a></li>
+                <li><a href="./2-solicitudes.html"><i class="bi bi-envelope-paper"></i> Solicitudes</a></li>
+                <li class="active"><a href="./3-tareas.html"><i class="bi bi-list-check"></i> Tareas</a></li>
+                <li><a href="./4-personal.html"><i class="bi bi-person-badge"></i> Información personal</a></li>
+            </ul>
+        </nav>
+        <div class="p-3 border-top border-secondary">
+            <small class="text-white-50"><i class="bi bi-shield-lock"></i> v2.0 · RRHH</small>
+        </div>
+    </aside>
 
     <!-- CONTENIDO PRINCIPAL -->
-    <main class="admin__main">
-
-        <section id="tareas" class="admin__section">
-            <header class="section__header">
-                <h2 class="section__title">Gestión de tareas</h2>
-                <p class="section__description">Visualiza y actualiza el estado de tus tareas asignadas</p>
-            </header>
-
-            <!-- Resumen -->
-            <div class="incapacity-summary">
-                <div class="incapacity-summary__card">
-                    <p style="font-size:0.75rem; color:var(--gray-500);">Pendientes</p>
-                    <p style="font-size:1.5rem; font-weight:600; color:var(--warning-color);">2</p>
+    <div class="main-content">
+        <header class="topbar">
+            <div class="d-flex align-items-center gap-3">
+                <button class="menu-toggle btn btn-dark" id="menuToggle"><i class="bi bi-list"></i></button>
+                <div class="company-info">
+                    <h2>Gestión de Tareas</h2>
+                    <p>Visualiza y actualiza el estado de tus tareas asignadas</p>
                 </div>
-                <div class="incapacity-summary__card">
-                    <p style="font-size:0.75rem; color:var(--gray-500);">En progreso</p>
-                    <p style="font-size:1.5rem; font-weight:600; color:var(--info-color);">1</p>
+            </div>
+            <div class="user-info">
+                <div class="user-badge">
+                    <i class="bi bi-person-circle"></i>
+                    <span id="employeeNameHeader">EDDIER PAZ PARDO</span>
                 </div>
-                <div class="incapacity-summary__card">
-                    <p style="font-size:0.75rem; color:var(--gray-500);">Completadas hoy</p>
-                    <p style="font-size:1.5rem; font-weight:600; color:var(--success-color);">3</p>
+                <button class="btn-logout" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> Salir</button>
+            </div>
+        </header>
+
+        <main class="dashboard-container">
+            <!-- Tarjetas resumen -->
+            <div class="row g-3 mb-4">
+                <div class="col-md-3">
+                    <div class="stat-card d-flex justify-content-between align-items-center">
+                        <div>
+                            <span class="text-muted">Pendientes</span>
+                            <h3 class="mt-1" id="pendientesCount">0</h3>
+                        </div>
+                        <i class="bi bi-hourglass-split"></i>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card d-flex justify-content-between align-items-center">
+                        <div>
+                            <span class="text-muted">En progreso</span>
+                            <h3 class="mt-1" id="progresoCount">0</h3>
+                        </div>
+                        <i class="bi bi-arrow-repeat"></i>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card d-flex justify-content-between align-items-center">
+                        <div>
+                            <span class="text-muted">Finalizadas</span>
+                            <h3 class="mt-1" id="finalizadasCount">0</h3>
+                        </div>
+                        <i class="bi bi-check2-circle"></i>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card d-flex justify-content-between align-items-center">
+                        <div>
+                            <span class="text-muted">Vencidas</span>
+                            <h3 class="mt-1" id="vencidasCount">0</h3>
+                        </div>
+                        <i class="bi bi-exclamation-triangle-fill" style="color:#B91C1C;"></i>
+                    </div>
                 </div>
             </div>
 
-            <!-- Lista de tareas -->
-            <div class="incapacity-timeline">
-
-                <div class="incapacity-card incapacity-card--pending">
-                    <div
-                        style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.75rem;">
-                        <div>
-                            <strong>LIMPIEZA DE VITRINA DE POSTRES</strong>
-                            <p style="font-size:0.875rem; color:var(--gray-500); margin-top:0.25rem;">
-                                📅 10/04/2025 &nbsp; ⏰ 2:00 pm - 4:00 pm
-                            </p>
-                        </div>
-                        <span class="badge badge--warning">Pendiente</span>
-                    </div>
-                    <p style="font-size:0.875rem; margin-bottom:0.75rem;">
-                        Realizar limpieza profunda de vitrinas de exhibición de postres, incluyendo bandejas y
-                        herramientas de exhibición.
-                    </p>
-                    <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-                        <button class="button button--primary button--small">✓ Marcar completada</button>
-                        <button class="button button--secondary button--small">Ver detalle</button>
-                    </div>
+            <!-- Filtros y tabs -->
+            <div class="d-flex justify-content-between align-items-center flex-wrap mb-3">
+                <h3><i class="bi bi-list-task me-2"></i> Mis tareas</h3>
+                <div class="filter-bar">
+                    <button class="btn btn-sm btn-link text-dark filter-btn active" data-filter="todas">Todas</button>
+                    <button class="btn btn-sm btn-link text-dark filter-btn" data-filter="pendiente">Pendientes</button>
+                    <button class="btn btn-sm btn-link text-dark filter-btn" data-filter="progreso">En progreso</button>
+                    <button class="btn btn-sm btn-link text-dark filter-btn" data-filter="finalizada">Finalizadas</button>
                 </div>
-
-                <div class="incapacity-card incapacity-card--pending">
-                    <div
-                        style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.75rem;">
-                        <div>
-                            <strong>BAÑOS</strong>
-                            <p style="font-size:0.875rem; color:var(--gray-500); margin-top:0.25rem;">
-                                📅 10/04/2025 &nbsp; ⏰ 2:00 pm - 3:00 pm
-                            </p>
-                        </div>
-                        <span class="badge badge--warning">Pendiente</span>
-                    </div>
-                    <p style="font-size:0.875rem; margin-bottom:0.75rem;">
-                        Limpieza y desinfección de baños de personal y clientes. Reponer papel higiénico, jabón y
-                        toallas.
-                    </p>
-                    <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-                        <button class="button button--primary button--small">✓ Marcar completada</button>
-                        <button class="button button--secondary button--small">Ver detalle</button>
-                    </div>
-                </div>
-
-                <div class="incapacity-card incapacity-card--approved">
-                    <div
-                        style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.75rem;">
-                        <div>
-                            <strong>ORGANIZACIÓN DE MESAS</strong>
-                            <p style="font-size:0.875rem; color:var(--gray-500); margin-top:0.25rem;">
-                                📅 10/04/2025 &nbsp; ⏰ 3:00 pm - 4:30 pm
-                            </p>
-                        </div>
-                        <span class="badge badge--success">Completada</span>
-                    </div>
-                    <p style="font-size:0.875rem; margin-bottom:0.75rem;">
-                        Organizar mesas del área de comedor, reponer servilletas y limpiar sillas para la hora pico.
-                    </p>
-                    <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-                        <button class="button button--secondary button--small" disabled>✓ Completada</button>
-                    </div>
-                </div>
-
             </div>
-        </section>
 
-    </main>
+            <!-- Contenedor de tareas -->
+            <div id="tasksContainer">
+                <div class="text-center text-muted py-4">Cargando tareas...</div>
+            </div>
 
-    <script src="../../../Scripts/script.js"></script>
+            <footer>
+                <i class="bi bi-shield-check"></i> Trazabilidad garantizada - Cada cambio queda registrado con fecha y hora.
+            </footer>
+        </main>
+    </div>
+</div>
 
+<!-- Toast para notificaciones -->
+<div class="toast-message" id="liveToast" style="display: none;">
+    <div class="bg-white rounded-3 shadow p-3 border-start border-4 border-danger">
+        <div class="d-flex gap-2 align-items-center">
+            <i class="bi bi-info-circle-fill text-danger fs-5"></i>
+            <span id="toastMsg">Mensaje</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ============================================================
+    // SISTEMA DE GESTIÓN DE TAREAS - OPERPAN (EMPLEADO)
+    // Cumple RF-TR-05 a RF-TR-10, RNF-TR-02, trazabilidad, notificaciones.
+    // ============================================================
+    
+    // Datos del empleado autenticado (simulado)
+    const empleadoActual = {
+        id: "EMP-2024-156",
+        nombre: "EDDIER PAZ PARDO",
+        turno: "Mañana (6am - 2pm)"
+    };
+    
+    const STORAGE_TASKS = "operpan_tareas";
+    const STORAGE_HISTORY = "operpan_tareas_historial";
+    
+    // Tareas de ejemplo (simulando asignación previa del administrador)
+    function inicializarTareas() {
+        const stored = localStorage.getItem(STORAGE_TASKS);
+        if (!stored) {
+            const sample = [
+                { id: "t1", empleadoId: "EMP-2024-156", titulo: "Preparar masa de pan francés", descripcion: "Realizar la mezcla y amasado según receta estándar", turno: "Mañana (6am - 2pm)", fechaLimite: "2025-04-16", estado: "pendiente", prioridad: "alta", fechaAsignacion: "2025-04-14T08:00:00", ultimaModificacion: "2025-04-14T08:00:00", historialCambios: [] },
+                { id: "t2", empleadoId: "EMP-2024-156", titulo: "Revisar inventario de hornos", descripcion: "Verificar limpieza y funcionamiento de los hornos antes del turno", turno: "Mañana (6am - 2pm)", fechaLimite: "2025-04-15", estado: "progreso", prioridad: "media", fechaAsignacion: "2025-04-13T09:30:00", ultimaModificacion: "2025-04-14T07:15:00", historialCambios: [] },
+                { id: "t3", empleadoId: "EMP-2024-156", titulo: "Empaquetar pedidos de mostrador", descripcion: "Organizar pedidos para clientes habituales", turno: "Mañana (6am - 2pm)", fechaLimite: "2025-04-12", estado: "finalizada", prioridad: "baja", fechaAsignacion: "2025-04-10T10:00:00", ultimaModificacion: "2025-04-12T13:45:00", fechaFinalizacion: "2025-04-12T13:45:00", historialCambios: [] },
+                { id: "t4", empleadoId: "EMP-2024-156", titulo: "Limpieza de área de amasado", descripcion: "Desinfección completa de superficies y utensilios", turno: "Mañana (6am - 2pm)", fechaLimite: "2025-04-14", estado: "pendiente", prioridad: "alta", fechaAsignacion: "2025-04-14T06:00:00", ultimaModificacion: "2025-04-14T06:00:00", historialCambios: [] },
+                { id: "t5", empleadoId: "EMP-2024-156", titulo: "Capacitación en normas de higiene", descripcion: "Ver video de inducción y firmar acta", turno: "Mañana (6am - 2pm)", fechaLimite: "2025-04-18", estado: "progreso", prioridad: "media", fechaAsignacion: "2025-04-11T11:00:00", ultimaModificacion: "2025-04-13T09:00:00", historialCambios: [] }
+            ];
+            localStorage.setItem(STORAGE_TASKS, JSON.stringify(sample));
+            localStorage.setItem(STORAGE_HISTORY, JSON.stringify([]));
+            return sample;
+        }
+        return JSON.parse(stored);
+    }
+    
+    let tareas = inicializarTareas();
+    let historialAcciones = JSON.parse(localStorage.getItem(STORAGE_HISTORY) || "[]");
+    
+    function guardarTareas() {
+        localStorage.setItem(STORAGE_TASKS, JSON.stringify(tareas));
+        localStorage.setItem(STORAGE_HISTORY, JSON.stringify(historialAcciones));
+    }
+    
+    // Registrar acción en el historial (trazabilidad)
+    function registrarHistorial(tareaId, accion, detalle) {
+        const registro = {
+            tareaId,
+            empleadoId: empleadoActual.id,
+            empleadoNombre: empleadoActual.nombre,
+            accion,
+            detalle,
+            fecha: new Date().toISOString()
+        };
+        historialAcciones.unshift(registro);
+        if (historialAcciones.length > 200) historialAcciones.pop();
+        guardarTareas();
+        console.log("[TRAZABILIDAD]", registro);
+    }
+    
+    // Notificación simulada (toast)
+    function mostrarNotificacion(mensaje, tipo = "info") {
+        const toast = document.getElementById("liveToast");
+        const msgSpan = document.getElementById("toastMsg");
+        msgSpan.innerText = mensaje;
+        toast.style.display = "block";
+        setTimeout(() => { toast.style.display = "none"; }, 3500);
+        // Simular notificación en tiempo real (RNF-TR-02)
+        if (Notification.permission === "granted" && tipo === "info") {
+            new Notification("OperPan - Tareas", { body: mensaje });
+        }
+    }
+    
+    // Solicitar permiso para notificaciones del navegador
+    if ("Notification" in window && Notification.permission !== "denied") {
+        Notification.requestPermission();
+    }
+    
+    // Cambiar estado de tarea (empleado)
+    function cambiarEstadoTarea(tareaId, nuevoEstado) {
+        const tarea = tareas.find(t => t.id === tareaId && t.empleadoId === empleadoActual.id);
+        if (!tarea) {
+            mostrarNotificacion("Tarea no encontrada.", "error");
+            return;
+        }
+        const estadosPermitidos = ["pendiente", "progreso", "finalizada"];
+        if (!estadosPermitidos.includes(nuevoEstado)) return;
+        
+        const estadoAnterior = tarea.estado;
+        if (estadoAnterior === nuevoEstado) {
+            mostrarNotificacion(`La tarea ya está en estado "${nuevoEstado}".`, "info");
+            return;
+        }
+        
+        // Validar que si está finalizada no se pueda cambiar (RN-TR-02)
+        if (estadoAnterior === "finalizada") {
+            mostrarNotificacion("No se puede modificar una tarea ya finalizada.", "error");
+            return;
+        }
+        
+        tarea.estado = nuevoEstado;
+        tarea.ultimaModificacion = new Date().toISOString();
+        if (nuevoEstado === "finalizada") {
+            tarea.fechaFinalizacion = new Date().toISOString();
+            mostrarNotificacion(`✅ Tarea "${tarea.titulo}" marcada como finalizada. Se notificará al administrador.`, "success");
+        } else if (nuevoEstado === "progreso") {
+            mostrarNotificacion(`🔄 Tarea "${tarea.titulo}" cambiada a "En progreso".`, "info");
+        } else {
+            mostrarNotificacion(`⏳ Tarea "${tarea.titulo}" cambiada a "Pendiente".`, "info");
+        }
+        
+        registrarHistorial(tarea.id, "cambio_estado", `Empleado cambió estado de "${estadoAnterior}" a "${nuevoEstado}"`);
+        guardarTareas();
+        renderizarTareas(filtroActual);
+        actualizarEstadisticas();
+        // Simular notificación al administrador (en consola)
+        console.log(`[NOTIFICACIÓN ADMIN] Empleado ${empleadoActual.nombre} cambió tarea ${tarea.titulo} a ${nuevoEstado}`);
+    }
+    
+    // Filtrar tareas del empleado actual
+    let filtroActual = "todas";
+    
+    function filtrarTareas() {
+        let misTareas = tareas.filter(t => t.empleadoId === empleadoActual.id);
+        const hoy = new Date().toISOString().split('T')[0];
+        // Marcar vencidas (si fecha límite < hoy y estado no finalizada)
+        misTareas.forEach(t => {
+            if (t.estado !== "finalizada" && t.fechaLimite < hoy && !t.vencida) {
+                t.vencida = true;
+            } else if (t.estado === "finalizada") {
+                t.vencida = false;
+            }
+        });
+        
+        if (filtroActual === "todas") return misTareas;
+        if (filtroActual === "pendiente") return misTareas.filter(t => t.estado === "pendiente" && !t.vencida);
+        if (filtroActual === "progreso") return misTareas.filter(t => t.estado === "progreso");
+        if (filtroActual === "finalizada") return misTareas.filter(t => t.estado === "finalizada");
+        return misTareas;
+    }
+    
+    function actualizarEstadisticas() {
+        const misTareas = tareas.filter(t => t.empleadoId === empleadoActual.id);
+        const pendientes = misTareas.filter(t => t.estado === "pendiente").length;
+        const progreso = misTareas.filter(t => t.estado === "progreso").length;
+        const finalizadas = misTareas.filter(t => t.estado === "finalizada").length;
+        const hoy = new Date().toISOString().split('T')[0];
+        const vencidas = misTareas.filter(t => t.estado !== "finalizada" && t.fechaLimite < hoy).length;
+        document.getElementById("pendientesCount").innerText = pendientes;
+        document.getElementById("progresoCount").innerText = progreso;
+        document.getElementById("finalizadasCount").innerText = finalizadas;
+        document.getElementById("vencidasCount").innerText = vencidas;
+    }
+    
+    function renderizarTareas(filtro) {
+        const container = document.getElementById("tasksContainer");
+        if (!container) return;
+        filtroActual = filtro;
+        const tareasFiltradas = filtrarTareas();
+        
+        if (tareasFiltradas.length === 0) {
+            container.innerHTML = `<div class="alert alert-light text-center">No hay tareas con el filtro seleccionado.</div>`;
+            return;
+        }
+        
+        let html = '';
+        tareasFiltradas.forEach(t => {
+            let badgeClass = "";
+            let estadoTexto = "";
+            switch (t.estado) {
+                case "pendiente": badgeClass = "badge-pending"; estadoTexto = "Pendiente"; break;
+                case "progreso": badgeClass = "badge-progress"; estadoTexto = "En progreso"; break;
+                case "finalizada": badgeClass = "badge-completed"; estadoTexto = "Finalizada"; break;
+                default: badgeClass = "badge-secondary";
+            }
+            const vencida = (t.estado !== "finalizada" && t.fechaLimite < new Date().toISOString().split('T')[0]);
+            if (vencida) {
+                badgeClass = "badge-expired";
+                estadoTexto = "Vencida";
+            }
+            const prioridadIcon = t.prioridad === "alta" ? '<i class="bi bi-flag-fill text-danger"></i>' : (t.prioridad === "media" ? '<i class="bi bi-flag text-warning"></i>' : '<i class="bi bi-flag text-secondary"></i>');
+            
+            html += `
+                <div class="task-card">
+                    <div class="d-flex justify-content-between align-items-start flex-wrap">
+                        <div class="flex-grow-1">
+                            <div class="d-flex align-items-center gap-2 mb-1">
+                                <h5 class="mb-0">${t.titulo}</h5>
+                                ${prioridadIcon}
+                                <span class="badge ${badgeClass}">${estadoTexto}</span>
+                            </div>
+                            <p class="text-muted small mb-2">${t.descripcion || "Sin descripción"}</p>
+                            <div class="d-flex gap-3 flex-wrap small text-muted">
+                                <span><i class="bi bi-calendar-event"></i> Límite: ${t.fechaLimite}</span>
+                                <span><i class="bi bi-clock-history"></i> Asignada: ${new Date(t.fechaAsignacion).toLocaleDateString()}</span>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2 mt-2 mt-sm-0">
+                            ${t.estado !== "finalizada" && !vencida ? `
+                                <button class="btn-action" onclick="cambiarEstadoTarea('${t.id}', 'pendiente')">Pendiente</button>
+                                <button class="btn-action" onclick="cambiarEstadoTarea('${t.id}', 'progreso')">En progreso</button>
+                                <button class="btn-action" onclick="cambiarEstadoTarea('${t.id}', 'finalizada')">Finalizar</button>
+                            ` : ''}
+                            ${t.estado === "finalizada" ? `<span class="text-success small"><i class="bi bi-check-circle"></i> Completada el ${new Date(t.fechaFinalizacion).toLocaleDateString()}</span>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+        actualizarEstadisticas();
+    }
+    
+    // Filtros UI
+    document.querySelectorAll(".filter-btn").forEach(btn => {
+        btn.addEventListener("click", function() {
+            document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+            this.classList.add("active");
+            const filtro = this.getAttribute("data-filter");
+            renderizarTareas(filtro);
+        });
+    });
+    
+    // Cierre de sesión
+    document.getElementById("logoutBtn")?.addEventListener("click", () => {
+        mostrarNotificacion("Cerrando sesión...", "info");
+        setTimeout(() => window.location.href = "../../login.html", 800);
+    });
+    
+    // Sidebar toggle móvil
+    const menuToggle = document.getElementById("menuToggle");
+    const sidebar = document.getElementById("sidebar");
+    if(menuToggle) {
+        menuToggle.addEventListener("click", () => sidebar.classList.toggle("active"));
+    }
+    
+    // Inicializar
+    renderizarTareas("todas");
+    
+    // Simulación de notificación automática de recordatorio (RNF-TR-02)
+    setTimeout(() => {
+        const tareasProximas = tareas.filter(t => t.empleadoId === empleadoActual.id && t.estado !== "finalizada");
+        const hoy = new Date();
+        tareasProximas.forEach(t => {
+            const limite = new Date(t.fechaLimite);
+            const diffDays = Math.ceil((limite - hoy) / (1000 * 60 * 60 * 24));
+            if (diffDays === 1 && t.estado !== "finalizada") {
+                mostrarNotificacion(`📌 Recordatorio: La tarea "${t.titulo}" vence mañana.`, "info");
+            }
+        });
+    }, 2000);
+</script>
 </body>
-
 </html>

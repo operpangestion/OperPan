@@ -1,199 +1,687 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OperPan | Información Personal</title>
-    <link rel="stylesheet" href="../../admin/Assets/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>OperPan | Mi perfil</title>
+    <!-- Bootstrap 5 + Icons + Google Fonts -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ==============================================
+           GLOBALES Y RESET (OperPan - Estación Paisa)
+        ============================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #F4F7FC;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, h5 {
+            font-weight: 700;
+            color: #000000;
+        }
+        h1 { font-size: 2.5rem; }
+        h2 { font-size: 2rem; }
+        h3 { font-size: 1.5rem; }
+        p, span, a, li, input, button, label {
+            font-size: 1rem;
+        }
+        /* Layout principal (sidebar + contenido) */
+        .wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+        /* SIDEBAR NEGRA CORPORATIVA */
+        .sidebar {
+            width: 280px;
+            background-color: #000000;
+            color: #FFFFFF;
+            transition: all 0.3s;
+            position: fixed;
+            height: 100vh;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar-header {
+            padding: 1.8rem 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: #A40706;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.5rem;
+        }
+        .logo-text h4 {
+            color: white;
+            margin-bottom: 0;
+            font-size: 1.3rem;
+        }
+        .logo-text span {
+            font-size: 0.7rem;
+            color: #ccc;
+        }
+        .nav-menu {
+            flex: 1;
+            padding: 2rem 0;
+        }
+        .nav-menu ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .nav-menu li {
+            margin-bottom: 0.5rem;
+        }
+        .nav-menu a {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 0.8rem 1.8rem;
+            color: #E0E0E0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+        .nav-menu a i {
+            font-size: 1.3rem;
+            width: 28px;
+        }
+        .nav-menu a:hover {
+            background: rgba(164, 7, 6, 0.15);
+            color: white;
+            border-left-color: #A40706;
+        }
+        .nav-menu .active a {
+            background: rgba(164, 7, 6, 0.2);
+            color: white;
+            border-left-color: #A40706;
+            font-weight: 600;
+        }
+        /* CONTENIDO PRINCIPAL */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            transition: all 0.3s;
+        }
+        /* TOPBAR NEGRO */
+        .topbar {
+            background: #000000;
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            border-bottom: 1px solid #2C2C2C;
+        }
+        .company-info h2 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 0;
+            font-weight: 600;
+        }
+        .company-info p {
+            color: #BBBBBB;
+            font-size: 0.75rem;
+            margin-bottom: 0;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .user-badge {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #1E1E1E;
+            padding: 0.4rem 1rem;
+            border-radius: 60px;
+        }
+        .user-badge i {
+            font-size: 1.5rem;
+            color: #A40706;
+        }
+        .user-badge span {
+            color: white;
+            font-weight: 500;
+        }
+        .btn-logout {
+            background: transparent;
+            border: 1px solid #A40706;
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 30px;
+            transition: 0.2s;
+        }
+        .btn-logout:hover {
+            background: #A40706;
+            color: white;
+        }
+        /* DASHBOARD */
+        .dashboard-container {
+            padding: 2rem;
+        }
+        /* Tarjeta de empleado mejorada */
+        .employee-card {
+            background: white;
+            border-radius: 28px;
+            padding: 1.8rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+            border: 1px solid #F0F2F5;
+        }
+        .employee-avatar-large {
+            width: 80px;
+            height: 80px;
+            background: #F0F2F5;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 2rem;
+            color: #A40706;
+        }
+        .badge-role {
+            background: #A40706;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+        }
+        /* Tabs modernos */
+        .custom-tabs {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #E9ECF3;
+            padding-bottom: 0.5rem;
+        }
+        .tab-btn-custom {
+            background: transparent;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            font-weight: 600;
+            border-radius: 40px;
+            transition: 0.2s;
+            color: #475569;
+        }
+        .tab-btn-custom i {
+            margin-right: 8px;
+        }
+        .tab-btn-custom.active {
+            background: #A40706;
+            color: white;
+        }
+        .tab-pane {
+            display: none;
+            animation: fadeIn 0.2s ease;
+        }
+        .tab-pane.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        /* Cards de desempeño */
+        .metric-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            border: 1px solid #EDF2F7;
+        }
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 800;
+        }
+        /* Tablas */
+        .table-custom {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .table-custom thead {
+            background: #F8F9FC;
+        }
+        .badge {
+            padding: 0.4rem 0.8rem;
+            border-radius: 40px;
+        }
+        .badge-success { background: #E0F2E9; color: #1E7B48; }
+        .badge-warning { background: #FFF3E0; color: #C77A00; }
+        .badge-info { background: #E6F0FA; color: #1A5D9C; }
+        /* Documentos */
+        .doc-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            border: 1px solid #EDF2F7;
+        }
+        /* Botones */
+        .btn-primary-corporate {
+            background: #A40706;
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        .btn-outline-corporate {
+            border: 1.5px solid #A40706;
+            background: transparent;
+            color: #A40706;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+        }
+        /* Toast */
+        .toast-message {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1100;
+        }
+        /* Responsive */
+        @media (max-width: 992px) {
+            .sidebar {
+                margin-left: -280px;
+            }
+            .sidebar.active {
+                margin-left: 0;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+            .menu-toggle {
+                display: block;
+                background: black;
+                color: white;
+                border: none;
+                padding: 0.5rem 1rem;
+                margin-right: 1rem;
+                border-radius: 12px;
+            }
+        }
+        @media (min-width: 993px) {
+            .menu-toggle {
+                display: none;
+            }
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            color: #5F6C7A;
+            font-size: 0.75rem;
+            margin-top: 1rem;
+        }
+    </style>
 </head>
-
-<body class="admin">
-
-    <!-- HEADER PRINCIPAL -->
-    <header class="admin__header">
-        <h1 class="admin__title">Estación Paisa</h1>
-        <div class="nav-container">
-            <span class="nav-label">Vista Empleado</span>
-            <button class="button button--secondary" onclick="cerrarSesion()">
-                Cerrar sesión
-            </button>
+<body>
+<div class="wrapper">
+    <!-- SIDEBAR NEGRA -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo-area">
+                <div class="logo-icon">OP</div>
+                <div class="logo-text">
+                    <h4>OperPan</h4>
+                    <span>Estación Paisa</span>
+                </div>
+            </div>
         </div>
-    </header>
-
-    <!-- NAVEGACIÓN PRINCIPAL -->
-    <nav class="admin__nav">
-        <ul class="admin__menu">
-            <li><a class="nav__btn" href="./1-asistencia.html">Registro de asistencia</a></li>
-            <li><a class="nav__btn" href="./2-solicitudes.html">Gestión de solicitudes</a></li>
-            <li><a class="nav__btn" href="./3-tareas.html">Gestión de tareas</a></li>
-            <li><a class="nav__btn nav__btn--active" href="./4-personal.html">Información personal</a></li>
-        </ul>
-    </nav>
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="./1-asistencia.html"><i class="bi bi-clock-history"></i> Asistencia</a></li>
+                <li><a href="./2-solicitudes.html"><i class="bi bi-envelope-paper"></i> Solicitudes</a></li>
+                <li><a href="./3-tareas.html"><i class="bi bi-list-check"></i> Tareas</a></li>
+                <li class="active"><a href="./4-personal.html"><i class="bi bi-person-badge"></i> Información personal</a></li>
+            </ul>
+        </nav>
+        <div class="p-3 border-top border-secondary">
+            <small class="text-white-50"><i class="bi bi-shield-lock"></i> v2.0 · RRHH</small>
+        </div>
+    </aside>
 
     <!-- CONTENIDO PRINCIPAL -->
-    <main class="admin__main">
+    <div class="main-content">
+        <header class="topbar">
+            <div class="d-flex align-items-center gap-3">
+                <button class="menu-toggle btn btn-dark" id="menuToggle"><i class="bi bi-list"></i></button>
+                <div class="company-info">
+                    <h2>Mi perfil profesional</h2>
+                    <p>Información personal, horarios, desempeño y documentos</p>
+                </div>
+            </div>
+            <div class="user-info">
+                <div class="user-badge">
+                    <i class="bi bi-person-circle"></i>
+                    <span id="employeeNameHeader">EDDIER PAZ PARDO</span>
+                </div>
+                <button class="btn-logout" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> Salir</button>
+            </div>
+        </header>
 
-        <section id="personal" class="admin__section">
-            <header class="section__header">
-                <h2 class="section__title">Información personal</h2>
-                <p class="section__description">Consulta tu perfil, historial y documentos laborales</p>
-            </header>
-
-            <!-- Tarjeta del empleado -->
-            <div class="employee-info">
-                <div class="employee-info__card">
-                    <div class="employee-info__avatar" aria-hidden="true">ERP</div>
-                    <div class="employee-info__details">
-                        <h3 class="employee-info__name">EDDIER PAZ PARDO</h3>
-                        <div class="employee-info__meta">
-                            <span class="employee-info__badge">ID: EMP-2024-156</span>
-                            <span class="employee-info__badge employee-info__badge--role">Panadero Principal</span>
-                            <span class="employee-info__badge">Turno: Mañana (6am - 2pm)</span>
+        <main class="dashboard-container">
+            <!-- Tarjeta de empleado mejorada -->
+            <div class="employee-card">
+                <div class="row align-items-center g-3">
+                    <div class="col-auto">
+                        <div class="employee-avatar-large">EP</div>
+                    </div>
+                    <div class="col">
+                        <h2 class="mb-1">EDDIER PAZ PARDO</h2>
+                        <div class="d-flex flex-wrap gap-2 mb-2">
+                            <span class="badge-role"><i class="bi bi-qr-code"></i> ID: EMP-2024-156</span>
+                            <span class="badge-role" style="background:#3A3F47;"><i class="bi bi-briefcase"></i> Panadero Principal</span>
+                            <span class="badge-role" style="background:#2C3E50;"><i class="bi bi-clock"></i> Turno: Mañana (6am - 2pm)</span>
                         </div>
+                        <div class="d-flex gap-3 small text-muted">
+                            <span><i class="bi bi-calendar-check"></i> Antigüedad: 2 años</span>
+                            <span><i class="bi bi-envelope"></i> eddier.paz@estacionpaisa.com</span>
+                            <span><i class="bi bi-phone"></i> +57 300 123 4567</span>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-outline-corporate" id="solicitarCertificadoBtn"><i class="bi bi-file-text"></i> Solicitar certificado</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Tabs de información -->
-            <div class="certificate-tabs">
-                <button class="certificate-tabs__tab certificate-tabs__tab--active" onclick="mostrarTab('historial', this)">Historial asistencia</button>
-                <button class="certificate-tabs__tab" onclick="mostrarTab('turnos', this)">Turnos asignados</button>
-                <button class="certificate-tabs__tab" onclick="mostrarTab('desempeno', this)">Desempeño</button>
-                <button class="certificate-tabs__tab" onclick="mostrarTab('documentos', this)">Documentos</button>
+            <!-- Tabs modernos -->
+            <div class="custom-tabs">
+                <button class="tab-btn-custom active" data-tab="historial"><i class="bi bi-calendar2-week"></i> Historial asistencia</button>
+                <button class="tab-btn-custom" data-tab="turnos"><i class="bi bi-clock-history"></i> Turnos asignados</button>
+                <button class="tab-btn-custom" data-tab="desempeno"><i class="bi bi-graph-up"></i> Desempeño</button>
+                <button class="tab-btn-custom" data-tab="documentos"><i class="bi bi-files"></i> Documentos</button>
+                <button class="tab-btn-custom" data-tab="certificaciones"><i class="bi bi-award"></i> Certificaciones</button>
             </div>
 
-            <!-- Historial asistencia -->
-            <div id="historial" class="certificate-view">
+            <!-- Panel: Historial asistencia -->
+            <div id="historial" class="tab-pane active">
                 <div class="table-responsive">
-                    <table class="table">
-                        <thead class="table__head">
-                            <tr>
-                                <th>Mes</th>
-                                <th>Días trabajados</th>
-                                <th>Ausencias</th>
-                                <th>Horas extra</th>
-                                <th>Estado</th>
-                            </tr>
+                    <table class="table table-custom">
+                        <thead>
+                            <tr><th>Mes</th><th>Días trabajados</th><th>Ausencias</th><th>Horas extra</th><th>Estado</th></tr>
                         </thead>
-                        <tbody class="table__body">
-                            <tr>
-                                <td>Abril 2025</td>
-                                <td>8</td>
-                                <td>1</td>
-                                <td>3h 15m</td>
-                                <td><span class="badge badge--success">Al día</span></td>
-                            </tr>
-                            <tr>
-                                <td>Marzo 2025</td>
-                                <td>24</td>
-                                <td>0</td>
-                                <td>5h 40m</td>
-                                <td><span class="badge badge--success">Al día</span></td>
-                            </tr>
-                            <tr>
-                                <td>Febrero 2025</td>
-                                <td>20</td>
-                                <td>2</td>
-                                <td>0h</td>
-                                <td><span class="badge badge--warning">Con novedades</span></td>
-                            </tr>
+                        <tbody id="historialBody">
+                            <!-- dinámico -->
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- Turnos asignados -->
-            <div id="turnos" class="certificate-view hidden">
+            <!-- Panel: Turnos asignados -->
+            <div id="turnos" class="tab-pane">
                 <div class="table-responsive">
-                    <table class="table">
-                        <thead class="table__head">
-                            <tr>
-                                <th>Semana</th>
-                                <th>Días</th>
-                                <th>Horario</th>
-                                <th>Estado</th>
-                            </tr>
-                        </thead>
-                        <tbody class="table__body">
-                            <tr>
-                                <td>07 - 12 Abr 2025</td>
-                                <td>Lun - Sáb</td>
-                                <td>6am - 2pm</td>
-                                <td><span class="badge badge--success">Activo</span></td>
-                            </tr>
-                            <tr>
-                                <td>14 - 19 Abr 2025</td>
-                                <td>Lun - Sáb</td>
-                                <td>6am - 2pm</td>
-                                <td><span class="badge badge--info">Próximo</span></td>
-                            </tr>
-                        </tbody>
+                    <table class="table table-custom">
+                        <thead><tr><th>Semana</th><th>Días</th><th>Horario</th><th>Estado</th></tr></thead>
+                        <tbody id="turnosBody"></tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- Desempeño -->
-            <div id="desempeno" class="certificate-view hidden">
-                <div class="incapacity-summary">
-                    <div class="incapacity-summary__card">
-                        <p style="font-size:0.75rem; color:var(--gray-500);">Puntualidad</p>
-                        <p style="font-size:1.5rem; font-weight:600; color:var(--success-color);">92%</p>
+            <!-- Panel: Desempeño -->
+            <div id="desempeno" class="tab-pane">
+                <div class="row g-3 mb-4">
+                    <div class="col-md-4">
+                        <div class="metric-card"><p class="text-muted">Puntualidad</p><div class="metric-value" id="puntualidadVal">92%</div></div>
                     </div>
-                    <div class="incapacity-summary__card">
-                        <p style="font-size:0.75rem; color:var(--gray-500);">Tareas completadas</p>
-                        <p style="font-size:1.5rem; font-weight:600; color:var(--success-color);">87%</p>
+                    <div class="col-md-4">
+                        <div class="metric-card"><p class="text-muted">Tareas completadas</p><div class="metric-value" id="tareasCompletadasVal">87%</div></div>
                     </div>
-                    <div class="incapacity-summary__card">
-                        <p style="font-size:0.75rem; color:var(--gray-500);">Llamados de atención</p>
-                        <p style="font-size:1.5rem; font-weight:600; color:var(--danger-color);">1</p>
+                    <div class="col-md-4">
+                        <div class="metric-card"><p class="text-muted">Llamados de atención</p><div class="metric-value text-danger" id="llamadosVal">1</div></div>
+                    </div>
+                </div>
+                <div class="alert alert-light border">
+                    <i class="bi bi-graph-up me-2"></i> Evaluación general: <strong>Buen desempeño</strong> - Cumple con objetivos operativos.
+                </div>
+            </div>
+
+            <!-- Panel: Documentos -->
+            <div id="documentos" class="tab-pane">
+                <div class="doc-card">
+                    <div><i class="bi bi-file-pdf fs-4 me-2" style="color:#A40706;"></i> <strong>Contrato de trabajo</strong><br><small class="text-muted">Contrato indefinido - Panadero Principal (15/01/2025)</small></div>
+                    <button class="btn-primary-corporate btn-sm descargarBtn" data-doc="contrato">Descargar</button>
+                </div>
+                <div class="doc-card">
+                    <div><i class="bi bi-file-earmark-text fs-4 me-2" style="color:#A40706;"></i> <strong>Certificado laboral</strong><br><small class="text-muted">Certificado de trabajo activo (01/03/2025)</small></div>
+                    <button class="btn-primary-corporate btn-sm descargarBtn" data-doc="certificado_laboral">Descargar</button>
+                </div>
+                <div class="doc-card">
+                    <div><i class="bi bi-file-spreadsheet fs-4 me-2" style="color:#A40706;"></i> <strong>Evaluación de desempeño</strong><br><small class="text-muted">Última evaluación: Marzo 2025</small></div>
+                    <button class="btn-primary-corporate btn-sm descargarBtn" data-doc="evaluacion">Descargar</button>
+                </div>
+            </div>
+
+            <!-- Panel: Certificaciones (adicional RF-CR) -->
+            <div id="certificaciones" class="tab-pane">
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle"></i> Aquí encontrarás tus certificaciones emitidas por la empresa.
+                </div>
+                <div id="certificacionesLista">
+                    <div class="doc-card">
+                        <div><i class="bi bi-award fs-4 me-2"></i> <strong>Certificación de manipulación de alimentos</strong><br><small>Emitida: 10/02/2025 - Válida hasta 10/02/2027</small></div>
+                        <button class="btn-outline-corporate btn-sm">Ver certificado</button>
+                    </div>
+                    <div class="doc-card">
+                        <div><i class="bi bi-award fs-4 me-2"></i> <strong>Curso de panadería artesanal</strong><br><small>Emitida: 15/03/2025 - 40 horas</small></div>
+                        <button class="btn-outline-corporate btn-sm">Ver certificado</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Documentos -->
-            <div id="documentos" class="certificate-view hidden">
-                <div class="certificates-timeline">
-                    <div class="certificate-history-card">
-                        <div class="certificate-history-card__date">
-                            <p style="font-size:0.75rem; font-weight:600;">ENE</p>
-                            <p style="font-size:1.25rem; font-weight:700;">15</p>
-                            <p style="font-size:0.75rem;">2025</p>
-                        </div>
-                        <div style="flex:1;">
-                            <strong>Contrato de trabajo</strong>
-                            <p style="font-size:0.875rem; color:var(--gray-500);">Contrato indefinido - Panadero Principal</p>
-                        </div>
-                        <button class="button button--secondary button--small">Descargar</button>
-                    </div>
-                    <div class="certificate-history-card">
-                        <div class="certificate-history-card__date">
-                            <p style="font-size:0.75rem; font-weight:600;">MAR</p>
-                            <p style="font-size:1.25rem; font-weight:700;">01</p>
-                            <p style="font-size:0.75rem;">2025</p>
-                        </div>
-                        <div style="flex:1;">
-                            <strong>Certificado laboral</strong>
-                            <p style="font-size:0.875rem; color:var(--gray-500);">Certificado de trabajo activo</p>
-                        </div>
-                        <button class="button button--secondary button--small">Descargar</button>
-                    </div>
-                </div>
-            </div>
+            <footer>
+                <i class="bi bi-shield-check"></i> Trazabilidad garantizada - Información actualizada en tiempo real
+            </footer>
+        </main>
+    </div>
+</div>
 
-        </section>
+<!-- Toast -->
+<div class="toast-message" id="liveToast" style="display: none;">
+    <div class="bg-white rounded-3 shadow p-3 border-start border-4 border-danger">
+        <div class="d-flex gap-2 align-items-center">
+            <i class="bi bi-info-circle-fill text-danger fs-5"></i>
+            <span id="toastMsg">Mensaje</span>
+        </div>
+    </div>
+</div>
 
-    </main>
-
-    <script src="../../../Scripts/script.js"></script>
-    <script>
-        function mostrarTab(id, btn) {
-            document.querySelectorAll('.certificate-view').forEach(v => v.classList.add('hidden'));
-            document.querySelectorAll('.certificate-tabs__tab').forEach(t => t.classList.remove('certificate-tabs__tab--active'));
-            document.getElementById(id).classList.remove('hidden');
-            btn.classList.add('certificate-tabs__tab--active');
+<script>
+    // ============================================================
+    // MÓDULO INFORMACIÓN PERSONAL - OPERPAN (EMPLEADO)
+    // Cumple: visualización horarios, historial, desempeño, documentos, certificaciones
+    // Simulación de datos con trazabilidad y solicitud de certificado (RF-CR-01, RF-CR-02)
+    // ============================================================
+    
+    const empleadoActual = {
+        id: "EMP-2024-156",
+        nombre: "EDDIER PAZ PARDO",
+        email: "eddier.paz@estacionpaisa.com",
+        telefono: "+57 300 123 4567",
+        antiguedad: "2 años",
+        rol: "Panadero Principal",
+        turnoActual: "Mañana (6am - 2pm)"
+    };
+    
+    // Datos simulados para cada sección
+    const historialAsistencia = [
+        { mes: "Abril 2025", diasTrabajados: 8, ausencias: 1, horasExtra: "3h 15m", estado: "Al día", estadoClase: "success" },
+        { mes: "Marzo 2025", diasTrabajados: 24, ausencias: 0, horasExtra: "5h 40m", estado: "Al día", estadoClase: "success" },
+        { mes: "Febrero 2025", diasTrabajados: 20, ausencias: 2, horasExtra: "0h", estado: "Con novedades", estadoClase: "warning" }
+    ];
+    
+    const turnosAsignados = [
+        { semana: "07 - 12 Abr 2025", dias: "Lun - Sáb", horario: "6am - 2pm", estado: "Activo", clase: "success" },
+        { semana: "14 - 19 Abr 2025", dias: "Lun - Sáb", horario: "6am - 2pm", estado: "Próximo", clase: "info" },
+        { semana: "21 - 26 Abr 2025", dias: "Lun - Sáb", horario: "8am - 4pm (Cambio especial)", estado: "Pendiente", clase: "warning" }
+    ];
+    
+    const metricas = {
+        puntualidad: 92,
+        tareasCompletadas: 87,
+        llamadosAtencion: 1
+    };
+    
+    // Simulación de certificaciones emitidas (historial)
+    let certificaciones = [
+        { id: "cert1", titulo: "Certificación laboral", fecha: "01/03/2025", estado: "emitida", pdfUrl: "#" },
+        { id: "cert2", titulo: "Constancia de ingresos", fecha: "15/02/2025", estado: "emitida", pdfUrl: "#" }
+    ];
+    
+    function mostrarMensaje(msg, tipo = "success") {
+        const toast = document.getElementById("liveToast");
+        const msgSpan = document.getElementById("toastMsg");
+        msgSpan.innerText = msg;
+        toast.style.display = "block";
+        setTimeout(() => toast.style.display = "none", 3000);
+    }
+    
+    // Cargar datos en tablas
+    function cargarHistorial() {
+        const tbody = document.getElementById("historialBody");
+        if (!tbody) return;
+        tbody.innerHTML = "";
+        historialAsistencia.forEach(h => {
+            tbody.innerHTML += `<tr>
+                <td>${h.mes}</td><td>${h.diasTrabajados}</td><td>${h.ausencias}</td><td>${h.horasExtra}</td>
+                <td><span class="badge badge-${h.estadoClase}">${h.estado}</span></td>
+            </tr>`;
+        });
+    }
+    
+    function cargarTurnos() {
+        const tbody = document.getElementById("turnosBody");
+        if (!tbody) return;
+        tbody.innerHTML = "";
+        turnosAsignados.forEach(t => {
+            tbody.innerHTML += `<tr>
+                <td>${t.semana}</td><td>${t.dias}</td><td>${t.horario}</td>
+                <td><span class="badge badge-${t.clase}">${t.estado}</span></td>
+            </tr>`;
+        });
+    }
+    
+    function cargarMetricas() {
+        document.getElementById("puntualidadVal").innerText = metricas.puntualidad + "%";
+        document.getElementById("tareasCompletadasVal").innerText = metricas.tareasCompletadas + "%";
+        document.getElementById("llamadosVal").innerText = metricas.llamadosAtencion;
+    }
+    
+    // Solicitar certificado (RF-CR-01, RF-CR-02)
+    function solicitarCertificado() {
+        // Simulación: crear una solicitud de certificado laboral
+        const solicitud = {
+            id: Date.now(),
+            empleadoId: empleadoActual.id,
+            empleadoNombre: empleadoActual.nombre,
+            tipo: "Certificado laboral",
+            fechaSolicitud: new Date().toISOString(),
+            estado: "pendiente"
+        };
+        // Guardar en localStorage para simular trazabilidad
+        let solicitudes = localStorage.getItem("operpan_solicitudes_certificados");
+        solicitudes = solicitudes ? JSON.parse(solicitudes) : [];
+        solicitudes.push(solicitud);
+        localStorage.setItem("operpan_solicitudes_certificados", JSON.stringify(solicitudes));
+        
+        mostrarMensaje("Solicitud de certificado enviada al administrador. Recibirás notificación cuando esté listo.", "success");
+        console.log("[TRAZABILIDAD] Solicitud de certificado creada:", solicitud);
+        
+        // Simular notificación al administrador (en producción se enviaría email/notificación)
+    }
+    
+    // Descarga de documentos (simulación)
+    function descargarDocumento(tipo) {
+        mostrarMensaje(`Descargando ${tipo}... (simulación)`, "info");
+        console.log(`[AUDITORÍA] Empleado ${empleadoActual.nombre} descargó documento: ${tipo}`);
+        // En producción aquí se generaría el PDF real
+    }
+    
+    // Gestión de pestañas
+    function initTabs() {
+        const tabs = document.querySelectorAll(".tab-btn-custom");
+        const panes = document.querySelectorAll(".tab-pane");
+        tabs.forEach(tab => {
+            tab.addEventListener("click", () => {
+                const targetId = tab.getAttribute("data-tab");
+                tabs.forEach(t => t.classList.remove("active"));
+                tab.classList.add("active");
+                panes.forEach(pane => pane.classList.remove("active"));
+                document.getElementById(targetId).classList.add("active");
+            });
+        });
+    }
+    
+    // Cerrar sesión
+    document.getElementById("logoutBtn")?.addEventListener("click", () => {
+        mostrarMensaje("Cerrando sesión...", "info");
+        setTimeout(() => window.location.href = "../../login.html", 800);
+    });
+    
+    // Sidebar toggle
+    const menuToggle = document.getElementById("menuToggle");
+    const sidebar = document.getElementById("sidebar");
+    if(menuToggle) {
+        menuToggle.addEventListener("click", () => sidebar.classList.toggle("active"));
+    }
+    
+    // Botón solicitar certificado
+    document.getElementById("solicitarCertificadoBtn")?.addEventListener("click", solicitarCertificado);
+    
+    // Botones de descarga de documentos
+    document.querySelectorAll(".descargarBtn").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            const doc = btn.getAttribute("data-doc");
+            descargarDocumento(doc);
+        });
+    });
+    
+    // Inicializar datos
+    cargarHistorial();
+    cargarTurnos();
+    cargarMetricas();
+    initTabs();
+    
+    // Mostrar datos de empleado en consola (trazabilidad de acceso)
+    console.log(`[ACCESO] Empleado ${empleadoActual.nombre} visualizó información personal - ${new Date().toLocaleString()}`);
+    
+    // Simulación de notificación de certificado aprobado (para demostrar trazabilidad)
+    setTimeout(() => {
+        // Opcional: mostrar mensaje si hay certificados nuevos
+        const solicitudesPendientes = JSON.parse(localStorage.getItem("operpan_solicitudes_certificados") || "[]");
+        const nuevas = solicitudesPendientes.filter(s => s.estado === "aprobada" && !s.notificado);
+        if (nuevas.length) {
+            mostrarMensaje("Tienes un certificado laboral disponible para descargar en la sección Documentos.", "success");
         }
-    </script>
-
+    }, 1000);
+</script>
 </body>
 </html>

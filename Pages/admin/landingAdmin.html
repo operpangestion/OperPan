@@ -1,228 +1,591 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OperPan | Panel Administrador</title>
-    <link rel="stylesheet" href="./Assets/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>OperPan | Panel Administrador</title>
+  <!-- Bootstrap 5 + Bootstrap Icons + Google Fonts -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ==============================================
+       GLOBALES Y RESET (OperPan - Estación Paisa)
+    ============================================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #F4F7FC;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4, h5 {
+      font-weight: 700;
+      color: #000000;
+    }
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+    h3 { font-size: 1.5rem; }
+    p, span, a, li, button {
+      font-size: 1rem;
+    }
+    /* Layout principal (sidebar + contenido) */
+    .wrapper {
+      display: flex;
+      min-height: 100vh;
+    }
+    /* SIDEBAR NEGRA CORPORATIVA */
+    .sidebar {
+      width: 280px;
+      background-color: #000000;
+      color: #FFFFFF;
+      transition: all 0.3s;
+      position: fixed;
+      height: 100vh;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar-header {
+      padding: 1.8rem 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: #A40706;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.5rem;
+    }
+    .logo-text h4 {
+      color: white;
+      margin-bottom: 0;
+      font-size: 1.3rem;
+    }
+    .logo-text span {
+      font-size: 0.7rem;
+      color: #ccc;
+    }
+    .nav-menu {
+      flex: 1;
+      padding: 2rem 0;
+    }
+    .nav-menu ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .nav-menu li {
+      margin-bottom: 0.5rem;
+    }
+    .nav-menu a {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 0.8rem 1.8rem;
+      color: #E0E0E0;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s;
+      border-left: 3px solid transparent;
+    }
+    .nav-menu a i {
+      font-size: 1.3rem;
+      width: 28px;
+    }
+    .nav-menu a:hover {
+      background: rgba(164, 7, 6, 0.15);
+      color: white;
+      border-left-color: #A40706;
+    }
+    .nav-menu .active a {
+      background: rgba(164, 7, 6, 0.2);
+      color: white;
+      border-left-color: #A40706;
+      font-weight: 600;
+    }
+    /* CONTENIDO PRINCIPAL */
+    .main-content {
+      flex: 1;
+      margin-left: 280px;
+      transition: all 0.3s;
+    }
+    /* TOPBAR NEGRO */
+    .topbar {
+      background: #000000;
+      padding: 0.8rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      border-bottom: 1px solid #2C2C2C;
+    }
+    .company-info h2 {
+      color: white;
+      font-size: 1.3rem;
+      margin-bottom: 0;
+      font-weight: 600;
+    }
+    .company-info p {
+      color: #BBBBBB;
+      font-size: 0.75rem;
+      margin-bottom: 0;
+    }
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .user-badge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #1E1E1E;
+      padding: 0.4rem 1rem;
+      border-radius: 60px;
+    }
+    .user-badge i {
+      font-size: 1.5rem;
+      color: #A40706;
+    }
+    .user-badge span {
+      color: white;
+      font-weight: 500;
+    }
+    .btn-logout {
+      background: transparent;
+      border: 1px solid #A40706;
+      color: white;
+      padding: 0.4rem 1rem;
+      border-radius: 30px;
+      transition: 0.2s;
+    }
+    .btn-logout:hover {
+      background: #A40706;
+      color: white;
+    }
+    /* DASHBOARD */
+    .dashboard-container {
+      padding: 2rem;
+    }
+    /* Tarjeta de bienvenida */
+    .welcome-card {
+      background: white;
+      border-radius: 28px;
+      padding: 1.8rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+      border: 1px solid #F0F2F5;
+    }
+    .employee-avatar-large {
+      width: 80px;
+      height: 80px;
+      background: #F0F2F5;
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 2rem;
+      color: #A40706;
+    }
+    .badge-role {
+      background: #A40706;
+      color: white;
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+    }
+    /* Cards de acceso rápido (módulos) */
+    .module-card {
+      background: white;
+      border-radius: 24px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: all 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      border: 1px solid #EDF2F7;
+      height: 100%;
+    }
+    .module-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1);
+      border-color: #A40706;
+    }
+    .module-icon {
+      font-size: 2.5rem;
+      color: #A40706;
+      margin-bottom: 1rem;
+    }
+    /* Tarjetas de resumen (stats) */
+    .stat-card {
+      background: white;
+      border-radius: 20px;
+      padding: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+      border: 1px solid #EDF2F7;
+    }
+    /* Noticias / recordatorios */
+    .reminder-card {
+      background: white;
+      border-radius: 20px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+      border-left: 4px solid #A40706;
+    }
+    /* Toast */
+    .toast-message {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1100;
+    }
+    /* Responsive */
+    @media (max-width: 992px) {
+      .sidebar {
+        margin-left: -280px;
+      }
+      .sidebar.active {
+        margin-left: 0;
+      }
+      .main-content {
+        margin-left: 0;
+      }
+      .menu-toggle {
+        display: block;
+        background: black;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        margin-right: 1rem;
+        border-radius: 12px;
+      }
+    }
+    @media (min-width: 993px) {
+      .menu-toggle {
+        display: none;
+      }
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      color: #5F6C7A;
+      font-size: 0.75rem;
+      margin-top: 2rem;
+    }
+  </style>
 </head>
-
-<body class="admin">
-
-    <!-- HEADER PRINCIPAL -->
-   <header class="admin__header">
-        <h1 class="admin__title">Estación Paisa</h1>
-
-        <label for="_nav">navegar</label>
-        <div class="nav-container">
-            <span class="nav-label">Vista</span>
-            <div class="nav-select-wrapper">
-                <select name="_nav" id="_nav" onchange="navegar()">
-                    <option value="/OperPan/Pages/admin/landingAdmin.html">Gerente / Admin</option>
-                    <option value="/OperPan/Pages/Empleado/landingEmpleado.html">Empleado</option>
-                </select>
-                <span class="nav-chevron">▼</span>
-            </div>
-            <button class="button button--secondary" onclick="cerrarSesion()">
-                Cerrar sesión
-            </button>
+<body>
+<div class="wrapper">
+  <!-- SIDEBAR NEGRA -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-area">
+        <div class="logo-icon">OP</div>
+        <div class="logo-text">
+          <h4>OperPan</h4>
+          <span>Estación Paisa</span>
         </div>
+      </div>
+    </div>
+    <nav class="nav-menu">
+      <ul>
+        <li class="active"><a href="#"><i class="bi bi-grid-3x3-gap-fill"></i> Inicio</a></li>
+        <li><a href="./sub-pages-admin/7-horarios.html"><i class="bi bi-calendar3-week"></i> Horarios</a></li>
+        <li><a href="./sub-pages-admin/1-cuentas.html"><i class="bi bi-people"></i> Cuentas</a></li>
+        <li><a href="./sub-pages-admin/2-tareas.html"><i class="bi bi-list-task"></i> Tareas</a></li>
+        <li><a href="./sub-pages-admin/3-permisos.html"><i class="bi bi-file-earmark-text"></i> Permisos</a></li>
+        <li><a href="./sub-pages-admin/4-reportes.html"><i class="bi bi-bar-chart"></i> Reportes</a></li>
+        <li><a href="./sub-pages-admin/5-incapacidad.html"><i class="bi bi-clipboard2-pulse"></i> Incapacidad</a></li>
+        <li><a href="./sub-pages-admin/6-certificados.html"><i class="bi bi-award"></i> Certificados</a></li>
+      </ul>
+    </nav>
+    <div class="p-3 border-top border-secondary">
+      <small class="text-white-50"><i class="bi bi-shield-lock"></i> v2.0 · Administrador</small>
+    </div>
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="main-content">
+    <header class="topbar">
+      <div class="d-flex align-items-center gap-3">
+        <button class="menu-toggle btn btn-dark" id="menuToggle"><i class="bi bi-list"></i></button>
+        <div class="company-info">
+          <h2>Panel de Administración</h2>
+          <p>Gestión integral del personal de Estación Paisa</p>
+        </div>
+      </div>
+      <div class="user-info">
+        <div class="user-badge">
+          <i class="bi bi-shield-fill-check"></i>
+          <span>Administrador</span>
+        </div>
+        <button class="btn-logout" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> Salir</button>
+      </div>
     </header>
 
-    <!-- NAVEGACIÓN PRINCIPAL -->
-    <nav class="admin__nav">
-        <ul class="admin__menu">
-            <li><a class="nav__btn nav__btn--active" href="#horarios">Horarios</a></li>
-            <li><a class="nav__btn" href="./sub-pages-admin/1-cuentas.html">Cuentas</a></li>
-            <li><a class="nav__btn" href="./sub-pages-admin/2-tareas.html">Tareas</a></li>
-            <li><a class="nav__btn" href="./sub-pages-admin/3-permisos.html">Permisos</a></li>
-            <li><a class="nav__btn" href="./sub-pages-admin/4-reportes.html">Reportes</a></li>
-            <li><a class="nav__btn" href="./sub-pages-admin/5-incapacidad.html">Incapacidad</a></li>
-            <li><a class="nav__btn" href="./sub-pages-admin/6-certificados.html">Certificados</a></li>
-        </ul>
-    </nav>
-
-
-    <!-- CONTENIDO PRINCIPAL -->
-    <main class="admin__main">
-
-        <!-- SECCIÓN HORARIOS -->
-        <section id="horarios" class="admin__section">
-            <header class="section__header">
-                <h2 class="section__title">Gestión de Horarios</h2>
-                <p class="section__description">Asigna y administra los horarios del personal</p>
-            </header>
-
-            <!-- Buscador y selector de empleado -->
-            <div class="employee-selector">
-                <div class="employee-selector__search">
-                    <label for="empleado-id" class="employee-selector__label">ID Empleado</label>
-                    <div class="employee-selector__field">
-                        <input type="text" id="empleado-id" class="employee-selector__input"
-                            placeholder="Buscar por ID, nombre o documento" aria-label="Buscar empleado">
-                        <button class="employee-selector__search-btn" aria-label="Buscar">
-                            🔍
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Acciones rápidas del empleado -->
-                <div class="employee-actions">
-                    <button class="button button--primary button--small" data-action="crear">
-                        Crear
-                    </button>
-                    <button class="button button--secondary button--small" data-action="modificar">
-                        Modificar
-                    </button>
-                    <button class="button button--danger button--small" data-action="eliminar">
-                        Eliminar
-                    </button>
-                </div>
+    <main class="dashboard-container">
+      <!-- Tarjeta de bienvenida -->
+      <div class="welcome-card">
+        <div class="row align-items-center g-3">
+          <div class="col-auto">
+            <div class="employee-avatar-large">AD</div>
+          </div>
+          <div class="col">
+            <h2 class="mb-1">¡Bienvenido, Administrador!</h2>
+            <p class="text-muted">Hoy es <strong id="fechaActual"></strong> - Centro de control del sistema</p>
+            <div class="d-flex flex-wrap gap-2">
+              <span class="badge-role"><i class="bi bi-shield-check"></i> Rol: Administrador</span>
+              <span class="badge-role" style="background:#3A3F47;"><i class="bi bi-building"></i> Estación Paisa</span>
+              <span class="badge-role" style="background:#2C3E50;"><i class="bi bi-people-fill"></i> 30+ empleados</span>
             </div>
+          </div>
+        </div>
+      </div>
 
-            <!-- Información del empleado seleccionado -->
-            <div class="employee-info">
-                <div class="employee-info__card">
-                    <div class="employee-info__avatar" aria-hidden="true">ERP</div>
-                    <div class="employee-info__details">
-                        <h3 class="employee-info__name">EDDIER PAZ PARDO</h3>
-                        <div class="employee-info__meta">
-                            <span class="employee-info__badge">ID: EMP-2024-156</span>
-                            <span class="employee-info__badge employee-info__badge--role">Panadero Principal</span>
-                            <span class="employee-info__badge">Turno: Mañana (6am - 2pm)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <!-- KPIs (datos reales desde localStorage) -->
+      <div class="row g-3 mb-4">
+        <div class="col-md-3">
+          <div class="stat-card d-flex justify-content-between align-items-center">
+            <div><span class="text-muted">Total empleados</span><h3 class="mt-1" id="totalEmpleados">0</h3></div>
+            <i class="bi bi-people-fill fs-2" style="color:#A40706;"></i>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="stat-card d-flex justify-content-between align-items-center">
+            <div><span class="text-muted">Tareas pendientes</span><h3 class="mt-1" id="tareasPendientes">0</h3></div>
+            <i class="bi bi-list-check fs-2" style="color:#A40706;"></i>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="stat-card d-flex justify-content-between align-items-center">
+            <div><span class="text-muted">Permisos pendientes</span><h3 class="mt-1" id="permisosPendientes">0</h3></div>
+            <i class="bi bi-file-earmark-text fs-2" style="color:#A40706;"></i>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="stat-card d-flex justify-content-between align-items-center">
+            <div><span class="text-muted">Reportes sin leer</span><h3 class="mt-1" id="reportesPendientes">0</h3></div>
+            <i class="bi bi-envelope-paper fs-2" style="color:#A40706;"></i>
+          </div>
+        </div>
+      </div>
 
-            <!-- Formulario principal de horarios -->
-            <form class="schedule-form">
-                <div class="form__grid">
-                    <!-- Selector de días -->
-                    <div class="form__field">
-                        <label for="dias" class="form__label">
-                            Días de la semana
-                            <span class="form__required" aria-label="campo requerido">*</span>
-                        </label>
-                        <select id="dias" class="form__select" required>
-                            <option value="" disabled selected>Seleccionar días</option>
-                            <option value="lunes-viernes">Lunes a Viernes</option>
-                            <option value="lunes-sabado">Lunes a Sábado</option>
-                            <option value="semana-completa">Semana Completa (Lun-Dom)</option>
-                            <option value="finde-semana">Fin de Semana (Sáb-Dom)</option>
-                            <option value="personalizado">Personalizar días...</option>
-                        </select>
-                    </div>
+      <!-- Acceso rápido a los 7 módulos -->
+      <h3 class="mb-3"><i class="bi bi-grid-3x3-gap-fill me-2"></i> Módulos de gestión</h3>
+      <div class="row g-4 mb-5">
+        <div class="col-md-3 col-sm-6">
+          <a href="./sub-pages-admin/7-horarios.html" class="module-card">
+            <div class="module-icon"><i class="bi bi-calendar3-week"></i></div>
+            <h5>Horarios</h5>
+            <p class="small text-muted">Asigna turnos y controla asistencia</p>
+          </a>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <a href="./sub-pages-admin/1-cuentas.html" class="module-card">
+            <div class="module-icon"><i class="bi bi-people"></i></div>
+            <h5>Cuentas</h5>
+            <p class="small text-muted">Gestiona empleados y accesos</p>
+          </a>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <a href="./sub-pages-admin/2-tareas.html" class="module-card">
+            <div class="module-icon"><i class="bi bi-list-task"></i></div>
+            <h5>Tareas</h5>
+            <p class="small text-muted">Asigna y da seguimiento</p>
+          </a>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <a href="./sub-pages-admin/3-permisos.html" class="module-card">
+            <div class="module-icon"><i class="bi bi-file-earmark-text"></i></div>
+            <h5>Permisos</h5>
+            <p class="small text-muted">Aprueba solicitudes</p>
+          </a>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <a href="./sub-pages-admin/4-reportes.html" class="module-card">
+            <div class="module-icon"><i class="bi bi-bar-chart"></i></div>
+            <h5>Reportes</h5>
+            <p class="small text-muted">Incidentes y novedades</p>
+          </a>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <a href="./sub-pages-admin/5-incapacidad.html" class="module-card">
+            <div class="module-icon"><i class="bi bi-clipboard2-pulse"></i></div>
+            <h5>Incapacidad</h5>
+            <p class="small text-muted">Gestiona documentos médicos</p>
+          </a>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <a href="./sub-pages-admin/6-certificados.html" class="module-card">
+            <div class="module-icon"><i class="bi bi-award"></i></div>
+            <h5>Certificados</h5>
+            <p class="small text-muted">Genera certificados laborales</p>
+          </a>
+        </div>
+      </div>
 
-                    <!-- Selector de horarios -->
-                    <div class="form__field">
-                        <label for="horario" class="form__label">
-                            Horario / Turno
-                            <span class="form__required" aria-label="campo requerido">*</span>
-                        </label>
-                        <select id="horario" class="form__select" required>
-                            <option value="" disabled selected>Seleccionar turno</option>
-                            <option value="madrugada">Madrugada (4am - 12pm)</option>
-                            <option value="mañana">Mañana (6am - 2pm)</option>
-                            <option value="tarde">Tarde (2pm - 10pm)</option>
-                            <option value="noche">Noche (10pm - 6am)</option>
-                            <option value="partido">Partido (6am-10am / 4pm-8pm)</option>
-                        </select>
-                    </div>
-                </div>
+      <!-- Actividad reciente (recordatorios del sistema) -->
+      <div class="row">
+        <div class="col-md-6">
+          <h4><i class="bi bi-bell-fill me-2"></i> Notificaciones recientes</h4>
+          <div class="reminder-card">
+            <i class="bi bi-calendar-check text-danger me-2"></i>
+            <strong>Nuevas solicitudes de permiso:</strong> 2 solicitudes pendientes de revisión.
+          </div>
+          <div class="reminder-card">
+            <i class="bi bi-chat-dots text-danger me-2"></i>
+            <strong>Reportes sin leer:</strong> 1 nuevo reporte de incidente en producción.
+          </div>
+          <div class="reminder-card">
+            <i class="bi bi-file-text text-danger me-2"></i>
+            <strong>Certificados solicitados:</strong> 3 empleados han solicitado certificados esta semana.
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h4><i class="bi bi-calendar-week me-2"></i> Próximas acciones</h4>
+          <div class="table-responsive">
+            <table class="table table-sm">
+              <thead><tr><th>Fecha</th><th>Acción</th><th>Estado</th></tr></thead>
+              <tbody>
+                <tr><td>Hoy</td><td>Revisar incapacidades pendientes</td><td><span class="badge bg-warning">Pendiente</span></td></tr>
+                <tr><td>Mañana</td><td>Generar reporte mensual de asistencia</td><td><span class="badge bg-secondary">Programado</span></td></tr>
+                <tr><td>15/04</td><td>Reunión de personal</td><td><span class="badge bg-info">Recordatorio</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
 
-                <!-- Sección de cargos (opcional - mejora profesional) -->
-                <details class="form__details">
-                    <summary class="form__details-summary">Asignación por cargo (opcional)</summary>
-                    <div class="form__details-content">
-                        <div class="role-selector">
-                            <span class="role-selector__label">Aplicar horario a:</span>
-                            <div class="role-selector__options">
-                                <label class="checkbox">
-                                    <input type="checkbox" value="panadero"> Panaderos
-                                </label>
-                                <label class="checkbox">
-                                    <input type="checkbox" value="repostero"> Reposteros
-                                </label>
-                                <label class="checkbox">
-                                    <input type="checkbox" value="atencion"> Servicio al Cliente
-                                </label>
-                                <label class="checkbox">
-                                    <input type="checkbox" value="aseo"> Aseo y Limpieza
-                                </label>
-                                <label class="checkbox">
-                                    <input type="checkbox" value="produccion"> Producción
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </details>
-
-                <!-- Observaciones adicionales -->
-                <div class="form__field">
-                    <label for="observaciones" class="form__label">Observaciones (opcional)</label>
-                    <textarea id="observaciones" class="form__textarea" rows="2"
-                        placeholder="Notas adicionales sobre el horario..."></textarea>
-                </div>
-
-                <!-- Botones de acción del formulario -->
-                <div class="form__actions">
-                    <button type="submit" class="button button--primary">
-                        Aceptar
-                    </button>
-                    <button type="button" class="button button--secondary">
-                        Cancelar
-                    </button>
-                </div>
-            </form>
-
-            <!-- Tabla de horarios recientes (para contexto) -->
-            <div class="recent-schedules">
-                <h3 class="recent-schedules__title">Horarios asignados recientemente</h3>
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead class="table__head">
-                            <tr>
-                                <th>Empleado</th>
-                                <th>Cargo</th>
-                                <th>Días</th>
-                                <th>Horario</th>
-                                <th>Estado</th>
-                            </tr>
-                        </thead>
-                        <tbody class="table__body">
-                            <tr>
-                                <td>María González</td>
-                                <td>Repostera</td>
-                                <td>Lun - Vie</td>
-                                <td>6am - 2pm</td>
-                                <td><span class="badge badge--success">Activo</span></td>
-                            </tr>
-                            <tr>
-                                <td>Carlos Rodríguez</td>
-                                <td>Panadero</td>
-                                <td>Mar - Sáb</td>
-                                <td>2pm - 10pm</td>
-                                <td><span class="badge badge--success">Activo</span></td>
-                            </tr>
-                            <tr>
-                                <td>Ana Martínez</td>
-                                <td>Atención al cliente</td>
-                                <td>Lun - Dom</td>
-                                <td>Partido</td>
-                                <td><span class="badge badge--warning">Por confirmar</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
+      <footer>
+        <i class="bi bi-shield-check"></i> Sistema de gestión de personal - OperPan &copy; 2025
+      </footer>
     </main>
+  </div>
+</div>
 
-    <script src="../../Scripts/script.js"></script>
+<!-- Toast -->
+<div class="toast-message" id="liveToast" style="display: none;">
+  <div class="bg-white rounded-3 shadow p-3 border-start border-4 border-danger">
+    <div class="d-flex gap-2 align-items-center">
+      <i class="bi bi-info-circle-fill text-danger fs-5"></i>
+      <span id="toastMsg">Mensaje</span>
+    </div>
+  </div>
+</div>
 
+<script>
+  // ============================================================
+  // LANDING DEL ADMINISTRADOR - OPERPAN
+  // Dashboard con KPIs reales, acceso a módulos y trazabilidad
+  // ============================================================
+  
+  const STORAGE_USERS = "operpan_usuarios";
+  const STORAGE_TAREAS = "operpan_tareas_admin";
+  const STORAGE_PERMISOS = "operpan_permisos";
+  const STORAGE_REPORTES = "operpan_reportes";
+  
+  // Mostrar fecha actual
+  function actualizarFecha() {
+    const ahora = new Date();
+    const fechaStr = ahora.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    document.getElementById("fechaActual") && (document.getElementById("fechaActual").innerText = fechaStr);
+  }
+  actualizarFecha();
+  
+  // Cargar KPIs desde localStorage (datos reales de los módulos)
+  function cargarKPIs() {
+    // Total empleados activos
+    let totalEmpleados = 0;
+    try {
+      const users = localStorage.getItem(STORAGE_USERS);
+      if (users) {
+        const empleados = JSON.parse(users);
+        totalEmpleados = empleados.filter(e => e.estado === "activo").length;
+      } else {
+        totalEmpleados = 3; // datos demo
+      }
+    } catch(e) { totalEmpleados = 3; }
+    document.getElementById("totalEmpleados").innerText = totalEmpleados;
+    
+    // Tareas pendientes (admin)
+    let tareasPendientes = 0;
+    try {
+      const tareas = localStorage.getItem(STORAGE_TAREAS);
+      if (tareas) {
+        const lista = JSON.parse(tareas);
+        tareasPendientes = lista.filter(t => t.estado === "pendiente").length;
+      } else {
+        tareasPendientes = 2;
+      }
+    } catch(e) { tareasPendientes = 2; }
+    document.getElementById("tareasPendientes").innerText = tareasPendientes;
+    
+    // Permisos pendientes
+    let permisosPendientes = 0;
+    try {
+      const permisos = localStorage.getItem(STORAGE_PERMISOS);
+      if (permisos) {
+        const lista = JSON.parse(permisos);
+        permisosPendientes = lista.filter(p => p.estado === "pendiente").length;
+      } else {
+        permisosPendientes = 2;
+      }
+    } catch(e) { permisosPendientes = 2; }
+    document.getElementById("permisosPendientes").innerText = permisosPendientes;
+    
+    // Reportes pendientes
+    let reportesPendientes = 0;
+    try {
+      const reportes = localStorage.getItem(STORAGE_REPORTES);
+      if (reportes) {
+        const lista = JSON.parse(reportes);
+        reportesPendientes = lista.filter(r => r.estado === "pendiente").length;
+      } else {
+        reportesPendientes = 1;
+      }
+    } catch(e) { reportesPendientes = 1; }
+    document.getElementById("reportesPendientes").innerText = reportesPendientes;
+  }
+  
+  // Cerrar sesión
+  document.getElementById("logoutBtn")?.addEventListener("click", () => {
+    mostrarMensaje("Cerrando sesión...");
+    setTimeout(() => window.location.href = "../../login.html", 800);
+  });
+  
+  // Sidebar toggle (móvil)
+  const menuToggle = document.getElementById("menuToggle");
+  const sidebar = document.getElementById("sidebar");
+  if(menuToggle) {
+    menuToggle.addEventListener("click", () => sidebar.classList.toggle("active"));
+  }
+  
+  function mostrarMensaje(msg) {
+    const toast = document.getElementById("liveToast");
+    const msgSpan = document.getElementById("toastMsg");
+    msgSpan.innerText = msg;
+    toast.style.display = "block";
+    setTimeout(() => toast.style.display = "none", 3000);
+  }
+  
+  // Trazabilidad de acceso al dashboard de admin
+  console.log(`[ACCESO ADMIN] Administrador ingresó al panel principal - ${new Date().toLocaleString()}`);
+  
+  cargarKPIs();
+</script>
 </body>
-
 </html>
