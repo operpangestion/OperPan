@@ -40,6 +40,9 @@ Eliminar el manejo manual de procesos operativos en panaderías mediante una pla
 
 ## Capturas
 
+### Homepage
+![Homepage](./Assets/img/00-readme/01-homepage.png)
+
 ### Acceso al sistema
 ![Acceso al sistema](./Assets/img/00-readme/02-accede-al-sistema.png)
 
