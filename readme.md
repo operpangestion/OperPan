@@ -1,212 +1,105 @@
-# Operpan Gestion de Personal
+# OperPan — Gestión de Personal
 
-Mira nuestro Proyecto <a href="https://operpangestion.github.io/OperPan/">Ingresa
+> Sistema web administrativo para la gestión de personal y recursos humanos en panaderías.
 
----
-# Git & GitHub – Tutorial Básico Desde Cero
-
-### 1. Crear una cuenta en GitHub
-
-Para comenzar a trabajar con Git y GitHub, primero debemos crear una cuenta en la plataforma oficial:
-
-Ir a: https://github.com
-
-Allí debemos registrarnos con nuestro correo electrónico (Gmail u otro).
-
-Pasos:
-
-1. Ingresar a GitHub.
-
-2. Hacer clic en Sign up.
-
-3. Ingresar correo electrónico.
-
-4. Crear contraseña.
-
-5. Elegir nombre de usuario.
-
-6. Verificar cuenta.
-
-<img src="./img/img.readme/image2023-6-1_12-26-20.png">
-
-## 2. Crear nuestro primer repositorio
-Una vez dentro de GitHub:
-
-Ir a la esquina superior derecha.
-
-Hacer clic en el botón New repository.
-
-<img src="./img/img.readme/como-subir-proyecto-local-github-01.png">
-
-Asignar:
-
-* Nombre del repositorio.
-
-* Descripción (opcional).
- 
-* Público o Privado.
-
-<img src="./img/img.readme/crear repositorio.png">
-
-Clic en Create repository.
-
-<img src="./img/img.readme/github.jpg">
-
-Aquí es donde GitHub nos mostrará las instrucciones para subir nuestro proyecto desde la consola.
-
-<img src="./img/img.readme/subirArchivo.jpg">
-
-Para subir un Repositorio en Git sin la necesidad de subirlo con comandos podemos subirlo con el apartado de uploading an existing file.
-
-
-## 3. Instalar Git en nuestro computador
-
-Para poder subir archivos mediante comandos necesitamos instalar Git.
-
-Descargar desde su página oficial:
-
-> https://git-scm.com/
-
-<img src="./img/img.readme/destination-location.png">
-
-Instalar normalmente dejando las opciones por defecto.
-
-Para verificar que está instalado correctamente abrimos la terminal (Git Bash o CMD) y escribimos:
-
-> git --version
-
-Si muestra la versión, significa que está instalado correctamente.
-
-Ejemplo:
-> git version 2.50.0.windows.1
- 
-## 4. Configuración inicial de Git
-
-Antes de comenzar debemos configurar nuestro usuario global.
-
-* Configurar nombre:
-> git config --global user.name "TuNombre"
-
-* Configurar correo:
-> git config --global user.email "tuemail@gmail.com"
-
-Ver configuración actual:
-
-> git config --list
-
-Esto es importante porque cada commit quedará registrado con estos datos.
-
-### Cerrar sesión o cambiar usuario en Git
-
-Git no maneja "sesión iniciada" como GitHub en el navegador.
-Lo que realmente guarda es tu configuración de usuario (nombre y correo).
-
-Si deseas eliminar el usuario configurado globalmente, debes usar:
-
-* Eliminar nombre global
-> git config --global --unset user.name
-
-* Eliminar correo global
-> git config --global --unset user.email
-
-
-Después puedes verificar con:
-
-> git config --list
-
-
-Si deseas cambiar el usuario simplemente vuelves a configurar:
-
-> git config --global user.name "NuevoNombre"
-
-> git config --global user.email "nuevoemail@gmail.com"
-
-
-### Nota Importante
-
-> --global afecta todos los repositorios del computador.
-
-Si quieres cambiar el usuario solo en un proyecto específico, debes quitar --global y ejecutar el comando dentro del proyecto.
-
-Ejemplo local:
-
-* git config user.name "UsuarioLocal"
-* git config user.email "correo@local.com"
-
-
-## 5. Subir nuestro primer proyecto con Git Bash
-Crear carpeta del proyecto
-
-Creamos una carpeta en nuestro computador.
-
-Ejemplo:
-
-> mkdir mi-primer-proyecto
-
-> cd mi-primer-proyecto
-
-## 6. Inicializar repositorio Git
-
-> git init
-
-Este comando crea un repositorio local en nuestra carpeta.
-
-## 7. Agregar archivo al área de preparación
-
-> git add .
-
-El punto significa que agregamos todos los archivos.
-
-También podemos agregar uno específico:
-
-> git add index.html
-
-
-## 8. Crear nuestro primer commit
-
-> git commit -m "Primer commit - Hola Mundo"
-
-El commit es como una fotografía del proyecto en ese momento.
-
-## 9. Conectar nuestro proyecto local con GitHub
-
-Copiamos el enlace del repositorio que GitHub nos da.
-
-Luego ejecutamos:
-
-> git remote add origin https://github.com/usuario/repositorio.git
-
-Verificar conexión:
-
-> git remote -v
-
-
-## 10. Subir nuestro proyecto a GitHub
-
-Si es la primera vez:
-
-> git branch -M main
-
-> git push -u origin main
-
-Después solo necesitaremos:
-
-> git push
+**[Ver aplicación en producción](https://operpangestion.github.io/OperPan/)**
 
 ---
 
-adminAccounts:
-
-"admin": username "admin", password "Admin123!"
-
-"gerente": username "gerente", password "Gerente123!"
-
-empleadosDB:
-
-"EMP001": codigo "EMP001", nombre "Carlos Méndez"
-
-"EMP002": codigo "EMP002", suspended true (inactive)
-
-"EMP003": codigo "EMP003", active
+OperPan es una plataforma institucional desarrollada para **Estación Paisa** que digitaliza y centraliza los procesos de administración de personal: horarios, asistencia, permisos, tareas, incapacidades y certificados laborales, todo en un único sistema organizado y trazable.
 
 ---
+
+## Características principales
+
+- Gestión completa de empleados (alta, modificación, baja)
+- Asignación y administración de horarios y turnos
+- Control de asistencia con historial por empleado
+- Gestión de permisos, incapacidades y solicitudes
+- Módulo de tareas con seguimiento y estados
+- Reportes y estadísticas administrativas
+- Generación de certificados laborales
+- Control de accesos por roles (Administrador, Gerente, Empleado)
+
+---
+
+## Objetivo
+
+Eliminar el manejo manual de procesos operativos en panaderías mediante una plataforma centralizada, accesible y escalable que mejore la productividad, reduzca errores y facilite la toma de decisiones basada en datos.
+
+---
+
+## Tecnologías
+
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
+![Bootstrap](https://img.shields.io/badge/Bootstrap_5-7952B3?style=flat&logo=bootstrap&logoColor=white)
+
+---
+
+## Capturas
+
+### Acceso al sistema
+![Acceso al sistema](./Assets/img/00-readme/02-accede-al-sistema.png)
+
+### Login
+![Login](./Assets/img/00-readme/03-login.png)
+
+### Panel Administrador
+![Panel Administrador](./Assets/img/00-readme/04-admin.png)
+
+### Panel Empleado
+![Panel Empleado](./Assets/img/00-readme/05-empleado.png)
+
+---
+
+## Estructura del repositorio
+
+```
+OPERPAN/
+├── index.html                  ← Homepage / Portal corporativo
+├── Assets/styles.css           ← Estilos globales
+├── Pages/
+│   ├── login.html
+│   ├── admin/                  ← Módulos para Admin/Gerente
+│   │   └── sub-pages-admin/
+│   └── Empleado/               ← Módulos para Empleado
+│       └── sub-pages-empleado/
+└── Scripts/script.js
+```
+
+---
+
+## Estado del proyecto
+
+**En desarrollo activo** — Fase 1 (Frontend completo) ✅ · Fase 2 (Backend + BD) 🔄 En progreso
+
+---
+
+## Próximas mejoras
+
+- [ ] Integración con backend (API REST)
+- [ ] Autenticación real con JWT
+- [ ] Generación de PDF para certificados y reportes
+- [ ] Exportación a Excel
+- [ ] Notificaciones automáticas
+- [ ] Soporte multi-sucursal
+
+---
+
+## Equipo
+
+| Desarrollador | GitHub |
+|---|---|
+| Eddier Paz Pardo | [@EddierPaz](https://github.com/EddierPaz) |
+| Santiago Muñetón | [@santiagoencodigo](https://github.com/santiagoencodigo) |
+| Andrea Herrera | [@AndreaHerreraDev](https://github.com/AndreaHerreraDev) |
+
+> Proyecto desarrollado en el **SENA** · Análisis y Desarrollo de Software · Ficha 3171608
+
+---
+
+## Licencia
+
+Este proyecto está bajo licencia MIT. Consulta el archivo `LICENSE` para más detalles.
