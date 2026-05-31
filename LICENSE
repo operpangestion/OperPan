@@ -1,0 +1,123 @@
+LICENCIA DE SOFTWARE PROPIETARIO
+OperPan — Sistema de Gestión de Personal
+Copyright (c) 2025–2026 Grupo Cless Lab.
+Todos los derechos reservados.
+
+================================================================================
+
+AVISO LEGAL
+
+Este software, su código fuente, diseño, arquitectura, documentación y todos
+los materiales asociados (en adelante, "el Software") son propiedad intelectual
+exclusiva de sus autores:
+
+  · Eddier Andrés Paz Pardo
+  · Santiago Muñetón
+  · Cristian D. Motta
+  · Laura C. Parra
+
+Desarrollado en el marco del programa Análisis y Desarrollo de Software (ADSO),
+Ficha 3171608, Centro de Diseño y Metrología, SENA — Bogotá D.C., Colombia.
+
+El Software está destinado para uso exclusivo de la empresa:
+
+  ESTACIÓN PAISA
+  NIT / Razón Social: Estación Paisa
+  Colombia
+
+================================================================================
+
+TÉRMINOS Y CONDICIONES DE USO
+
+1. DERECHOS DE USO
+
+   La empresa Estación Paisa recibe una licencia de uso no exclusiva,
+   intransferible y limitada para operar el Software en el contexto de su
+   actividad empresarial interna.
+
+   Queda estrictamente prohibido:
+
+   a) Copiar, reproducir o distribuir el Software, total o parcialmente,
+      sin autorización escrita de los autores.
+
+   b) Modificar, adaptar, traducir, descompilar o realizar ingeniería inversa
+      sobre cualquier parte del Software.
+
+   c) Sublicenciar, vender, arrendar, ceder o transferir el Software o
+      cualquiera de sus componentes a terceros.
+
+   d) Usar el Software para desarrollar productos derivados o competidores.
+
+   e) Eliminar, ocultar o modificar los avisos de copyright, marcas o
+      atribuciones presentes en el Software.
+
+2. PROPIEDAD INTELECTUAL
+
+   Todos los derechos de propiedad intelectual sobre el Software, incluyendo
+   pero no limitado a: código fuente, diseño de interfaces, arquitectura del
+   sistema, documentación técnica, logotipos y nombres comerciales, pertenecen
+   exclusivamente a los autores indicados en este documento.
+
+   El uso del Software por parte de Estación Paisa no implica cesión de ningún
+   derecho de propiedad intelectual.
+
+3. CONFIDENCIALIDAD
+
+   El Software y su documentación asociada son considerados información
+   confidencial. El usuario se compromete a:
+
+   a) Mantener la confidencialidad del código fuente y de la arquitectura
+      técnica del sistema.
+
+   b) No divulgar información técnica del Software a personas o entidades
+      ajenas a la organización sin autorización previa y escrita de los autores.
+
+   c) Implementar medidas razonables de seguridad para proteger el Software
+      frente a accesos no autorizados.
+
+4. GARANTÍAS Y LIMITACIÓN DE RESPONSABILIDAD
+
+   EL SOFTWARE SE PROPORCIONA EN SU ESTADO ACTUAL ("AS IS") DURANTE LA FASE
+   DE DESARROLLO. LOS AUTORES NO OFRECEN GARANTÍAS EXPRESAS NI IMPLÍCITAS
+   SOBRE SU FUNCIONAMIENTO ININTERRUMPIDO, EXACTITUD O ADECUACIÓN PARA UN
+   PROPÓSITO ESPECÍFICO.
+
+   En ningún caso los autores serán responsables por daños directos,
+   indirectos, incidentales o consecuentes derivados del uso o imposibilidad
+   de uso del Software.
+
+5. VIGENCIA Y TERMINACIÓN
+
+   Esta licencia es vigente desde la fecha de entrega formal del Software y
+   permanecerá activa mientras se mantenga el acuerdo de uso entre los autores
+   y Estación Paisa.
+
+   Los autores se reservan el derecho de revocar esta licencia en caso de
+   incumplimiento de cualquiera de los términos aquí descritos.
+
+   Ante cualquier terminación, el usuario deberá cesar el uso del Software y
+   eliminar todas las copias en su poder.
+
+6. LEY APLICABLE Y JURISDICCIÓN
+
+   Esta licencia se rige por las leyes de la República de Colombia,
+   incluyendo la Ley 23 de 1982 sobre Derechos de Autor y la Decisión
+   Andina 351 de 1993, así como cualquier norma que las modifique o complemente.
+
+   Cualquier controversia derivada de esta licencia será resuelta ante los
+   tribunales competentes de la ciudad de Bogotá D.C., Colombia.
+
+================================================================================
+
+CONTACTO Y AUTORIZACIONES
+
+Para solicitar permisos adicionales, licencias comerciales o acuerdos de uso
+distintos a los aquí descritos, contactar a los autores del proyecto a través
+del repositorio oficial:
+
+  https://github.com/operpangestion/OperPan
+
+================================================================================
+
+OperPan © 2025–2026 · Grupo Cless Lab. · Todos los derechos reservados.
+SENA · Centro de Diseño y Metrología · Análisis y Desarrollo de Software
