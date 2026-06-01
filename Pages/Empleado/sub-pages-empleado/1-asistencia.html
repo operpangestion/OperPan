@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <meta name="description" content="Registro de asistencia - OperPan para Panadería Estación Paisa">
     <title>OperPan | Asistencia</title>
-    
+
     <!-- Bootstrap 5 + Icons + Google Fonts -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
     <!-- Estilos personalizados OperPan -->
     <style>
         /* =========================
@@ -21,25 +23,44 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Poppins', sans-serif;
             background: #F4F7FC;
             overflow-x: hidden;
         }
-        
-        h1, h2, h3, h4, h5 {
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
             font-weight: 700;
             color: #000000;
         }
-        
-        h1 { font-size: 2.5rem; }
-        h2 { font-size: 2rem; }
-        h3 { font-size: 1.5rem; }
-        p, span, a, li, input, button, label {
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        p,
+        span,
+        a,
+        li,
+        input,
+        button,
+        label {
             font-size: 1rem;
         }
-        
+
         /* =========================
            LAYOUT PRINCIPAL (Sidebar + Header)
         ========================= */
@@ -47,7 +68,7 @@
             display: flex;
             min-height: 100vh;
         }
-        
+
         /* SIDEBAR NEGRO CORPORATIVO */
         .sidebar {
             width: 280px;
@@ -60,18 +81,18 @@
             height: 100vh;
             z-index: 1000;
         }
-        
+
         .sidebar-header {
             padding: 1.8rem 1.5rem;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+
         .logo-area {
             display: flex;
             align-items: center;
             gap: 12px;
         }
-        
+
         .logo-icon {
             width: 40px;
             height: 40px;
@@ -83,32 +104,32 @@
             font-weight: 800;
             font-size: 1.5rem;
         }
-        
+
         .logo-text h4 {
             color: white;
             margin-bottom: 0;
             font-size: 1.3rem;
         }
-        
+
         .logo-text span {
             font-size: 0.7rem;
             color: #ccc;
         }
-        
+
         .nav-menu {
             flex: 1;
             padding: 2rem 0;
         }
-        
+
         .nav-menu ul {
             list-style: none;
             padding-left: 0;
         }
-        
+
         .nav-menu li {
             margin-bottom: 0.5rem;
         }
-        
+
         .nav-menu a {
             display: flex;
             align-items: center;
@@ -120,32 +141,32 @@
             transition: all 0.2s;
             border-left: 3px solid transparent;
         }
-        
+
         .nav-menu a i {
             font-size: 1.3rem;
             width: 28px;
         }
-        
+
         .nav-menu a:hover {
             background: rgba(164, 7, 6, 0.15);
             color: white;
             border-left-color: #A40706;
         }
-        
+
         .nav-menu .active a {
             background: rgba(164, 7, 6, 0.2);
             color: white;
             border-left-color: #A40706;
             font-weight: 600;
         }
-        
+
         /* CONTENIDO PRINCIPAL */
         .main-content {
             flex: 1;
             margin-left: 280px;
             transition: all 0.3s;
         }
-        
+
         /* TOPBAR NEGRO */
         .topbar {
             background: #000000;
@@ -156,26 +177,26 @@
             flex-wrap: wrap;
             border-bottom: 1px solid #2C2C2C;
         }
-        
+
         .company-info h2 {
             color: white;
             font-size: 1.3rem;
             margin-bottom: 0;
             font-weight: 600;
         }
-        
+
         .company-info p {
             color: #BBBBBB;
             font-size: 0.75rem;
             margin-bottom: 0;
         }
-        
+
         .user-info {
             display: flex;
             align-items: center;
             gap: 20px;
         }
-        
+
         .user-badge {
             display: flex;
             align-items: center;
@@ -184,17 +205,17 @@
             padding: 0.4rem 1rem;
             border-radius: 60px;
         }
-        
+
         .user-badge i {
             font-size: 1.5rem;
             color: #A40706;
         }
-        
+
         .user-badge span {
             color: white;
             font-weight: 500;
         }
-        
+
         .btn-logout {
             background: transparent;
             border: 1px solid #A40706;
@@ -203,45 +224,45 @@
             border-radius: 30px;
             transition: 0.2s;
         }
-        
+
         .btn-logout:hover {
             background: #A40706;
             color: white;
         }
-        
+
         /* CONTENIDO DINÁMICO */
         .dashboard-container {
             padding: 2rem;
         }
-        
+
         /* Cards de resumen */
         .stats-row {
             margin-bottom: 2rem;
         }
-        
+
         .stat-card {
             background: white;
             border-radius: 20px;
             padding: 1rem 1.2rem;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
             border: 1px solid #EDF2F7;
             transition: 0.2s;
         }
-        
+
         .stat-card i {
             font-size: 2rem;
             color: #A40706;
         }
-        
+
         /* Tarjeta de empleado */
         .employee-card {
             background: white;
             border-radius: 24px;
             padding: 1.5rem;
             margin-bottom: 2rem;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
         }
-        
+
         .employee-avatar {
             width: 70px;
             height: 70px;
@@ -254,7 +275,7 @@
             font-size: 1.5rem;
             color: #A40706;
         }
-        
+
         .badge-role {
             background: #A40706;
             color: white;
@@ -262,7 +283,7 @@
             border-radius: 40px;
             font-size: 0.75rem;
         }
-        
+
         /* Botones de acción */
         .action-buttons {
             display: flex;
@@ -270,7 +291,7 @@
             flex-wrap: wrap;
             margin-bottom: 2rem;
         }
-        
+
         .btn-primary-corporate {
             background: #A40706;
             border: none;
@@ -279,12 +300,12 @@
             font-weight: 600;
             transition: 0.2s;
         }
-        
+
         .btn-primary-corporate:hover {
             background: #8a0504;
             transform: translateY(-2px);
         }
-        
+
         .btn-outline-corporate {
             border: 1.5px solid #A40706;
             background: transparent;
@@ -293,59 +314,77 @@
             border-radius: 40px;
             font-weight: 600;
         }
-        
+
         .btn-outline-corporate:hover {
             background: #A40706;
             color: white;
         }
-        
+
         /* Tabla moderna */
         .table-custom {
             background: white;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
         }
-        
+
         .table-custom thead {
             background: #F8F9FC;
             color: #1E293B;
         }
-        
+
         .table-custom th {
             font-weight: 600;
             border-bottom: 1px solid #E9ECF3;
             padding: 1rem;
         }
-        
+
         .table-custom td {
             padding: 1rem;
             vertical-align: middle;
         }
-        
+
         .badge {
             padding: 0.4rem 0.8rem;
             border-radius: 40px;
             font-weight: 500;
         }
-        
-        .badge-success { background: #E0F2E9; color: #1E7B48; }
-        .badge-warning { background: #FFF3E0; color: #C77A00; }
-        .badge-danger { background: #FEF2F0; color: #B91C1C; }
-        .badge-info { background: #E6F0FA; color: #1A5D9C; }
-        
+
+        .badge-success {
+            background: #E0F2E9;
+            color: #1E7B48;
+        }
+
+        .badge-warning {
+            background: #FFF3E0;
+            color: #C77A00;
+        }
+
+        .badge-danger {
+            background: #FEF2F0;
+            color: #B91C1C;
+        }
+
+        .badge-info {
+            background: #E6F0FA;
+            color: #1A5D9C;
+        }
+
         /* Responsive */
         @media (max-width: 992px) {
             .sidebar {
                 margin-left: -280px;
                 position: fixed;
             }
+
             .sidebar.active {
                 margin-left: 0;
             }
+
             .main-content {
                 margin-left: 0;
             }
+
             .menu-toggle {
                 display: block;
                 background: black;
@@ -356,20 +395,20 @@
                 border-radius: 12px;
             }
         }
-        
+
         @media (min-width: 993px) {
             .menu-toggle {
                 display: none;
             }
         }
-        
+
         .toast-message {
             position: fixed;
             bottom: 20px;
             right: 20px;
             z-index: 1100;
         }
-        
+
         /* Filtros simplificados */
         .filter-bar {
             background: white;
@@ -378,7 +417,7 @@
             display: inline-flex;
             margin-bottom: 1.5rem;
         }
-        
+
         footer {
             text-align: center;
             padding: 1rem;
@@ -387,332 +426,342 @@
         }
     </style>
 </head>
+
 <body>
 
-<div class="wrapper">
-    <!-- SIDEBAR NEGRA (corporativa) -->
-    <aside class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <div class="logo-area">
-                <div class="logo-icon">OP</div>
-                <div class="logo-text">
-                    <h4>OperPan</h4>
-                    <span>Estación Paisa</span>
+    <div class="wrapper">
+        <!-- SIDEBAR NEGRA (corporativa) -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-area">
+                    <div class="logo-icon">OP</div>
+                    <div class="logo-text">
+                        <h4>OperPan</h4>
+                        <span>Estación Paisa</span>
+                    </div>
                 </div>
             </div>
+            <nav class="nav-menu">
+                <ul>
+                    <li class="active"><a href="../landingEmpleado.html"><i class="bi bi-speedometer2"></i>
+                            Dashboard</a></li>
+                    <li class="active"><a href="./1-asistencia.html"><i class="bi bi-clock-history"></i> Asistencia</a>
+                    </li>
+                    <li><a href="./2-solicitudes.html"><i class="bi bi-envelope-paper"></i> Solicitudes</a></li>
+                    <li><a href="./3-tareas.html"><i class="bi bi-list-check"></i> Tareas</a></li>
+                    <li><a href="./4-personal.html"><i class="bi bi-person-badge"></i> Información personal</a></li>
+                </ul>
+            </nav>
+            <div class="p-3 border-top border-secondary">
+                <small class="text-white-50"><i class="bi bi-shield-lock"></i> v2.0 · RRHH</small>
+            </div>
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <div class="main-content">
+            <header class="topbar">
+                <div class="d-flex align-items-center gap-3">
+                    <button class="menu-toggle btn btn-dark" id="menuToggle"><i class="bi bi-list"></i></button>
+                    <div class="company-info">
+                        <h2>Módulo de Asistencia</h2>
+                        <p>Control y trazabilidad de jornada laboral</p>
+                    </div>
+                </div>
+                <div class="user-info">
+                    <div class="user-badge">
+                        <i class="bi bi-person-circle"></i>
+                        <span id="employeeNameHeader">EDDIER PAZ PARDO</span>
+                    </div>
+                    <button class="btn-logout" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> Salir</button>
+                </div>
+            </header>
+
+            <main class="dashboard-container">
+
+                <!-- Información del empleado -->
+                <div class="employee-card">
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <div class="employee-avatar">EP</div>
+                        </div>
+                        <div class="col">
+                            <h3 class="mb-1">EDDIER PAZ PARDO</h3>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge-role"><i class="bi bi-qr-code"></i><span class="fw-semibold"
+                                        style="font-size: 13px;"> ID:</span> EMP-001</span>
+                                <span class="badge-role" style="background:#3A3F47;"><i
+                                        class="bi bi-briefcase"></i><span class="fw-semibold" style="font-size: 13px;">
+                                        Cargo:</span> Panadero Principal</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjetas resumen -->
+                <div class="row stats-row g-3">
+                    <div class="col-md-4">
+                        <div class="stat-card d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="text-muted">Horas trabajadas (mes)</span>
+                                <h3 class="mt-1" id="totalHorasMes">124h 30m</h3>
+                            </div>
+                            <i class="bi bi-calendar-check"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stat-card d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="text-muted">Retardos este mes</span>
+                                <h3 class="mt-1" id="totalRetardos">2</h3>
+                            </div>
+                            <i class="bi bi-exclamation-triangle"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stat-card d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="text-muted">Asistencias completas</span>
+                                <h3 class="mt-1" id="asistenciasCompletas">15</h3>
+                            </div>
+                            <i class="bi bi-check-circle-fill" style="color:#1E7B48;"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botones de acción rápidos -->
+                <div class="action-buttons">
+                    <button id="btnEntrada" class="btn btn-primary-corporate"><i class="bi bi-door-open"></i> Registrar
+                        entrada</button>
+                    <button id="btnSalida" class="btn btn-outline-corporate"><i class="bi bi-door-closed"></i> Registrar
+                        salida</button>
+                    <button id="exportPDFbtn" class="btn btn-outline-secondary"><i class="bi bi-file-pdf"></i> Exportar
+                        PDF</button>
+                </div>
+
+                <!-- Tabla de asistencia histórica -->
+                <div class="d-flex justify-content-between align-items-center flex-wrap mb-3">
+                    <h3 class="mb-0"><i class="bi bi-table"></i> Historial reciente</h3>
+                    <div class="filter-bar">
+                        <button class="btn btn-sm btn-link text-dark" id="filterSemana">Esta semana</button>
+                        <button class="btn btn-sm btn-link text-dark" id="filterMes">Este mes</button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-custom" id="attendanceTable">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Entrada</th>
+                                <th>Salida</th>
+                                <th>Horas trabajadas</th>
+                                <th>Horas extra</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="attendanceBody">
+                            <!-- Los datos se cargan desde JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-center mt-3">
+                    <button class="btn btn-sm btn-secondary" id="verMasBtn"><i class="bi bi-calendar-week"></i> Ver mes
+                        completo</button>
+                </div>
+                <footer>
+                    <i class="bi bi-shield-check"></i> Sistema de gestión de asistencia - Trazabilidad garantizada
+                </footer>
+            </main>
         </div>
-        <nav class="nav-menu">
-            <ul>
-                <li class="active"><a href="../landingEmpleado.html"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
-                <li class="active"><a href="./1-asistencia.html"><i class="bi bi-clock-history"></i> Asistencia</a></li>
-                <li><a href="./2-solicitudes.html"><i class="bi bi-envelope-paper"></i> Solicitudes</a></li>
-                <li><a href="./3-tareas.html"><i class="bi bi-list-check"></i> Tareas</a></li>
-                <li><a href="./4-personal.html"><i class="bi bi-person-badge"></i> Información personal</a></li>
-            </ul>
-        </nav>
-        <div class="p-3 border-top border-secondary">
-            <small class="text-white-50"><i class="bi bi-shield-lock"></i> v2.0 · RRHH</small>
-        </div>
-    </aside>
-
-    <!-- CONTENIDO PRINCIPAL -->
-    <div class="main-content">
-        <header class="topbar">
-            <div class="d-flex align-items-center gap-3">
-                <button class="menu-toggle btn btn-dark" id="menuToggle"><i class="bi bi-list"></i></button>
-                <div class="company-info">
-                    <h2>Módulo de Asistencia</h2>
-                    <p>Control y trazabilidad de jornada laboral</p>
-                </div>
-            </div>
-            <div class="user-info">
-                <div class="user-badge">
-                    <i class="bi bi-person-circle"></i>
-                    <span id="employeeNameHeader">EDDIER PAZ PARDO</span>
-                </div>
-                <button class="btn-logout" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> Salir</button>
-            </div>
-        </header>
-
-        <main class="dashboard-container">
-            <!-- Tarjetas resumen -->
-            <div class="row stats-row g-3">
-                <div class="col-md-4">
-                    <div class="stat-card d-flex justify-content-between align-items-center">
-                        <div>
-                            <span class="text-muted">Horas trabajadas (mes)</span>
-                            <h3 class="mt-1" id="totalHorasMes">124h 30m</h3>
-                        </div>
-                        <i class="bi bi-calendar-check"></i>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="stat-card d-flex justify-content-between align-items-center">
-                        <div>
-                            <span class="text-muted">Retardos este mes</span>
-                            <h3 class="mt-1" id="totalRetardos">2</h3>
-                        </div>
-                        <i class="bi bi-exclamation-triangle"></i>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="stat-card d-flex justify-content-between align-items-center">
-                        <div>
-                            <span class="text-muted">Asistencias completas</span>
-                            <h3 class="mt-1" id="asistenciasCompletas">15</h3>
-                        </div>
-                        <i class="bi bi-check-circle-fill" style="color:#1E7B48;"></i>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Información del empleado -->
-            <div class="employee-card">
-                <div class="row align-items-center">
-                    <div class="col-auto">
-                        <div class="employee-avatar">EP</div>
-                    </div>
-                    <div class="col">
-                        <h3 class="mb-1">EDDIER PAZ PARDO</h3>
-                        <div class="d-flex flex-wrap gap-2">
-                            <span class="badge-role"><i class="bi bi-person-badge"></i> ID: EMP-2024-156</span>
-                            <span class="badge-role" style="background:#3A3F47;"><i class="bi bi-briefcase"></i> Panadero Principal</span>
-                            <span class="badge-role" style="background:#2C3E50;"><i class="bi bi-clock"></i> Turno: Mañana (6am - 2pm)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Botones de acción rápidos -->
-            <div class="action-buttons">
-                <button id="btnEntrada" class="btn btn-primary-corporate"><i class="bi bi-door-open"></i> Registrar entrada</button>
-                <button id="btnSalida" class="btn btn-outline-corporate"><i class="bi bi-door-closed"></i> Registrar salida</button>
-                <button id="exportPDFbtn" class="btn btn-outline-secondary"><i class="bi bi-file-pdf"></i> Exportar PDF</button>
-            </div>
-
-            <!-- Tabla de asistencia histórica -->
-            <div class="d-flex justify-content-between align-items-center flex-wrap mb-3">
-                <h3 class="mb-0"><i class="bi bi-table"></i> Historial reciente</h3>
-                <div class="filter-bar">
-                    <button class="btn btn-sm btn-link text-dark" id="filterSemana">Esta semana</button>
-                    <button class="btn btn-sm btn-link text-dark" id="filterMes">Este mes</button>
-                </div>
-            </div>
-            <div class="table-responsive">
-                <table class="table table-custom" id="attendanceTable">
-                    <thead>
-                        <tr>
-                            <th>Fecha</th>
-                            <th>Entrada</th>
-                            <th>Salida</th>
-                            <th>Horas trabajadas</th>
-                            <th>Horas extra</th>
-                            <th>Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody id="attendanceBody">
-                        <!-- Los datos se cargan desde JavaScript -->
-                    </tbody>
-                </table>
-            </div>
-            <div class="text-center mt-3">
-                <button class="btn btn-sm btn-secondary" id="verMasBtn"><i class="bi bi-calendar-week"></i> Ver mes completo</button>
-            </div>
-            <footer>
-                <i class="bi bi-shield-check"></i> Sistema de gestión de asistencia - Trazabilidad garantizada
-            </footer>
-        </main>
     </div>
-</div>
 
-<!-- Toast para notificaciones -->
-<div class="toast-message" id="liveToast" style="display: none;">
-    <div class="bg-white rounded-3 shadow p-3 border-start border-4 border-danger">
-        <div class="d-flex gap-2 align-items-center">
-            <i class="bi bi-info-circle-fill text-danger fs-5"></i>
-            <span id="toastMsg">Mensaje</span>
+    <!-- Toast para notificaciones -->
+    <div class="toast-message" id="liveToast" style="display: none;">
+        <div class="bg-white rounded-3 shadow p-3 border-start border-4 border-danger">
+            <div class="d-flex gap-2 align-items-center">
+                <i class="bi bi-info-circle-fill text-danger fs-5"></i>
+                <span id="toastMsg">Mensaje</span>
+            </div>
         </div>
     </div>
-</div>
 
-<script>
-    // ======================================================
-    // SISTEMA DE ASISTENCIA OPERPAN (EMPLEADO)
-    // Simulación de datos persistentes en localStorage
-    // Cumple con: registro entrada/salida, retardos, historial, trazabilidad
-    // ======================================================
-    
-    // Empleado actual (simulado)
-    const empleadoActual = {
-        id: "EMP-2024-156",
-        nombre: "EDDIER PAZ PARDO",
-        rol: "Panadero Principal",
-        turnoInicio: "06:00",
-        turnoFin: "14:00",
-        toleranciaMin: 5   // minutos de tolerancia (después se marca retardo)
-    };
-    
-    // Clave de storage
-    const STORAGE_KEY = "operpan_asistencia_empleado";
-    
-    // Función para obtener registros o inicializar con datos demo
-    function obtenerRegistros() {
-        const stored = localStorage.getItem(STORAGE_KEY);
-        if (stored) {
-            return JSON.parse(stored);
-        } else {
-            // Datos de ejemplo (últimos días)
+    <script>
+        // ======================================================
+        // SISTEMA DE ASISTENCIA OPERPAN (EMPLEADO)
+        // Simulación de datos persistentes en localStorage
+        // Cumple con: registro entrada/salida, retardos, historial, trazabilidad
+        // ======================================================
+
+        // Empleado actual (simulado)
+        const empleadoActual = {
+            id: "EMP-2024-156",
+            nombre: "EDDIER PAZ PARDO",
+            rol: "Panadero Principal",
+            turnoInicio: "06:00",
+            turnoFin: "14:00",
+            toleranciaMin: 5   // minutos de tolerancia (después se marca retardo)
+        };
+
+        // Clave de storage
+        const STORAGE_KEY = "operpan_asistencia_empleado";
+
+        // Función para obtener registros o inicializar con datos demo
+        function obtenerRegistros() {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            if (stored) {
+                return JSON.parse(stored);
+            } else {
+                // Datos de ejemplo (últimos días)
+                const hoy = new Date();
+                const demo = [
+                    { fecha: "2025-04-07", entrada: "06:02", salida: "14:05", horas: "8h 03m", extra: "0h 03m", estado: "Completo", timestampEntrada: 1744041720000, timestampSalida: 1744067100000 },
+                    { fecha: "2025-04-08", entrada: "06:10", salida: "14:00", horas: "7h 50m", extra: "—", estado: "Incompleto", timestampEntrada: 1744128600000, timestampSalida: 1744156800000 },
+                    { fecha: "2025-04-09", entrada: "05:58", salida: "14:30", horas: "8h 32m", extra: "0h 32m", estado: "Completo", timestampEntrada: 1744214280000, timestampSalida: 1744245000000 },
+                    { fecha: "2025-04-10", entrada: "—", salida: "—", horas: "—", extra: "—", estado: "Ausente", timestampEntrada: null, timestampSalida: null },
+                    { fecha: "2025-04-11", entrada: "06:01", salida: "14:02", horas: "8h 01m", extra: "0h 01m", estado: "Completo", timestampEntrada: 1744387260000, timestampSalida: 1744412520000 }
+                ];
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(demo));
+                return demo;
+            }
+        }
+
+        let registrosAsistencia = obtenerRegistros();
+
+        // Guardar cambios
+        function guardarRegistros() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(registrosAsistencia));
+            actualizarTablaYEstadisticas();
+        }
+
+        // Calcular horas trabajadas (string formato)
+        function calcularHoras(entradaStr, salidaStr) {
+            if (!entradaStr || entradaStr === "—" || !salidaStr || salidaStr === "—") return "—";
+            const [hEnt, mEnt] = entradaStr.split(":");
+            const [hSal, mSal] = salidaStr.split(":");
+            let minutos = (parseInt(hSal) * 60 + parseInt(mSal)) - (parseInt(hEnt) * 60 + parseInt(mEnt));
+            if (minutos < 0) minutos += 24 * 60;
+            const horas = Math.floor(minutos / 60);
+            const mins = minutos % 60;
+            return `${horas}h ${mins.toString().padStart(2, '0')}m`;
+        }
+
+        // Determinar estado (retardo si entrada > turno + tolerancia)
+        function determinarEstado(entradaStr, fechaISO) {
+            if (!entradaStr || entradaStr === "—") return "Ausente";
+            const [horaE, minE] = entradaStr.split(":").map(Number);
+            const [hTurno, mTurno] = empleadoActual.turnoInicio.split(":").map(Number);
+            let minutosReal = horaE * 60 + minE;
+            let minutosTurno = hTurno * 60 + mTurno;
+            let diff = minutosReal - minutosTurno;
+            if (diff > empleadoActual.toleranciaMin) return "Retardo";
+            return "Completo";
+        }
+
+        // Registrar entrada (hora actual simulada)
+        function registrarEntrada() {
             const hoy = new Date();
-            const demo = [
-                { fecha: "2025-04-07", entrada: "06:02", salida: "14:05", horas: "8h 03m", extra: "0h 03m", estado: "Completo", timestampEntrada: 1744041720000, timestampSalida: 1744067100000 },
-                { fecha: "2025-04-08", entrada: "06:10", salida: "14:00", horas: "7h 50m", extra: "—", estado: "Incompleto", timestampEntrada: 1744128600000, timestampSalida: 1744156800000 },
-                { fecha: "2025-04-09", entrada: "05:58", salida: "14:30", horas: "8h 32m", extra: "0h 32m", estado: "Completo", timestampEntrada: 1744214280000, timestampSalida: 1744245000000 },
-                { fecha: "2025-04-10", entrada: "—", salida: "—", horas: "—", extra: "—", estado: "Ausente", timestampEntrada: null, timestampSalida: null },
-                { fecha: "2025-04-11", entrada: "06:01", salida: "14:02", horas: "8h 01m", extra: "0h 01m", estado: "Completo", timestampEntrada: 1744387260000, timestampSalida: 1744412520000 }
-            ];
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(demo));
-            return demo;
+            const fechaStr = hoy.toISOString().split('T')[0]; // YYYY-MM-DD
+            const horaActual = hoy.toHoursMinutes(); // función auxiliar
+
+            // Verificar si ya existe registro hoy
+            const existeHoy = registrosAsistencia.find(r => r.fecha === fechaStr);
+            if (existeHoy && existeHoy.entrada && existeHoy.entrada !== "—") {
+                mostrarMensaje("Ya has registrado la entrada de hoy.", "warning");
+                return;
+            }
+
+            // Si existe pero con entrada vacía (Ausente) lo actualizamos
+            let registro = registrosAsistencia.find(r => r.fecha === fechaStr);
+            if (!registro) {
+                registro = { fecha: fechaStr, entrada: "—", salida: "—", horas: "—", extra: "—", estado: "Ausente", timestampEntrada: null, timestampSalida: null };
+                registrosAsistencia.push(registro);
+            }
+
+            registro.entrada = horaActual;
+            registro.timestampEntrada = hoy.getTime();
+            const estadoNuevo = determinarEstado(horaActual, fechaStr);
+            registro.estado = estadoNuevo;
+            if (registro.salida !== "—") {
+                registro.horas = calcularHoras(registro.entrada, registro.salida);
+                // Extra simple: si horas trabajadas >8h, diferencia
+                if (registro.horas !== "—") {
+                    // calculo extra
+                }
+            } else {
+                registro.horas = "—";
+            }
+
+            guardarRegistros();
+            mostrarMensaje(`Entrada registrada a las ${horaActual}`, "success");
+
+            // Registrar en consola de trazabilidad (simulación)
+            console.log(`[AUDITORÍA] Empleado ${empleadoActual.nombre} registró entrada ${horaActual} - ${new Date().toLocaleString()}`);
         }
-    }
-    
-    let registrosAsistencia = obtenerRegistros();
-    
-    // Guardar cambios
-    function guardarRegistros() {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(registrosAsistencia));
-        actualizarTablaYEstadisticas();
-    }
-    
-    // Calcular horas trabajadas (string formato)
-    function calcularHoras(entradaStr, salidaStr) {
-        if (!entradaStr || entradaStr === "—" || !salidaStr || salidaStr === "—") return "—";
-        const [hEnt, mEnt] = entradaStr.split(":");
-        const [hSal, mSal] = salidaStr.split(":");
-        let minutos = (parseInt(hSal)*60 + parseInt(mSal)) - (parseInt(hEnt)*60 + parseInt(mEnt));
-        if (minutos < 0) minutos += 24*60;
-        const horas = Math.floor(minutos / 60);
-        const mins = minutos % 60;
-        return `${horas}h ${mins.toString().padStart(2,'0')}m`;
-    }
-    
-    // Determinar estado (retardo si entrada > turno + tolerancia)
-    function determinarEstado(entradaStr, fechaISO) {
-        if (!entradaStr || entradaStr === "—") return "Ausente";
-        const [horaE, minE] = entradaStr.split(":").map(Number);
-        const [hTurno, mTurno] = empleadoActual.turnoInicio.split(":").map(Number);
-        let minutosReal = horaE*60 + minE;
-        let minutosTurno = hTurno*60 + mTurno;
-        let diff = minutosReal - minutosTurno;
-        if (diff > empleadoActual.toleranciaMin) return "Retardo";
-        return "Completo";
-    }
-    
-    // Registrar entrada (hora actual simulada)
-    function registrarEntrada() {
-        const hoy = new Date();
-        const fechaStr = hoy.toISOString().split('T')[0]; // YYYY-MM-DD
-        const horaActual = hoy.toHoursMinutes(); // función auxiliar
-        
-        // Verificar si ya existe registro hoy
-        const existeHoy = registrosAsistencia.find(r => r.fecha === fechaStr);
-        if (existeHoy && existeHoy.entrada && existeHoy.entrada !== "—") {
-            mostrarMensaje("Ya has registrado la entrada de hoy.", "warning");
-            return;
-        }
-        
-        // Si existe pero con entrada vacía (Ausente) lo actualizamos
-        let registro = registrosAsistencia.find(r => r.fecha === fechaStr);
-        if (!registro) {
-            registro = { fecha: fechaStr, entrada: "—", salida: "—", horas: "—", extra: "—", estado: "Ausente", timestampEntrada: null, timestampSalida: null };
-            registrosAsistencia.push(registro);
-        }
-        
-        registro.entrada = horaActual;
-        registro.timestampEntrada = hoy.getTime();
-        const estadoNuevo = determinarEstado(horaActual, fechaStr);
-        registro.estado = estadoNuevo;
-        if (registro.salida !== "—") {
+
+        // Registrar salida
+        function registrarSalida() {
+            const hoy = new Date();
+            const fechaStr = hoy.toISOString().split('T')[0];
+            const horaActual = hoy.toHoursMinutes();
+            const registro = registrosAsistencia.find(r => r.fecha === fechaStr);
+
+            if (!registro || !registro.entrada || registro.entrada === "—") {
+                mostrarMensaje("No puedes registrar salida sin una entrada previa registrada hoy.", "error");
+                return;
+            }
+            if (registro.salida && registro.salida !== "—") {
+                mostrarMensaje("Ya has registrado la salida de hoy.", "warning");
+                return;
+            }
+
+            registro.salida = horaActual;
+            registro.timestampSalida = hoy.getTime();
             registro.horas = calcularHoras(registro.entrada, registro.salida);
-            // Extra simple: si horas trabajadas >8h, diferencia
-            if (registro.horas !== "—") {
-                // calculo extra
+            // calcular horas extra (si excede turnoFin)
+            const [hSal, mSal] = horaActual.split(":").map(Number);
+            const [hFin, mFin] = empleadoActual.turnoFin.split(":").map(Number);
+            let minutosExtra = (hSal * 60 + mSal) - (hFin * 60 + mFin);
+            if (minutosExtra > 0) {
+                const extraHoras = Math.floor(minutosExtra / 60);
+                const extraMins = minutosExtra % 60;
+                registro.extra = `${extraHoras}h ${extraMins.toString().padStart(2, '0')}m`;
+            } else {
+                registro.extra = "—";
             }
-        } else {
-            registro.horas = "—";
+
+            // Estado definitivo
+            if (registro.estado !== "Retardo") registro.estado = determinarEstado(registro.entrada, fechaStr);
+            guardarRegistros();
+            mostrarMensaje(`Salida registrada a las ${horaActual}. Jornada completa.`, "success");
+            console.log(`[AUDITORÍA] Empleado ${empleadoActual.nombre} registró salida ${horaActual}`);
         }
-        
-        guardarRegistros();
-        mostrarMensaje(`Entrada registrada a las ${horaActual}`, "success");
-        
-        // Registrar en consola de trazabilidad (simulación)
-        console.log(`[AUDITORÍA] Empleado ${empleadoActual.nombre} registró entrada ${horaActual} - ${new Date().toLocaleString()}`);
-    }
-    
-    // Registrar salida
-    function registrarSalida() {
-        const hoy = new Date();
-        const fechaStr = hoy.toISOString().split('T')[0];
-        const horaActual = hoy.toHoursMinutes();
-        const registro = registrosAsistencia.find(r => r.fecha === fechaStr);
-        
-        if (!registro || !registro.entrada || registro.entrada === "—") {
-            mostrarMensaje("No puedes registrar salida sin una entrada previa registrada hoy.", "error");
-            return;
-        }
-        if (registro.salida && registro.salida !== "—") {
-            mostrarMensaje("Ya has registrado la salida de hoy.", "warning");
-            return;
-        }
-        
-        registro.salida = horaActual;
-        registro.timestampSalida = hoy.getTime();
-        registro.horas = calcularHoras(registro.entrada, registro.salida);
-        // calcular horas extra (si excede turnoFin)
-        const [hSal, mSal] = horaActual.split(":").map(Number);
-        const [hFin, mFin] = empleadoActual.turnoFin.split(":").map(Number);
-        let minutosExtra = (hSal*60 + mSal) - (hFin*60 + mFin);
-        if (minutosExtra > 0) {
-            const extraHoras = Math.floor(minutosExtra / 60);
-            const extraMins = minutosExtra % 60;
-            registro.extra = `${extraHoras}h ${extraMins.toString().padStart(2,'0')}m`;
-        } else {
-            registro.extra = "—";
-        }
-        
-        // Estado definitivo
-        if (registro.estado !== "Retardo") registro.estado = determinarEstado(registro.entrada, fechaStr);
-        guardarRegistros();
-        mostrarMensaje(`Salida registrada a las ${horaActual}. Jornada completa.`, "success");
-        console.log(`[AUDITORÍA] Empleado ${empleadoActual.nombre} registró salida ${horaActual}`);
-    }
-    
-    // Función auxiliar para dar formato a hora actual
-    Date.prototype.toHoursMinutes = function() {
-        return `${this.getHours().toString().padStart(2,'0')}:${this.getMinutes().toString().padStart(2,'0')}`;
-    };
-    
-    // Actualizar tabla y resumen estadístico
-    function actualizarTablaYEstadisticas() {
-        const tbody = document.getElementById("attendanceBody");
-        if (!tbody) return;
-        // Ordenar descendente por fecha
-        const ordenados = [...registrosAsistencia].sort((a,b) => new Date(b.fecha) - new Date(a.fecha));
-        tbody.innerHTML = "";
-        let totalHoras = 0;  // en minutos
-        let retardos = 0;
-        let asistenciasCompletas = 0;
-        
-        ordenados.forEach(reg => {
-            const estadoClass = reg.estado === "Completo" ? "badge-success" : (reg.estado === "Retardo" ? "badge-warning" : (reg.estado === "Ausente" ? "badge-danger" : "badge-info"));
-            const badgeText = reg.estado;
-            if (reg.estado === "Retardo") retardos++;
-            if (reg.estado === "Completo") asistenciasCompletas++;
-            if (reg.horas && reg.horas !== "—") {
-                const partes = reg.horas.match(/(\d+)h\s*(\d+)m/);
-                if (partes) totalHoras += parseInt(partes[1])*60 + parseInt(partes[2]);
-            }
-            const fila = document.createElement("tr");
-            fila.innerHTML = `
+
+        // Función auxiliar para dar formato a hora actual
+        Date.prototype.toHoursMinutes = function () {
+            return `${this.getHours().toString().padStart(2, '0')}:${this.getMinutes().toString().padStart(2, '0')}`;
+        };
+
+        // Actualizar tabla y resumen estadístico
+        function actualizarTablaYEstadisticas() {
+            const tbody = document.getElementById("attendanceBody");
+            if (!tbody) return;
+            // Ordenar descendente por fecha
+            const ordenados = [...registrosAsistencia].sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+            tbody.innerHTML = "";
+            let totalHoras = 0;  // en minutos
+            let retardos = 0;
+            let asistenciasCompletas = 0;
+
+            ordenados.forEach(reg => {
+                const estadoClass = reg.estado === "Completo" ? "badge-success" : (reg.estado === "Retardo" ? "badge-warning" : (reg.estado === "Ausente" ? "badge-danger" : "badge-info"));
+                const badgeText = reg.estado;
+                if (reg.estado === "Retardo") retardos++;
+                if (reg.estado === "Completo") asistenciasCompletas++;
+                if (reg.horas && reg.horas !== "—") {
+                    const partes = reg.horas.match(/(\d+)h\s*(\d+)m/);
+                    if (partes) totalHoras += parseInt(partes[1]) * 60 + parseInt(partes[2]);
+                }
+                const fila = document.createElement("tr");
+                fila.innerHTML = `
                 <td>${formatearFechaParaTabla(reg.fecha)}</td>
                 <td>${reg.entrada || "—"}</td>
                 <td>${reg.salida || "—"}</td>
@@ -720,71 +769,72 @@
                 <td>${reg.extra || "—"}</td>
                 <td><span class="badge ${estadoClass}">${badgeText}</span></td>
             `;
-            tbody.appendChild(fila);
+                tbody.appendChild(fila);
+            });
+
+            const totalHorasStr = `${Math.floor(totalHoras / 60)}h ${totalHoras % 60}m`;
+            document.getElementById("totalHorasMes").innerText = totalHorasStr;
+            document.getElementById("totalRetardos").innerText = retardos;
+            document.getElementById("asistenciasCompletas").innerText = asistenciasCompletas;
+        }
+
+        function formatearFechaParaTabla(fechaISO) {
+            const opciones = { weekday: 'short', year: 'numeric', month: 'numeric', day: 'numeric' };
+            const fecha = new Date(fechaISO);
+            return fecha.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        }
+
+        function mostrarMensaje(msg, tipo = "info") {
+            const toastDiv = document.getElementById("liveToast");
+            const msgSpan = document.getElementById("toastMsg");
+            msgSpan.innerText = msg;
+            toastDiv.style.display = "block";
+            setTimeout(() => {
+                toastDiv.style.display = "none";
+            }, 3000);
+        }
+
+        // Exportar PDF simulado (descarga de tabla)
+        function exportarPDF() {
+            mostrarMensaje("Función de exportación a PDF disponible en versión completa. Se descargaría reporte mensual.", "info");
+            // Aquí se integraría librería jsPDF, pero simulamos acción
+        }
+
+        // Filtros simples (visuales, solo reordenan)
+        document.getElementById("filterSemana")?.addEventListener("click", () => {
+            mostrarMensaje("Filtro semana: mostrando últimos 7 días (demo)", "info");
+            // En entorno real se filtraría, pero la tabla ya se actualiza dinámicamente
+            actualizarTablaYEstadisticas();
         });
-        
-        const totalHorasStr = `${Math.floor(totalHoras/60)}h ${totalHoras%60}m`;
-        document.getElementById("totalHorasMes").innerText = totalHorasStr;
-        document.getElementById("totalRetardos").innerText = retardos;
-        document.getElementById("asistenciasCompletas").innerText = asistenciasCompletas;
-    }
-    
-    function formatearFechaParaTabla(fechaISO) {
-        const opciones = { weekday: 'short', year: 'numeric', month: 'numeric', day: 'numeric' };
-        const fecha = new Date(fechaISO);
-        return fecha.toLocaleDateString('es-ES', { day:'2-digit', month:'2-digit', year:'numeric' });
-    }
-    
-    function mostrarMensaje(msg, tipo="info") {
-        const toastDiv = document.getElementById("liveToast");
-        const msgSpan = document.getElementById("toastMsg");
-        msgSpan.innerText = msg;
-        toastDiv.style.display = "block";
-        setTimeout(() => {
-            toastDiv.style.display = "none";
-        }, 3000);
-    }
-    
-    // Exportar PDF simulado (descarga de tabla)
-    function exportarPDF() {
-        mostrarMensaje("Función de exportación a PDF disponible en versión completa. Se descargaría reporte mensual.", "info");
-        // Aquí se integraría librería jsPDF, pero simulamos acción
-    }
-    
-    // Filtros simples (visuales, solo reordenan)
-    document.getElementById("filterSemana")?.addEventListener("click", () => {
-        mostrarMensaje("Filtro semana: mostrando últimos 7 días (demo)", "info");
-        // En entorno real se filtraría, pero la tabla ya se actualiza dinámicamente
-        actualizarTablaYEstadisticas();
-    });
-    document.getElementById("filterMes")?.addEventListener("click", () => {
-        actualizarTablaYEstadisticas();
-    });
-    
-    // Event listeners
-    document.getElementById("btnEntrada")?.addEventListener("click", registrarEntrada);
-    document.getElementById("btnSalida")?.addEventListener("click", registrarSalida);
-    document.getElementById("exportPDFbtn")?.addEventListener("click", exportarPDF);
-    document.getElementById("verMasBtn")?.addEventListener("click", () => mostrarMensaje("Vista de mes completo: se mostrarán todos los registros históricos.", "info"));
-    document.getElementById("logoutBtn")?.addEventListener("click", () => {
-        mostrarMensaje("Cerrando sesión...", "success");
-        setTimeout(() => window.location.href = "../../login.html", 800);
-    });
-    
-    // Sidebar toggle
-    const menuToggle = document.getElementById("menuToggle");
-    const sidebar = document.getElementById("sidebar");
-    if(menuToggle) {
-        menuToggle.addEventListener("click", () => {
-            sidebar.classList.toggle("active");
+        document.getElementById("filterMes")?.addEventListener("click", () => {
+            actualizarTablaYEstadisticas();
         });
-    }
-    
-    // Inicializar vista
-    actualizarTablaYEstadisticas();
-    
-    // Trazabilidad de eventos en consola
-    console.log("Módulo de asistencia cargado - OperPan v2.0");
-</script>
+
+        // Event listeners
+        document.getElementById("btnEntrada")?.addEventListener("click", registrarEntrada);
+        document.getElementById("btnSalida")?.addEventListener("click", registrarSalida);
+        document.getElementById("exportPDFbtn")?.addEventListener("click", exportarPDF);
+        document.getElementById("verMasBtn")?.addEventListener("click", () => mostrarMensaje("Vista de mes completo: se mostrarán todos los registros históricos.", "info"));
+        document.getElementById("logoutBtn")?.addEventListener("click", () => {
+            mostrarMensaje("Cerrando sesión...", "success");
+            setTimeout(() => window.location.href = "../../login.html", 800);
+        });
+
+        // Sidebar toggle
+        const menuToggle = document.getElementById("menuToggle");
+        const sidebar = document.getElementById("sidebar");
+        if (menuToggle) {
+            menuToggle.addEventListener("click", () => {
+                sidebar.classList.toggle("active");
+            });
+        }
+
+        // Inicializar vista
+        actualizarTablaYEstadisticas();
+
+        // Trazabilidad de eventos en consola
+        console.log("Módulo de asistencia cargado - OperPan v2.0");
+    </script>
 </body>
+
 </html>
