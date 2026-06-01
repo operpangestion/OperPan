@@ -492,9 +492,19 @@
         <!-- TABLA -->
         <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
           <h3><i class="bi bi-table me-2"></i> Listado de cuentas</h3>
-          <div class="input-group" style="width:320px;">
-            <input type="text" class="form-control" id="searchInput" placeholder="Buscar nombre, email o documento">
-            <button class="btn btn-outline-secondary" id="searchBtn"><i class="bi bi-search"></i></button>
+
+          <div class="d-flex gap-2 align-items-center">
+            <button class="btn-primary-corporate" onclick="mostrarFormulario()">
+              <i class="bi bi-person-plus-fill me-1"></i>
+              Crear cuenta
+            </button>
+
+            <div class="input-group" style="width:320px;">
+              <input type="text" class="form-control" id="searchInput" placeholder="Buscar nombre, email o documento">
+              <button class="btn btn-outline-secondary" id="searchBtn">
+                <i class="bi bi-search"></i>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -517,7 +527,7 @@
         </div>
 
         <!-- FORMULARIO -->
-        <div class="form-section">
+        <div class="form-section" id="formularioCuenta" style="display:none;">
           <h3 class="mb-4"><i class="bi bi-person-plus-fill me-2"></i><span id="formTitle">Crear nueva cuenta</span>
           </h3>
 
@@ -986,6 +996,7 @@
         auditoria("CREAR CUENTA", `Nueva cuenta: ${pn} ${pa} (${nuevoId})`, nuevoId);
         mostrarToast(`Cuenta creada — ID: ${nuevoId}`, "success");
         limpiarForm();
+        ocultarFormulario();
       }
 
       guardarLS();
@@ -994,9 +1005,13 @@
 
     // ── Editar cuenta ────────────────────────────────────────────
     function editarCuenta(id) {
+      mostrarFormulario();
+
       const u = usuarios.find(x => x.id === id);
       if (!u) return;
+
       editandoId = id;
+
       document.getElementById("formTitle").innerText = "Editar cuenta";
       document.getElementById("btnCancelarEdicion").style.display = "inline-block";
 
@@ -1045,6 +1060,7 @@
       document.getElementById("formTitle").innerText = "Crear nueva cuenta";
       document.getElementById("btnCancelarEdicion").style.display = "none";
       limpiarForm();
+      ocultarFormulario();
     }
 
     function limpiarForm() {
@@ -1096,6 +1112,17 @@
         eliminarId = null;
       };
       new bootstrap.Modal(document.getElementById("confirmModal")).show();
+    }
+
+    // ── Mostarar Formularios
+    function mostrarFormulario() {
+      document.getElementById("formularioCuenta").style.display = "block";
+      document.getElementById("formularioCuenta")
+        .scrollIntoView({ behavior: "smooth" });
+    }
+
+    function ocultarFormulario() {
+      document.getElementById("formularioCuenta").style.display = "none";
     }
 
     // ── Eventos ──────────────────────────────────────────────────
