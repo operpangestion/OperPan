@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
@@ -7,25 +8,61 @@
   <!-- Bootstrap 5 + Icons + Google Fonts -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
   <style>
     /* ==============================================
        GLOBALES Y RESET (OperPan - Estación Paisa)
     ============================================== */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Poppins', sans-serif;
       background: #F4F7FC;
       overflow-x: hidden;
     }
-    h1, h2, h3, h4, h5 { font-weight: 700; color: #000000; }
-    h1 { font-size: 2.5rem; }
-    h2 { font-size: 2rem; }
-    h3 { font-size: 1.5rem; }
-    p, span, a, li, input, button, label { font-size: 1rem; }
-    
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      font-weight: 700;
+      color: #000000;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+    }
+
+    p,
+    span,
+    a,
+    li,
+    input,
+    button,
+    label {
+      font-size: 1rem;
+    }
+
     /* Layout sidebar + contenido */
-    .wrapper { display: flex; min-height: 100vh; }
+    .wrapper {
+      display: flex;
+      min-height: 100vh;
+    }
+
     .sidebar {
       width: 280px;
       background-color: #000000;
@@ -36,9 +73,32 @@
       z-index: 1000;
       display: flex;
       flex-direction: column;
+
+      /* Habilitar el scroll pero ocultar la barra */
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: none;
+      /* Oculta la barra en Firefox */
+      -ms-overflow-style: none;
+      /* Oculta la barra en Internet Explorer/Edge */
     }
-    .sidebar-header { padding: 1.8rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
-    .logo-area { display: flex; align-items: center; gap: 12px; }
+
+    /* Oculta la barra en Chrome, Safari y navegadores basados en Chromium (como Brave o Edge) */
+    .sidebar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .sidebar-header {
+      padding: 1.8rem 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
     .logo-icon {
       width: 40px;
       height: 40px;
@@ -50,11 +110,32 @@
       font-weight: 800;
       font-size: 1.5rem;
     }
-    .logo-text h4 { color: white; margin-bottom: 0; font-size: 1.3rem; }
-    .logo-text span { font-size: 0.7rem; color: #ccc; }
-    .nav-menu { flex: 1; padding: 2rem 0; }
-    .nav-menu ul { list-style: none; padding-left: 0; }
-    .nav-menu li { margin-bottom: 0.5rem; }
+
+    .logo-text h4 {
+      color: white;
+      margin-bottom: 0;
+      font-size: 1.3rem;
+    }
+
+    .logo-text span {
+      font-size: 0.7rem;
+      color: #ccc;
+    }
+
+    .nav-menu {
+      flex: 1;
+      padding: 2rem 0;
+    }
+
+    .nav-menu ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .nav-menu li {
+      margin-bottom: 0.5rem;
+    }
+
     .nav-menu a {
       display: flex;
       align-items: center;
@@ -66,12 +147,43 @@
       transition: all 0.2s;
       border-left: 3px solid transparent;
     }
-    .nav-menu a i { font-size: 1.3rem; width: 28px; }
-    .nav-menu a:hover { background: rgba(164, 7, 6, 0.15); color: white; border-left-color: #A40706; }
-    .nav-menu .active a { background: rgba(164, 7, 6, 0.2); color: white; border-left-color: #A40706; font-weight: 600; }
-    
+
+    .nav-menu a i {
+      font-size: 1.3rem;
+      width: 28px;
+    }
+
+    .nav-menu a:hover {
+      background: rgba(164, 7, 6, 0.15);
+      color: white;
+      border-left-color: #A40706;
+    }
+
+    .nav-menu .active a {
+      background: rgba(164, 7, 6, 0.2);
+      color: white;
+      border-left-color: #A40706;
+      font-weight: 600;
+    }
+
+    .soporte {
+      color: #ffffff80;
+      text-decoration: none;
+    }
+
+    .soporte:hover {
+      transition: 1s;
+      text-decoration: none;
+      color: #A40706;
+    }
+
     /* Contenido principal */
-    .main-content { flex: 1; margin-left: 280px; transition: all 0.3s; }
+    .main-content {
+      flex: 1;
+      margin-left: 280px;
+      transition: all 0.3s;
+    }
+
     .topbar {
       background: #000000;
       padding: 0.8rem 2rem;
@@ -81,9 +193,26 @@
       flex-wrap: wrap;
       border-bottom: 1px solid #2C2C2C;
     }
-    .company-info h2 { color: white; font-size: 1.3rem; margin-bottom: 0; font-weight: 600; }
-    .company-info p { color: #BBBBBB; font-size: 0.75rem; margin-bottom: 0; }
-    .user-info { display: flex; align-items: center; gap: 20px; }
+
+    .company-info h2 {
+      color: white;
+      font-size: 1.3rem;
+      margin-bottom: 0;
+      font-weight: 600;
+    }
+
+    .company-info p {
+      color: #BBBBBB;
+      font-size: 0.75rem;
+      margin-bottom: 0;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
     .user-badge {
       display: flex;
       align-items: center;
@@ -92,8 +221,17 @@
       padding: 0.4rem 1rem;
       border-radius: 60px;
     }
-    .user-badge i { font-size: 1.5rem; color: #A40706; }
-    .user-badge span { color: white; font-weight: 500; }
+
+    .user-badge i {
+      font-size: 1.5rem;
+      color: #A40706;
+    }
+
+    .user-badge span {
+      color: white;
+      font-weight: 500;
+    }
+
     .btn-logout {
       background: transparent;
       border: 1px solid #A40706;
@@ -102,24 +240,33 @@
       border-radius: 30px;
       transition: 0.2s;
     }
-    .btn-logout:hover { background: #A40706; color: white; }
-    
+
+    .btn-logout:hover {
+      background: #A40706;
+      color: white;
+    }
+
     /* Dashboard */
-    .dashboard-container { padding: 2rem; }
+    .dashboard-container {
+      padding: 2rem;
+    }
+
     .card-modern {
       background: white;
       border-radius: 24px;
       border: none;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
       margin-bottom: 1.5rem;
       overflow: hidden;
     }
+
     .card-header {
       background: transparent;
       border-bottom: 1px solid #EDF2F7;
       padding: 1rem 1.5rem;
       font-weight: 700;
     }
+
     /* Tabs de vista */
     .view-tabs {
       display: flex;
@@ -128,6 +275,7 @@
       border-bottom: 1px solid #E9ECF3;
       padding-bottom: 0.5rem;
     }
+
     .view-tab {
       background: transparent;
       border: none;
@@ -137,24 +285,58 @@
       transition: 0.2s;
       color: #475569;
     }
-    .view-tab i { margin-right: 8px; }
-    .view-tab.active { background: #A40706; color: white; }
-    .view-pane { display: none; animation: fadeIn 0.2s ease; }
-    .view-pane.active { display: block; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(5px);} to { opacity: 1; transform: translateY(0);} }
-    
+
+    .view-tab i {
+      margin-right: 8px;
+    }
+
+    .view-tab.active {
+      background: #A40706;
+      color: white;
+    }
+
+    .view-pane {
+      display: none;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .view-pane.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     /* Formularios */
-    .form-label { font-weight: 600; color: #1E293B; margin-bottom: 0.5rem; }
-    .form-control, .form-select {
+    .form-label {
+      font-weight: 600;
+      color: #1E293B;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-control,
+    .form-select {
       border-radius: 16px;
       border: 1.5px solid #E2E8F0;
       padding: 0.7rem 1rem;
       font-family: 'Poppins', sans-serif;
     }
-    .form-control:focus, .form-select:focus {
+
+    .form-control:focus,
+    .form-select:focus {
       border-color: #A40706;
-      box-shadow: 0 0 0 3px rgba(164,7,6,0.2);
+      box-shadow: 0 0 0 3px rgba(164, 7, 6, 0.2);
     }
+
     .btn-primary-corporate {
       background: #A40706;
       border: none;
@@ -163,7 +345,12 @@
       font-weight: 600;
       transition: 0.2s;
     }
-    .btn-primary-corporate:hover { background: #8a0504; transform: translateY(-2px); }
+
+    .btn-primary-corporate:hover {
+      background: #8a0504;
+      transform: translateY(-2px);
+    }
+
     .btn-outline-corporate {
       border: 1.5px solid #A40706;
       background: transparent;
@@ -172,7 +359,7 @@
       border-radius: 40px;
       font-weight: 600;
     }
-    
+
     /* Tarjetas de incapacidad */
     .incapacidad-card {
       background: white;
@@ -182,31 +369,68 @@
       border: 1px solid #EDF2F7;
       transition: 0.2s;
     }
-    .badge-pending { background: #FFF3E0; color: #C77A00; }
-    .badge-approved { background: #E0F2E9; color: #1E7B48; }
-    .badge-rejected { background: #FEF2F0; color: #B91C1C; }
-    
+
+    .badge-pending {
+      background: #FFF3E0;
+      color: #C77A00;
+    }
+
+    .badge-approved {
+      background: #E0F2E9;
+      color: #1E7B48;
+    }
+
+    .badge-rejected {
+      background: #FEF2F0;
+      color: #B91C1C;
+    }
+
     /* KPIs */
     .kpi-card {
       background: white;
       border-radius: 20px;
       padding: 1rem;
       text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
     }
+
     .toast-message {
       position: fixed;
       bottom: 20px;
       right: 20px;
       z-index: 1100;
     }
+
     @media (max-width: 992px) {
-      .sidebar { margin-left: -280px; }
-      .sidebar.active { margin-left: 0; }
-      .main-content { margin-left: 0; }
-      .menu-toggle { display: block; background: black; color: white; border: none; padding: 0.5rem 1rem; margin-right: 1rem; border-radius: 12px; }
+      .sidebar {
+        margin-left: -280px;
+      }
+
+      .sidebar.active {
+        margin-left: 0;
+      }
+
+      .main-content {
+        margin-left: 0;
+      }
+
+      .menu-toggle {
+        display: block;
+        background: black;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        margin-right: 1rem;
+        border-radius: 12px;
+      }
     }
-    @media (min-width: 993px) { .menu-toggle { display: none; } }
+
+    @media (min-width: 993px) {
+      .menu-toggle {
+        display: none;
+      }
+    }
+
     footer {
       text-align: center;
       padding: 1rem;
@@ -216,288 +440,380 @@
     }
   </style>
 </head>
+
 <body>
-<div class="wrapper">
-  <!-- SIDEBAR NEGRA -->
-  <aside class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">OP</div><div class="logo-text"><h4>OperPan</h4><span>Estación Paisa</span></div></div>
-    </div>
-    <nav class="nav-menu">
-      <ul>
-        <li><a href="../landingAdmin.html"><i class="bi bi-grid-3x3-gap-fill"></i> Inicio</a></li>
-        <li><a href="./7-horarios.html"><i class="bi bi-calendar3-week"></i> Horarios</a></li>
-        <li><a href="./1-cuentas.html"><i class="bi bi-people"></i> Cuentas</a></li>
-        <li><a href="./2-tareas.html"><i class="bi bi-list-task"></i> Tareas</a></li>
-        <li><a href="./3-permisos.html"><i class="bi bi-file-earmark-text"></i> Permisos</a></li>
-        <li><a href="./4-reportes.html"><i class="bi bi-bar-chart"></i> Reportes</a></li>
-        <li class="active"><a href="./5-incapacidad.html"><i class="bi bi-clipboard2-pulse"></i> Incapacidad</a></li>
-        <li><a href="./6-certificados.html"><i class="bi bi-award"></i> Certificados</a></li>
-      </ul>
-    </nav>
-    <div class="p-3 border-top border-secondary"><small class="text-white-50"><i class="bi bi-shield-lock"></i> v2.0 · Administrador</small></div>
-  </aside>
-
-  <div class="main-content">
-    <header class="topbar">
-      <div class="d-flex align-items-center gap-3">
-        <button class="menu-toggle btn btn-dark" id="menuToggle"><i class="bi bi-list"></i></button>
-        <div class="company-info"><h2>Gestión de Incapacidades</h2><p>Administra y da seguimiento a las incapacidades médicas</p></div>
+  <div class="wrapper">
+    <!-- SIDEBAR NEGRA -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-area">
+          <div class="logo-icon">OP</div>
+          <div class="logo-text">
+            <h4>OperPan</h4><span>Estación Paisa</span>
+          </div>
+        </div>
       </div>
-      <div class="user-info">
-        <div class="user-badge"><i class="bi bi-shield-fill-check"></i><span>Administrador</span></div>
-        <button class="btn-logout" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> Salir</button>
+      <nav class="nav-menu">
+        <ul>
+          <li><a href="../landingAdmin.html"><i class="bi bi-grid-3x3-gap-fill"></i> Inicio</a></li>
+          <li><a href="./7-horarios.html"><i class="bi bi-calendar3-week"></i> Horarios</a></li>
+          <li><a href="./1-cuentas.html"><i class="bi bi-people"></i> Cuentas</a></li>
+          <li><a href="./2-tareas.html"><i class="bi bi-list-task"></i> Tareas</a></li>
+          <li><a href="./3-permisos.html"><i class="bi bi-file-earmark-text"></i> Permisos</a></li>
+          <li><a href="./4-reportes.html"><i class="bi bi-bar-chart"></i> Reportes</a></li>
+          <li class="active"><a href="./5-incapacidad.html"><i class="bi bi-clipboard2-pulse"></i> Incapacidad</a></li>
+          <li><a href="./6-certificados.html"><i class="bi bi-award"></i> Certificados</a></li>
+        </ul>
+      </nav>
+      <div class="p-3 border-top border-secondary">
+        <a class="soporte"
+          href="https://mail.google.com/mail/?view=cm&fs=1&to=eddierpaz9@gmail.com&su=Soporte%20OperPan">
+          <small><i class="bi bi-question-circle me-2"></i>Ayuda / Soporte</small>
+        </a>
       </div>
-    </header>
-
-    <main class="dashboard-container">
-      <!-- KPIs resumen -->
-      <div class="row g-3 mb-4">
-        <div class="col-md-3"><div class="kpi-card"><span class="text-muted">Pendientes</span><h3 id="kpiPendientes">0</h3></div></div>
-        <div class="col-md-3"><div class="kpi-card"><span class="text-muted">Aprobadas hoy</span><h3 id="kpiAprobadas">0</h3></div></div>
-        <div class="col-md-3"><div class="kpi-card"><span class="text-muted">Rechazadas hoy</span><h3 id="kpiRechazadas">0</h3></div></div>
-        <div class="col-md-3"><div class="kpi-card"><span class="text-muted">Total mes</span><h3 id="kpiTotalMes">0</h3></div></div>
+      <div class="p-3 border-top border-secondary">
+        <small class="text-white-50"><i class="bi bi-shield-lock"></i> v2.0 · Administrador</small>
       </div>
+    </aside>
 
-      <!-- Tabs de vista -->
-      <div class="view-tabs">
-        <button class="view-tab active" data-view="empleado"><i class="bi bi-person-badge"></i> Vista Empleado</button>
-        <button class="view-tab" data-view="admin"><i class="bi bi-shield-lock"></i> Vista Administrador</button>
-      </div>
+    <div class="main-content">
+      <header class="topbar">
+        <div class="d-flex align-items-center gap-3">
+          <button class="menu-toggle btn btn-dark" id="menuToggle"><i class="bi bi-list"></i></button>
+          <div class="company-info">
+            <h2>Gestión de Incapacidades</h2>
+            <p>Administra y da seguimiento a las incapacidades médicas</p>
+          </div>
+        </div>
+        <div class="user-info">
+          <div class="user-badge"><i class="bi bi-shield-fill-check"></i><span>Administrador</span></div>
+          <button class="btn-logout" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> Salir</button>
+        </div>
+      </header>
 
-      <!-- VISTA EMPLEADO -->
-      <div id="viewEmpleado" class="view-pane active">
-        <div class="card-modern">
-          <div class="card-header"><h3 class="mb-0"><i class="bi bi-person-circle me-2"></i> Mis datos</h3></div>
-          <div class="p-3">
-            <div class="d-flex align-items-center gap-3">
-              <div class="bg-light rounded-circle d-flex align-items-center justify-content-center" style="width: 70px; height: 70px;"><i class="bi bi-person fs-1 text-muted"></i></div>
-              <div><h4 id="empleadoNombre">Eddier Paz Pardo</h4><div class="d-flex gap-2 flex-wrap"><span class="badge bg-secondary">ID: EMP-2024-156</span><span class="badge bg-dark">Panadero Principal</span><span class="badge bg-dark">EPS: Sura</span></div></div>
+      <main class="dashboard-container">
+        <!-- KPIs resumen -->
+        <div class="row g-3 mb-4">
+          <div class="col-md-3">
+            <div class="kpi-card"><span class="text-muted">Pendientes</span>
+              <h3 id="kpiPendientes">0</h3>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="kpi-card"><span class="text-muted">Aprobadas hoy</span>
+              <h3 id="kpiAprobadas">0</h3>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="kpi-card"><span class="text-muted">Rechazadas hoy</span>
+              <h3 id="kpiRechazadas">0</h3>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="kpi-card"><span class="text-muted">Total mes</span>
+              <h3 id="kpiTotalMes">0</h3>
             </div>
           </div>
         </div>
 
-        <!-- Formulario nueva incapacidad -->
-        <div class="card-modern">
-          <div class="card-header"><h3 class="mb-0"><i class="bi bi-plus-circle"></i> Adjuntar nueva incapacidad</h3></div>
-          <div class="p-4">
-            <form id="incapacidadForm">
-              <div class="row g-3">
-                <div class="col-12"><label class="form-label">Título *</label><input type="text" class="form-control" id="titulo" required placeholder="Ej: Incapacidad por cirugía"></div>
-                <div class="col-md-6"><label class="form-label">Fecha inicio *</label><input type="date" class="form-control" id="fechaInicio" required></div>
-                <div class="col-md-6"><label class="form-label">Fecha fin *</label><input type="date" class="form-control" id="fechaFin" required></div>
-                <div class="col-12"><label class="form-label">Descripción</label><textarea class="form-control" id="descripcion" rows="2" placeholder="Detalles adicionales..."></textarea></div>
-                <div class="col-12"><label class="form-label">Adjuntar documento médico (PDF) *</label><input type="file" class="form-control" id="archivo" accept=".pdf" required></div>
-                <div class="col-12"><button type="submit" class="btn btn-primary-corporate"><i class="bi bi-send"></i> Enviar incapacidad</button></div>
+        <!-- Tabs de vista -->
+        <div class="view-tabs">
+          <button class="view-tab active" data-view="empleado"><i class="bi bi-person-badge"></i> Vista
+            Empleado</button>
+          <button class="view-tab" data-view="admin"><i class="bi bi-shield-lock"></i> Vista Administrador</button>
+        </div>
+
+        <!-- VISTA EMPLEADO -->
+        <div id="viewEmpleado" class="view-pane active">
+          <div class="card-modern">
+            <div class="card-header">
+              <h3 class="mb-0"><i class="bi bi-person-circle me-2"></i> Mis datos</h3>
+            </div>
+            <div class="p-3">
+              <div class="d-flex align-items-center gap-3">
+                <div class="bg-light rounded-circle d-flex align-items-center justify-content-center"
+                  style="width: 70px; height: 70px;"><i class="bi bi-person fs-1 text-muted"></i></div>
+                <div>
+                  <h4 id="empleadoNombre">Eddier Paz Pardo</h4>
+                  <div class="d-flex gap-2 flex-wrap"><span class="badge bg-secondary">ID: EMP-2024-156</span><span
+                      class="badge bg-dark">Panadero Principal</span><span class="badge bg-dark">EPS: Sura</span></div>
+                </div>
               </div>
-            </form>
-          </div>
-        </div>
-
-        <!-- Mis incapacidades -->
-        <div class="card-modern">
-          <div class="card-header"><h3 class="mb-0"><i class="bi bi-clock-history"></i> Mis incapacidades</h3></div>
-          <div class="p-3" id="misIncapacidadesContainer"></div>
-        </div>
-      </div>
-
-      <!-- VISTA ADMINISTRADOR -->
-      <div id="viewAdmin" class="view-pane">
-        <div class="card-modern">
-          <div class="card-header"><h3 class="mb-0"><i class="bi bi-inbox"></i> Bandeja de incapacidades</h3></div>
-          <div class="p-3">
-            <div class="row g-2 mb-3">
-              <div class="col-md-3"><select class="form-select" id="filtroEstado"><option value="todas">Todos los estados</option><option value="pendiente">Pendientes</option><option value="aprobada">Aprobadas</option><option value="rechazada">Rechazadas</option></select></div>
-              <div class="col-md-3"><input type="text" class="form-control" id="buscarEmpleado" placeholder="Buscar por empleado"></div>
             </div>
-            <div id="incapacidadesAdminContainer"></div>
+          </div>
+
+          <!-- Formulario nueva incapacidad -->
+          <div class="card-modern">
+            <div class="card-header">
+              <h3 class="mb-0"><i class="bi bi-plus-circle"></i> Adjuntar nueva incapacidad</h3>
+            </div>
+            <div class="p-4">
+              <form id="incapacidadForm">
+                <div class="row g-3">
+                  <div class="col-12"><label class="form-label">Título *</label><input type="text" class="form-control"
+                      id="titulo" required placeholder="Ej: Incapacidad por cirugía"></div>
+                  <div class="col-md-6"><label class="form-label">Fecha inicio *</label><input type="date"
+                      class="form-control" id="fechaInicio" required></div>
+                  <div class="col-md-6"><label class="form-label">Fecha fin *</label><input type="date"
+                      class="form-control" id="fechaFin" required></div>
+                  <div class="col-12"><label class="form-label">Descripción</label><textarea class="form-control"
+                      id="descripcion" rows="2" placeholder="Detalles adicionales..."></textarea></div>
+                  <div class="col-12"><label class="form-label">Adjuntar documento médico (PDF) *</label><input
+                      type="file" class="form-control" id="archivo" accept=".pdf" required></div>
+                  <div class="col-12"><button type="submit" class="btn btn-primary-corporate"><i class="bi bi-send"></i>
+                      Enviar incapacidad</button></div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Mis incapacidades -->
+          <div class="card-modern">
+            <div class="card-header">
+              <h3 class="mb-0"><i class="bi bi-clock-history"></i> Mis incapacidades</h3>
+            </div>
+            <div class="p-3" id="misIncapacidadesContainer"></div>
           </div>
         </div>
-      </div>
-      <footer><i class="bi bi-shield-check"></i> Trazabilidad completa - Cada acción queda registrada</footer>
-    </main>
+
+        <!-- VISTA ADMINISTRADOR -->
+        <div id="viewAdmin" class="view-pane">
+          <div class="card-modern">
+            <div class="card-header">
+              <h3 class="mb-0"><i class="bi bi-inbox"></i> Bandeja de incapacidades</h3>
+            </div>
+            <div class="p-3">
+              <div class="row g-2 mb-3">
+                <div class="col-md-3"><select class="form-select" id="filtroEstado">
+                    <option value="todas">Todos los estados</option>
+                    <option value="pendiente">Pendientes</option>
+                    <option value="aprobada">Aprobadas</option>
+                    <option value="rechazada">Rechazadas</option>
+                  </select></div>
+                <div class="col-md-3"><input type="text" class="form-control" id="buscarEmpleado"
+                    placeholder="Buscar por empleado"></div>
+              </div>
+              <div id="incapacidadesAdminContainer"></div>
+            </div>
+          </div>
+        </div>
+        <footer><i class="bi bi-shield-check"></i> Trazabilidad completa - Cada acción queda registrada</footer>
+      </main>
+    </div>
   </div>
-</div>
 
-<!-- Modal para rechazar con justificación -->
-<div class="modal fade" id="rejectModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Rechazar incapacidad</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><label class="form-label">Motivo del rechazo *</label><textarea class="form-control" id="rejectReason" rows="3" required placeholder="Explique al empleado por qué se rechaza..."></textarea></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button><button type="button" class="btn btn-danger" id="confirmRejectBtn">Confirmar rechazo</button></div></div></div></div>
+  <!-- Modal para rechazar con justificación -->
+  <div class="modal fade" id="rejectModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Rechazar incapacidad</h5><button type="button" class="btn-close"
+            data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body"><label class="form-label">Motivo del rechazo *</label><textarea class="form-control"
+            id="rejectReason" rows="3" required placeholder="Explique al empleado por qué se rechaza..."></textarea>
+        </div>
+        <div class="modal-footer"><button type="button" class="btn btn-secondary"
+            data-bs-dismiss="modal">Cancelar</button><button type="button" class="btn btn-danger"
+            id="confirmRejectBtn">Confirmar rechazo</button></div>
+      </div>
+    </div>
+  </div>
 
-<!-- Modal para ver detalle -->
-<div class="modal fade" id="detalleModal" tabindex="-1"><div class="modal-dialog modal-lg modal-dialog-centered"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Detalle de incapacidad</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body" id="modalDetalleBody"></div><div class="modal-footer"><button type="button" class="btn btn-success" id="aprobarDesdeDetalle">Aprobar</button><button type="button" class="btn btn-danger" id="rechazarDesdeDetalle">Rechazar</button><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button></div></div></div></div>
+  <!-- Modal para ver detalle -->
+  <div class="modal fade" id="detalleModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Detalle de incapacidad</h5><button type="button" class="btn-close"
+            data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" id="modalDetalleBody"></div>
+        <div class="modal-footer"><button type="button" class="btn btn-success"
+            id="aprobarDesdeDetalle">Aprobar</button><button type="button" class="btn btn-danger"
+            id="rechazarDesdeDetalle">Rechazar</button><button type="button" class="btn btn-secondary"
+            data-bs-dismiss="modal">Cerrar</button></div>
+      </div>
+    </div>
+  </div>
 
-<!-- Toast -->
-<div class="toast-message" id="liveToast" style="display:none;"><div class="bg-white rounded-3 shadow p-3 border-start border-4 border-danger"><div class="d-flex gap-2"><i class="bi bi-info-circle-fill text-danger fs-5"></i><span id="toastMsg"></span></div></div></div>
+  <!-- Toast -->
+  <div class="toast-message" id="liveToast" style="display:none;">
+    <div class="bg-white rounded-3 shadow p-3 border-start border-4 border-danger">
+      <div class="d-flex gap-2"><i class="bi bi-info-circle-fill text-danger fs-5"></i><span id="toastMsg"></span></div>
+    </div>
+  </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  // ============================================================
-  // MÓDULO DE INCAPACIDADES - OPERPAN (ADMIN + EMPLEADO)
-  // Cumple RF-IN-01 a RF-IN-07, RNF-IN-01 a RNF-IN-04, reglas de negocio
-  // Persistencia localStorage, trazabilidad, aprobación/rechazo con motivo
-  // ============================================================
-  
-  const STORAGE_INCAPACIDADES = "operpan_incapacidades";
-  const STORAGE_AUDIT = "operpan_audit_incapacidades";
-  
-  let incapacidades = [];
-  let auditLog = [];
-  let pendingRejectId = null;
-  
-  const empleadoActual = {
-    id: "EMP-2024-156",
-    nombre: "Eddier Paz Pardo",
-    eps: "Sura",
-    rol: "empleado"
-  };
-  
-  function inicializarDatos() {
-    const stored = localStorage.getItem(STORAGE_INCAPACIDADES);
-    if (!stored) {
-      incapacidades = [
-        { id: "inc1", empleadoId: "EMP-2024-156", empleadoNombre: "Eddier Paz Pardo", titulo: "Procedimiento odontológico", descripcion: "Endodoncia, reposo 5 días", fechaInicio: "2025-04-10", fechaFin: "2025-04-15", estado: "pendiente", fechaSolicitud: "2025-04-14T20:00:00", archivo: "incapacidad1.pdf", motivoRechazo: null, decisionPor: null, decisionFecha: null },
-        { id: "inc2", empleadoId: "EMP-2024-157", empleadoNombre: "Santiago Muñeton", titulo: "Fractura dedo", descripcion: "Fractura dedo meñique", fechaInicio: "2025-04-11", fechaFin: "2025-04-25", estado: "pendiente", fechaSolicitud: "2025-04-13T15:30:00", archivo: "incapacidad2.pdf", motivoRechazo: null, decisionPor: null, decisionFecha: null },
-        { id: "inc3", empleadoId: "EMP-2024-156", empleadoNombre: "Eddier Paz Pardo", titulo: "Gripa estacional", descripcion: "Incapacidad 3 días", fechaInicio: "2025-03-01", fechaFin: "2025-03-03", estado: "aprobada", fechaSolicitud: "2025-02-28T10:00:00", archivo: "incapacidad3.pdf", motivoRechazo: null, decisionPor: "Administrador", decisionFecha: "2025-03-01T09:00:00" }
-      ];
-      localStorage.setItem(STORAGE_INCAPACIDADES, JSON.stringify(incapacidades));
-    } else incapacidades = JSON.parse(stored);
-    
-    const storedAudit = localStorage.getItem(STORAGE_AUDIT);
-    auditLog = storedAudit ? JSON.parse(storedAudit) : [];
-  }
-  
-  function guardarDatos() {
-    localStorage.setItem(STORAGE_INCAPACIDADES, JSON.stringify(incapacidades));
-    localStorage.setItem(STORAGE_AUDIT, JSON.stringify(auditLog));
-  }
-  
-  function registrarAuditoria(accion, detalles, incapacidadId, empleadoAfectado) {
-    const registro = {
-      fecha: new Date().toISOString(),
-      administrador: "Administrador",
-      accion,
-      detalles,
-      incapacidadId,
-      empleadoAfectado,
-      timestamp: Date.now()
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // ============================================================
+    // MÓDULO DE INCAPACIDADES - OPERPAN (ADMIN + EMPLEADO)
+    // Cumple RF-IN-01 a RF-IN-07, RNF-IN-01 a RNF-IN-04, reglas de negocio
+    // Persistencia localStorage, trazabilidad, aprobación/rechazo con motivo
+    // ============================================================
+
+    const STORAGE_INCAPACIDADES = "operpan_incapacidades";
+    const STORAGE_AUDIT = "operpan_audit_incapacidades";
+
+    let incapacidades = [];
+    let auditLog = [];
+    let pendingRejectId = null;
+
+    const empleadoActual = {
+      id: "EMP-2024-156",
+      nombre: "Eddier Paz Pardo",
+      eps: "Sura",
+      rol: "empleado"
     };
-    auditLog.unshift(registro);
-    if (auditLog.length > 200) auditLog.pop();
-    guardarDatos();
-    console.log("[AUDITORÍA INCAPACIDAD]", registro);
-  }
-  
-  function mostrarMensaje(msg) {
-    const toast = document.getElementById("liveToast");
-    document.getElementById("toastMsg").innerText = msg;
-    toast.style.display = "block";
-    setTimeout(() => toast.style.display = "none", 3000);
-  }
-  
-  function actualizarKPIs() {
-    const pendientes = incapacidades.filter(i => i.estado === "pendiente").length;
-    const hoy = new Date().toISOString().split('T')[0];
-    const aprobadasHoy = incapacidades.filter(i => i.estado === "aprobada" && i.decisionFecha?.split('T')[0] === hoy).length;
-    const rechazadasHoy = incapacidades.filter(i => i.estado === "rechazada" && i.decisionFecha?.split('T')[0] === hoy).length;
-    const mesActual = new Date().getMonth();
-    const totalMes = incapacidades.filter(i => new Date(i.fechaSolicitud).getMonth() === mesActual).length;
-    document.getElementById("kpiPendientes").innerText = pendientes;
-    document.getElementById("kpiAprobadas").innerText = aprobadasHoy;
-    document.getElementById("kpiRechazadas").innerText = rechazadasHoy;
-    document.getElementById("kpiTotalMes").innerText = totalMes;
-  }
-  
-  function renderizarMisIncapacidades() {
-    const container = document.getElementById("misIncapacidadesContainer");
-    if (!container) return;
-    const misIncaps = incapacidades.filter(i => i.empleadoId === empleadoActual.id).sort((a,b) => new Date(b.fechaSolicitud) - new Date(a.fechaSolicitud));
-    if (misIncaps.length === 0) { container.innerHTML = '<div class="alert alert-light">No has registrado incapacidades.</div>'; return; }
-    let html = "";
-    misIncaps.forEach(i => {
-      let badgeClass = i.estado === "pendiente" ? "badge-pending" : (i.estado === "aprobada" ? "badge-approved" : "badge-rejected");
-      let estadoText = i.estado === "pendiente" ? "Pendiente" : (i.estado === "aprobada" ? "Aprobada" : "Rechazada");
-      html += `<div class="incapacidad-card">
+
+    function inicializarDatos() {
+      const stored = localStorage.getItem(STORAGE_INCAPACIDADES);
+      if (!stored) {
+        incapacidades = [
+          { id: "inc1", empleadoId: "EMP-2024-156", empleadoNombre: "Eddier Paz Pardo", titulo: "Procedimiento odontológico", descripcion: "Endodoncia, reposo 5 días", fechaInicio: "2025-04-10", fechaFin: "2025-04-15", estado: "pendiente", fechaSolicitud: "2025-04-14T20:00:00", archivo: "incapacidad1.pdf", motivoRechazo: null, decisionPor: null, decisionFecha: null },
+          { id: "inc2", empleadoId: "EMP-2024-157", empleadoNombre: "Santiago Muñeton", titulo: "Fractura dedo", descripcion: "Fractura dedo meñique", fechaInicio: "2025-04-11", fechaFin: "2025-04-25", estado: "pendiente", fechaSolicitud: "2025-04-13T15:30:00", archivo: "incapacidad2.pdf", motivoRechazo: null, decisionPor: null, decisionFecha: null },
+          { id: "inc3", empleadoId: "EMP-2024-156", empleadoNombre: "Eddier Paz Pardo", titulo: "Gripa estacional", descripcion: "Incapacidad 3 días", fechaInicio: "2025-03-01", fechaFin: "2025-03-03", estado: "aprobada", fechaSolicitud: "2025-02-28T10:00:00", archivo: "incapacidad3.pdf", motivoRechazo: null, decisionPor: "Administrador", decisionFecha: "2025-03-01T09:00:00" }
+        ];
+        localStorage.setItem(STORAGE_INCAPACIDADES, JSON.stringify(incapacidades));
+      } else incapacidades = JSON.parse(stored);
+
+      const storedAudit = localStorage.getItem(STORAGE_AUDIT);
+      auditLog = storedAudit ? JSON.parse(storedAudit) : [];
+    }
+
+    function guardarDatos() {
+      localStorage.setItem(STORAGE_INCAPACIDADES, JSON.stringify(incapacidades));
+      localStorage.setItem(STORAGE_AUDIT, JSON.stringify(auditLog));
+    }
+
+    function registrarAuditoria(accion, detalles, incapacidadId, empleadoAfectado) {
+      const registro = {
+        fecha: new Date().toISOString(),
+        administrador: "Administrador",
+        accion,
+        detalles,
+        incapacidadId,
+        empleadoAfectado,
+        timestamp: Date.now()
+      };
+      auditLog.unshift(registro);
+      if (auditLog.length > 200) auditLog.pop();
+      guardarDatos();
+      console.log("[AUDITORÍA INCAPACIDAD]", registro);
+    }
+
+    function mostrarMensaje(msg) {
+      const toast = document.getElementById("liveToast");
+      document.getElementById("toastMsg").innerText = msg;
+      toast.style.display = "block";
+      setTimeout(() => toast.style.display = "none", 3000);
+    }
+
+    function actualizarKPIs() {
+      const pendientes = incapacidades.filter(i => i.estado === "pendiente").length;
+      const hoy = new Date().toISOString().split('T')[0];
+      const aprobadasHoy = incapacidades.filter(i => i.estado === "aprobada" && i.decisionFecha?.split('T')[0] === hoy).length;
+      const rechazadasHoy = incapacidades.filter(i => i.estado === "rechazada" && i.decisionFecha?.split('T')[0] === hoy).length;
+      const mesActual = new Date().getMonth();
+      const totalMes = incapacidades.filter(i => new Date(i.fechaSolicitud).getMonth() === mesActual).length;
+      document.getElementById("kpiPendientes").innerText = pendientes;
+      document.getElementById("kpiAprobadas").innerText = aprobadasHoy;
+      document.getElementById("kpiRechazadas").innerText = rechazadasHoy;
+      document.getElementById("kpiTotalMes").innerText = totalMes;
+    }
+
+    function renderizarMisIncapacidades() {
+      const container = document.getElementById("misIncapacidadesContainer");
+      if (!container) return;
+      const misIncaps = incapacidades.filter(i => i.empleadoId === empleadoActual.id).sort((a, b) => new Date(b.fechaSolicitud) - new Date(a.fechaSolicitud));
+      if (misIncaps.length === 0) { container.innerHTML = '<div class="alert alert-light">No has registrado incapacidades.</div>'; return; }
+      let html = "";
+      misIncaps.forEach(i => {
+        let badgeClass = i.estado === "pendiente" ? "badge-pending" : (i.estado === "aprobada" ? "badge-approved" : "badge-rejected");
+        let estadoText = i.estado === "pendiente" ? "Pendiente" : (i.estado === "aprobada" ? "Aprobada" : "Rechazada");
+        html += `<div class="incapacidad-card">
         <div class="d-flex justify-content-between"><div><strong>${i.titulo}</strong><br><small class="text-muted">${new Date(i.fechaSolicitud).toLocaleDateString()}</small><p class="mt-1 small">${i.descripcion}</p><div><span class="badge bg-secondary">${i.fechaInicio} → ${i.fechaFin}</span></div></div><div><span class="badge ${badgeClass}">${estadoText}</span></div></div>
         ${i.motivoRechazo ? `<div class="alert alert-danger mt-2 small">Motivo rechazo: ${i.motivoRechazo}</div>` : ''}
         <div class="mt-2"><a href="#" class="small" onclick="return false;">📄 Ver documento</a></div>
       </div>`;
-    });
-    container.innerHTML = html;
-  }
-  
-  function renderizarAdminIncapacidades() {
-    const container = document.getElementById("incapacidadesAdminContainer");
-    if (!container) return;
-    let filtradas = [...incapacidades];
-    const estado = document.getElementById("filtroEstado")?.value || "todas";
-    const busqueda = document.getElementById("buscarEmpleado")?.value.toLowerCase() || "";
-    if (estado !== "todas") filtradas = filtradas.filter(i => i.estado === estado);
-    if (busqueda) filtradas = filtradas.filter(i => i.empleadoNombre.toLowerCase().includes(busqueda));
-    filtradas.sort((a,b) => new Date(b.fechaSolicitud) - new Date(a.fechaSolicitud));
-    
-    if (filtradas.length === 0) { container.innerHTML = '<div class="alert alert-light">No hay incapacidades con esos filtros.</div>'; return; }
-    let html = "";
-    filtradas.forEach(i => {
-      let badgeClass = i.estado === "pendiente" ? "badge-pending" : (i.estado === "aprobada" ? "badge-approved" : "badge-rejected");
-      let estadoText = i.estado === "pendiente" ? "Pendiente" : (i.estado === "aprobada" ? "Aprobada" : "Rechazada");
-      html += `<div class="incapacidad-card">
+      });
+      container.innerHTML = html;
+    }
+
+    function renderizarAdminIncapacidades() {
+      const container = document.getElementById("incapacidadesAdminContainer");
+      if (!container) return;
+      let filtradas = [...incapacidades];
+      const estado = document.getElementById("filtroEstado")?.value || "todas";
+      const busqueda = document.getElementById("buscarEmpleado")?.value.toLowerCase() || "";
+      if (estado !== "todas") filtradas = filtradas.filter(i => i.estado === estado);
+      if (busqueda) filtradas = filtradas.filter(i => i.empleadoNombre.toLowerCase().includes(busqueda));
+      filtradas.sort((a, b) => new Date(b.fechaSolicitud) - new Date(a.fechaSolicitud));
+
+      if (filtradas.length === 0) { container.innerHTML = '<div class="alert alert-light">No hay incapacidades con esos filtros.</div>'; return; }
+      let html = "";
+      filtradas.forEach(i => {
+        let badgeClass = i.estado === "pendiente" ? "badge-pending" : (i.estado === "aprobada" ? "badge-approved" : "badge-rejected");
+        let estadoText = i.estado === "pendiente" ? "Pendiente" : (i.estado === "aprobada" ? "Aprobada" : "Rechazada");
+        html += `<div class="incapacidad-card">
         <div class="d-flex justify-content-between flex-wrap"><div><strong>${i.empleadoNombre}</strong> <span class="badge bg-secondary">${i.titulo}</span><p class="mt-1 small">${i.descripcion}</p><div><small>📅 ${i.fechaInicio} → ${i.fechaFin}</small> <span class="badge ${badgeClass}">${estadoText}</span></div></div><div><button class="btn btn-sm btn-primary verDetalleBtn" data-id="${i.id}"><i class="bi bi-eye"></i> Ver</button>${i.estado === "pendiente" ? `<button class="btn btn-sm btn-success aprobarBtn ms-2" data-id="${i.id}">✓ Aprobar</button><button class="btn btn-sm btn-danger rechazarBtn ms-2" data-id="${i.id}">✗ Rechazar</button>` : ''}</div></div>
         ${i.motivoRechazo ? `<div class="alert alert-danger mt-2 small"><strong>Motivo rechazo:</strong> ${i.motivoRechazo}</div>` : ''}
       </div>`;
-    });
-    container.innerHTML = html;
-    document.querySelectorAll(".verDetalleBtn").forEach(btn => btn.addEventListener("click", () => verDetalle(btn.dataset.id)));
-    document.querySelectorAll(".aprobarBtn").forEach(btn => btn.addEventListener("click", () => aprobarIncapacidad(btn.dataset.id)));
-    document.querySelectorAll(".rechazarBtn").forEach(btn => btn.addEventListener("click", () => abrirModalRechazo(btn.dataset.id)));
-  }
-  
-  function aprobarIncapacidad(id) {
-    const incap = incapacidades.find(i => i.id === id);
-    if (!incap || incap.estado !== "pendiente") return;
-    incap.estado = "aprobada";
-    incap.decisionPor = "Administrador";
-    incap.decisionFecha = new Date().toISOString();
-    incap.motivoRechazo = null;
-    registrarAuditoria("APROBAR INCAPACIDAD", `Incapacidad "${incap.titulo}" aprobada`, id, incap.empleadoId);
-    mostrarMensaje(`Incapacidad aprobada. Notificación enviada al empleado.`);
-    guardarDatos();
-    actualizarKPIs();
-    renderizarAdminIncapacidades();
-    renderizarMisIncapacidades();
-  }
-  
-  function abrirModalRechazo(id) {
-    pendingRejectId = id;
-    const modal = new bootstrap.Modal(document.getElementById("rejectModal"));
-    document.getElementById("rejectReason").value = "";
-    modal.show();
-  }
-  
-  document.getElementById("confirmRejectBtn")?.addEventListener("click", () => {
-    if (!pendingRejectId) return;
-    const reason = document.getElementById("rejectReason").value.trim();
-    if (!reason) { mostrarMensaje("Debe ingresar un motivo de rechazo."); return; }
-    const incap = incapacidades.find(i => i.id === pendingRejectId);
-    if (incap && incap.estado === "pendiente") {
-      incap.estado = "rechazada";
-      incap.motivoRechazo = reason;
+      });
+      container.innerHTML = html;
+      document.querySelectorAll(".verDetalleBtn").forEach(btn => btn.addEventListener("click", () => verDetalle(btn.dataset.id)));
+      document.querySelectorAll(".aprobarBtn").forEach(btn => btn.addEventListener("click", () => aprobarIncapacidad(btn.dataset.id)));
+      document.querySelectorAll(".rechazarBtn").forEach(btn => btn.addEventListener("click", () => abrirModalRechazo(btn.dataset.id)));
+    }
+
+    function aprobarIncapacidad(id) {
+      const incap = incapacidades.find(i => i.id === id);
+      if (!incap || incap.estado !== "pendiente") return;
+      incap.estado = "aprobada";
       incap.decisionPor = "Administrador";
       incap.decisionFecha = new Date().toISOString();
-      registrarAuditoria("RECHAZAR INCAPACIDAD", `Incapacidad "${incap.titulo}" rechazada. Motivo: ${reason}`, pendingRejectId, incap.empleadoId);
-      mostrarMensaje(`Incapacidad rechazada. Notificación enviada al empleado.`);
+      incap.motivoRechazo = null;
+      registrarAuditoria("APROBAR INCAPACIDAD", `Incapacidad "${incap.titulo}" aprobada`, id, incap.empleadoId);
+      mostrarMensaje(`Incapacidad aprobada. Notificación enviada al empleado.`);
       guardarDatos();
       actualizarKPIs();
       renderizarAdminIncapacidades();
       renderizarMisIncapacidades();
     }
-    bootstrap.Modal.getInstance(document.getElementById("rejectModal")).hide();
-    pendingRejectId = null;
-  });
-  
-  function verDetalle(id) {
-    const incap = incapacidades.find(i => i.id === id);
-    if (!incap) return;
-    const modalBody = document.getElementById("modalDetalleBody");
-    modalBody.innerHTML = `
+
+    function abrirModalRechazo(id) {
+      pendingRejectId = id;
+      const modal = new bootstrap.Modal(document.getElementById("rejectModal"));
+      document.getElementById("rejectReason").value = "";
+      modal.show();
+    }
+
+    document.getElementById("confirmRejectBtn")?.addEventListener("click", () => {
+      if (!pendingRejectId) return;
+      const reason = document.getElementById("rejectReason").value.trim();
+      if (!reason) { mostrarMensaje("Debe ingresar un motivo de rechazo."); return; }
+      const incap = incapacidades.find(i => i.id === pendingRejectId);
+      if (incap && incap.estado === "pendiente") {
+        incap.estado = "rechazada";
+        incap.motivoRechazo = reason;
+        incap.decisionPor = "Administrador";
+        incap.decisionFecha = new Date().toISOString();
+        registrarAuditoria("RECHAZAR INCAPACIDAD", `Incapacidad "${incap.titulo}" rechazada. Motivo: ${reason}`, pendingRejectId, incap.empleadoId);
+        mostrarMensaje(`Incapacidad rechazada. Notificación enviada al empleado.`);
+        guardarDatos();
+        actualizarKPIs();
+        renderizarAdminIncapacidades();
+        renderizarMisIncapacidades();
+      }
+      bootstrap.Modal.getInstance(document.getElementById("rejectModal")).hide();
+      pendingRejectId = null;
+    });
+
+    function verDetalle(id) {
+      const incap = incapacidades.find(i => i.id === id);
+      if (!incap) return;
+      const modalBody = document.getElementById("modalDetalleBody");
+      modalBody.innerHTML = `
       <p><strong>Empleado:</strong> ${incap.empleadoNombre}</p>
       <p><strong>Título:</strong> ${incap.titulo}</p>
       <p><strong>Descripción:</strong> ${incap.descripcion || "Sin descripción"}</p>
@@ -507,106 +823,119 @@
       ${incap.motivoRechazo ? `<p><strong>Motivo rechazo:</strong> ${incap.motivoRechazo}</p>` : ''}
       <p><strong>Documento:</strong> <a href="#">${incap.archivo}</a></p>
     `;
-    const modal = new bootstrap.Modal(document.getElementById("detalleModal"));
-    modal.show();
-    const aprobarBtn = document.getElementById("aprobarDesdeDetalle");
-    const rechazarBtn = document.getElementById("rechazarDesdeDetalle");
-    aprobarBtn.onclick = () => { aprobarIncapacidad(id); modal.hide(); };
-    rechazarBtn.onclick = () => { modal.hide(); abrirModalRechazo(id); };
-    if (incap.estado !== "pendiente") {
-      aprobarBtn.disabled = true;
-      rechazarBtn.disabled = true;
-    } else {
-      aprobarBtn.disabled = false;
-      rechazarBtn.disabled = false;
+      const modal = new bootstrap.Modal(document.getElementById("detalleModal"));
+      modal.show();
+      const aprobarBtn = document.getElementById("aprobarDesdeDetalle");
+      const rechazarBtn = document.getElementById("rechazarDesdeDetalle");
+      aprobarBtn.onclick = () => { aprobarIncapacidad(id); modal.hide(); };
+      rechazarBtn.onclick = () => { modal.hide(); abrirModalRechazo(id); };
+      if (incap.estado !== "pendiente") {
+        aprobarBtn.disabled = true;
+        rechazarBtn.disabled = true;
+      } else {
+        aprobarBtn.disabled = false;
+        rechazarBtn.disabled = false;
+      }
     }
-  }
-  
-  // Enviar nueva incapacidad (empleado)
-  document.getElementById("incapacidadForm")?.addEventListener("submit", function(e) {
-    e.preventDefault();
-    const titulo = document.getElementById("titulo").value.trim();
-    const fechaInicio = document.getElementById("fechaInicio").value;
-    const fechaFin = document.getElementById("fechaFin").value;
-    const descripcion = document.getElementById("descripcion").value.trim();
-    const archivo = document.getElementById("archivo").files[0];
-    
-    if (!titulo || !fechaInicio || !fechaFin) {
-      mostrarMensaje("Complete todos los campos obligatorios.");
-      return;
+
+    // Enviar nueva incapacidad (empleado)
+    document.getElementById("incapacidadForm")?.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const titulo = document.getElementById("titulo").value.trim();
+      const fechaInicio = document.getElementById("fechaInicio").value;
+      const fechaFin = document.getElementById("fechaFin").value;
+      const descripcion = document.getElementById("descripcion").value.trim();
+      const archivo = document.getElementById("archivo").files[0];
+
+      if (!titulo || !fechaInicio || !fechaFin) {
+        mostrarMensaje("Complete todos los campos obligatorios.");
+        return;
+      }
+      if (new Date(fechaInicio) > new Date(fechaFin)) {
+        mostrarMensaje("La fecha fin no puede ser anterior a la fecha inicio.");
+        return;
+      }
+      if (!archivo) {
+        mostrarMensaje("Debe adjuntar el documento médico en PDF.");
+        return;
+      }
+      if (archivo.type !== "application/pdf") {
+        mostrarMensaje("Solo se permiten archivos PDF.");
+        return;
+      }
+      if (archivo.size > 10 * 1024 * 1024) {
+        mostrarMensaje("El archivo no debe superar 10MB.");
+        return;
+      }
+
+      const nueva = {
+        id: Date.now().toString(),
+        empleadoId: empleadoActual.id,
+        empleadoNombre: empleadoActual.nombre,
+        titulo,
+        descripcion,
+        fechaInicio,
+        fechaFin,
+        estado: "pendiente",
+        fechaSolicitud: new Date().toISOString(),
+        archivo: archivo.name,
+        motivoRechazo: null,
+        decisionPor: null,
+        decisionFecha: null
+      };
+      incapacidades.push(nueva);
+      registrarAuditoria("CREAR INCAPACIDAD", `Nueva incapacidad: ${titulo}`, nueva.id, empleadoActual.id);
+      mostrarMensaje("Incapacidad enviada correctamente. Quedará pendiente de revisión.");
+      guardarDatos();
+      actualizarKPIs();
+      renderizarMisIncapacidades();
+      renderizarAdminIncapacidades();
+      document.getElementById("incapacidadForm").reset();
+    });
+
+    // Filtros
+    document.getElementById("filtroEstado")?.addEventListener("change", renderizarAdminIncapacidades);
+    document.getElementById("buscarEmpleado")?.addEventListener("input", renderizarAdminIncapacidades);
+
+    // Cambio de vista
+    document.querySelectorAll(".view-tab").forEach(tab => {
+      tab.addEventListener("click", () => {
+        document.querySelectorAll(".view-tab").forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+        const view = tab.dataset.view;
+        document.getElementById("viewEmpleado").classList.toggle("active", view === "empleado");
+        document.getElementById("viewAdmin").classList.toggle("active", view === "admin");
+        if (view === "admin") renderizarAdminIncapacidades();
+        else renderizarMisIncapacidades();
+      });
+    });
+
+    document.getElementById("logoutBtn")?.addEventListener("click", () => {
+      mostrarMensaje("Cerrando sesión...");
+      setTimeout(() => window.location.href = "../../login.html", 800);
+    });
+
+    const menuToggle = document.getElementById("menuToggle");
+    const sidebar = document.getElementById("sidebar");
+    if (menuToggle) {
+      menuToggle.addEventListener("click", () => sidebar.classList.toggle("active"));
     }
-    if (new Date(fechaInicio) > new Date(fechaFin)) {
-      mostrarMensaje("La fecha fin no puede ser anterior a la fecha inicio.");
-      return;
-    }
-    if (!archivo) {
-      mostrarMensaje("Debe adjuntar el documento médico en PDF.");
-      return;
-    }
-    if (archivo.type !== "application/pdf") {
-      mostrarMensaje("Solo se permiten archivos PDF.");
-      return;
-    }
-    if (archivo.size > 10 * 1024 * 1024) {
-      mostrarMensaje("El archivo no debe superar 10MB.");
-      return;
-    }
-    
-    const nueva = {
-      id: Date.now().toString(),
-      empleadoId: empleadoActual.id,
-      empleadoNombre: empleadoActual.nombre,
-      titulo,
-      descripcion,
-      fechaInicio,
-      fechaFin,
-      estado: "pendiente",
-      fechaSolicitud: new Date().toISOString(),
-      archivo: archivo.name,
-      motivoRechazo: null,
-      decisionPor: null,
-      decisionFecha: null
-    };
-    incapacidades.push(nueva);
-    registrarAuditoria("CREAR INCAPACIDAD", `Nueva incapacidad: ${titulo}`, nueva.id, empleadoActual.id);
-    mostrarMensaje("Incapacidad enviada correctamente. Quedará pendiente de revisión.");
-    guardarDatos();
+    // Cerrar el menú si se hace clic fuera de él (en la zona blanca)
+    document.addEventListener("click", (event) => {
+      // Verificamos si el sidebar está abierto (tiene la clase active)
+      if (sidebar.classList.contains("active")) {
+        // Si el clic NO fue dentro del sidebar Y TAMPOCO en el botón de hamburguesa...
+        if (!sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
+          sidebar.classList.remove("active");
+        }
+      }
+    });
+
+    inicializarDatos();
     actualizarKPIs();
     renderizarMisIncapacidades();
     renderizarAdminIncapacidades();
-    document.getElementById("incapacidadForm").reset();
-  });
-  
-  // Filtros
-  document.getElementById("filtroEstado")?.addEventListener("change", renderizarAdminIncapacidades);
-  document.getElementById("buscarEmpleado")?.addEventListener("input", renderizarAdminIncapacidades);
-  
-  // Cambio de vista
-  document.querySelectorAll(".view-tab").forEach(tab => {
-    tab.addEventListener("click", () => {
-      document.querySelectorAll(".view-tab").forEach(t => t.classList.remove("active"));
-      tab.classList.add("active");
-      const view = tab.dataset.view;
-      document.getElementById("viewEmpleado").classList.toggle("active", view === "empleado");
-      document.getElementById("viewAdmin").classList.toggle("active", view === "admin");
-      if (view === "admin") renderizarAdminIncapacidades();
-      else renderizarMisIncapacidades();
-    });
-  });
-  
-  document.getElementById("logoutBtn")?.addEventListener("click", () => {
-    mostrarMensaje("Cerrando sesión...");
-    setTimeout(() => window.location.href = "../../login.html", 800);
-  });
-  
-  const menuToggle = document.getElementById("menuToggle");
-  const sidebar = document.getElementById("sidebar");
-  if(menuToggle) menuToggle.addEventListener("click", () => sidebar.classList.toggle("active"));
-  
-  inicializarDatos();
-  actualizarKPIs();
-  renderizarMisIncapacidades();
-  renderizarAdminIncapacidades();
-</script>
+  </script>
 </body>
+
 </html>

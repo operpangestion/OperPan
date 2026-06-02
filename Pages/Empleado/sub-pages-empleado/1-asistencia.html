@@ -203,7 +203,7 @@
             padding: 0.4rem 1rem;
             border-radius: 60px;
         }
-        
+
         .user-badge:hover span {
             transition: 1s;
             color: #A40706;
@@ -474,6 +474,12 @@
                 </ul>
             </nav>
             <div class="p-3 border-top border-secondary">
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=eddierpaz9@gmail.com&su=Soporte%20OperPan"
+                    target="_blank" class="text-white-50 text-decoration-none d-block custom-sidebar-link">
+                    <small><i class="bi bi-question-circle me-2"></i>Ayuda / Soporte</small>
+                </a>
+            </div>
+            <div class="p-3 border-top border-secondary">
                 <small class="text-white-50"><i class="bi bi-shield-lock"></i> v2.0 · RRHH</small>
             </div>
         </aside>
@@ -521,10 +527,11 @@
 
                 <!-- Tarjetas resumen -->
                 <div class="row stats-row g-3">
+                    <h3 class="mb-0"><i class="bi bi-bar-chart"></i> Estadisticas del mes</h3>
                     <div class="col-md-4">
                         <div class="stat-card d-flex justify-content-between align-items-center">
                             <div>
-                                <span class="text-muted">Horas trabajadas (mes)</span>
+                                <span class="text-muted">Horas trabajadas</span>
                                 <h3 class="mt-1" id="totalHorasMes">124h 30m</h3>
                             </div>
                             <i class="bi bi-calendar-check"></i>
@@ -533,7 +540,7 @@
                     <div class="col-md-4">
                         <div class="stat-card d-flex justify-content-between align-items-center">
                             <div>
-                                <span class="text-muted">Retardos este mes</span>
+                                <span class="text-muted">Retardos</span>
                                 <h3 class="mt-1" id="totalRetardos">2</h3>
                             </div>
                             <i class="bi bi-exclamation-triangle"></i>
@@ -576,7 +583,6 @@
                                 <th>Entrada</th>
                                 <th>Salida</th>
                                 <th>Horas trabajadas</th>
-                                <th>Horas extra</th>
                                 <th>Estado</th>
                             </tr>
                         </thead>
@@ -796,7 +802,6 @@
                 <td>${reg.entrada || "—"}</td>
                 <td>${reg.salida || "—"}</td>
                 <td>${reg.horas || "—"}</td>
-                <td>${reg.extra || "—"}</td>
                 <td><span class="badge ${estadoClass}">${badgeText}</span></td>
             `;
                 tbody.appendChild(fila);

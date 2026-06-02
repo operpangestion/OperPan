@@ -69,6 +69,19 @@
       z-index: 1000;
       display: flex;
       flex-direction: column;
+
+      /* Habilitar el scroll pero ocultar la barra */
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: none;
+      /* Oculta la barra en Firefox */
+      -ms-overflow-style: none;
+      /* Oculta la barra en Internet Explorer/Edge */
+    }
+
+    /* Oculta la barra en Chrome, Safari y navegadores basados en Chromium (como Brave o Edge) */
+    .sidebar::-webkit-scrollbar {
+      display: none;
     }
 
     .sidebar-header {
@@ -92,7 +105,6 @@
       justify-content: center;
       font-weight: 800;
       font-size: 1.5rem;
-      color: #fff;
     }
 
     .logo-text h4 {
@@ -148,6 +160,17 @@
       color: white;
       border-left-color: #A40706;
       font-weight: 600;
+    }
+
+    .soporte {
+      color: #ffffff80;
+      text-decoration: none;
+    }
+
+    .soporte:hover {
+      transition: 1s;
+      text-decoration: none;
+      color: #A40706;
     }
 
     /* CONTENIDO */
@@ -435,6 +458,12 @@
           <li><a href="./6-certificados.html"><i class="bi bi-award"></i> Certificados</a></li>
         </ul>
       </nav>
+      <div class="p-3 border-top border-secondary">
+        <a class="soporte"
+          href="https://mail.google.com/mail/?view=cm&fs=1&to=eddierpaz9@gmail.com&su=Soporte%20OperPan">
+          <small><i class="bi bi-question-circle me-2"></i>Ayuda / Soporte</small>
+        </a>
+      </div>
       <div class="p-3 border-top border-secondary">
         <small class="text-white-50"><i class="bi bi-shield-lock"></i> v2.0 · Administrador</small>
       </div>
@@ -1130,8 +1159,20 @@
     document.getElementById("searchInput").addEventListener("keyup", e => {
       if (e.key === "Enter") renderizarTabla();
     });
-    document.getElementById("menuToggle").addEventListener("click", () => {
-      document.getElementById("sidebar").classList.toggle("active");
+    const menuToggle = document.getElementById("menuToggle");
+    const sidebar = document.getElementById("sidebar");
+    if (menuToggle) {
+      menuToggle.addEventListener("click", () => sidebar.classList.toggle("active"));
+    }
+    // Cerrar el menú si se hace clic fuera de él (en la zona blanca)
+    document.addEventListener("click", (event) => {
+      // Verificamos si el sidebar está abierto (tiene la clase active)
+      if (sidebar.classList.contains("active")) {
+        // Si el clic NO fue dentro del sidebar Y TAMPOCO en el botón de hamburguesa...
+        if (!sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
+          sidebar.classList.remove("active");
+        }
+      }
     });
     document.getElementById("logoutBtn").addEventListener("click", () => {
       mostrarToast("Cerrando sesión...", "success");

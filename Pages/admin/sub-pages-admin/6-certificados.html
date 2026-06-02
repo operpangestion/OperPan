@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
@@ -7,25 +8,61 @@
   <!-- Bootstrap 5 + Icons + Google Fonts -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
   <style>
     /* ==============================================
        GLOBALES Y RESET (OperPan - Estación Paisa)
     ============================================== */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Poppins', sans-serif;
       background: #F4F7FC;
       overflow-x: hidden;
     }
-    h1, h2, h3, h4, h5 { font-weight: 700; color: #000000; }
-    h1 { font-size: 2.5rem; }
-    h2 { font-size: 2rem; }
-    h3 { font-size: 1.5rem; }
-    p, span, a, li, input, button, label { font-size: 1rem; }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      font-weight: 700;
+      color: #000000;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+    }
+
+    p,
+    span,
+    a,
+    li,
+    input,
+    button,
+    label {
+      font-size: 1rem;
+    }
 
     /* Layout principal */
-    .wrapper { display: flex; min-height: 100vh; }
+    .wrapper {
+      display: flex;
+      min-height: 100vh;
+    }
+
     .sidebar {
       width: 280px;
       background-color: #000000;
@@ -36,9 +73,32 @@
       z-index: 1000;
       display: flex;
       flex-direction: column;
+
+      /* Habilitar el scroll pero ocultar la barra */
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: none;
+      /* Oculta la barra en Firefox */
+      -ms-overflow-style: none;
+      /* Oculta la barra en Internet Explorer/Edge */
     }
-    .sidebar-header { padding: 1.8rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
-    .logo-area { display: flex; align-items: center; gap: 12px; }
+
+    /* Oculta la barra en Chrome, Safari y navegadores basados en Chromium (como Brave o Edge) */
+    .sidebar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .sidebar-header {
+      padding: 1.8rem 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
     .logo-icon {
       width: 40px;
       height: 40px;
@@ -50,11 +110,32 @@
       font-weight: 800;
       font-size: 1.5rem;
     }
-    .logo-text h4 { color: white; margin-bottom: 0; font-size: 1.3rem; }
-    .logo-text span { font-size: 0.7rem; color: #ccc; }
-    .nav-menu { flex: 1; padding: 2rem 0; }
-    .nav-menu ul { list-style: none; padding-left: 0; }
-    .nav-menu li { margin-bottom: 0.5rem; }
+
+    .logo-text h4 {
+      color: white;
+      margin-bottom: 0;
+      font-size: 1.3rem;
+    }
+
+    .logo-text span {
+      font-size: 0.7rem;
+      color: #ccc;
+    }
+
+    .nav-menu {
+      flex: 1;
+      padding: 2rem 0;
+    }
+
+    .nav-menu ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .nav-menu li {
+      margin-bottom: 0.5rem;
+    }
+
     .nav-menu a {
       display: flex;
       align-items: center;
@@ -66,12 +147,43 @@
       transition: all 0.2s;
       border-left: 3px solid transparent;
     }
-    .nav-menu a i { font-size: 1.3rem; width: 28px; }
-    .nav-menu a:hover { background: rgba(164,7,6,0.15); color: white; border-left-color: #A40706; }
-    .nav-menu .active a { background: rgba(164,7,6,0.2); color: white; border-left-color: #A40706; font-weight: 600; }
+
+    .nav-menu a i {
+      font-size: 1.3rem;
+      width: 28px;
+    }
+
+    .nav-menu a:hover {
+      background: rgba(164, 7, 6, 0.15);
+      color: white;
+      border-left-color: #A40706;
+    }
+
+    .nav-menu .active a {
+      background: rgba(164, 7, 6, 0.2);
+      color: white;
+      border-left-color: #A40706;
+      font-weight: 600;
+    }
+
+    .soporte {
+      color: #ffffff80;
+      text-decoration: none;
+    }
+
+    .soporte:hover {
+      transition: 1s;
+      text-decoration: none;
+      color: #A40706;
+    }
 
     /* Contenido principal */
-    .main-content { flex: 1; margin-left: 280px; transition: all 0.3s; }
+    .main-content {
+      flex: 1;
+      margin-left: 280px;
+      transition: all 0.3s;
+    }
+
     .topbar {
       background: #000000;
       padding: 0.8rem 2rem;
@@ -81,9 +193,26 @@
       flex-wrap: wrap;
       border-bottom: 1px solid #2C2C2C;
     }
-    .company-info h2 { color: white; font-size: 1.3rem; margin-bottom: 0; font-weight: 600; }
-    .company-info p { color: #BBBBBB; font-size: 0.75rem; margin-bottom: 0; }
-    .user-info { display: flex; align-items: center; gap: 20px; }
+
+    .company-info h2 {
+      color: white;
+      font-size: 1.3rem;
+      margin-bottom: 0;
+      font-weight: 600;
+    }
+
+    .company-info p {
+      color: #BBBBBB;
+      font-size: 0.75rem;
+      margin-bottom: 0;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
     .user-badge {
       display: flex;
       align-items: center;
@@ -92,8 +221,17 @@
       padding: 0.4rem 1rem;
       border-radius: 60px;
     }
-    .user-badge i { font-size: 1.5rem; color: #A40706; }
-    .user-badge span { color: white; font-weight: 500; }
+
+    .user-badge i {
+      font-size: 1.5rem;
+      color: #A40706;
+    }
+
+    .user-badge span {
+      color: white;
+      font-weight: 500;
+    }
+
     .btn-logout {
       background: transparent;
       border: 1px solid #A40706;
@@ -102,24 +240,33 @@
       border-radius: 30px;
       transition: 0.2s;
     }
-    .btn-logout:hover { background: #A40706; color: white; }
+
+    .btn-logout:hover {
+      background: #A40706;
+      color: white;
+    }
 
     /* Dashboard */
-    .dashboard-container { padding: 2rem; }
+    .dashboard-container {
+      padding: 2rem;
+    }
+
     .card-modern {
       background: white;
       border-radius: 24px;
       border: none;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
       margin-bottom: 1.5rem;
       overflow: hidden;
     }
+
     .card-header {
       background: transparent;
       border-bottom: 1px solid #EDF2F7;
       padding: 1rem 1.5rem;
       font-weight: 700;
     }
+
     /* Tabs */
     .view-tabs {
       display: flex;
@@ -128,6 +275,7 @@
       border-bottom: 1px solid #E9ECF3;
       padding-bottom: 0.5rem;
     }
+
     .view-tab {
       background: transparent;
       border: none;
@@ -137,24 +285,58 @@
       transition: 0.2s;
       color: #475569;
     }
-    .view-tab i { margin-right: 8px; }
-    .view-tab.active { background: #A40706; color: white; }
-    .view-pane { display: none; animation: fadeIn 0.2s ease; }
-    .view-pane.active { display: block; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(5px);} to { opacity: 1; transform: translateY(0);} }
+
+    .view-tab i {
+      margin-right: 8px;
+    }
+
+    .view-tab.active {
+      background: #A40706;
+      color: white;
+    }
+
+    .view-pane {
+      display: none;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .view-pane.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
     /* Formularios */
-    .form-label { font-weight: 600; color: #1E293B; margin-bottom: 0.5rem; }
-    .form-control, .form-select {
+    .form-label {
+      font-weight: 600;
+      color: #1E293B;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-control,
+    .form-select {
       border-radius: 16px;
       border: 1.5px solid #E2E8F0;
       padding: 0.7rem 1rem;
       font-family: 'Poppins', sans-serif;
     }
-    .form-control:focus, .form-select:focus {
+
+    .form-control:focus,
+    .form-select:focus {
       border-color: #A40706;
-      box-shadow: 0 0 0 3px rgba(164,7,6,0.2);
+      box-shadow: 0 0 0 3px rgba(164, 7, 6, 0.2);
     }
+
     .btn-primary-corporate {
       background: #A40706;
       border: none;
@@ -163,7 +345,12 @@
       font-weight: 600;
       transition: 0.2s;
     }
-    .btn-primary-corporate:hover { background: #8a0504; transform: translateY(-2px); }
+
+    .btn-primary-corporate:hover {
+      background: #8a0504;
+      transform: translateY(-2px);
+    }
+
     .btn-outline-corporate {
       border: 1.5px solid #A40706;
       background: transparent;
@@ -172,14 +359,23 @@
       border-radius: 40px;
       font-weight: 600;
     }
+
     /* Tabla */
     .table-custom {
       background: white;
       border-radius: 20px;
       overflow: hidden;
     }
-    .table-custom thead { background: #F8F9FC; }
-    .badge { padding: 0.4rem 0.8rem; border-radius: 40px; }
+
+    .table-custom thead {
+      background: #F8F9FC;
+    }
+
+    .badge {
+      padding: 0.4rem 0.8rem;
+      border-radius: 40px;
+    }
+
     /* Toast */
     .toast-message {
       position: fixed;
@@ -187,237 +383,332 @@
       right: 20px;
       z-index: 1100;
     }
+
     @media (max-width: 992px) {
-      .sidebar { margin-left: -280px; }
-      .sidebar.active { margin-left: 0; }
-      .main-content { margin-left: 0; }
-      .menu-toggle { display: block; background: black; color: white; border: none; padding: 0.5rem 1rem; margin-right: 1rem; border-radius: 12px; }
+      .sidebar {
+        margin-left: -280px;
+      }
+
+      .sidebar.active {
+        margin-left: 0;
+      }
+
+      .main-content {
+        margin-left: 0;
+      }
+
+      .menu-toggle {
+        display: block;
+        background: black;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        margin-right: 1rem;
+        border-radius: 12px;
+      }
     }
-    @media (min-width: 993px) { .menu-toggle { display: none; } }
-    footer { text-align: center; padding: 1rem; color: #5F6C7A; font-size: 0.75rem; margin-top: 2rem; }
+
+    @media (min-width: 993px) {
+      .menu-toggle {
+        display: none;
+      }
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      color: #5F6C7A;
+      font-size: 0.75rem;
+      margin-top: 2rem;
+    }
   </style>
 </head>
+
 <body>
-<div class="wrapper">
-  <!-- SIDEBAR NEGRA -->
-  <aside class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">OP</div><div class="logo-text"><h4>OperPan</h4><span>Estación Paisa</span></div></div>
+  <div class="wrapper">
+    <!-- SIDEBAR NEGRA -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-area">
+          <div class="logo-icon">OP</div>
+          <div class="logo-text">
+            <h4>OperPan</h4><span>Estación Paisa</span>
+          </div>
+        </div>
+      </div>
+      <nav class="nav-menu">
+        <ul>
+          <li><a href="../landingAdmin.html"><i class="bi bi-grid-3x3-gap-fill"></i> Inicio</a></li>
+          <li><a href="./7-horarios.html"><i class="bi bi-calendar3-week"></i> Horarios</a></li>
+          <li><a href="./1-cuentas.html"><i class="bi bi-people"></i> Cuentas</a></li>
+          <li><a href="./2-tareas.html"><i class="bi bi-list-task"></i> Tareas</a></li>
+          <li><a href="./3-permisos.html"><i class="bi bi-file-earmark-text"></i> Permisos</a></li>
+          <li><a href="./4-reportes.html"><i class="bi bi-bar-chart"></i> Reportes</a></li>
+          <li><a href="./5-incapacidad.html"><i class="bi bi-clipboard2-pulse"></i> Incapacidad</a></li>
+          <li class="active"><a href="./6-certificados.html"><i class="bi bi-award"></i> Certificados</a></li>
+        </ul>
+      </nav>
+      <div class="p-3 border-top border-secondary">
+        <a class="soporte"
+          href="https://mail.google.com/mail/?view=cm&fs=1&to=eddierpaz9@gmail.com&su=Soporte%20OperPan">
+          <small><i class="bi bi-question-circle me-2"></i>Ayuda / Soporte</small>
+        </a>
+      </div>
+      <div class="p-3 border-top border-secondary">
+        <small class="text-white-50"><i class="bi bi-shield-lock"></i> v2.0 · Administrador</small>
+      </div>
+    </aside>
+
+    <div class="main-content">
+      <header class="topbar">
+        <div class="d-flex align-items-center gap-3">
+          <button class="menu-toggle btn btn-dark" id="menuToggle"><i class="bi bi-list"></i></button>
+          <div class="company-info">
+            <h2>Gestión de Certificados</h2>
+            <p>Solicita y genera certificados laborales</p>
+          </div>
+        </div>
+        <div class="user-info">
+          <div class="user-badge"><i class="bi bi-shield-fill-check"></i><span>Administrador</span></div>
+          <button class="btn-logout" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> Salir</button>
+        </div>
+      </header>
+
+      <main class="dashboard-container">
+        <!-- Tabs de vista -->
+        <div class="view-tabs">
+          <button class="view-tab active" data-view="empleado"><i class="bi bi-person-badge"></i> Vista
+            Empleado</button>
+          <button class="view-tab" data-view="admin"><i class="bi bi-shield-lock"></i> Vista Administrador</button>
+        </div>
+
+        <!-- VISTA EMPLEADO -->
+        <div id="viewEmpleado" class="view-pane active">
+          <div class="card-modern">
+            <div class="card-header">
+              <h3 class="mb-0"><i class="bi bi-person-circle me-2"></i> Mis datos</h3>
+            </div>
+            <div class="p-3">
+              <div class="d-flex align-items-center gap-3">
+                <div class="bg-light rounded-circle d-flex align-items-center justify-content-center"
+                  style="width: 70px; height: 70px;"><i class="bi bi-person fs-1 text-muted"></i></div>
+                <div>
+                  <h4 id="empleadoNombre">Eddier Paz Pardo</h4>
+                  <div class="d-flex gap-2 flex-wrap"><span class="badge bg-secondary">ID: EMP-2024-156</span><span
+                      class="badge bg-dark">Panadero Principal</span><span class="badge bg-dark">Ingreso:
+                      15/03/2022</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-modern">
+            <div class="card-header">
+              <h3 class="mb-0"><i class="bi bi-file-text"></i> Solicitar certificado laboral</h3>
+            </div>
+            <div class="p-4">
+              <form id="solicitudCertificadoForm">
+                <div class="row g-3">
+                  <div class="col-12"><label class="form-label">Tipo de certificado *</label><select class="form-select"
+                      id="tipoCertificadoEmpleado" required>
+                      <option value="laboral">Certificado laboral general</option>
+                      <option value="ingresos">Certificado de ingresos</option>
+                      <option value="antiguedad">Certificado de antigüedad</option>
+                    </select></div>
+                  <div class="col-12"><label class="form-label">Propósito *</label><input type="text"
+                      class="form-control" id="propositoEmpleado" required
+                      placeholder="Ej: Trámite bancario, nuevo empleo..."></div>
+                  <div class="col-12"><button type="submit" class="btn btn-primary-corporate"><i class="bi bi-send"></i>
+                      Solicitar certificado</button></div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Mis certificados previos -->
+          <div class="card-modern">
+            <div class="card-header">
+              <h3 class="mb-0"><i class="bi bi-clock-history"></i> Mis certificados anteriores</h3>
+            </div>
+            <div class="p-3" id="misCertificadosContainer"></div>
+          </div>
+        </div>
+
+        <!-- VISTA ADMINISTRADOR -->
+        <div id="viewAdmin" class="view-pane">
+          <div class="card-modern">
+            <div class="card-header">
+              <h3 class="mb-0"><i class="bi bi-plus-circle"></i> Generar certificado para empleado</h3>
+            </div>
+            <div class="p-4">
+              <form id="generarCertificadoForm">
+                <div class="row g-3">
+                  <div class="col-md-6"><label class="form-label">Empleado *</label><select class="form-select"
+                      id="empleadoSelect" required></select></div>
+                  <div class="col-md-6"><label class="form-label">Tipo de certificado *</label><select
+                      class="form-select" id="tipoCertificadoAdmin" required>
+                      <option value="laboral">Certificado laboral general</option>
+                      <option value="ingresos">Certificado de ingresos</option>
+                      <option value="antiguedad">Certificado de antigüedad</option>
+                    </select></div>
+                  <div class="col-12"><label class="form-label">Propósito *</label><input type="text"
+                      class="form-control" id="propositoAdmin" required placeholder="Ej: Crédito hipotecario"></div>
+                  <div class="col-12"><label class="form-label">Observaciones (opcional)</label><textarea
+                      class="form-control" id="observacionesAdmin" rows="2"></textarea></div>
+                  <div class="col-12"><button type="submit" class="btn btn-primary-corporate"><i
+                        class="bi bi-file-pdf"></i> Generar certificado PDF</button></div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Historial de certificados generados (admin) -->
+          <div class="card-modern">
+            <div class="card-header">
+              <h3 class="mb-0"><i class="bi bi-table"></i> Historial de certificados emitidos</h3>
+            </div>
+            <div class="p-3">
+              <div class="table-responsive">
+                <table class="table table-custom">
+                  <thead>
+                    <tr>
+                      <th>Fecha</th>
+                      <th>Empleado</th>
+                      <th>Tipo</th>
+                      <th>Propósito</th>
+                      <th>Generado por</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody id="historialCertificadosBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer><i class="bi bi-shield-check"></i> Trazabilidad garantizada - Todos los certificados quedan registrados
+        </footer>
+      </main>
     </div>
-    <nav class="nav-menu">
-      <ul>
-        <li><a href="../landingAdmin.html"><i class="bi bi-grid-3x3-gap-fill"></i> Inicio</a></li>
-        <li><a href="./7-horarios.html"><i class="bi bi-calendar3-week"></i> Horarios</a></li>
-        <li><a href="./1-cuentas.html"><i class="bi bi-people"></i> Cuentas</a></li>
-        <li><a href="./2-tareas.html"><i class="bi bi-list-task"></i> Tareas</a></li>
-        <li><a href="./3-permisos.html"><i class="bi bi-file-earmark-text"></i> Permisos</a></li>
-        <li><a href="./4-reportes.html"><i class="bi bi-bar-chart"></i> Reportes</a></li>
-        <li><a href="./5-incapacidad.html"><i class="bi bi-clipboard2-pulse"></i> Incapacidad</a></li>
-        <li class="active"><a href="./6-certificados.html"><i class="bi bi-award"></i> Certificados</a></li>
-      </ul>
-    </nav>
-    <div class="p-3 border-top border-secondary"><small class="text-white-50"><i class="bi bi-shield-lock"></i> v2.0 · Administrador</small></div>
-  </aside>
-
-  <div class="main-content">
-    <header class="topbar">
-      <div class="d-flex align-items-center gap-3">
-        <button class="menu-toggle btn btn-dark" id="menuToggle"><i class="bi bi-list"></i></button>
-        <div class="company-info"><h2>Gestión de Certificados</h2><p>Solicita y genera certificados laborales</p></div>
-      </div>
-      <div class="user-info">
-        <div class="user-badge"><i class="bi bi-shield-fill-check"></i><span>Administrador</span></div>
-        <button class="btn-logout" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> Salir</button>
-      </div>
-    </header>
-
-    <main class="dashboard-container">
-      <!-- Tabs de vista -->
-      <div class="view-tabs">
-        <button class="view-tab active" data-view="empleado"><i class="bi bi-person-badge"></i> Vista Empleado</button>
-        <button class="view-tab" data-view="admin"><i class="bi bi-shield-lock"></i> Vista Administrador</button>
-      </div>
-
-      <!-- VISTA EMPLEADO -->
-      <div id="viewEmpleado" class="view-pane active">
-        <div class="card-modern">
-          <div class="card-header"><h3 class="mb-0"><i class="bi bi-person-circle me-2"></i> Mis datos</h3></div>
-          <div class="p-3">
-            <div class="d-flex align-items-center gap-3">
-              <div class="bg-light rounded-circle d-flex align-items-center justify-content-center" style="width: 70px; height: 70px;"><i class="bi bi-person fs-1 text-muted"></i></div>
-              <div><h4 id="empleadoNombre">Eddier Paz Pardo</h4><div class="d-flex gap-2 flex-wrap"><span class="badge bg-secondary">ID: EMP-2024-156</span><span class="badge bg-dark">Panadero Principal</span><span class="badge bg-dark">Ingreso: 15/03/2022</span></div></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card-modern">
-          <div class="card-header"><h3 class="mb-0"><i class="bi bi-file-text"></i> Solicitar certificado laboral</h3></div>
-          <div class="p-4">
-            <form id="solicitudCertificadoForm">
-              <div class="row g-3">
-                <div class="col-12"><label class="form-label">Tipo de certificado *</label><select class="form-select" id="tipoCertificadoEmpleado" required><option value="laboral">Certificado laboral general</option><option value="ingresos">Certificado de ingresos</option><option value="antiguedad">Certificado de antigüedad</option></select></div>
-                <div class="col-12"><label class="form-label">Propósito *</label><input type="text" class="form-control" id="propositoEmpleado" required placeholder="Ej: Trámite bancario, nuevo empleo..."></div>
-                <div class="col-12"><button type="submit" class="btn btn-primary-corporate"><i class="bi bi-send"></i> Solicitar certificado</button></div>
-              </div>
-            </form>
-          </div>
-        </div>
-
-        <!-- Mis certificados previos -->
-        <div class="card-modern">
-          <div class="card-header"><h3 class="mb-0"><i class="bi bi-clock-history"></i> Mis certificados anteriores</h3></div>
-          <div class="p-3" id="misCertificadosContainer"></div>
-        </div>
-      </div>
-
-      <!-- VISTA ADMINISTRADOR -->
-      <div id="viewAdmin" class="view-pane">
-        <div class="card-modern">
-          <div class="card-header"><h3 class="mb-0"><i class="bi bi-plus-circle"></i> Generar certificado para empleado</h3></div>
-          <div class="p-4">
-            <form id="generarCertificadoForm">
-              <div class="row g-3">
-                <div class="col-md-6"><label class="form-label">Empleado *</label><select class="form-select" id="empleadoSelect" required></select></div>
-                <div class="col-md-6"><label class="form-label">Tipo de certificado *</label><select class="form-select" id="tipoCertificadoAdmin" required><option value="laboral">Certificado laboral general</option><option value="ingresos">Certificado de ingresos</option><option value="antiguedad">Certificado de antigüedad</option></select></div>
-                <div class="col-12"><label class="form-label">Propósito *</label><input type="text" class="form-control" id="propositoAdmin" required placeholder="Ej: Crédito hipotecario"></div>
-                <div class="col-12"><label class="form-label">Observaciones (opcional)</label><textarea class="form-control" id="observacionesAdmin" rows="2"></textarea></div>
-                <div class="col-12"><button type="submit" class="btn btn-primary-corporate"><i class="bi bi-file-pdf"></i> Generar certificado PDF</button></div>
-              </div>
-            </form>
-          </div>
-        </div>
-
-        <!-- Historial de certificados generados (admin) -->
-        <div class="card-modern">
-          <div class="card-header"><h3 class="mb-0"><i class="bi bi-table"></i> Historial de certificados emitidos</h3></div>
-          <div class="p-3">
-            <div class="table-responsive">
-              <table class="table table-custom">
-                <thead><tr><th>Fecha</th><th>Empleado</th><th>Tipo</th><th>Propósito</th><th>Generado por</th><th>Acciones</th></tr></thead>
-                <tbody id="historialCertificadosBody"></tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-      <footer><i class="bi bi-shield-check"></i> Trazabilidad garantizada - Todos los certificados quedan registrados</footer>
-    </main>
   </div>
-</div>
 
-<!-- Toast -->
-<div class="toast-message" id="liveToast" style="display:none;"><div class="bg-white rounded-3 shadow p-3 border-start border-4 border-danger"><div class="d-flex gap-2"><i class="bi bi-info-circle-fill text-danger fs-5"></i><span id="toastMsg"></span></div></div></div>
+  <!-- Toast -->
+  <div class="toast-message" id="liveToast" style="display:none;">
+    <div class="bg-white rounded-3 shadow p-3 border-start border-4 border-danger">
+      <div class="d-flex gap-2"><i class="bi bi-info-circle-fill text-danger fs-5"></i><span id="toastMsg"></span></div>
+    </div>
+  </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  // ============================================================
-  // MÓDULO DE CERTIFICADOS - OPERPAN (ADMIN + EMPLEADO)
-  // Cumple RF-CR-01, RF-CR-02, RNF-CR-01 a RNF-CR-04, RN-CR-01 a RN-CR-03
-  // Persistencia localStorage, trazabilidad, simulación de PDF
-  // ============================================================
-  
-  const STORAGE_CERTIFICADOS = "operpan_certificados";
-  const STORAGE_AUDIT = "operpan_audit_certificados";
-  const STORAGE_USERS = "operpan_usuarios";
-  
-  let certificados = [];
-  let auditLog = [];
-  let empleados = [];
-  
-  const empleadoActual = {
-    id: "EMP-2024-156",
-    nombre: "Eddier Paz Pardo",
-    cargo: "Panadero Principal",
-    ingreso: "2022-03-15",
-    email: "eddier.paz@estacionpaisa.com"
-  };
-  
-  function inicializarDatos() {
-    const storedUsers = localStorage.getItem(STORAGE_USERS);
-    if (storedUsers) empleados = JSON.parse(storedUsers).filter(u => u.estado === "activo");
-    else empleados = [
-      { id: "EMP-2024-156", nombres: "Eddier", apellidos: "Paz Pardo", cargo: "Panadero Principal", email: "eddier.paz@estacionpaisa.com", fechaIngreso: "2022-03-15" },
-      { id: "EMP-2024-157", nombres: "Santiago", apellidos: "Muñeton", cargo: "Panadero", email: "santiago@estacionpaisa.com", fechaIngreso: "2023-01-10" }
-    ];
-    
-    const stored = localStorage.getItem(STORAGE_CERTIFICADOS);
-    if (!stored) {
-      certificados = [
-        { id: "cert1", empleadoId: "EMP-2024-156", empleadoNombre: "Eddier Paz Pardo", tipo: "laboral", proposito: "Crédito bancario", fecha: "2025-04-10T10:30:00", generadoPor: "Administrador", descargas: 2 }
-      ];
-      localStorage.setItem(STORAGE_CERTIFICADOS, JSON.stringify(certificados));
-    } else certificados = JSON.parse(stored);
-    
-    const storedAudit = localStorage.getItem(STORAGE_AUDIT);
-    auditLog = storedAudit ? JSON.parse(storedAudit) : [];
-  }
-  
-  function guardarDatos() {
-    localStorage.setItem(STORAGE_CERTIFICADOS, JSON.stringify(certificados));
-    localStorage.setItem(STORAGE_AUDIT, JSON.stringify(auditLog));
-  }
-  
-  function registrarAuditoria(accion, detalles, certificadoId, empleadoAfectado) {
-    const registro = {
-      fecha: new Date().toISOString(),
-      administrador: "Administrador",
-      accion,
-      detalles,
-      certificadoId,
-      empleadoAfectado,
-      timestamp: Date.now()
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // ============================================================
+    // MÓDULO DE CERTIFICADOS - OPERPAN (ADMIN + EMPLEADO)
+    // Cumple RF-CR-01, RF-CR-02, RNF-CR-01 a RNF-CR-04, RN-CR-01 a RN-CR-03
+    // Persistencia localStorage, trazabilidad, simulación de PDF
+    // ============================================================
+
+    const STORAGE_CERTIFICADOS = "operpan_certificados";
+    const STORAGE_AUDIT = "operpan_audit_certificados";
+    const STORAGE_USERS = "operpan_usuarios";
+
+    let certificados = [];
+    let auditLog = [];
+    let empleados = [];
+
+    const empleadoActual = {
+      id: "EMP-2024-156",
+      nombre: "Eddier Paz Pardo",
+      cargo: "Panadero Principal",
+      ingreso: "2022-03-15",
+      email: "eddier.paz@estacionpaisa.com"
     };
-    auditLog.unshift(registro);
-    if (auditLog.length > 200) auditLog.pop();
-    guardarDatos();
-    console.log("[AUDITORÍA CERTIFICADO]", registro);
-  }
-  
-  function mostrarMensaje(msg) {
-    const toast = document.getElementById("liveToast");
-    document.getElementById("toastMsg").innerText = msg;
-    toast.style.display = "block";
-    setTimeout(() => toast.style.display = "none", 3000);
-  }
-  
-  // Simular descarga de PDF (RNF-CR-04)
-  function descargarPDF(certificado) {
-    const contenido = `CERTIFICADO LABORAL\n\nEmpresa: Estación Paisa\nEmpleado: ${certificado.empleadoNombre}\nTipo: ${certificado.tipo}\nPropósito: ${certificado.proposito}\nFecha emisión: ${new Date(certificado.fecha).toLocaleString()}\n\nEste certificado es generado electrónicamente y tiene validez oficial.`;
-    const blob = new Blob([contenido], {type: "application/pdf"});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `Certificado_${certificado.empleadoNombre.replace(/\s/g,"_")}.pdf`;
-    a.click();
-    URL.revokeObjectURL(url);
-    mostrarMensaje("PDF descargado exitosamente.");
-  }
-  
-  // Renderizar mis certificados (vista empleado)
-  function renderizarMisCertificados() {
-    const container = document.getElementById("misCertificadosContainer");
-    if (!container) return;
-    const misCertificados = certificados.filter(c => c.empleadoId === empleadoActual.id).sort((a,b) => new Date(b.fecha) - new Date(a.fecha));
-    if (misCertificados.length === 0) { container.innerHTML = '<div class="alert alert-light">No tienes certificados previos.</div>'; return; }
-    let html = "";
-    misCertificados.forEach(c => {
-      html += `<div class="incapacidad-card d-flex justify-content-between align-items-center"><div><strong>${c.tipo === "laboral" ? "Certificado laboral" : (c.tipo === "ingresos" ? "Certificado ingresos" : "Antigüedad")}</strong><br><small>${new Date(c.fecha).toLocaleDateString()} - ${c.proposito}</small></div><div><button class="btn btn-sm btn-outline-primary descargarCertificadoBtn" data-id="${c.id}"><i class="bi bi-download"></i> Descargar</button></div></div>`;
-    });
-    container.innerHTML = html;
-    document.querySelectorAll(".descargarCertificadoBtn").forEach(btn => btn.addEventListener("click", () => {
-      const cert = certificados.find(c => c.id === btn.dataset.id);
-      if (cert) descargarPDF(cert);
-    }));
-  }
-  
-  // Renderizar historial admin
-  function renderizarHistorialAdmin() {
-    const tbody = document.getElementById("historialCertificadosBody");
-    if (!tbody) return;
-    const todos = [...certificados].sort((a,b) => new Date(b.fecha) - new Date(a.fecha));
-    tbody.innerHTML = "";
-    todos.forEach(c => {
-      tbody.innerHTML += `<tr>
+
+    function inicializarDatos() {
+      const storedUsers = localStorage.getItem(STORAGE_USERS);
+      if (storedUsers) empleados = JSON.parse(storedUsers).filter(u => u.estado === "activo");
+      else empleados = [
+        { id: "EMP-2024-156", nombres: "Eddier", apellidos: "Paz Pardo", cargo: "Panadero Principal", email: "eddier.paz@estacionpaisa.com", fechaIngreso: "2022-03-15" },
+        { id: "EMP-2024-157", nombres: "Santiago", apellidos: "Muñeton", cargo: "Panadero", email: "santiago@estacionpaisa.com", fechaIngreso: "2023-01-10" }
+      ];
+
+      const stored = localStorage.getItem(STORAGE_CERTIFICADOS);
+      if (!stored) {
+        certificados = [
+          { id: "cert1", empleadoId: "EMP-2024-156", empleadoNombre: "Eddier Paz Pardo", tipo: "laboral", proposito: "Crédito bancario", fecha: "2025-04-10T10:30:00", generadoPor: "Administrador", descargas: 2 }
+        ];
+        localStorage.setItem(STORAGE_CERTIFICADOS, JSON.stringify(certificados));
+      } else certificados = JSON.parse(stored);
+
+      const storedAudit = localStorage.getItem(STORAGE_AUDIT);
+      auditLog = storedAudit ? JSON.parse(storedAudit) : [];
+    }
+
+    function guardarDatos() {
+      localStorage.setItem(STORAGE_CERTIFICADOS, JSON.stringify(certificados));
+      localStorage.setItem(STORAGE_AUDIT, JSON.stringify(auditLog));
+    }
+
+    function registrarAuditoria(accion, detalles, certificadoId, empleadoAfectado) {
+      const registro = {
+        fecha: new Date().toISOString(),
+        administrador: "Administrador",
+        accion,
+        detalles,
+        certificadoId,
+        empleadoAfectado,
+        timestamp: Date.now()
+      };
+      auditLog.unshift(registro);
+      if (auditLog.length > 200) auditLog.pop();
+      guardarDatos();
+      console.log("[AUDITORÍA CERTIFICADO]", registro);
+    }
+
+    function mostrarMensaje(msg) {
+      const toast = document.getElementById("liveToast");
+      document.getElementById("toastMsg").innerText = msg;
+      toast.style.display = "block";
+      setTimeout(() => toast.style.display = "none", 3000);
+    }
+
+    // Simular descarga de PDF (RNF-CR-04)
+    function descargarPDF(certificado) {
+      const contenido = `CERTIFICADO LABORAL\n\nEmpresa: Estación Paisa\nEmpleado: ${certificado.empleadoNombre}\nTipo: ${certificado.tipo}\nPropósito: ${certificado.proposito}\nFecha emisión: ${new Date(certificado.fecha).toLocaleString()}\n\nEste certificado es generado electrónicamente y tiene validez oficial.`;
+      const blob = new Blob([contenido], { type: "application/pdf" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `Certificado_${certificado.empleadoNombre.replace(/\s/g, "_")}.pdf`;
+      a.click();
+      URL.revokeObjectURL(url);
+      mostrarMensaje("PDF descargado exitosamente.");
+    }
+
+    // Renderizar mis certificados (vista empleado)
+    function renderizarMisCertificados() {
+      const container = document.getElementById("misCertificadosContainer");
+      if (!container) return;
+      const misCertificados = certificados.filter(c => c.empleadoId === empleadoActual.id).sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+      if (misCertificados.length === 0) { container.innerHTML = '<div class="alert alert-light">No tienes certificados previos.</div>'; return; }
+      let html = "";
+      misCertificados.forEach(c => {
+        html += `<div class="incapacidad-card d-flex justify-content-between align-items-center"><div><strong>${c.tipo === "laboral" ? "Certificado laboral" : (c.tipo === "ingresos" ? "Certificado ingresos" : "Antigüedad")}</strong><br><small>${new Date(c.fecha).toLocaleDateString()} - ${c.proposito}</small></div><div><button class="btn btn-sm btn-outline-primary descargarCertificadoBtn" data-id="${c.id}"><i class="bi bi-download"></i> Descargar</button></div></div>`;
+      });
+      container.innerHTML = html;
+      document.querySelectorAll(".descargarCertificadoBtn").forEach(btn => btn.addEventListener("click", () => {
+        const cert = certificados.find(c => c.id === btn.dataset.id);
+        if (cert) descargarPDF(cert);
+      }));
+    }
+
+    // Renderizar historial admin
+    function renderizarHistorialAdmin() {
+      const tbody = document.getElementById("historialCertificadosBody");
+      if (!tbody) return;
+      const todos = [...certificados].sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+      tbody.innerHTML = "";
+      todos.forEach(c => {
+        tbody.innerHTML += `<tr>
         <td>${new Date(c.fecha).toLocaleString()}</td>
         <td>${c.empleadoNombre}</td>
         <td>${c.tipo}</td>
@@ -425,106 +716,119 @@
         <td>${c.generadoPor}</td>
         <td><button class="btn btn-sm btn-outline-primary descargarHistorialBtn" data-id="${c.id}"><i class="bi bi-download"></i> PDF</button></td>
       </tr>`;
+      });
+      document.querySelectorAll(".descargarHistorialBtn").forEach(btn => btn.addEventListener("click", () => {
+        const cert = certificados.find(c => c.id === btn.dataset.id);
+        if (cert) descargarPDF(cert);
+      }));
+    }
+
+    // Llenar select de empleados en admin
+    function cargarSelectEmpleados() {
+      const select = document.getElementById("empleadoSelect");
+      if (!select) return;
+      select.innerHTML = '<option value="">Seleccionar empleado</option>';
+      empleados.forEach(emp => {
+        select.innerHTML += `<option value="${emp.id}" data-nombre="${emp.nombres} ${emp.apellidos}">${emp.nombres} ${emp.apellidos} (${emp.cargo})</option>`;
+      });
+    }
+
+    // Solicitud de certificado (empleado) -> registra en historial y notifica al admin (simulado)
+    document.getElementById("solicitudCertificadoForm")?.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const tipo = document.getElementById("tipoCertificadoEmpleado").value;
+      const proposito = document.getElementById("propositoEmpleado").value.trim();
+      if (!proposito) { mostrarMensaje("Indique el propósito del certificado."); return; }
+
+      // Simular solicitud: creamos un certificado pendiente? Pero según requerimiento, el admin genera. Aquí solo notificamos.
+      // Para cumplir HU-CR-01, registramos la solicitud en auditoría y mostramos mensaje.
+      const solicitud = {
+        empleadoId: empleadoActual.id,
+        empleadoNombre: empleadoActual.nombre,
+        tipo,
+        proposito,
+        fechaSolicitud: new Date().toISOString()
+      };
+      registrarAuditoria("SOLICITAR CERTIFICADO", `Solicitud de ${tipo} para ${proposito}`, "solicitud", empleadoActual.id);
+      mostrarMensaje("Solicitud enviada al administrador. Recibirás el certificado cuando sea generado.");
+      // Opcional: guardar en localStorage solicitudes pendientes, pero para simplificar, notificamos.
+      document.getElementById("solicitudCertificadoForm").reset();
     });
-    document.querySelectorAll(".descargarHistorialBtn").forEach(btn => btn.addEventListener("click", () => {
-      const cert = certificados.find(c => c.id === btn.dataset.id);
-      if (cert) descargarPDF(cert);
-    }));
-  }
-  
-  // Llenar select de empleados en admin
-  function cargarSelectEmpleados() {
-    const select = document.getElementById("empleadoSelect");
-    if (!select) return;
-    select.innerHTML = '<option value="">Seleccionar empleado</option>';
-    empleados.forEach(emp => {
-      select.innerHTML += `<option value="${emp.id}" data-nombre="${emp.nombres} ${emp.apellidos}">${emp.nombres} ${emp.apellidos} (${emp.cargo})</option>`;
+
+    // Generar certificado (admin)
+    document.getElementById("generarCertificadoForm")?.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const empleadoId = document.getElementById("empleadoSelect").value;
+      if (!empleadoId) { mostrarMensaje("Seleccione un empleado."); return; }
+      const empleado = empleados.find(e => e.id === empleadoId);
+      if (!empleado) return;
+      const tipo = document.getElementById("tipoCertificadoAdmin").value;
+      const proposito = document.getElementById("propositoAdmin").value.trim();
+      if (!proposito) { mostrarMensaje("Ingrese el propósito del certificado."); return; }
+      const observaciones = document.getElementById("observacionesAdmin").value;
+
+      const nuevoCertificado = {
+        id: Date.now().toString(),
+        empleadoId: empleado.id,
+        empleadoNombre: `${empleado.nombres} ${empleado.apellidos}`,
+        tipo,
+        proposito,
+        observaciones,
+        fecha: new Date().toISOString(),
+        generadoPor: "Administrador",
+        descargas: 0
+      };
+      certificados.push(nuevoCertificado);
+      registrarAuditoria("GENERAR CERTIFICADO", `Certificado ${tipo} para ${empleado.nombres} ${empleado.apellidos}`, nuevoCertificado.id, empleado.id);
+      mostrarMensaje(`Certificado generado exitosamente. Se ha notificado al empleado.`);
+      guardarDatos();
+      renderizarHistorialAdmin();
+      renderizarMisCertificados(); // actualiza vista empleado si está activa
+      // Descargar automáticamente el PDF (RNF-CR-04)
+      descargarPDF(nuevoCertificado);
+      document.getElementById("generarCertificadoForm").reset();
+      document.getElementById("observacionesAdmin").value = "";
     });
-  }
-  
-  // Solicitud de certificado (empleado) -> registra en historial y notifica al admin (simulado)
-  document.getElementById("solicitudCertificadoForm")?.addEventListener("submit", function(e) {
-    e.preventDefault();
-    const tipo = document.getElementById("tipoCertificadoEmpleado").value;
-    const proposito = document.getElementById("propositoEmpleado").value.trim();
-    if (!proposito) { mostrarMensaje("Indique el propósito del certificado."); return; }
-    
-    // Simular solicitud: creamos un certificado pendiente? Pero según requerimiento, el admin genera. Aquí solo notificamos.
-    // Para cumplir HU-CR-01, registramos la solicitud en auditoría y mostramos mensaje.
-    const solicitud = {
-      empleadoId: empleadoActual.id,
-      empleadoNombre: empleadoActual.nombre,
-      tipo,
-      proposito,
-      fechaSolicitud: new Date().toISOString()
-    };
-    registrarAuditoria("SOLICITAR CERTIFICADO", `Solicitud de ${tipo} para ${proposito}`, "solicitud", empleadoActual.id);
-    mostrarMensaje("Solicitud enviada al administrador. Recibirás el certificado cuando sea generado.");
-    // Opcional: guardar en localStorage solicitudes pendientes, pero para simplificar, notificamos.
-    document.getElementById("solicitudCertificadoForm").reset();
-  });
-  
-  // Generar certificado (admin)
-  document.getElementById("generarCertificadoForm")?.addEventListener("submit", function(e) {
-    e.preventDefault();
-    const empleadoId = document.getElementById("empleadoSelect").value;
-    if (!empleadoId) { mostrarMensaje("Seleccione un empleado."); return; }
-    const empleado = empleados.find(e => e.id === empleadoId);
-    if (!empleado) return;
-    const tipo = document.getElementById("tipoCertificadoAdmin").value;
-    const proposito = document.getElementById("propositoAdmin").value.trim();
-    if (!proposito) { mostrarMensaje("Ingrese el propósito del certificado."); return; }
-    const observaciones = document.getElementById("observacionesAdmin").value;
-    
-    const nuevoCertificado = {
-      id: Date.now().toString(),
-      empleadoId: empleado.id,
-      empleadoNombre: `${empleado.nombres} ${empleado.apellidos}`,
-      tipo,
-      proposito,
-      observaciones,
-      fecha: new Date().toISOString(),
-      generadoPor: "Administrador",
-      descargas: 0
-    };
-    certificados.push(nuevoCertificado);
-    registrarAuditoria("GENERAR CERTIFICADO", `Certificado ${tipo} para ${empleado.nombres} ${empleado.apellidos}`, nuevoCertificado.id, empleado.id);
-    mostrarMensaje(`Certificado generado exitosamente. Se ha notificado al empleado.`);
-    guardarDatos();
+
+    // Cambio de vista
+    document.querySelectorAll(".view-tab").forEach(tab => {
+      tab.addEventListener("click", () => {
+        document.querySelectorAll(".view-tab").forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+        const view = tab.dataset.view;
+        document.getElementById("viewEmpleado").classList.toggle("active", view === "empleado");
+        document.getElementById("viewAdmin").classList.toggle("active", view === "admin");
+        if (view === "admin") renderizarHistorialAdmin();
+        else renderizarMisCertificados();
+      });
+    });
+
+    document.getElementById("logoutBtn")?.addEventListener("click", () => {
+      mostrarMensaje("Cerrando sesión...");
+      setTimeout(() => window.location.href = "../../login.html", 800);
+    });
+
+    const menuToggle = document.getElementById("menuToggle");
+    const sidebar = document.getElementById("sidebar");
+    if (menuToggle) {
+      menuToggle.addEventListener("click", () => sidebar.classList.toggle("active"));
+    }
+    // Cerrar el menú si se hace clic fuera de él (en la zona blanca)
+    document.addEventListener("click", (event) => {
+      // Verificamos si el sidebar está abierto (tiene la clase active)
+      if (sidebar.classList.contains("active")) {
+        // Si el clic NO fue dentro del sidebar Y TAMPOCO en el botón de hamburguesa...
+        if (!sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
+          sidebar.classList.remove("active");
+        }
+      }
+    });
+
+    inicializarDatos();
+    cargarSelectEmpleados();
+    renderizarMisCertificados();
     renderizarHistorialAdmin();
-    renderizarMisCertificados(); // actualiza vista empleado si está activa
-    // Descargar automáticamente el PDF (RNF-CR-04)
-    descargarPDF(nuevoCertificado);
-    document.getElementById("generarCertificadoForm").reset();
-    document.getElementById("observacionesAdmin").value = "";
-  });
-  
-  // Cambio de vista
-  document.querySelectorAll(".view-tab").forEach(tab => {
-    tab.addEventListener("click", () => {
-      document.querySelectorAll(".view-tab").forEach(t => t.classList.remove("active"));
-      tab.classList.add("active");
-      const view = tab.dataset.view;
-      document.getElementById("viewEmpleado").classList.toggle("active", view === "empleado");
-      document.getElementById("viewAdmin").classList.toggle("active", view === "admin");
-      if (view === "admin") renderizarHistorialAdmin();
-      else renderizarMisCertificados();
-    });
-  });
-  
-  document.getElementById("logoutBtn")?.addEventListener("click", () => {
-    mostrarMensaje("Cerrando sesión...");
-    setTimeout(() => window.location.href = "../../login.html", 800);
-  });
-  
-  const menuToggle = document.getElementById("menuToggle");
-  const sidebar = document.getElementById("sidebar");
-  if(menuToggle) menuToggle.addEventListener("click", () => sidebar.classList.toggle("active"));
-  
-  inicializarDatos();
-  cargarSelectEmpleados();
-  renderizarMisCertificados();
-  renderizarHistorialAdmin();
-</script>
+  </script>
 </body>
+
 </html>

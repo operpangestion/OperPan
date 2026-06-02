@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
@@ -7,7 +8,8 @@
   <!-- Bootstrap 5 + Bootstrap Icons + Google Fonts -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
   <style>
     /* ==============================================
        GLOBALES Y RESET (OperPan - Estación Paisa)
@@ -17,26 +19,48 @@
       padding: 0;
       box-sizing: border-box;
     }
+
     body {
       font-family: 'Poppins', sans-serif;
       background: #F4F7FC;
       overflow-x: hidden;
     }
-    h1, h2, h3, h4, h5 {
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
       font-weight: 700;
       color: #000000;
     }
-    h1 { font-size: 2.5rem; }
-    h2 { font-size: 2rem; }
-    h3 { font-size: 1.5rem; }
-    p, span, a, li, button {
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+    }
+
+    p,
+    span,
+    a,
+    li,
+    button {
       font-size: 1rem;
     }
+
     /* Layout principal (sidebar + contenido) */
     .wrapper {
       display: flex;
       min-height: 100vh;
     }
+
     /* SIDEBAR NEGRA CORPORATIVA */
     .sidebar {
       width: 280px;
@@ -48,16 +72,32 @@
       z-index: 1000;
       display: flex;
       flex-direction: column;
+
+      /* Habilitar el scroll pero ocultar la barra */
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: none;
+      /* Oculta la barra en Firefox */
+      -ms-overflow-style: none;
+      /* Oculta la barra en Internet Explorer/Edge */
     }
+
+    /* Oculta la barra en Chrome, Safari y navegadores basados en Chromium (como Brave o Edge) */
+    .sidebar::-webkit-scrollbar {
+      display: none;
+    }
+
     .sidebar-header {
       padding: 1.8rem 1.5rem;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
+
     .logo-area {
       display: flex;
       align-items: center;
       gap: 12px;
     }
+
     .logo-icon {
       width: 40px;
       height: 40px;
@@ -69,26 +109,32 @@
       font-weight: 800;
       font-size: 1.5rem;
     }
+
     .logo-text h4 {
       color: white;
       margin-bottom: 0;
       font-size: 1.3rem;
     }
+
     .logo-text span {
       font-size: 0.7rem;
       color: #ccc;
     }
+
     .nav-menu {
       flex: 1;
       padding: 2rem 0;
     }
+
     .nav-menu ul {
       list-style: none;
       padding-left: 0;
     }
+
     .nav-menu li {
       margin-bottom: 0.5rem;
     }
+
     .nav-menu a {
       display: flex;
       align-items: center;
@@ -100,27 +146,43 @@
       transition: all 0.2s;
       border-left: 3px solid transparent;
     }
+
     .nav-menu a i {
       font-size: 1.3rem;
       width: 28px;
     }
+
     .nav-menu a:hover {
       background: rgba(164, 7, 6, 0.15);
       color: white;
       border-left-color: #A40706;
     }
+
     .nav-menu .active a {
       background: rgba(164, 7, 6, 0.2);
       color: white;
       border-left-color: #A40706;
       font-weight: 600;
     }
+
+    .soporte {
+      color: #ffffff80;
+      text-decoration: none;
+    }
+
+    .soporte:hover {
+      transition: 1s;
+      text-decoration: none;
+      color: #A40706;
+    }
+
     /* CONTENIDO PRINCIPAL */
     .main-content {
       flex: 1;
       margin-left: 280px;
       transition: all 0.3s;
     }
+
     /* TOPBAR NEGRO */
     .topbar {
       background: #000000;
@@ -131,22 +193,26 @@
       flex-wrap: wrap;
       border-bottom: 1px solid #2C2C2C;
     }
+
     .company-info h2 {
       color: white;
       font-size: 1.3rem;
       margin-bottom: 0;
       font-weight: 600;
     }
+
     .company-info p {
       color: #BBBBBB;
       font-size: 0.75rem;
       margin-bottom: 0;
     }
+
     .user-info {
       display: flex;
       align-items: center;
       gap: 20px;
     }
+
     .user-badge {
       display: flex;
       align-items: center;
@@ -155,14 +221,17 @@
       padding: 0.4rem 1rem;
       border-radius: 60px;
     }
+
     .user-badge i {
       font-size: 1.5rem;
       color: #A40706;
     }
+
     .user-badge span {
       color: white;
       font-weight: 500;
     }
+
     .btn-logout {
       background: transparent;
       border: 1px solid #A40706;
@@ -171,23 +240,27 @@
       border-radius: 30px;
       transition: 0.2s;
     }
+
     .btn-logout:hover {
       background: #A40706;
       color: white;
     }
+
     /* DASHBOARD */
     .dashboard-container {
       padding: 2rem;
     }
+
     /* Tarjeta de bienvenida */
     .welcome-card {
       background: white;
       border-radius: 28px;
       padding: 1.8rem;
       margin-bottom: 2rem;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
       border: 1px solid #F0F2F5;
     }
+
     .employee-avatar-large {
       width: 80px;
       height: 80px;
@@ -200,6 +273,7 @@
       font-size: 2rem;
       color: #A40706;
     }
+
     .badge-role {
       background: #A40706;
       color: white;
@@ -207,6 +281,7 @@
       border-radius: 40px;
       font-size: 0.8rem;
     }
+
     /* Cards de acceso rápido (módulos) */
     .module-card {
       background: white;
@@ -220,24 +295,28 @@
       border: 1px solid #EDF2F7;
       height: 100%;
     }
+
     .module-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1);
+      box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.1);
       border-color: #A40706;
     }
+
     .module-icon {
       font-size: 2.5rem;
       color: #A40706;
       margin-bottom: 1rem;
     }
+
     /* Tarjetas de resumen (stats) */
     .stat-card {
       background: white;
       border-radius: 20px;
       padding: 1rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
       border: 1px solid #EDF2F7;
     }
+
     /* Noticias / recordatorios */
     .reminder-card {
       background: white;
@@ -246,6 +325,7 @@
       margin-bottom: 1rem;
       border-left: 4px solid #A40706;
     }
+
     /* Toast */
     .toast-message {
       position: fixed;
@@ -253,17 +333,21 @@
       right: 20px;
       z-index: 1100;
     }
+
     /* Responsive */
     @media (max-width: 992px) {
       .sidebar {
         margin-left: -280px;
       }
+
       .sidebar.active {
         margin-left: 0;
       }
+
       .main-content {
         margin-left: 0;
       }
+
       .menu-toggle {
         display: block;
         background: black;
@@ -274,11 +358,13 @@
         border-radius: 12px;
       }
     }
+
     @media (min-width: 993px) {
       .menu-toggle {
         display: none;
       }
     }
+
     footer {
       text-align: center;
       padding: 1rem;
@@ -288,305 +374,350 @@
     }
   </style>
 </head>
+
 <body>
-<div class="wrapper">
-  <!-- SIDEBAR NEGRA -->
-  <aside class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-      <div class="logo-area">
-        <div class="logo-icon">OP</div>
-        <div class="logo-text">
-          <h4>OperPan</h4>
-          <span>Estación Paisa</span>
-        </div>
-      </div>
-    </div>
-    <nav class="nav-menu">
-      <ul>
-        <li class="active"><a href="#"><i class="bi bi-grid-3x3-gap-fill"></i> Inicio</a></li>
-        <li><a href="./sub-pages-admin/7-horarios.html"><i class="bi bi-calendar3-week"></i> Horarios</a></li>
-        <li><a href="./sub-pages-admin/1-cuentas.html"><i class="bi bi-people"></i> Cuentas</a></li>
-        <li><a href="./sub-pages-admin/2-tareas.html"><i class="bi bi-list-task"></i> Tareas</a></li>
-        <li><a href="./sub-pages-admin/3-permisos.html"><i class="bi bi-file-earmark-text"></i> Permisos</a></li>
-        <li><a href="./sub-pages-admin/4-reportes.html"><i class="bi bi-bar-chart"></i> Reportes</a></li>
-        <li><a href="./sub-pages-admin/5-incapacidad.html"><i class="bi bi-clipboard2-pulse"></i> Incapacidad</a></li>
-        <li><a href="./sub-pages-admin/6-certificados.html"><i class="bi bi-award"></i> Certificados</a></li>
-      </ul>
-    </nav>
-    <div class="p-3 border-top border-secondary">
-      <small class="text-white-50"><i class="bi bi-shield-lock"></i> v2.0 · Administrador</small>
-    </div>
-  </aside>
-
-  <!-- CONTENIDO PRINCIPAL -->
-  <div class="main-content">
-    <header class="topbar">
-      <div class="d-flex align-items-center gap-3">
-        <button class="menu-toggle btn btn-dark" id="menuToggle"><i class="bi bi-list"></i></button>
-        <div class="company-info">
-          <h2>Panel de Administración</h2>
-          <p>Gestión integral del personal de Estación Paisa</p>
-        </div>
-      </div>
-      <div class="user-info">
-        <div class="user-badge">
-          <i class="bi bi-shield-fill-check"></i>
-          <span>Administrador</span>
-        </div>
-        <button class="btn-logout" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> Salir</button>
-      </div>
-    </header>
-
-    <main class="dashboard-container">
-      <!-- Tarjeta de bienvenida -->
-      <div class="welcome-card">
-        <div class="row align-items-center g-3">
-          <div class="col-auto">
-            <div class="employee-avatar-large">AD</div>
+  <div class="wrapper">
+    <!-- SIDEBAR NEGRA -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-area">
+          <div class="logo-icon">OP</div>
+          <div class="logo-text">
+            <h4>OperPan</h4>
+            <span>Estación Paisa</span>
           </div>
-          <div class="col">
-            <h2 class="mb-1">¡Bienvenido, Eddier!</h2>
-            <p class="text-muted">Hoy es <strong id="fechaActual"></strong></p>
-            <div class="d-flex flex-wrap gap-2">
-              <span class="badge-role"><i class="bi bi-shield-check"></i> <span class="fw-semibold" style="font-size: 13px;"> Rol:</span> Administrador</span>
-              <span class="badge-role" style="background:#3A3F47;"><i class="bi bi-building"></i> <span class="fw-semibold" style="font-size: 13px;"> Sede:</span> Terreros</span>              
+        </div>
+      </div>
+      <nav class="nav-menu">
+        <ul>
+          <li class="active"><a href="#"><i class="bi bi-grid-3x3-gap-fill"></i> Inicio</a></li>
+          <li><a href="./sub-pages-admin/7-horarios.html"><i class="bi bi-calendar3-week"></i> Horarios</a></li>
+          <li><a href="./sub-pages-admin/1-cuentas.html"><i class="bi bi-people"></i> Cuentas</a></li>
+          <li><a href="./sub-pages-admin/2-tareas.html"><i class="bi bi-list-task"></i> Tareas</a></li>
+          <li><a href="./sub-pages-admin/3-permisos.html"><i class="bi bi-file-earmark-text"></i> Permisos</a></li>
+          <li><a href="./sub-pages-admin/4-reportes.html"><i class="bi bi-bar-chart"></i> Reportes</a></li>
+          <li><a href="./sub-pages-admin/5-incapacidad.html"><i class="bi bi-clipboard2-pulse"></i> Incapacidad</a></li>
+          <li><a href="./sub-pages-admin/6-certificados.html"><i class="bi bi-award"></i> Certificados</a></li>
+        </ul>
+      </nav>
+      <div class="p-3 border-top border-secondary">
+        <a class="soporte"
+          href="https://mail.google.com/mail/?view=cm&fs=1&to=eddierpaz9@gmail.com&su=Soporte%20OperPan">
+          <small><i class="bi bi-question-circle me-2"></i>Ayuda / Soporte</small>
+        </a>
+      </div>
+      <div class="p-3 border-top border-secondary">
+        <small class="text-white-50"><i class="bi bi-shield-lock"></i> v2.0 · Administrador</small>
+      </div>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="main-content">
+      <header class="topbar">
+        <div class="d-flex align-items-center gap-3">
+          <button class="menu-toggle btn btn-dark" id="menuToggle"><i class="bi bi-list"></i></button>
+          <div class="company-info">
+            <h2>Panel de Administración</h2>
+            <p>Gestión integral del personal de Estación Paisa</p>
+          </div>
+        </div>
+        <div class="user-info">
+          <div class="user-badge">
+            <i class="bi bi-shield-fill-check"></i>
+            <span>Administrador</span>
+          </div>
+          <button class="btn-logout" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> Salir</button>
+        </div>
+      </header>
+
+      <main class="dashboard-container">
+        <!-- Tarjeta de bienvenida -->
+        <div class="welcome-card">
+          <div class="row align-items-center g-3">
+            <div class="col-auto">
+              <div class="employee-avatar-large">AD</div>
+            </div>
+            <div class="col">
+              <h2 class="mb-1">¡Bienvenido, Eddier!</h2>
+              <p class="text-muted">Hoy es <strong id="fechaActual"></strong></p>
+              <div class="d-flex flex-wrap gap-2">
+                <span class="badge-role"><i class="bi bi-shield-check"></i> <span class="fw-semibold"
+                    style="font-size: 13px;"> Rol:</span> Administrador</span>
+                <span class="badge-role" style="background:#3A3F47;"><i class="bi bi-building"></i> <span
+                    class="fw-semibold" style="font-size: 13px;"> Sede:</span> Terreros</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- KPIs (datos reales desde localStorage) -->
-      <div class="row g-3 mb-4">
-        <div class="col-md-3">
-          <div class="stat-card d-flex justify-content-between align-items-center">
-            <div>
-              <span class="text-muted">Total empleados</span><h3 class="mt-1" id="totalEmpleados">0</h3>
+        <!-- KPIs (datos reales desde localStorage) -->
+        <div class="row g-3 mb-4">
+          <div class="col-md-3">
+            <div class="stat-card d-flex justify-content-between align-items-center">
+              <div>
+                <span class="text-muted">Total empleados</span>
+                <h3 class="mt-1" id="totalEmpleados">0</h3>
+              </div>
+              <i class="bi bi-people-fill fs-2" style="color:#A40706;"></i>
             </div>
-            <i class="bi bi-people-fill fs-2" style="color:#A40706;"></i>
+          </div>
+          <div class="col-md-3">
+            <div class="stat-card d-flex justify-content-between align-items-center">
+              <div><span class="text-muted">Tareas pendientes</span>
+                <h3 class="mt-1" id="tareasPendientes">0</h3>
+              </div>
+              <i class="bi bi-list-check fs-2" style="color:#A40706;"></i>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="stat-card d-flex justify-content-between align-items-center">
+              <div><span class="text-muted">Permisos pendientes</span>
+                <h3 class="mt-1" id="permisosPendientes">0</h3>
+              </div>
+              <i class="bi bi-file-earmark-text fs-2" style="color:#A40706;"></i>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="stat-card d-flex justify-content-between align-items-center">
+              <div><span class="text-muted">Reportes sin leer</span>
+                <h3 class="mt-1" id="reportesPendientes">0</h3>
+              </div>
+              <i class="bi bi-envelope-paper fs-2" style="color:#A40706;"></i>
+            </div>
           </div>
         </div>
-        <div class="col-md-3">
-          <div class="stat-card d-flex justify-content-between align-items-center">
-            <div><span class="text-muted">Tareas pendientes</span><h3 class="mt-1" id="tareasPendientes">0</h3></div>
-            <i class="bi bi-list-check fs-2" style="color:#A40706;"></i>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="stat-card d-flex justify-content-between align-items-center">
-            <div><span class="text-muted">Permisos pendientes</span><h3 class="mt-1" id="permisosPendientes">0</h3></div>
-            <i class="bi bi-file-earmark-text fs-2" style="color:#A40706;"></i>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="stat-card d-flex justify-content-between align-items-center">
-            <div><span class="text-muted">Reportes sin leer</span><h3 class="mt-1" id="reportesPendientes">0</h3></div>
-            <i class="bi bi-envelope-paper fs-2" style="color:#A40706;"></i>
-          </div>
-        </div>
-      </div>
 
-      <!-- Acceso rápido a los 7 módulos -->
-      <h3 class="mb-3"><i class="bi bi-grid-3x3-gap-fill me-2"></i> Módulos de gestión</h3>
-      <div class="row g-4 mb-5">
-        <div class="col-md-3 col-sm-6">
-          <a href="./sub-pages-admin/7-horarios.html" class="module-card">
-            <div class="module-icon"><i class="bi bi-calendar3-week"></i></div>
-            <h5>Horarios</h5>
-            <p class="small text-muted">Asigna turnos y controla asistencia</p>
-          </a>
+        <!-- Acceso rápido a los 7 módulos -->
+        <h3 class="mb-3"><i class="bi bi-grid-3x3-gap-fill me-2"></i> Módulos de gestión</h3>
+        <div class="row g-4 mb-5">
+          <div class="col-md-3 col-sm-6">
+            <a href="./sub-pages-admin/7-horarios.html" class="module-card">
+              <div class="module-icon"><i class="bi bi-calendar3-week"></i></div>
+              <h5>Horarios</h5>
+              <p class="small text-muted">Asigna turnos y controla asistencia</p>
+            </a>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <a href="./sub-pages-admin/1-cuentas.html" class="module-card">
+              <div class="module-icon"><i class="bi bi-people"></i></div>
+              <h5>Cuentas</h5>
+              <p class="small text-muted">Gestiona empleados y accesos</p>
+            </a>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <a href="./sub-pages-admin/2-tareas.html" class="module-card">
+              <div class="module-icon"><i class="bi bi-list-task"></i></div>
+              <h5>Tareas</h5>
+              <p class="small text-muted">Asigna y da seguimiento</p>
+            </a>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <a href="./sub-pages-admin/3-permisos.html" class="module-card">
+              <div class="module-icon"><i class="bi bi-file-earmark-text"></i></div>
+              <h5>Permisos</h5>
+              <p class="small text-muted">Aprueba solicitudes</p>
+            </a>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <a href="./sub-pages-admin/4-reportes.html" class="module-card">
+              <div class="module-icon"><i class="bi bi-bar-chart"></i></div>
+              <h5>Reportes</h5>
+              <p class="small text-muted">Incidentes y novedades</p>
+            </a>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <a href="./sub-pages-admin/5-incapacidad.html" class="module-card">
+              <div class="module-icon"><i class="bi bi-clipboard2-pulse"></i></div>
+              <h5>Incapacidad</h5>
+              <p class="small text-muted">Gestiona documentos médicos</p>
+            </a>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <a href="./sub-pages-admin/6-certificados.html" class="module-card">
+              <div class="module-icon"><i class="bi bi-award"></i></div>
+              <h5>Certificados</h5>
+              <p class="small text-muted">Genera certificados laborales</p>
+            </a>
+          </div>
         </div>
-        <div class="col-md-3 col-sm-6">
-          <a href="./sub-pages-admin/1-cuentas.html" class="module-card">
-            <div class="module-icon"><i class="bi bi-people"></i></div>
-            <h5>Cuentas</h5>
-            <p class="small text-muted">Gestiona empleados y accesos</p>
-          </a>
-        </div>
-        <div class="col-md-3 col-sm-6">
-          <a href="./sub-pages-admin/2-tareas.html" class="module-card">
-            <div class="module-icon"><i class="bi bi-list-task"></i></div>
-            <h5>Tareas</h5>
-            <p class="small text-muted">Asigna y da seguimiento</p>
-          </a>
-        </div>
-        <div class="col-md-3 col-sm-6">
-          <a href="./sub-pages-admin/3-permisos.html" class="module-card">
-            <div class="module-icon"><i class="bi bi-file-earmark-text"></i></div>
-            <h5>Permisos</h5>
-            <p class="small text-muted">Aprueba solicitudes</p>
-          </a>
-        </div>
-        <div class="col-md-3 col-sm-6">
-          <a href="./sub-pages-admin/4-reportes.html" class="module-card">
-            <div class="module-icon"><i class="bi bi-bar-chart"></i></div>
-            <h5>Reportes</h5>
-            <p class="small text-muted">Incidentes y novedades</p>
-          </a>
-        </div>
-        <div class="col-md-3 col-sm-6">
-          <a href="./sub-pages-admin/5-incapacidad.html" class="module-card">
-            <div class="module-icon"><i class="bi bi-clipboard2-pulse"></i></div>
-            <h5>Incapacidad</h5>
-            <p class="small text-muted">Gestiona documentos médicos</p>
-          </a>
-        </div>
-        <div class="col-md-3 col-sm-6">
-          <a href="./sub-pages-admin/6-certificados.html" class="module-card">
-            <div class="module-icon"><i class="bi bi-award"></i></div>
-            <h5>Certificados</h5>
-            <p class="small text-muted">Genera certificados laborales</p>
-          </a>
-        </div>
-      </div>
 
-      <!-- Actividad reciente (recordatorios del sistema) -->
-      <div class="row">
-        <div class="col-md-6">
-          <h4><i class="bi bi-bell-fill me-2"></i> Notificaciones recientes</h4>
-          <div class="reminder-card">
-            <i class="bi bi-calendar-check text-danger me-2"></i>
-            <strong>Nuevas solicitudes de permiso:</strong> 2 solicitudes pendientes de revisión.
+        <!-- Actividad reciente (recordatorios del sistema) -->
+        <div class="row">
+          <div class="col-md-6">
+            <h4><i class="bi bi-bell-fill me-2"></i> Notificaciones recientes</h4>
+            <div class="reminder-card">
+              <i class="bi bi-calendar-check text-danger me-2"></i>
+              <strong>Nuevas solicitudes de permiso:</strong> 2 solicitudes pendientes de revisión.
+            </div>
+            <div class="reminder-card">
+              <i class="bi bi-chat-dots text-danger me-2"></i>
+              <strong>Reportes sin leer:</strong> 1 nuevo reporte de incidente en producción.
+            </div>
+            <div class="reminder-card">
+              <i class="bi bi-file-text text-danger me-2"></i>
+              <strong>Certificados solicitados:</strong> 3 empleados han solicitado certificados esta semana.
+            </div>
           </div>
-          <div class="reminder-card">
-            <i class="bi bi-chat-dots text-danger me-2"></i>
-            <strong>Reportes sin leer:</strong> 1 nuevo reporte de incidente en producción.
-          </div>
-          <div class="reminder-card">
-            <i class="bi bi-file-text text-danger me-2"></i>
-            <strong>Certificados solicitados:</strong> 3 empleados han solicitado certificados esta semana.
+          <div class="col-md-6">
+            <h4><i class="bi bi-calendar-week me-2"></i> Próximas acciones</h4>
+            <div class="table-responsive">
+              <table class="table table-sm">
+                <thead>
+                  <tr>
+                    <th>Fecha</th>
+                    <th>Acción</th>
+                    <th>Estado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Hoy</td>
+                    <td>Revisar incapacidades pendientes</td>
+                    <td><span class="badge bg-warning">Pendiente</span></td>
+                  </tr>
+                  <tr>
+                    <td>Mañana</td>
+                    <td>Generar reporte mensual de asistencia</td>
+                    <td><span class="badge bg-secondary">Programado</span></td>
+                  </tr>
+                  <tr>
+                    <td>15/04</td>
+                    <td>Reunión de personal</td>
+                    <td><span class="badge bg-info">Recordatorio</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
-        <div class="col-md-6">
-          <h4><i class="bi bi-calendar-week me-2"></i> Próximas acciones</h4>
-          <div class="table-responsive">
-            <table class="table table-sm">
-              <thead><tr><th>Fecha</th><th>Acción</th><th>Estado</th></tr></thead>
-              <tbody>
-                <tr><td>Hoy</td><td>Revisar incapacidades pendientes</td><td><span class="badge bg-warning">Pendiente</span></td></tr>
-                <tr><td>Mañana</td><td>Generar reporte mensual de asistencia</td><td><span class="badge bg-secondary">Programado</span></td></tr>
-                <tr><td>15/04</td><td>Reunión de personal</td><td><span class="badge bg-info">Recordatorio</span></td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
 
-      <footer>
-        <i class="bi bi-shield-check"></i> Sistema de gestión de personal - OperPan &copy; 2025
-      </footer>
-    </main>
-  </div>
-</div>
-
-<!-- Toast -->
-<div class="toast-message" id="liveToast" style="display: none;">
-  <div class="bg-white rounded-3 shadow p-3 border-start border-4 border-danger">
-    <div class="d-flex gap-2 align-items-center">
-      <i class="bi bi-info-circle-fill text-danger fs-5"></i>
-      <span id="toastMsg">Mensaje</span>
+        <footer>
+          <i class="bi bi-shield-check"></i> Sistema de gestión de personal - OperPan &copy; 2025
+        </footer>
+      </main>
     </div>
   </div>
-</div>
 
-<script>
-  // ============================================================
-  // LANDING DEL ADMINISTRADOR - OPERPAN
-  // Dashboard con KPIs reales, acceso a módulos y trazabilidad
-  // ============================================================
-  
-  const STORAGE_USERS = "operpan_usuarios";
-  const STORAGE_TAREAS = "operpan_tareas_admin";
-  const STORAGE_PERMISOS = "operpan_permisos";
-  const STORAGE_REPORTES = "operpan_reportes";
-  
-  // Mostrar fecha actual
-  function actualizarFecha() {
-    const ahora = new Date();
-    const fechaStr = ahora.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-    document.getElementById("fechaActual") && (document.getElementById("fechaActual").innerText = fechaStr);
-  }
-  actualizarFecha();
-  
-  // Cargar KPIs desde localStorage (datos reales de los módulos)
-  function cargarKPIs() {
-    // Total empleados activos
-    let totalEmpleados = 0;
-    try {
-      const users = localStorage.getItem(STORAGE_USERS);
-      if (users) {
-        const empleados = JSON.parse(users);
-        totalEmpleados = empleados.filter(e => e.estado === "activo").length;
-      } else {
-        totalEmpleados = 3; // datos demo
+  <!-- Toast -->
+  <div class="toast-message" id="liveToast" style="display: none;">
+    <div class="bg-white rounded-3 shadow p-3 border-start border-4 border-danger">
+      <div class="d-flex gap-2 align-items-center">
+        <i class="bi bi-info-circle-fill text-danger fs-5"></i>
+        <span id="toastMsg">Mensaje</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ============================================================
+    // LANDING DEL ADMINISTRADOR - OPERPAN
+    // Dashboard con KPIs reales, acceso a módulos y trazabilidad
+    // ============================================================
+
+    const STORAGE_USERS = "operpan_usuarios";
+    const STORAGE_TAREAS = "operpan_tareas_admin";
+    const STORAGE_PERMISOS = "operpan_permisos";
+    const STORAGE_REPORTES = "operpan_reportes";
+
+    // Mostrar fecha actual
+    function actualizarFecha() {
+      const ahora = new Date();
+      const fechaStr = ahora.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+      document.getElementById("fechaActual") && (document.getElementById("fechaActual").innerText = fechaStr);
+    }
+    actualizarFecha();
+
+    // Cargar KPIs desde localStorage (datos reales de los módulos)
+    function cargarKPIs() {
+      // Total empleados activos
+      let totalEmpleados = 0;
+      try {
+        const users = localStorage.getItem(STORAGE_USERS);
+        if (users) {
+          const empleados = JSON.parse(users);
+          totalEmpleados = empleados.filter(e => e.estado === "activo").length;
+        } else {
+          totalEmpleados = 3; // datos demo
+        }
+      } catch (e) { totalEmpleados = 3; }
+      document.getElementById("totalEmpleados").innerText = totalEmpleados;
+
+      // Tareas pendientes (admin)
+      let tareasPendientes = 0;
+      try {
+        const tareas = localStorage.getItem(STORAGE_TAREAS);
+        if (tareas) {
+          const lista = JSON.parse(tareas);
+          tareasPendientes = lista.filter(t => t.estado === "pendiente").length;
+        } else {
+          tareasPendientes = 2;
+        }
+      } catch (e) { tareasPendientes = 2; }
+      document.getElementById("tareasPendientes").innerText = tareasPendientes;
+
+      // Permisos pendientes
+      let permisosPendientes = 0;
+      try {
+        const permisos = localStorage.getItem(STORAGE_PERMISOS);
+        if (permisos) {
+          const lista = JSON.parse(permisos);
+          permisosPendientes = lista.filter(p => p.estado === "pendiente").length;
+        } else {
+          permisosPendientes = 2;
+        }
+      } catch (e) { permisosPendientes = 2; }
+      document.getElementById("permisosPendientes").innerText = permisosPendientes;
+
+      // Reportes pendientes
+      let reportesPendientes = 0;
+      try {
+        const reportes = localStorage.getItem(STORAGE_REPORTES);
+        if (reportes) {
+          const lista = JSON.parse(reportes);
+          reportesPendientes = lista.filter(r => r.estado === "pendiente").length;
+        } else {
+          reportesPendientes = 1;
+        }
+      } catch (e) { reportesPendientes = 1; }
+      document.getElementById("reportesPendientes").innerText = reportesPendientes;
+    }
+
+    // Cerrar sesión
+    document.getElementById("logoutBtn")?.addEventListener("click", () => {
+      mostrarMensaje("Cerrando sesión...");
+      setTimeout(() => window.location.href = "../../login.html", 800);
+    });
+
+    // Sidebar toggle (móvil)
+    const menuToggle = document.getElementById("menuToggle");
+    const sidebar = document.getElementById("sidebar");
+    if (menuToggle) {
+      menuToggle.addEventListener("click", () => sidebar.classList.toggle("active"));
+    }
+    // Cerrar el menú si se hace clic fuera de él (en la zona blanca)
+    document.addEventListener("click", (event) => {
+      // Verificamos si el sidebar está abierto (tiene la clase active)
+      if (sidebar.classList.contains("active")) {
+        // Si el clic NO fue dentro del sidebar Y TAMPOCO en el botón de hamburguesa...
+        if (!sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
+          sidebar.classList.remove("active");
+        }
       }
-    } catch(e) { totalEmpleados = 3; }
-    document.getElementById("totalEmpleados").innerText = totalEmpleados;
-    
-    // Tareas pendientes (admin)
-    let tareasPendientes = 0;
-    try {
-      const tareas = localStorage.getItem(STORAGE_TAREAS);
-      if (tareas) {
-        const lista = JSON.parse(tareas);
-        tareasPendientes = lista.filter(t => t.estado === "pendiente").length;
-      } else {
-        tareasPendientes = 2;
-      }
-    } catch(e) { tareasPendientes = 2; }
-    document.getElementById("tareasPendientes").innerText = tareasPendientes;
-    
-    // Permisos pendientes
-    let permisosPendientes = 0;
-    try {
-      const permisos = localStorage.getItem(STORAGE_PERMISOS);
-      if (permisos) {
-        const lista = JSON.parse(permisos);
-        permisosPendientes = lista.filter(p => p.estado === "pendiente").length;
-      } else {
-        permisosPendientes = 2;
-      }
-    } catch(e) { permisosPendientes = 2; }
-    document.getElementById("permisosPendientes").innerText = permisosPendientes;
-    
-    // Reportes pendientes
-    let reportesPendientes = 0;
-    try {
-      const reportes = localStorage.getItem(STORAGE_REPORTES);
-      if (reportes) {
-        const lista = JSON.parse(reportes);
-        reportesPendientes = lista.filter(r => r.estado === "pendiente").length;
-      } else {
-        reportesPendientes = 1;
-      }
-    } catch(e) { reportesPendientes = 1; }
-    document.getElementById("reportesPendientes").innerText = reportesPendientes;
-  }
-  
-  // Cerrar sesión
-  document.getElementById("logoutBtn")?.addEventListener("click", () => {
-    mostrarMensaje("Cerrando sesión...");
-    setTimeout(() => window.location.href = "../../login.html", 800);
-  });
-  
-  // Sidebar toggle (móvil)
-  const menuToggle = document.getElementById("menuToggle");
-  const sidebar = document.getElementById("sidebar");
-  if(menuToggle) {
-    menuToggle.addEventListener("click", () => sidebar.classList.toggle("active"));
-  }
-  
-  function mostrarMensaje(msg) {
-    const toast = document.getElementById("liveToast");
-    const msgSpan = document.getElementById("toastMsg");
-    msgSpan.innerText = msg;
-    toast.style.display = "block";
-    setTimeout(() => toast.style.display = "none", 3000);
-  }
-  
-  // Trazabilidad de acceso al dashboard de admin
-  console.log(`[ACCESO ADMIN] Administrador ingresó al panel principal - ${new Date().toLocaleString()}`);
-  
-  cargarKPIs();
-</script>
+    });
+
+    function mostrarMensaje(msg) {
+      const toast = document.getElementById("liveToast");
+      const msgSpan = document.getElementById("toastMsg");
+      msgSpan.innerText = msg;
+      toast.style.display = "block";
+      setTimeout(() => toast.style.display = "none", 3000);
+    }
+
+    // Trazabilidad de acceso al dashboard de admin
+    console.log(`[ACCESO ADMIN] Administrador ingresó al panel principal - ${new Date().toLocaleString()}`);
+
+    cargarKPIs();
+  </script>
 </body>
+
 </html>

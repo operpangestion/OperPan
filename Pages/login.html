@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <meta name="description" content="Sistema de gestión de personal y recursos humanos para Panadería Estación Paisa - OperPan">
+    <meta name="description"
+        content="Sistema de gestión de personal y recursos humanos para Panadería Estación Paisa - OperPan">
     <title>OperPan | Iniciar Sesión</title>
 
     <!-- Bootstrap 5 CSS + Icons + Poppins Font -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
     <style>
         /* =========================
@@ -32,20 +35,33 @@
         }
 
         /* Tipografía jerarquía */
-        h1, h2, h3, h4 {
+        h1,
+        h2,
+        h3,
+        h4 {
             font-weight: 700;
             color: #000000;
         }
+
         h1 {
             font-size: 2.5rem;
         }
+
         h2 {
             font-size: 2rem;
         }
+
         h3 {
             font-size: 1.5rem;
         }
-        p, span, a, li, input, button, label {
+
+        p,
+        span,
+        a,
+        li,
+        input,
+        button,
+        label {
             font-size: 1rem;
         }
 
@@ -60,7 +76,7 @@
             width: 100%;
             max-width: 520px;
             transition: all 0.2s ease;
-            border: 1px solid rgba(0,0,0,0.03);
+            border: 1px solid rgba(0, 0, 0, 0.03);
         }
 
         /* Logo y encabezado */
@@ -68,30 +84,36 @@
             text-align: center;
             margin-bottom: 1rem;
         }
+
         .logo-operpan {
             max-width: 100px;
             height: auto;
             margin-bottom: 0.5rem;
         }
+
         .brand-titles {
             text-align: center;
             margin-bottom: 2rem;
         }
+
         .brand-titles h1 {
             font-size: 1.8rem;
             line-height: 1.2;
             margin-bottom: 0;
             letter-spacing: -0.3px;
         }
+
         .brand-titles h1:first-child {
             font-weight: 600;
             color: #A40706;
         }
+
         .brand-titles h1:last-child {
             font-weight: 700;
             color: #000000;
             font-size: 1.6rem;
         }
+
         .system-badge {
             background: #F0F2F5;
             display: inline-block;
@@ -112,6 +134,7 @@
             border-radius: 60px;
             margin-bottom: 2rem;
         }
+
         .tab-btn {
             flex: 1;
             background: transparent;
@@ -124,11 +147,13 @@
             color: #3A3F47;
             font-family: 'Poppins', sans-serif;
         }
+
         .tab-btn.active {
             background: #A40706;
             color: white;
             box-shadow: 0 4px 8px rgba(164, 7, 6, 0.2);
         }
+
         .tab-btn i {
             margin-right: 8px;
             font-size: 1.1rem;
@@ -138,17 +163,20 @@
         .form-group {
             margin-bottom: 1.5rem;
         }
+
         .input-icon {
             position: relative;
             display: flex;
             align-items: center;
         }
+
         .input-icon i {
             position: absolute;
             left: 16px;
             color: #8E98A3;
             font-size: 1.2rem;
         }
+
         .form-control-custom {
             width: 100%;
             padding: 0.9rem 1rem 0.9rem 48px;
@@ -159,11 +187,13 @@
             background: #FFFFFF;
             transition: 0.2s;
         }
+
         .form-control-custom:focus {
             border-color: #A40706;
             outline: none;
             box-shadow: 0 0 0 3px rgba(164, 7, 6, 0.2);
         }
+
         /* cuando no hay icono interno */
         .form-control-plain {
             padding: 0.9rem 1rem;
@@ -172,6 +202,7 @@
             width: 100%;
             font-family: 'Poppins', sans-serif;
         }
+
         .form-control-plain:focus {
             border-color: #A40706;
             outline: none;
@@ -195,11 +226,13 @@
             gap: 8px;
             margin-top: 0.5rem;
         }
+
         .btn-login:hover {
             background: #8a0504;
             transform: translateY(-2px);
             box-shadow: 0 8px 18px rgba(164, 7, 6, 0.3);
         }
+
         .btn-login:active {
             transform: translateY(1px);
         }
@@ -209,6 +242,7 @@
             text-align: center;
             margin-top: 1.2rem;
         }
+
         .forgot-link a {
             color: #5F6C7A;
             text-decoration: none;
@@ -216,6 +250,7 @@
             font-weight: 500;
             transition: 0.2s;
         }
+
         .forgot-link a:hover {
             color: #A40706;
             text-decoration: underline;
@@ -233,9 +268,11 @@
             border-left: 4px solid #A40706;
             display: none;
         }
+
         .message-area.show {
             display: block;
         }
+
         .message-area i {
             margin-right: 8px;
         }
@@ -260,370 +297,384 @@
             .login-card {
                 padding: 1.5rem;
             }
+
             .brand-titles h1 {
                 font-size: 1.4rem;
             }
+
             .tab-btn {
                 font-size: 0.75rem;
             }
         }
     </style>
 </head>
+
 <body>
 
-<main>
-    <div class="login-card">
-        <!-- Logo y cabecera institucional -->
-        <div class="logo-wrapper">
-            <img class="logo-operpan" src="../Assets/img/img-login/LOGO OPERPAN.png" alt="OperPan Logo">
-        </div>
-        <div class="brand-titles">
-            <h1>Panadería</h1>
-            <h1>Estación Paisa</h1>
-            <div class="system-badge">
-                <i class="bi bi-person-badge"></i> Sistema de Gestión RH
+    <main>
+        <div class="login-card">
+            <!-- Logo y cabecera institucional -->
+            <div class="logo-wrapper">
+                <img class="logo-operpan" src="../Assets/img/img-login/LOGO OPERPAN.png" alt="OperPan Logo">
+            </div>
+            <div class="brand-titles">
+                <h1>Panadería</h1>
+                <h1>Estación Paisa</h1>
+                <div class="system-badge">
+                    <i class="bi bi-person-badge"></i> Sistema de Gestión RH
+                </div>
+            </div>
+
+            <!-- Tabs: Acceso administrativo / Acceso empleado -->
+            <div class="access-tabs" role="tablist">
+                <button type="button" class="tab-btn active" id="tabAdminGerente">
+                    <i class="bi bi-shield-lock"></i> Administrativo
+                </button>
+                <button type="button" class="tab-btn" id="tabEmpleado">
+                    <i class="bi bi-person-badge"></i> Empleado (Código)
+                </button>
+            </div>
+
+            <!-- PANEL ADMIN / GERENTE (usuario + contraseña) -->
+            <div id="adminFormPane" class="form-pane">
+                <form id="loginAdminForm" novalidate>
+                    <div class="form-group">
+                        <div class="input-icon">
+                            <i class="bi bi-person-circle"></i>
+                            <input type="text" id="adminUser" class="form-control-custom" placeholder="Usuario"
+                                autocomplete="username" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-icon">
+                            <i class="bi bi-lock-fill"></i>
+                            <input type="password" id="adminPass" class="form-control-custom" placeholder="Contraseña"
+                                autocomplete="current-password" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-login" id="submitAdminBtn">
+                        <i class="bi bi-box-arrow-in-right"></i> Iniciar Sesión
+                    </button>
+                </form>
+            </div>
+
+            <!-- PANEL EMPLEADO (código personal) -->
+            <div id="empleadoFormPane" class="form-pane" style="display: none;">
+                <form id="loginEmpleadoForm" novalidate>
+                    <div class="form-group">
+                        <div class="input-icon">
+                            <i class="bi bi-upc-scan"></i>
+                            <input type="text" id="empleadoCodigo" class="form-control-custom"
+                                placeholder="Código personal (ej: EMP001)" autocomplete="off" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-login" id="submitEmpleadoBtn">
+                        <i class="bi bi-box-arrow-in-right"></i> Ingresar con código
+                    </button>
+                </form>
+            </div>
+
+            <!-- Mensajes globales de feedback -->
+            <div id="globalMessage" class="message-area">
+                <i class="bi bi-exclamation-triangle-fill"></i> <span id="msgText"></span>
+            </div>
+
+            <div class="forgot-link">
+                <a href="#" id="forgotPasswordLink"><i class="bi bi-question-circle"></i> ¿Olvidaste tu contraseña o
+                    código?</a>
+            </div>
+            <div class="forgot-link">
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=eddierpaz9@gmail.com&su=Soporte%20OperPan"
+                    target="_blank" class="text text-decoration-none d-block custom-sidebar-link">
+                    <small><i class="bi bi-question-circle me-2"></i>Ayuda / Soporte</small>
+                </a>
+            </div>
+            <div class="footer-note">
+                <i class="bi bi-shield-check"></i> Entorno seguro · Auditoría de accesos
             </div>
         </div>
+    </main>
 
-        <!-- Tabs: Acceso administrativo / Acceso empleado -->
-        <div class="access-tabs" role="tablist">
-            <button type="button" class="tab-btn active" id="tabAdminGerente">
-                <i class="bi bi-shield-lock"></i> Administrativo
-            </button>
-            <button type="button" class="tab-btn" id="tabEmpleado">
-                <i class="bi bi-person-badge"></i> Empleado (Código)
-            </button>
-        </div>
+    <script>
+        // =========================
+        // BASE DE DATOS SIMULADA (cumple requisitos funcionales)
+        // =========================
+        // Administradores y Gerentes
+        const adminAccounts = {
+            "admin": {
+                username: "admin",
+                password: "Admin123!",
+                role: "admin",
+                fullName: "Administrador Principal",
+                suspended: false,
+            },
+            "gerente": {
+                username: "gerente",
+                password: "Gerente123!",
+                role: "gerente",
+                fullName: "Gerente Operaciones",
+                suspended: false,
+            }
+            // Cuenta suspendida de prueba (descomentar si se necesita simular)
+            // "inactivo": { username: "inactivo", password: "Pass123!", role: "admin", suspended: true }
+        };
 
-        <!-- PANEL ADMIN / GERENTE (usuario + contraseña) -->
-        <div id="adminFormPane" class="form-pane">
-            <form id="loginAdminForm" novalidate>
-                <div class="form-group">
-                    <div class="input-icon">
-                        <i class="bi bi-person-circle"></i>
-                        <input type="text" id="adminUser" class="form-control-custom" placeholder="Usuario" autocomplete="username" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="input-icon">
-                        <i class="bi bi-lock-fill"></i>
-                        <input type="password" id="adminPass" class="form-control-custom" placeholder="Contraseña" autocomplete="current-password" required>
-                    </div>
-                </div>
-                <button type="submit" class="btn-login" id="submitAdminBtn">
-                    <i class="bi bi-box-arrow-in-right"></i> Iniciar Sesión
-                </button>
-            </form>
-        </div>
+        // Empleados con código personal (RF-LG-02)
+        const empleadosDB = {
+            "EMP001": { codigo: "EMP001", nombre: "Carlos Méndez", role: "empleado", suspended: false, activo: true },
+            "EMP002": { codigo: "EMP002", nombre: "Luisa Fernández", role: "empleado", suspended: true, activo: false },   // suspendida (RN-LG-06)
+            "EMP003": { codigo: "EMP003", nombre: "Jorge Ramírez", role: "empleado", suspended: false, activo: true },
+        };
 
-        <!-- PANEL EMPLEADO (código personal) -->
-        <div id="empleadoFormPane" class="form-pane" style="display: none;">
-            <form id="loginEmpleadoForm" novalidate>
-                <div class="form-group">
-                    <div class="input-icon">
-                        <i class="bi bi-upc-scan"></i>
-                        <input type="text" id="empleadoCodigo" class="form-control-custom" placeholder="Código personal (ej: EMP001)" autocomplete="off" required>
-                    </div>
-                </div>
-                <button type="submit" class="btn-login" id="submitEmpleadoBtn">
-                    <i class="bi bi-box-arrow-in-right"></i> Ingresar con código
-                </button>
-            </form>
-        </div>
-
-        <!-- Mensajes globales de feedback -->
-        <div id="globalMessage" class="message-area">
-            <i class="bi bi-exclamation-triangle-fill"></i> <span id="msgText"></span>
-        </div>
-
-        <div class="forgot-link">
-            <a href="#" id="forgotPasswordLink"><i class="bi bi-question-circle"></i> ¿Olvidaste tu contraseña o código?</a>
-        </div>
-        <div class="footer-note">
-            <i class="bi bi-shield-check"></i> Entorno seguro · Auditoría de accesos
-        </div>
-    </div>
-</main>
-
-<script>
-    // =========================
-    // BASE DE DATOS SIMULADA (cumple requisitos funcionales)
-    // =========================
-    // Administradores y Gerentes
-    const adminAccounts = {
-        "admin": {
-            username: "admin",
-            password: "Admin123!",
-            role: "admin",
-            fullName: "Administrador Principal",
-            suspended: false,
-        },
-        "gerente": {
-            username: "gerente",
-            password: "Gerente123!",
-            role: "gerente",
-            fullName: "Gerente Operaciones",
-            suspended: false,
+        // ---------- Gestión de bloqueo temporal (RNF-LG-02) ----------
+        // Estructura en localStorage: "loginAttempts" => { "username": { attempts, blockedUntil } }
+        function getAttemptsStorage() {
+            const stored = localStorage.getItem("operpan_login_attempts");
+            return stored ? JSON.parse(stored) : {};
         }
-        // Cuenta suspendida de prueba (descomentar si se necesita simular)
-        // "inactivo": { username: "inactivo", password: "Pass123!", role: "admin", suspended: true }
-    };
-    
-    // Empleados con código personal (RF-LG-02)
-    const empleadosDB = {
-        "EMP001": { codigo: "EMP001", nombre: "Carlos Méndez", role: "empleado", suspended: false, activo: true },
-        "EMP002": { codigo: "EMP002", nombre: "Luisa Fernández", role: "empleado", suspended: true, activo: false },   // suspendida (RN-LG-06)
-        "EMP003": { codigo: "EMP003", nombre: "Jorge Ramírez", role: "empleado", suspended: false, activo: true },
-    };
-
-    // ---------- Gestión de bloqueo temporal (RNF-LG-02) ----------
-    // Estructura en localStorage: "loginAttempts" => { "username": { attempts, blockedUntil } }
-    function getAttemptsStorage() {
-        const stored = localStorage.getItem("operpan_login_attempts");
-        return stored ? JSON.parse(stored) : {};
-    }
-    function saveAttemptsStorage(data) {
-        localStorage.setItem("operpan_login_attempts", JSON.stringify(data));
-    }
-
-    // Verificar si cuenta admin/gerente está bloqueada
-    function isAccountBlocked(username) {
-        const attemptsData = getAttemptsStorage();
-        const record = attemptsData[username];
-        if (record && record.blockedUntil && Date.now() < record.blockedUntil) {
-            return true; // aún bloqueado
+        function saveAttemptsStorage(data) {
+            localStorage.setItem("operpan_login_attempts", JSON.stringify(data));
         }
-        // si expiró el bloqueo, limpiamos sus intentos
-        if (record && record.blockedUntil && Date.now() >= record.blockedUntil) {
-            delete attemptsData[username];
-            saveAttemptsStorage(attemptsData);
+
+        // Verificar si cuenta admin/gerente está bloqueada
+        function isAccountBlocked(username) {
+            const attemptsData = getAttemptsStorage();
+            const record = attemptsData[username];
+            if (record && record.blockedUntil && Date.now() < record.blockedUntil) {
+                return true; // aún bloqueado
+            }
+            // si expiró el bloqueo, limpiamos sus intentos
+            if (record && record.blockedUntil && Date.now() >= record.blockedUntil) {
+                delete attemptsData[username];
+                saveAttemptsStorage(attemptsData);
+            }
+            return false;
         }
-        return false;
-    }
-    
-    // Registrar intento fallido para admin/gerente
-    function registerFailedAttempt(username) {
-        const attemptsData = getAttemptsStorage();
-        const now = Date.now();
-        if (!attemptsData[username]) {
-            attemptsData[username] = { attempts: 1, blockedUntil: null };
-        } else {
-            // Si ya estaba bloqueado pero expiró, reiniciamos
-            if (attemptsData[username].blockedUntil && now >= attemptsData[username].blockedUntil) {
+
+        // Registrar intento fallido para admin/gerente
+        function registerFailedAttempt(username) {
+            const attemptsData = getAttemptsStorage();
+            const now = Date.now();
+            if (!attemptsData[username]) {
                 attemptsData[username] = { attempts: 1, blockedUntil: null };
             } else {
-                attemptsData[username].attempts += 1;
+                // Si ya estaba bloqueado pero expiró, reiniciamos
+                if (attemptsData[username].blockedUntil && now >= attemptsData[username].blockedUntil) {
+                    attemptsData[username] = { attempts: 1, blockedUntil: null };
+                } else {
+                    attemptsData[username].attempts += 1;
+                }
             }
-        }
-        // Después de 3 fallos: bloquear por 5 minutos (300000 ms)
-        if (attemptsData[username].attempts >= 3) {
-            attemptsData[username].blockedUntil = now + 300000; // 5 minutos
-            attemptsData[username].attempts = 0; // reset contador pero mantiene bloqueo
-        }
-        saveAttemptsStorage(attemptsData);
-    }
-    
-    // Limpiar intentos luego de login exitoso
-    function clearAttempts(username) {
-        const attemptsData = getAttemptsStorage();
-        if (attemptsData[username]) {
-            delete attemptsData[username];
+            // Después de 3 fallos: bloquear por 5 minutos (300000 ms)
+            if (attemptsData[username].attempts >= 3) {
+                attemptsData[username].blockedUntil = now + 300000; // 5 minutos
+                attemptsData[username].attempts = 0; // reset contador pero mantiene bloqueo
+            }
             saveAttemptsStorage(attemptsData);
         }
-    }
 
-    // =========================
-    // REGISTRO DE ACCESOS (RF-LG-03, RF-LG-04, trazabilidad)
-    // =========================
-    function registrarAcceso(usuario, rol, tipoAcceso, codigoOCredencial) {
-        const ahora = new Date();
-        const fechaHora = ahora.toLocaleString('es-CO');
-        const dispositivo = navigator.userAgent || "Desconocido";
-        const logEntry = {
-            timestamp: ahora.toISOString(),
-            fechaHora: fechaHora,
-            usuario: usuario,
-            rol: rol,
-            tipo: tipoAcceso,   // "admin_login", "empleado_login"
-            credencial: codigoOCredencial,
-            dispositivo: dispositivo,
-            ip: "simulada-local" // en entorno real se obtendría del backend
-        };
-        // Guardar en localStorage para simular auditoría (historial de últimos 50)
-        let logs = localStorage.getItem("operpan_access_logs");
-        logs = logs ? JSON.parse(logs) : [];
-        logs.unshift(logEntry);
-        if (logs.length > 100) logs.pop();
-        localStorage.setItem("operpan_access_logs", JSON.stringify(logs));
-        console.log("[AUDITORÍA] Acceso registrado:", logEntry);
-        // Aquí se podría enviar a backend, pero simulamos
-    }
-    
-    // Mostrar mensaje de error amigable (RNF-LG-04)
-    function showMessage(message, isError = true) {
-        const msgDiv = document.getElementById("globalMessage");
-        const msgSpan = document.getElementById("msgText");
-        msgSpan.innerText = message;
-        msgDiv.classList.add("show");
-        if (isError) {
-            msgDiv.style.background = "#FEF2F0";
-            msgDiv.style.color = "#B91C1C";
-            msgDiv.style.borderLeftColor = "#A40706";
-        } else {
-            msgDiv.style.background = "#E6F7EC";
-            msgDiv.style.color = "#0E6B2E";
-            msgDiv.style.borderLeftColor = "#2E7D32";
-        }
-        setTimeout(() => {
-            msgDiv.classList.remove("show");
-        }, 5000);
-    }
-    
-    // Limpiar mensaje
-    function clearMessage() {
-        const msgDiv = document.getElementById("globalMessage");
-        msgDiv.classList.remove("show");
-    }
-    
-    // ---------- LOGICA ADMIN / GERENTE ----------
-    async function handleAdminLogin(event) {
-        event.preventDefault();
-        clearMessage();
-        const username = document.getElementById("adminUser").value.trim();
-        const password = document.getElementById("adminPass").value;
-        
-        if (!username || !password) {
-            showMessage("⚠️ Por favor complete usuario y contraseña.");
-            return;
-        }
-        
-        // Verificar si la cuenta existe
-        const account = adminAccounts[username.toLowerCase()];
-        if (!account) {
-            showMessage("❌ Credenciales inválidas. Usuario o contraseña incorrectos.");
-            // Registrar intento fallido genérico (no se expone existencia)
-            registerFailedAttempt(username);
-            return;
-        }
-        
-        // Verificar bloqueo activo
-        if (isAccountBlocked(account.username)) {
+        // Limpiar intentos luego de login exitoso
+        function clearAttempts(username) {
             const attemptsData = getAttemptsStorage();
-            const blockedUntil = attemptsData[account.username]?.blockedUntil;
-            const minutosRest = Math.ceil((blockedUntil - Date.now()) / 60000);
-            showMessage(`🔒 Cuenta temporalmente bloqueada. Intente nuevamente en ${minutosRest} minuto(s) por seguridad.`);
-            return;
-        }
-        
-        // Verificar si cuenta suspendida (RN-LG-06)
-        if (account.suspended === true) {
-            showMessage("⛔ Acceso denegado. Su cuenta ha sido suspendida/inactivada. Contacte al administrador.");
-            return;
-        }
-        
-        // Validar contraseña
-        if (account.password !== password) {
-            registerFailedAttempt(account.username);
-            showMessage("❌ Contraseña incorrecta. Verifique sus credenciales.");
-            return;
-        }
-        
-        // ÉXITO: Login correcto (Administrador o Gerente)
-        clearAttempts(account.username);
-        // Registrar acceso con todos los detalles (fecha, hora, dispositivo)
-        registrarAcceso(account.fullName, account.role, "login_admin_gerente", username);
-        
-        // Mensaje de bienvenida exitoso
-        showMessage(`✅ Bienvenido ${account.fullName}. Redirigiendo al panel...`, false);
-        
-        // Redirección según rol (RF-LG-01, HU-LG-01, HU-LG-02)
-        setTimeout(() => {
-            if (account.role === "admin") {
-                window.location.href = "../Pages/admin/landingAdmin.html";
-            } else if (account.role === "gerente") {
-                // El gerente también puede tener su propio landing (o el mismo con permisos reducidos)
-                window.location.href = "../Pages/admin/landingAdmin.html?role=gerente";  // Asumimos que el landingAdmin gestiona permisos
-            } else {
-                window.location.href = "../index.html";
+            if (attemptsData[username]) {
+                delete attemptsData[username];
+                saveAttemptsStorage(attemptsData);
             }
-        }, 800);
-    }
-    
-    // ---------- LOGICA EMPLEADO (código personal) ----------
-    async function handleEmpleadoLogin(event) {
-        event.preventDefault();
-        clearMessage();
-        const codigo = document.getElementById("empleadoCodigo").value.trim().toUpperCase();
-        
-        if (!codigo) {
-            showMessage("📌 Debe ingresar su código personal de empleado.");
-            return;
         }
-        
-        const empleado = empleadosDB[codigo];
-        if (!empleado) {
-            showMessage("❌ Código personal inválido. No existe en la base de datos.");
-            return;
+
+        // =========================
+        // REGISTRO DE ACCESOS (RF-LG-03, RF-LG-04, trazabilidad)
+        // =========================
+        function registrarAcceso(usuario, rol, tipoAcceso, codigoOCredencial) {
+            const ahora = new Date();
+            const fechaHora = ahora.toLocaleString('es-CO');
+            const dispositivo = navigator.userAgent || "Desconocido";
+            const logEntry = {
+                timestamp: ahora.toISOString(),
+                fechaHora: fechaHora,
+                usuario: usuario,
+                rol: rol,
+                tipo: tipoAcceso,   // "admin_login", "empleado_login"
+                credencial: codigoOCredencial,
+                dispositivo: dispositivo,
+                ip: "simulada-local" // en entorno real se obtendría del backend
+            };
+            // Guardar en localStorage para simular auditoría (historial de últimos 50)
+            let logs = localStorage.getItem("operpan_access_logs");
+            logs = logs ? JSON.parse(logs) : [];
+            logs.unshift(logEntry);
+            if (logs.length > 100) logs.pop();
+            localStorage.setItem("operpan_access_logs", JSON.stringify(logs));
+            console.log("[AUDITORÍA] Acceso registrado:", logEntry);
+            // Aquí se podría enviar a backend, pero simulamos
         }
-        
-        // Verificar si cuenta suspendida o inactiva (RN-LG-06, RN-LG-02)
-        if (empleado.suspended === true || empleado.activo === false) {
-            showMessage("⛔ Acceso denegado. Su cuenta está inactiva o suspendida. Consulte con administración.");
-            return;
+
+        // Mostrar mensaje de error amigable (RNF-LG-04)
+        function showMessage(message, isError = true) {
+            const msgDiv = document.getElementById("globalMessage");
+            const msgSpan = document.getElementById("msgText");
+            msgSpan.innerText = message;
+            msgDiv.classList.add("show");
+            if (isError) {
+                msgDiv.style.background = "#FEF2F0";
+                msgDiv.style.color = "#B91C1C";
+                msgDiv.style.borderLeftColor = "#A40706";
+            } else {
+                msgDiv.style.background = "#E6F7EC";
+                msgDiv.style.color = "#0E6B2E";
+                msgDiv.style.borderLeftColor = "#2E7D32";
+            }
+            setTimeout(() => {
+                msgDiv.classList.remove("show");
+            }, 5000);
         }
-        
-        // ÉXITO: empleado autenticado con código personal
-        // Registrar acceso (fecha, hora, dispositivo) RF-LG-04
-        registrarAcceso(empleado.nombre, empleado.role, "login_empleado_codigo", codigo);
-        
-        showMessage(`👋 Bienvenido ${empleado.nombre}. Accediendo a su panel personal...`, false);
-        
-        // Redirigir al landing de empleado (HU-LG-03)
-        setTimeout(() => {
-            window.location.href = "../Pages/Empleado/landingEmpleado.html";
-        }, 800);
-    }
-    
-    // ---------- TOGGLE ENTRE TABS (Admin/Gerente vs Empleado) ----------
-    const tabAdmin = document.getElementById("tabAdminGerente");
-    const tabEmp = document.getElementById("tabEmpleado");
-    const adminPane = document.getElementById("adminFormPane");
-    const empPane = document.getElementById("empleadoFormPane");
-    
-    function setActiveTab(active) {
-        if (active === "admin") {
-            tabAdmin.classList.add("active");
-            tabEmp.classList.remove("active");
-            adminPane.style.display = "block";
-            empPane.style.display = "none";
+
+        // Limpiar mensaje
+        function clearMessage() {
+            const msgDiv = document.getElementById("globalMessage");
+            msgDiv.classList.remove("show");
+        }
+
+        // ---------- LOGICA ADMIN / GERENTE ----------
+        async function handleAdminLogin(event) {
+            event.preventDefault();
             clearMessage();
-        } else {
-            tabEmp.classList.add("active");
-            tabAdmin.classList.remove("active");
-            adminPane.style.display = "none";
-            empPane.style.display = "block";
-            clearMessage();
+            const username = document.getElementById("adminUser").value.trim();
+            const password = document.getElementById("adminPass").value;
+
+            if (!username || !password) {
+                showMessage("⚠️ Por favor complete usuario y contraseña.");
+                return;
+            }
+
+            // Verificar si la cuenta existe
+            const account = adminAccounts[username.toLowerCase()];
+            if (!account) {
+                showMessage("❌ Credenciales inválidas. Usuario o contraseña incorrectos.");
+                // Registrar intento fallido genérico (no se expone existencia)
+                registerFailedAttempt(username);
+                return;
+            }
+
+            // Verificar bloqueo activo
+            if (isAccountBlocked(account.username)) {
+                const attemptsData = getAttemptsStorage();
+                const blockedUntil = attemptsData[account.username]?.blockedUntil;
+                const minutosRest = Math.ceil((blockedUntil - Date.now()) / 60000);
+                showMessage(`🔒 Cuenta temporalmente bloqueada. Intente nuevamente en ${minutosRest} minuto(s) por seguridad.`);
+                return;
+            }
+
+            // Verificar si cuenta suspendida (RN-LG-06)
+            if (account.suspended === true) {
+                showMessage("⛔ Acceso denegado. Su cuenta ha sido suspendida/inactivada. Contacte al administrador.");
+                return;
+            }
+
+            // Validar contraseña
+            if (account.password !== password) {
+                registerFailedAttempt(account.username);
+                showMessage("❌ Contraseña incorrecta. Verifique sus credenciales.");
+                return;
+            }
+
+            // ÉXITO: Login correcto (Administrador o Gerente)
+            clearAttempts(account.username);
+            // Registrar acceso con todos los detalles (fecha, hora, dispositivo)
+            registrarAcceso(account.fullName, account.role, "login_admin_gerente", username);
+
+            // Mensaje de bienvenida exitoso
+            showMessage(`✅ Bienvenido ${account.fullName}. Redirigiendo al panel...`, false);
+
+            // Redirección según rol (RF-LG-01, HU-LG-01, HU-LG-02)
+            setTimeout(() => {
+                if (account.role === "admin") {
+                    window.location.href = "../Pages/admin/landingAdmin.html";
+                } else if (account.role === "gerente") {
+                    // El gerente también puede tener su propio landing (o el mismo con permisos reducidos)
+                    window.location.href = "../Pages/admin/landingAdmin.html?role=gerente";  // Asumimos que el landingAdmin gestiona permisos
+                } else {
+                    window.location.href = "../index.html";
+                }
+            }, 800);
         }
-    }
-    
-    tabAdmin.addEventListener("click", () => setActiveTab("admin"));
-    tabEmp.addEventListener("click", () => setActiveTab("empleado"));
-    
-    // Asignar eventos submit a los formularios
-    document.getElementById("loginAdminForm").addEventListener("submit", handleAdminLogin);
-    document.getElementById("loginEmpleadoForm").addEventListener("submit", handleEmpleadoLogin);
-    
-    // Simular enlace de olvido contraseña (información de seguridad)
-    document.getElementById("forgotPasswordLink").addEventListener("click", (e) => {
-        e.preventDefault();
-        showMessage("🔐 Para recuperar su acceso, comuníquese con el Administrador del sistema o solicite restablecimiento vía correo corporativo. (Política de seguridad OperPan)", true);
-    });
-    
-    // validación inicial: por defecto mostrar admin activo
-    setActiveTab("admin");
-    
-    // Simulación extra: Cargar intentos previos (solo demostración)
-    console.log("Sistema de Login - OperPan | Auditoría y bloqueo activo");
-</script>
+
+        // ---------- LOGICA EMPLEADO (código personal) ----------
+        async function handleEmpleadoLogin(event) {
+            event.preventDefault();
+            clearMessage();
+            const codigo = document.getElementById("empleadoCodigo").value.trim().toUpperCase();
+
+            if (!codigo) {
+                showMessage("📌 Debe ingresar su código personal de empleado.");
+                return;
+            }
+
+            const empleado = empleadosDB[codigo];
+            if (!empleado) {
+                showMessage("❌ Código personal inválido. No existe en la base de datos.");
+                return;
+            }
+
+            // Verificar si cuenta suspendida o inactiva (RN-LG-06, RN-LG-02)
+            if (empleado.suspended === true || empleado.activo === false) {
+                showMessage("⛔ Acceso denegado. Su cuenta está inactiva o suspendida. Consulte con administración.");
+                return;
+            }
+
+            // ÉXITO: empleado autenticado con código personal
+            // Registrar acceso (fecha, hora, dispositivo) RF-LG-04
+            registrarAcceso(empleado.nombre, empleado.role, "login_empleado_codigo", codigo);
+
+            showMessage(`👋 Bienvenido ${empleado.nombre}. Accediendo a su panel personal...`, false);
+
+            // Redirigir al landing de empleado (HU-LG-03)
+            setTimeout(() => {
+                window.location.href = "../Pages/Empleado/landingEmpleado.html";
+            }, 800);
+        }
+
+        // ---------- TOGGLE ENTRE TABS (Admin/Gerente vs Empleado) ----------
+        const tabAdmin = document.getElementById("tabAdminGerente");
+        const tabEmp = document.getElementById("tabEmpleado");
+        const adminPane = document.getElementById("adminFormPane");
+        const empPane = document.getElementById("empleadoFormPane");
+
+        function setActiveTab(active) {
+            if (active === "admin") {
+                tabAdmin.classList.add("active");
+                tabEmp.classList.remove("active");
+                adminPane.style.display = "block";
+                empPane.style.display = "none";
+                clearMessage();
+            } else {
+                tabEmp.classList.add("active");
+                tabAdmin.classList.remove("active");
+                adminPane.style.display = "none";
+                empPane.style.display = "block";
+                clearMessage();
+            }
+        }
+
+        tabAdmin.addEventListener("click", () => setActiveTab("admin"));
+        tabEmp.addEventListener("click", () => setActiveTab("empleado"));
+
+        // Asignar eventos submit a los formularios
+        document.getElementById("loginAdminForm").addEventListener("submit", handleAdminLogin);
+        document.getElementById("loginEmpleadoForm").addEventListener("submit", handleEmpleadoLogin);
+
+        // Simular enlace de olvido contraseña (información de seguridad)
+        document.getElementById("forgotPasswordLink").addEventListener("click", (e) => {
+            e.preventDefault();
+            showMessage("🔐 Para recuperar su acceso, comuníquese con el Administrador del sistema o solicite restablecimiento vía correo corporativo. (Política de seguridad OperPan)", true);
+        });
+
+        // validación inicial: por defecto mostrar admin activo
+        setActiveTab("admin");
+
+        // Simulación extra: Cargar intentos previos (solo demostración)
+        console.log("Sistema de Login - OperPan | Auditoría y bloqueo activo");
+    </script>
 </body>
+
 </html>
