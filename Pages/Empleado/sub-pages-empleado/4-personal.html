@@ -169,7 +169,6 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            border-bottom: 1px solid #2C2C2C;
         }
 
         .company-info h2 {
@@ -191,18 +190,29 @@
             gap: 20px;
         }
 
-        .user-badge {
+
+        .user-badge a {
             display: flex;
             align-items: center;
             gap: 12px;
-            background: #1E1E1E;
             padding: 0.4rem 1rem;
             border-radius: 60px;
         }
 
+        .user-badge:hover span {
+            transition: 1s;
+            color: #A40706;
+        }
+
+        .user-badge:hover i {
+            transition: 1s;
+            color: #A40706;
+        }
+
+
         .user-badge i {
             font-size: 1.5rem;
-            color: #A40706;
+            color: white;
         }
 
         .user-badge span {
@@ -211,7 +221,7 @@
         }
 
         .btn-logout {
-            background: transparent;
+            background: #A40706;
             border: 1px solid #A40706;
             color: white;
             padding: 0.4rem 1rem;
@@ -220,8 +230,8 @@
         }
 
         .btn-logout:hover {
-            background: #A40706;
-            color: white;
+            background: white;
+            color: #A40706;
         }
 
         /* DASHBOARD */
@@ -451,7 +461,7 @@
             </div>
             <nav class="nav-menu">
                 <ul>
-                    <li class="active"><a href="../landingEmpleado.html"><i class="bi bi-speedometer2"></i>
+                    <li><a href="../landingEmpleado.html"><i class="bi bi-speedometer2"></i>
                             Dashboard</a></li>
                     <li><a href="./1-asistencia.html"><i class="bi bi-clock-history"></i> Asistencia</a></li>
                     <li><a href="./2-solicitudes.html"><i class="bi bi-envelope-paper"></i> Solicitudes</a></li>
@@ -471,14 +481,16 @@
                 <div class="d-flex align-items-center gap-3">
                     <button class="menu-toggle btn btn-dark" id="menuToggle"><i class="bi bi-list"></i></button>
                     <div class="company-info">
-                        <h2>Mi perfil profesional</h2>
-                        <p>Información personal, horarios, desempeño y documentos</p>
+                        <h2>Centro de control laboral</h2>
+                        <p>Panel del Empleado</p>
                     </div>
                 </div>
                 <div class="user-info">
                     <div class="user-badge">
-                        <i class="bi bi-person-circle"></i>
-                        <span id="employeeNameHeader">EDDIER PAZ PARDO</span>
+                        <a style="text-decoration: none;" href="./4-personal.html">
+                            <i class="bi bi-person-circle"></i>
+                            <span id="employeeNameHeader">EDDIER PAZ PARDO</span>
+                        </a>
                     </div>
                     <button class="btn-logout" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> Salir</button>
                 </div>
@@ -512,7 +524,7 @@
                             Información Personal
                         </h4>
 
-                        <button id="btnEditar" class="btn btn-primary">
+                        <button id="btnEditar" class="btn" style="background-color: #A40706; color: white;">
                             <i class="bi bi-pencil-square"></i>
                             Editar
                         </button>

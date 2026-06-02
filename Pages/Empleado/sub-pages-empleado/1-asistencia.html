@@ -175,7 +175,6 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            border-bottom: 1px solid #2C2C2C;
         }
 
         .company-info h2 {
@@ -197,18 +196,27 @@
             gap: 20px;
         }
 
-        .user-badge {
+        .user-badge a {
             display: flex;
             align-items: center;
             gap: 12px;
-            background: #1E1E1E;
             padding: 0.4rem 1rem;
             border-radius: 60px;
+        }
+        
+        .user-badge:hover span {
+            transition: 1s;
+            color: #A40706;
+        }
+
+        .user-badge:hover i {
+            transition: 1s;
+            color: #A40706;
         }
 
         .user-badge i {
             font-size: 1.5rem;
-            color: #A40706;
+            color: white;
         }
 
         .user-badge span {
@@ -217,7 +225,7 @@
         }
 
         .btn-logout {
-            background: transparent;
+            background: #A40706;
             border: 1px solid #A40706;
             color: white;
             padding: 0.4rem 1rem;
@@ -226,8 +234,8 @@
         }
 
         .btn-logout:hover {
-            background: #A40706;
-            color: white;
+            background: white;
+            color: #A40706;
         }
 
         /* CONTENIDO DINÁMICO */
@@ -402,6 +410,19 @@
             }
         }
 
+        .welcome-message {
+            background: #A40706;
+            border-radius: 24px;
+            padding: 1.5rem;
+            color: #A40706;
+            margin-bottom: 2rem;
+        }
+
+        .welcome-message h2,
+        .welcome-message p {
+            color: white;
+        }
+
         .toast-message {
             position: fixed;
             bottom: 20px;
@@ -443,7 +464,7 @@
             </div>
             <nav class="nav-menu">
                 <ul>
-                    <li class="active"><a href="../landingEmpleado.html"><i class="bi bi-speedometer2"></i>
+                    <li><a href="../landingEmpleado.html"><i class="bi bi-speedometer2"></i>
                             Dashboard</a></li>
                     <li class="active"><a href="./1-asistencia.html"><i class="bi bi-clock-history"></i> Asistencia</a>
                     </li>
@@ -464,13 +485,15 @@
                     <button class="menu-toggle btn btn-dark" id="menuToggle"><i class="bi bi-list"></i></button>
                     <div class="company-info">
                         <h2>Módulo de Asistencia</h2>
-                        <p>Control y trazabilidad de jornada laboral</p>
+                        <p>Panel del Empleado</p>
                     </div>
                 </div>
                 <div class="user-info">
                     <div class="user-badge">
-                        <i class="bi bi-person-circle"></i>
-                        <span id="employeeNameHeader">EDDIER PAZ PARDO</span>
+                        <a style="text-decoration: none;" href="./4-personal.html">
+                            <i class="bi bi-person-circle"></i>
+                            <span id="employeeNameHeader">EDDIER PAZ PARDO</span>
+                        </a>
                     </div>
                     <button class="btn-logout" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> Salir</button>
                 </div>
@@ -479,20 +502,19 @@
             <main class="dashboard-container">
 
                 <!-- Información del empleado -->
-                <div class="employee-card">
-                    <div class="row align-items-center">
-                        <div class="col-auto">
-                            <div class="employee-avatar">EP</div>
+                <div class="welcome-message">
+                    <div class="d-flex justify-content-between align-items-center flex-wrap">
+                        <div>
+                            <h2 class="mb-1">¡Bienvenido, Eddier!</h2>
+                            <p class="mb-0">Hoy es <strong id="fechaActual"></strong> · Tu turno comienza a las 6:00 AM
+                            </p>
                         </div>
-                        <div class="col">
-                            <h3 class="mb-1">EDDIER PAZ PARDO</h3>
-                            <div class="d-flex flex-wrap gap-2">
-                                <span class="badge-role"><i class="bi bi-qr-code"></i><span class="fw-semibold"
-                                        style="font-size: 13px;"> ID:</span> EMP-001</span>
-                                <span class="badge-role" style="background:#3A3F47;"><i
-                                        class="bi bi-briefcase"></i><span class="fw-semibold" style="font-size: 13px;">
-                                        Cargo:</span> Panadero Principal</span>
-                            </div>
+                        <div class="d-flex flex-wrap gap-2 mb-2">
+                            <span class="badge-role" style="background:#3A3F47;"><i class="bi bi-qr-code"></i><span
+                                    class="fw-semibold" style="font-size: 13px;"> ID:</span> EMP-001</span>
+                            <span class="badge-role" style="background:#3A3F47;"><i class="bi bi-briefcase"></i><span
+                                    class="fw-semibold" style="font-size: 13px;"> Cargo:</span> Panadero
+                                Principal</span>
                         </div>
                     </div>
                 </div>
@@ -529,14 +551,14 @@
                 </div>
 
                 <!-- Botones de acción rápidos -->
-                <div class="action-buttons">
+                <!-- <div class="action-buttons">
                     <button id="btnEntrada" class="btn btn-primary-corporate"><i class="bi bi-door-open"></i> Registrar
                         entrada</button>
                     <button id="btnSalida" class="btn btn-outline-corporate"><i class="bi bi-door-closed"></i> Registrar
                         salida</button>
                     <button id="exportPDFbtn" class="btn btn-outline-secondary"><i class="bi bi-file-pdf"></i> Exportar
                         PDF</button>
-                </div>
+                </div>  -->
 
                 <!-- Tabla de asistencia histórica -->
                 <div class="d-flex justify-content-between align-items-center flex-wrap mb-3">
@@ -601,6 +623,13 @@
             toleranciaMin: 5   // minutos de tolerancia (después se marca retardo)
         };
 
+        // Mostrar fecha actual
+        function mostrarFecha() {
+            const fecha = new Date();
+            const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById("fechaActual").innerText = fecha.toLocaleDateString('es-ES', opciones);
+        }
+
         // Clave de storage
         const STORAGE_KEY = "operpan_asistencia_empleado";
 
@@ -631,6 +660,7 @@
             localStorage.setItem(STORAGE_KEY, JSON.stringify(registrosAsistencia));
             actualizarTablaYEstadisticas();
         }
+
 
         // Calcular horas trabajadas (string formato)
         function calcularHoras(entradaStr, salidaStr) {
@@ -828,6 +858,9 @@
                 sidebar.classList.toggle("active");
             });
         }
+
+        // Mostrar fecha
+        mostrarFecha();
 
         // Inicializar vista
         actualizarTablaYEstadisticas();

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
@@ -7,7 +8,8 @@
   <!-- Bootstrap 5 + Icons + Google Fonts -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
   <style>
     /* ==============================================
        GLOBALES Y RESET (OperPan - Estación Paisa)
@@ -17,26 +19,50 @@
       padding: 0;
       box-sizing: border-box;
     }
+
     body {
       font-family: 'Poppins', sans-serif;
       background: #F4F7FC;
       overflow-x: hidden;
     }
-    h1, h2, h3, h4, h5 {
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
       font-weight: 700;
       color: #000000;
     }
-    h1 { font-size: 2.5rem; }
-    h2 { font-size: 2rem; }
-    h3 { font-size: 1.5rem; }
-    p, span, a, li, input, button, label {
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+    }
+
+    p,
+    span,
+    a,
+    li,
+    input,
+    button,
+    label {
       font-size: 1rem;
     }
+
     /* Layout principal (sidebar fija + contenido) */
     .wrapper {
       display: flex;
       min-height: 100vh;
     }
+
     /* SIDEBAR NEGRA CORPORATIVA */
     .sidebar {
       width: 280px;
@@ -49,15 +75,18 @@
       display: flex;
       flex-direction: column;
     }
+
     .sidebar-header {
       padding: 1.8rem 1.5rem;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
+
     .logo-area {
       display: flex;
       align-items: center;
       gap: 12px;
     }
+
     .logo-icon {
       width: 40px;
       height: 40px;
@@ -69,26 +98,32 @@
       font-weight: 800;
       font-size: 1.5rem;
     }
+
     .logo-text h4 {
       color: white;
       margin-bottom: 0;
       font-size: 1.3rem;
     }
+
     .logo-text span {
       font-size: 0.7rem;
       color: #ccc;
     }
+
     .nav-menu {
       flex: 1;
       padding: 2rem 0;
     }
+
     .nav-menu ul {
       list-style: none;
       padding-left: 0;
     }
+
     .nav-menu li {
       margin-bottom: 0.5rem;
     }
+
     .nav-menu a {
       display: flex;
       align-items: center;
@@ -100,27 +135,32 @@
       transition: all 0.2s;
       border-left: 3px solid transparent;
     }
+
     .nav-menu a i {
       font-size: 1.3rem;
       width: 28px;
     }
+
     .nav-menu a:hover {
       background: rgba(164, 7, 6, 0.15);
       color: white;
       border-left-color: #A40706;
     }
+
     .nav-menu .active a {
       background: rgba(164, 7, 6, 0.2);
       color: white;
       border-left-color: #A40706;
       font-weight: 600;
     }
+
     /* CONTENIDO PRINCIPAL */
     .main-content {
       flex: 1;
       margin-left: 280px;
       transition: all 0.3s;
     }
+
     /* TOPBAR NEGRO */
     .topbar {
       background: #000000;
@@ -129,86 +169,113 @@
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      border-bottom: 1px solid #2C2C2C;
     }
+
     .company-info h2 {
       color: white;
       font-size: 1.3rem;
       margin-bottom: 0;
       font-weight: 600;
     }
+
     .company-info p {
       color: #BBBBBB;
       font-size: 0.75rem;
       margin-bottom: 0;
     }
+
     .user-info {
       display: flex;
       align-items: center;
       gap: 20px;
     }
-    .user-badge {
+
+
+    .user-badge a {
       display: flex;
       align-items: center;
       gap: 12px;
-      background: #1E1E1E;
       padding: 0.4rem 1rem;
       border-radius: 60px;
     }
-    .user-badge i {
-      font-size: 1.5rem;
+
+    .user-badge:hover span {
+      transition: 1s;
       color: #A40706;
     }
+
+    .user-badge:hover i {
+      transition: 1s;
+      color: #A40706;
+    }
+
+
+    .user-badge i {
+      font-size: 1.5rem;
+      color: white;
+    }
+
     .user-badge span {
       color: white;
       font-weight: 500;
     }
+
     .btn-logout {
-      background: transparent;
+      background: #A40706;
       border: 1px solid #A40706;
       color: white;
       padding: 0.4rem 1rem;
       border-radius: 30px;
       transition: 0.2s;
     }
+
     .btn-logout:hover {
-      background: #A40706;
-      color: white;
+      background: white;
+      color: #A40706;
     }
+
     /* DASHBOARD */
     .dashboard-container {
       padding: 2rem;
     }
+
     /* Cards */
     .card-modern {
       background: white;
       border-radius: 24px;
       border: none;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
       transition: 0.2s;
       margin-bottom: 1.5rem;
     }
+
     .card-modern .card-header {
       background: transparent;
       border-bottom: 1px solid #EDF2F7;
       padding: 1.2rem 1.5rem;
       font-weight: 700;
     }
+
     .form-label {
       font-weight: 600;
       color: #1E293B;
       margin-bottom: 0.5rem;
     }
-    .form-control, .form-select {
+
+    .form-control,
+    .form-select {
       border-radius: 16px;
       border: 1.5px solid #E2E8F0;
       padding: 0.7rem 1rem;
       font-family: 'Poppins', sans-serif;
     }
-    .form-control:focus, .form-select:focus {
+
+    .form-control:focus,
+    .form-select:focus {
       border-color: #A40706;
-      box-shadow: 0 0 0 3px rgba(164,7,6,0.2);
+      box-shadow: 0 0 0 3px rgba(164, 7, 6, 0.2);
     }
+
     .btn-primary-corporate {
       background: #A40706;
       border: none;
@@ -217,18 +284,21 @@
       font-weight: 600;
       transition: 0.2s;
     }
+
     .btn-primary-corporate:hover {
       background: #8a0504;
       transform: translateY(-2px);
     }
+
     .btn-outline-corporate {
       border: 1.5px solid #1E1E1E;
-      background: transparent ;
+      background: transparent;
       color: #1E1E1E;
       padding: 0.7rem 1.8rem;
       border-radius: 40px;
       font-weight: 600;
     }
+
     .btn-outline-corporate:hover {
       border: 1.5px solid #A40706;
       background: transparent;
@@ -237,28 +307,44 @@
       border-radius: 40px;
       font-weight: 600;
     }
+
     /* Solicitudes cards */
     .request-card {
       background: white;
       border-radius: 20px;
       padding: 1.2rem;
       margin-bottom: 1rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
       transition: 0.2s;
       border: 1px solid #F0F2F5;
     }
+
     .request-card:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 20px rgba(0,0,0,0.05);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.05);
     }
+
     .badge {
       padding: 0.4rem 0.9rem;
       border-radius: 40px;
       font-weight: 500;
     }
-    .badge-pending { background: #FFF3E0; color: #C77A00; }
-    .badge-approved { background: #E0F2E9; color: #1E7B48; }
-    .badge-rejected { background: #FEF2F0; color: #B91C1C; }
+
+    .badge-pending {
+      background: #FFF3E0;
+      color: #C77A00;
+    }
+
+    .badge-approved {
+      background: #E0F2E9;
+      color: #1E7B48;
+    }
+
+    .badge-rejected {
+      background: #FEF2F0;
+      color: #B91C1C;
+    }
+
     /* Toast */
     .toast-message {
       position: fixed;
@@ -266,17 +352,21 @@
       right: 20px;
       z-index: 1100;
     }
+
     /* Responsive */
     @media (max-width: 992px) {
       .sidebar {
         margin-left: -280px;
       }
+
       .sidebar.active {
         margin-left: 0;
       }
+
       .main-content {
         margin-left: 0;
       }
+
       .menu-toggle {
         display: block;
         background: black;
@@ -287,226 +377,237 @@
         border-radius: 12px;
       }
     }
+
     @media (min-width: 993px) {
       .menu-toggle {
         display: none;
       }
     }
+
     footer {
       text-align: center;
       padding: 1rem;
       color: #5F6C7A;
       font-size: 0.75rem;
     }
+
     .file-info {
       font-size: 0.8rem;
       color: #2C3E50;
     }
   </style>
 </head>
+
 <body>
-<div class="wrapper">
-  <!-- SIDEBAR NEGRA CORPORATIVA -->
-  <aside class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-      <div class="logo-area">
-        <div class="logo-icon">OP</div>
-        <div class="logo-text">
-          <h4>OperPan</h4>
-          <span>Estación Paisa</span>
+  <div class="wrapper">
+    <!-- SIDEBAR NEGRA CORPORATIVA -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-area">
+          <div class="logo-icon">OP</div>
+          <div class="logo-text">
+            <h4>OperPan</h4>
+            <span>Estación Paisa</span>
+          </div>
         </div>
       </div>
-    </div>
-    <nav class="nav-menu">
-      <ul>
-        <li class="active"><a href="../landingEmpleado.html"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
-        <li><a href="./1-asistencia.html"><i class="bi bi-clock-history"></i> Asistencia</a></li>
-        <li class="active"><a href="./2-solicitudes.html"><i class="bi bi-envelope-paper"></i> Solicitudes</a></li>
-        <li><a href="./3-tareas.html"><i class="bi bi-list-check"></i> Tareas</a></li>
-        <li><a href="./4-personal.html"><i class="bi bi-person-badge"></i> Información personal</a></li>
-      </ul>
-    </nav>
-    <div class="p-3 border-top border-secondary">
-      <small class="text-white-50"><i class="bi bi-shield-lock"></i> v2.0 · RRHH</small>
-    </div>
-  </aside>
+      <nav class="nav-menu">
+        <ul>
+          <li><a href="../landingEmpleado.html"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+          <li><a href="./1-asistencia.html"><i class="bi bi-clock-history"></i> Asistencia</a></li>
+          <li class="active"><a href="./2-solicitudes.html"><i class="bi bi-envelope-paper"></i> Solicitudes</a></li>
+          <li><a href="./3-tareas.html"><i class="bi bi-list-check"></i> Tareas</a></li>
+          <li><a href="./4-personal.html"><i class="bi bi-person-badge"></i> Información personal</a></li>
+        </ul>
+      </nav>
+      <div class="p-3 border-top border-secondary">
+        <small class="text-white-50"><i class="bi bi-shield-lock"></i> v2.0 · RRHH</small>
+      </div>
+    </aside>
 
-  <!-- CONTENIDO PRINCIPAL -->
-  <div class="main-content">
-    <header class="topbar">
-      <div class="d-flex align-items-center gap-3">
-        <button class="menu-toggle btn btn-dark" id="menuToggle"><i class="bi bi-list"></i></button>
-        <div class="company-info">
-          <h2>Gestión de Solicitudes</h2>
-          <p>Permisos, incapacidades, cambios de turno y vacaciones</p>
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="main-content">
+      <header class="topbar">
+        <div class="d-flex align-items-center gap-3">
+          <button class="menu-toggle btn btn-dark" id="menuToggle"><i class="bi bi-list"></i></button>
+          <div class="company-info">
+            <h2>Centro de control laboral</h2>
+            <p>Panel del Empleado</p>
+          </div>
         </div>
-      </div>
-      <div class="user-info">
-        <div class="user-badge">
-          <i class="bi bi-person-circle"></i>
-          <span id="employeeNameHeader">EDDIER PAZ PARDO</span>
+        <div class="user-info">
+          <div class="user-badge">
+            <a style="text-decoration: none;" href="./4-personal.html">
+              <i class="bi bi-person-circle"></i>
+              <span id="employeeNameHeader">EDDIER PAZ PARDO</span>
+            </a>
+          </div>
+          <button class="btn-logout" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> Salir</button>
         </div>
-        <button class="btn-logout" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> Salir</button>
-      </div>
-    </header>
+      </header>
 
-    <main class="dashboard-container">
-      <!-- Formulario de nueva solicitud -->
-      <div class="card card-modern">
-        <div class="card-header bg-white">
-          <h3 class="mb-0"><i class="bi bi-plus-circle me-2" style="color:#A40706;"></i> Nueva solicitud</h3>
+      <main class="dashboard-container">
+        <!-- Formulario de nueva solicitud -->
+        <div class="card card-modern">
+          <div class="card-header bg-white">
+            <h3 class="mb-0"><i class="bi bi-plus-circle me-2" style="color:#A40706;"></i> Nueva solicitud</h3>
+          </div>
+          <div class="card-body p-4">
+            <form id="solicitudForm">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label">Tipo de solicitud <span class="text-danger">*</span></label>
+                  <select class="form-select" id="tipoSolicitud" required>
+                    <option value="">Seleccionar tipo</option>
+                    <option value="permiso">Permiso</option>
+                    <option value="incapacidad">Incapacidad médica</option>
+                    <option value="cambio_turno">Cambio de turno</option>
+                    <option value="vacaciones">Solicitud de vacaciones</option>
+                    <option value="certificados">Certificados</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">Fecha inicio</label>
+                  <input type="date" class="form-control" id="fechaInicio" required>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">Fecha fin</label>
+                  <input type="date" class="form-control" id="fechaFin" required>
+                </div>
+                <div class="col-12">
+                  <label class="form-label">Motivo / Descripción</label>
+                  <textarea class="form-control" rows="3" id="descripcion"
+                    placeholder="Explique detalladamente el motivo de su solicitud..."></textarea>
+                </div>
+                <div class="col-12">
+                  <label class="form-label">Adjuntar soporte (incapacidad médica obligatoria si aplica)</label>
+                  <input type="file" class="form-control" id="adjunto" accept=".pdf,.jpg,.png,.jpeg">
+                  <small class="file-info">Formatos permitidos: PDF, JPG, PNG (máx 5MB). Para incapacidades es
+                    obligatorio.</small>
+                </div>
+                <div class="col-12 d-flex gap-3">
+                  <button type="submit" class="btn btn-primary-corporate text-white"><i class="bi bi-send"></i> Enviar
+                    solicitud</button>
+                  <button type="reset" class="btn btn-outline-corporate">Limpiar campos</button>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
-        <div class="card-body p-4">
-          <form id="solicitudForm">
-            <div class="row g-3">
-              <div class="col-md-6">
-                <label class="form-label">Tipo de solicitud <span class="text-danger">*</span></label>
-                <select class="form-select" id="tipoSolicitud" required>
-                  <option value="">Seleccionar tipo</option>
-                  <option value="permiso">Permiso</option>
-                  <option value="incapacidad">Incapacidad médica</option>
-                  <option value="cambio_turno">Cambio de turno</option>
-                  <option value="vacaciones">Solicitud de vacaciones</option>
-                </select>
-              </div>
-              <div class="col-md-3">
-                <label class="form-label">Fecha inicio</label>
-                <input type="date" class="form-control" id="fechaInicio" required>
-              </div>
-              <div class="col-md-3">
-                <label class="form-label">Fecha fin</label>
-                <input type="date" class="form-control" id="fechaFin" required>
-              </div>
-              <div class="col-12">
-                <label class="form-label">Motivo / Descripción</label>
-                <textarea class="form-control" rows="3" id="descripcion" placeholder="Explique detalladamente el motivo de su solicitud..."></textarea>
-              </div>
-              <div class="col-12">
-                <label class="form-label">Adjuntar soporte (incapacidad médica obligatoria si aplica)</label>
-                <input type="file" class="form-control" id="adjunto" accept=".pdf,.jpg,.png,.jpeg">
-                <small class="file-info">Formatos permitidos: PDF, JPG, PNG (máx 5MB). Para incapacidades es obligatorio.</small>
-              </div>
-              <div class="col-12 d-flex gap-3">
-                <button type="submit" class="btn btn-primary-corporate text-white"><i class="bi bi-send"></i> Enviar solicitud</button>
-                <button type="reset" class="btn btn-outline-corporate">Limpiar campos</button>
-              </div>
-            </div>
-          </form>
+
+        <!-- Listado de solicitudes recientes -->
+        <div class="d-flex justify-content-between align-items-center mt-4 mb-3">
+          <h3><i class="bi bi-clock-history me-2"></i> Mis solicitudes</h3>
+          <div class="btn-group" role="group">
+            <button class="btn btn-sm btn-outline-secondary filter-btn" data-filter="todas">Todas</button>
+            <button class="btn btn-sm btn-outline-secondary filter-btn" data-filter="pendiente">Pendiente</button>
+            <button class="btn btn-sm btn-outline-secondary filter-btn" data-filter="aprobada">Aprobada</button>
+            <button class="btn btn-sm btn-outline-secondary filter-btn" data-filter="negada">Negada</button>
+          </div>
         </div>
-      </div>
-
-      <!-- Listado de solicitudes recientes -->
-      <div class="d-flex justify-content-between align-items-center mt-4 mb-3">
-        <h3><i class="bi bi-clock-history me-2"></i> Mis solicitudes</h3>
-        <div class="btn-group" role="group">
-          <button class="btn btn-sm btn-outline-secondary filter-btn" data-filter="todas">Todas</button>
-          <button class="btn btn-sm btn-outline-secondary filter-btn" data-filter="pendiente">Pendiente</button>
-          <button class="btn btn-sm btn-outline-secondary filter-btn" data-filter="aprobada">Aprobada</button>
-          <button class="btn btn-sm btn-outline-secondary filter-btn" data-filter="negada">Negada</button>
+        <div id="solicitudesContainer">
+          <!-- Aquí se cargarán dinámicamente las solicitudes -->
+          <div class="text-center text-muted py-4">Cargando solicitudes...</div>
         </div>
-      </div>
-      <div id="solicitudesContainer">
-        <!-- Aquí se cargarán dinámicamente las solicitudes -->
-        <div class="text-center text-muted py-4">Cargando solicitudes...</div>
-      </div>
 
-      <footer>
-        <i class="bi bi-shield-check"></i> Trazabilidad garantizada - Todas las solicitudes quedan registradas con fecha y estado.
-      </footer>
-    </main>
-  </div>
-</div>
-
-<!-- Toast para notificaciones -->
-<div class="toast-message" id="liveToast" style="display: none;">
-  <div class="bg-white rounded-3 shadow p-3 border-start border-4 border-danger">
-    <div class="d-flex gap-2 align-items-center">
-      <i class="bi bi-info-circle-fill text-danger fs-5"></i>
-      <span id="toastMsg">Mensaje</span>
+        <footer>
+          <i class="bi bi-shield-check"></i> Trazabilidad garantizada - Todas las solicitudes quedan registradas con
+          fecha y estado.
+        </footer>
+      </main>
     </div>
   </div>
-</div>
 
-<script>
-  // ============================================================
-  // SISTEMA DE GESTIÓN DE SOLICITUDES (Permisos + Incapacidades)
-  // Cumple RF-IN, RF-PR, trazabilidad, adjuntos simulados.
-  // ============================================================
-  
-  // Datos del empleado autenticado (simulado)
-  const empleadoActual = {
-    id: "EMP-2024-156",
-    nombre: "EDDIER PAZ PARDO",
-    rol: "empleado"
-  };
-  
-  const STORAGE_KEY = "operpan_solicitudes";
-  
-  // Inicializar solicitudes de ejemplo si no existen
-  function inicializarSolicitudes() {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (!stored) {
-      const sample = [
-        { id: "sol1", empleadoId: "EMP-2024-156", tipo: "permiso", fechaInicio: "2025-04-10", fechaFin: "2025-04-10", motivo: "Cita médica personal", adjunto: "", estado: "aprobada", justificacionRechazo: "", fechaCreacion: "2025-04-01T10:30:00", fechaModificacion: "2025-04-02T09:00:00" },
-        { id: "sol2", empleadoId: "EMP-2024-156", tipo: "incapacidad", fechaInicio: "2025-04-15", fechaFin: "2025-04-17", motivo: "Gripe severa", adjunto: "incapacidad_medica.pdf", estado: "pendiente", justificacionRechazo: "", fechaCreacion: "2025-04-14T08:15:00", fechaModificacion: "2025-04-14T08:15:00" },
-        { id: "sol3", empleadoId: "EMP-2024-156", tipo: "vacaciones", fechaInicio: "2025-05-01", fechaFin: "2025-05-15", motivo: "Descanso anual", adjunto: "", estado: "pendiente", justificacionRechazo: "", fechaCreacion: "2025-04-05T11:45:00", fechaModificacion: "2025-04-05T11:45:00" }
-      ];
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(sample));
-      return sample;
+  <!-- Toast para notificaciones -->
+  <div class="toast-message" id="liveToast" style="display: none;">
+    <div class="bg-white rounded-3 shadow p-3 border-start border-4 border-danger">
+      <div class="d-flex gap-2 align-items-center">
+        <i class="bi bi-info-circle-fill text-danger fs-5"></i>
+        <span id="toastMsg">Mensaje</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ============================================================
+    // SISTEMA DE GESTIÓN DE SOLICITUDES (Permisos + Incapacidades)
+    // Cumple RF-IN, RF-PR, trazabilidad, adjuntos simulados.
+    // ============================================================
+
+    // Datos del empleado autenticado (simulado)
+    const empleadoActual = {
+      id: "EMP-2024-156",
+      nombre: "EDDIER PAZ PARDO",
+      rol: "empleado"
+    };
+
+    const STORAGE_KEY = "operpan_solicitudes";
+
+    // Inicializar solicitudes de ejemplo si no existen
+    function inicializarSolicitudes() {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (!stored) {
+        const sample = [
+          { id: "sol1", empleadoId: "EMP-2024-156", tipo: "permiso", fechaInicio: "2025-04-10", fechaFin: "2025-04-10", motivo: "Cita médica personal", adjunto: "", estado: "aprobada", justificacionRechazo: "", fechaCreacion: "2025-04-01T10:30:00", fechaModificacion: "2025-04-02T09:00:00" },
+          { id: "sol2", empleadoId: "EMP-2024-156", tipo: "incapacidad", fechaInicio: "2025-04-15", fechaFin: "2025-04-17", motivo: "Gripe severa", adjunto: "incapacidad_medica.pdf", estado: "pendiente", justificacionRechazo: "", fechaCreacion: "2025-04-14T08:15:00", fechaModificacion: "2025-04-14T08:15:00" },
+          { id: "sol3", empleadoId: "EMP-2024-156", tipo: "vacaciones", fechaInicio: "2025-05-01", fechaFin: "2025-05-15", motivo: "Descanso anual", adjunto: "", estado: "pendiente", justificacionRechazo: "", fechaCreacion: "2025-04-05T11:45:00", fechaModificacion: "2025-04-05T11:45:00" }
+        ];
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(sample));
+        return sample;
+      }
+      return JSON.parse(stored);
     }
-    return JSON.parse(stored);
-  }
-  
-  let solicitudes = inicializarSolicitudes();
-  
-  // Guardar en localStorage
-  function guardarSolicitudes() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(solicitudes));
-  }
-  
-  // Mostrar notificación toast
-  function mostrarMensaje(mensaje, tipo = "success") {
-    const toast = document.getElementById("liveToast");
-    const msgSpan = document.getElementById("toastMsg");
-    msgSpan.innerText = mensaje;
-    toast.style.display = "block";
-    setTimeout(() => { toast.style.display = "none"; }, 3000);
-  }
-  
-  // Renderizar lista de solicitudes con filtro
-  let filtroActual = "todas";
-  
-  function renderizarSolicitudes() {
-    const container = document.getElementById("solicitudesContainer");
-    if (!container) return;
-    
-    const misSolicitudes = solicitudes.filter(s => s.empleadoId === empleadoActual.id);
-    let filtradas = misSolicitudes;
-    if (filtroActual !== "todas") {
-      filtradas = misSolicitudes.filter(s => s.estado === filtroActual);
+
+    let solicitudes = inicializarSolicitudes();
+
+    // Guardar en localStorage
+    function guardarSolicitudes() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(solicitudes));
     }
-    
-    if (filtradas.length === 0) {
-      container.innerHTML = `<div class="alert alert-light text-center">No hay solicitudes ${filtroActual !== 'todas' ? 'con estado ' + filtroActual : ''}.</div>`;
-      return;
+
+    // Mostrar notificación toast
+    function mostrarMensaje(mensaje, tipo = "success") {
+      const toast = document.getElementById("liveToast");
+      const msgSpan = document.getElementById("toastMsg");
+      msgSpan.innerText = mensaje;
+      toast.style.display = "block";
+      setTimeout(() => { toast.style.display = "none"; }, 3000);
     }
-    
-    // Orden descendente por fecha de creación
-    filtradas.sort((a,b) => new Date(b.fechaCreacion) - new Date(a.fechaCreacion));
-    
-    let html = '';
-    filtradas.forEach(sol => {
-      let badgeClass = "";
-      let estadoTexto = "";
-      if (sol.estado === "pendiente") { badgeClass = "badge-pending"; estadoTexto = "Pendiente"; }
-      else if (sol.estado === "aprobada") { badgeClass = "badge-approved"; estadoTexto = "Aprobada"; }
-      else { badgeClass = "badge-rejected"; estadoTexto = "Negada"; }
-      
-      const tipoMostrar = {
-        permiso: "Permiso", incapacidad: "Incapacidad", cambio_turno: "Cambio de turno", vacaciones: "Vacaciones"
-      }[sol.tipo] || sol.tipo;
-      
-      html += `
+
+    // Renderizar lista de solicitudes con filtro
+    let filtroActual = "todas";
+
+    function renderizarSolicitudes() {
+      const container = document.getElementById("solicitudesContainer");
+      if (!container) return;
+
+      const misSolicitudes = solicitudes.filter(s => s.empleadoId === empleadoActual.id);
+      let filtradas = misSolicitudes;
+      if (filtroActual !== "todas") {
+        filtradas = misSolicitudes.filter(s => s.estado === filtroActual);
+      }
+
+      if (filtradas.length === 0) {
+        container.innerHTML = `<div class="alert alert-light text-center">No hay solicitudes ${filtroActual !== 'todas' ? 'con estado ' + filtroActual : ''}.</div>`;
+        return;
+      }
+
+      // Orden descendente por fecha de creación
+      filtradas.sort((a, b) => new Date(b.fechaCreacion) - new Date(a.fechaCreacion));
+
+      let html = '';
+      filtradas.forEach(sol => {
+        let badgeClass = "";
+        let estadoTexto = "";
+        if (sol.estado === "pendiente") { badgeClass = "badge-pending"; estadoTexto = "Pendiente"; }
+        else if (sol.estado === "aprobada") { badgeClass = "badge-approved"; estadoTexto = "Aprobada"; }
+        else { badgeClass = "badge-rejected"; estadoTexto = "Negada"; }
+
+        const tipoMostrar = {
+          permiso: "Permiso", incapacidad: "Incapacidad", cambio_turno: "Cambio de turno", vacaciones: "Vacaciones"
+        }[sol.tipo] || sol.tipo;
+
+        html += `
         <div class="request-card">
           <div class="d-flex justify-content-between align-items-start flex-wrap">
             <div>
@@ -523,132 +624,133 @@
           </div>
         </div>
       `;
-    });
-    container.innerHTML = html;
-  }
-  
-  // Función para generar ID único
-  function generarId() {
-    return Date.now() + '-' + Math.random().toString(36).substr(2, 6);
-  }
-  
-  // Validar fechas
-  function validarFechas(inicio, fin) {
-    if (!inicio || !fin) return false;
-    return new Date(inicio) <= new Date(fin);
-  }
-  
-  // Manejar envío de nueva solicitud
-  document.getElementById("solicitudForm")?.addEventListener("submit", function(e) {
-    e.preventDefault();
-    
-    const tipo = document.getElementById("tipoSolicitud").value;
-    const fechaInicio = document.getElementById("fechaInicio").value;
-    const fechaFin = document.getElementById("fechaFin").value;
-    const motivo = document.getElementById("descripcion").value.trim();
-    const adjuntoInput = document.getElementById("adjunto");
-    let adjuntoNombre = "";
-    
-    if (!tipo) {
-      mostrarMensaje("Seleccione un tipo de solicitud.", "error");
-      return;
+      });
+      container.innerHTML = html;
     }
-    if (!fechaInicio || !fechaFin) {
-      mostrarMensaje("Debe indicar fechas de inicio y fin.", "error");
-      return;
+
+    // Función para generar ID único
+    function generarId() {
+      return Date.now() + '-' + Math.random().toString(36).substr(2, 6);
     }
-    if (!validarFechas(fechaInicio, fechaFin)) {
-      mostrarMensaje("La fecha de fin no puede ser anterior a la fecha de inicio.", "error");
-      return;
+
+    // Validar fechas
+    function validarFechas(inicio, fin) {
+      if (!inicio || !fin) return false;
+      return new Date(inicio) <= new Date(fin);
     }
-    
-    // Para incapacidades, es obligatorio adjuntar documento médico (simulación)
-    if (tipo === "incapacidad") {
-      if (!adjuntoInput.files || adjuntoInput.files.length === 0) {
-        mostrarMensaje("Para incapacidades médicas debe adjuntar el soporte (PDF/Imagen).", "error");
+
+    // Manejar envío de nueva solicitud
+    document.getElementById("solicitudForm")?.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const tipo = document.getElementById("tipoSolicitud").value;
+      const fechaInicio = document.getElementById("fechaInicio").value;
+      const fechaFin = document.getElementById("fechaFin").value;
+      const motivo = document.getElementById("descripcion").value.trim();
+      const adjuntoInput = document.getElementById("adjunto");
+      let adjuntoNombre = "";
+
+      if (!tipo) {
+        mostrarMensaje("Seleccione un tipo de solicitud.", "error");
         return;
+      }
+      if (!fechaInicio || !fechaFin) {
+        mostrarMensaje("Debe indicar fechas de inicio y fin.", "error");
+        return;
+      }
+      if (!validarFechas(fechaInicio, fechaFin)) {
+        mostrarMensaje("La fecha de fin no puede ser anterior a la fecha de inicio.", "error");
+        return;
+      }
+
+      // Para incapacidades, es obligatorio adjuntar documento médico (simulación)
+      if (tipo === "incapacidad") {
+        if (!adjuntoInput.files || adjuntoInput.files.length === 0) {
+          mostrarMensaje("Para incapacidades médicas debe adjuntar el soporte (PDF/Imagen).", "error");
+          return;
+        } else {
+          const file = adjuntoInput.files[0];
+          const allowed = ["application/pdf", "image/jpeg", "image/png", "image/jpg"];
+          if (!allowed.includes(file.type)) {
+            mostrarMensaje("Formato no permitido. Use PDF, JPG o PNG.", "error");
+            return;
+          }
+          if (file.size > 5 * 1024 * 1024) {
+            mostrarMensaje("El archivo no debe superar 5MB.", "error");
+            return;
+          }
+          adjuntoNombre = file.name; // simulación, no se sube realmente
+        }
       } else {
-        const file = adjuntoInput.files[0];
-        const allowed = ["application/pdf", "image/jpeg", "image/png", "image/jpg"];
-        if (!allowed.includes(file.type)) {
-          mostrarMensaje("Formato no permitido. Use PDF, JPG o PNG.", "error");
-          return;
+        // Si no es incapacidad, puede ir opcional
+        if (adjuntoInput.files.length > 0) {
+          adjuntoNombre = adjuntoInput.files[0].name;
         }
-        if (file.size > 5 * 1024 * 1024) {
-          mostrarMensaje("El archivo no debe superar 5MB.", "error");
-          return;
-        }
-        adjuntoNombre = file.name; // simulación, no se sube realmente
       }
-    } else {
-      // Si no es incapacidad, puede ir opcional
-      if (adjuntoInput.files.length > 0) {
-        adjuntoNombre = adjuntoInput.files[0].name;
-      }
-    }
-    
-    // Crear nueva solicitud (estado pendiente)
-    const nuevaSolicitud = {
-      id: generarId(),
-      empleadoId: empleadoActual.id,
-      tipo: tipo,
-      fechaInicio: fechaInicio,
-      fechaFin: fechaFin,
-      motivo: motivo,
-      adjunto: adjuntoNombre || "",
-      estado: "pendiente",
-      justificacionRechazo: "",
-      fechaCreacion: new Date().toISOString(),
-      fechaModificacion: new Date().toISOString()
-    };
-    
-    solicitudes.push(nuevaSolicitud);
-    guardarSolicitudes();
-    renderizarSolicitudes();
-    
-    // Resetear formulario (excepto el file)
-    document.getElementById("solicitudForm").reset();
-    document.getElementById("adjunto").value = "";
-    mostrarMensaje("Solicitud enviada correctamente. Quedará en estado pendiente hasta revisión del administrador.", "success");
-    
-    // Trazabilidad: registrar en consola
-    console.log(`[AUDITORÍA] Empleado ${empleadoActual.nombre} creó solicitud ${nuevaSolicitud.id} tipo ${tipo}`);
-  });
-  
-  // Filtros
-  document.querySelectorAll(".filter-btn").forEach(btn => {
-    btn.addEventListener("click", function() {
-      filtroActual = this.getAttribute("data-filter");
+
+      // Crear nueva solicitud (estado pendiente)
+      const nuevaSolicitud = {
+        id: generarId(),
+        empleadoId: empleadoActual.id,
+        tipo: tipo,
+        fechaInicio: fechaInicio,
+        fechaFin: fechaFin,
+        motivo: motivo,
+        adjunto: adjuntoNombre || "",
+        estado: "pendiente",
+        justificacionRechazo: "",
+        fechaCreacion: new Date().toISOString(),
+        fechaModificacion: new Date().toISOString()
+      };
+
+      solicitudes.push(nuevaSolicitud);
+      guardarSolicitudes();
       renderizarSolicitudes();
-      // Actualizar estilo activo
-      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active", "btn-primary"));
-      this.classList.add("active", "btn-primary");
-      this.classList.remove("btn-outline-secondary");
+
+      // Resetear formulario (excepto el file)
+      document.getElementById("solicitudForm").reset();
+      document.getElementById("adjunto").value = "";
+      mostrarMensaje("Solicitud enviada correctamente. Quedará en estado pendiente hasta revisión del administrador.", "success");
+
+      // Trazabilidad: registrar en consola
+      console.log(`[AUDITORÍA] Empleado ${empleadoActual.nombre} creó solicitud ${nuevaSolicitud.id} tipo ${tipo}`);
     });
-  });
-  
-  // Cierre de sesión
-  document.getElementById("logoutBtn")?.addEventListener("click", () => {
-    mostrarMensaje("Cerrando sesión...", "info");
-    setTimeout(() => window.location.href = "../../login.html", 800);
-  });
-  
-  // Sidebar toggle en móvil
-  const menuToggle = document.getElementById("menuToggle");
-  const sidebar = document.getElementById("sidebar");
-  if(menuToggle) {
-    menuToggle.addEventListener("click", () => sidebar.classList.toggle("active"));
-  }
-  
-  // Render inicial
-  renderizarSolicitudes();
-  
-  // Simulación de notificación de cambio de estado (para demostrar que el administrador podría cambiar estados)
-  // En un caso real, el administrador desde otro panel actualizaría. Para demo, agregamos función para simular aprobación después de 5 segundos? No, mejor no.
-  // Pero cumplimos con trazabilidad y registro de decisiones.
-  
-  // Exponer para consola (solo desarrollo)
-  window.solicitudes = solicitudes;
-</script>
+
+    // Filtros
+    document.querySelectorAll(".filter-btn").forEach(btn => {
+      btn.addEventListener("click", function () {
+        filtroActual = this.getAttribute("data-filter");
+        renderizarSolicitudes();
+        // Actualizar estilo activo
+        document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active", "btn-primary"));
+        this.classList.add("active", "btn-primary");
+        this.classList.remove("btn-outline-secondary");
+      });
+    });
+
+    // Cierre de sesión
+    document.getElementById("logoutBtn")?.addEventListener("click", () => {
+      mostrarMensaje("Cerrando sesión...", "info");
+      setTimeout(() => window.location.href = "../../login.html", 800);
+    });
+
+    // Sidebar toggle en móvil
+    const menuToggle = document.getElementById("menuToggle");
+    const sidebar = document.getElementById("sidebar");
+    if (menuToggle) {
+      menuToggle.addEventListener("click", () => sidebar.classList.toggle("active"));
+    }
+
+    // Render inicial
+    renderizarSolicitudes();
+
+    // Simulación de notificación de cambio de estado (para demostrar que el administrador podría cambiar estados)
+    // En un caso real, el administrador desde otro panel actualizaría. Para demo, agregamos función para simular aprobación después de 5 segundos? No, mejor no.
+    // Pero cumplimos con trazabilidad y registro de decisiones.
+
+    // Exponer para consola (solo desarrollo)
+    window.solicitudes = solicitudes;
+  </script>
 </body>
+
 </html>
