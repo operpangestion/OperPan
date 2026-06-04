@@ -1,0 +1,174 @@
+/* Dashboard */
+.dashboard-container {
+    padding: 2rem;
+}
+
+.card-modern {
+    background: white;
+    border-radius: 24px;
+    border: none;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+
+.card-header {
+    background: transparent;
+    border-bottom: 1px solid #EDF2F7;
+    padding: 1rem 1.5rem;
+    font-weight: 700;
+}
+
+/* Tabs de vista */
+.view-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #E9ECF3;
+    padding-bottom: 0.5rem;
+}
+
+.view-tab {
+    background: transparent;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    font-weight: 600;
+    border-radius: 40px;
+    transition: 0.2s;
+    color: #475569;
+}
+
+.view-tab i {
+    margin-right: 8px;
+}
+
+.view-tab.active {
+    background: #A40706;
+    color: white;
+}
+
+.view-pane {
+    display: none;
+    animation: fadeIn 0.2s ease;
+}
+
+.view-pane.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Formularios */
+.form-label {
+    font-weight: 600;
+    color: #1E293B;
+    margin-bottom: 0.5rem;
+}
+
+.form-control,
+.form-select {
+    border-radius: 16px;
+    border: 1.5px solid #E2E8F0;
+    padding: 0.7rem 1rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #A40706;
+    box-shadow: 0 0 0 3px rgba(164, 7, 6, 0.2);
+}
+
+.btn-primary-corporate {
+    background: #A40706;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 40px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.btn-primary-corporate:hover {
+    background: #8a0504;
+    transform: translateY(-2px);
+}
+
+.btn-outline-corporate {
+    border: 1.5px solid #A40706;
+    background: transparent;
+    color: #A40706;
+    padding: 0.6rem 1.5rem;
+    border-radius: 40px;
+    font-weight: 600;
+}
+
+/* Tarjetas de reporte (empleado) */
+.report-card {
+    background: white;
+    border-radius: 20px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #EDF2F7;
+    transition: 0.2s;
+}
+
+.badge-pending {
+    background: #FFF3E0;
+    color: #C77A00;
+}
+
+.badge-resolved {
+    background: #E0F2E9;
+    color: #1E7B48;
+}
+
+.badge-review {
+    background: #E6F0FA;
+    color: #1A5D9C;
+}
+
+/* Tarjetas admin */
+.admin-report-card {
+    background: white;
+    border-radius: 20px;
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid #A40706;
+    transition: 0.2s;
+}
+
+.priority-high {
+    border-left-color: #B91C1C;
+    background: #FEF2F0;
+}
+
+.priority-medium {
+    border-left-color: #C77A00;
+    background: #FFF8F0;
+}
+
+/* KPIs */
+.kpi-card {
+    background: white;
+    border-radius: 20px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+}
+
+.toast-message {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1100;
+}

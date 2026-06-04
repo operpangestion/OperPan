@@ -10,3 +10,4 @@ function navegar() {
 function cerrarSesion() {
     window.location.href = "/OperPan/index.html";
 }
+
