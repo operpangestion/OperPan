@@ -154,6 +154,17 @@
             font-weight: 600;
         }
 
+        .soporte {
+            color: #ffffff80;
+            text-decoration: none;
+        }
+
+        .soporte:hover {
+            transition: 1s;
+            text-decoration: none;
+            color: #A40706;
+        }
+
         /* CONTENIDO PRINCIPAL */
         .main-content {
             flex: 1;
@@ -471,7 +482,13 @@
                 </ul>
             </nav>
             <div class="p-3 border-top border-secondary">
-                <small class="text-white-50"><i class="bi bi-shield-lock"></i> v2.0 · RRHH</small>
+                <a class="soporte"
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=eddierpaz9@gmail.com&su=Soporte%20OperPan">
+                    <small><i class="bi bi-question-circle me-2"></i>Ayuda / Soporte</small>
+                </a>
+            </div>
+            <div class="p-3 border-top border-secondary">
+                <small class="text-white-50"><i class="bi bi-shield-lock"></i> v2.0 · Administrador</small>
             </div>
         </aside>
 
@@ -524,7 +541,8 @@
                             Información Personal
                         </h4>
 
-                        <button id="btnEditar" class="btn" style="border: 1px solid #A40706; background-color: #A40706; color: white;">
+                        <button id="btnEditar" class="btn"
+                            style="border: 1px solid #A40706; background-color: #A40706; color: white;">
                             <i class="bi bi-pencil-square"></i>
                             Editar
                         </button>
