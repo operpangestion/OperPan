@@ -21,9 +21,9 @@ const adminAccounts = {
 };
 
 const empleadosDB = {
-    "EMP001": { codigo: "EMP001", nombre: "Carlos Méndez", role: "empleado", suspended: false, activo: true },
-    "EMP002": { codigo: "EMP002", nombre: "Luisa Fernández", role: "empleado", suspended: true, activo: false },
-    "EMP003": { codigo: "EMP003", nombre: "Jorge Ramírez", role: "empleado", suspended: false, activo: true },
+    "EMP001": { codigo: "EMP001", nombre: "Eddier Paz", role: "empleado", suspended: false, activo: true },
+    "EMP002": { codigo: "EMP002", nombre: "Paula Herrera", role: "empleado", suspended: true, activo: false },
+    "EMP003": { codigo: "EMP003", nombre: "Santiago Muñeton", role: "empleado", suspended: false, activo: true },
 };
 
 // --- GESTIÓN DE BLOQUEO TEMPORAL (RNF-LG-02) ---
