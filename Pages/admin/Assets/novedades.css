@@ -1,0 +1,300 @@
+/* ==============================================
+    GLOBALES Y RESET (OperPan - Estación Paisa)
+============================================== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #F4F7FC;
+    overflow-x: hidden;
+}
+h1, h2, h3, h4, h5 { font-weight: 700; color: #000000; }
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+p, span, a, li, input, button, label { font-size: 1rem; }
+
+.wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 280px;
+    background-color: #000000;
+    color: #FFFFFF;
+    transition: all 0.3s;
+    position: fixed;
+    height: 100vh;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.sidebar::-webkit-scrollbar { display: none; }
+.sidebar-header {
+    padding: 1.8rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.nav-menu {
+    flex: 1;
+    padding: 2rem 0;
+}
+.nav-menu ul {
+    list-style: none;
+    padding-left: 0;
+}
+.nav-menu li {
+    margin-bottom: 0.5rem;
+}
+.nav-menu a {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 0.8rem 1.8rem;
+    color: #E0E0E0;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+}
+.nav-menu a i {
+    font-size: 1.3rem;
+    width: 28px;
+}
+.nav-menu a:hover {
+    background: rgba(164, 7, 6, 0.15);
+    color: white;
+    border-left-color: #A40706;
+}
+.nav-menu .active a {
+    background: rgba(164, 7, 6, 0.2);
+    color: white;
+    border-left-color: #A40706;
+    font-weight: 600;
+}
+.soporte {
+    color: #ffffff80;
+    text-decoration: none;
+}
+.soporte:hover {
+    transition: 1s;
+    text-decoration: none;
+    color: #A40706;
+}
+
+/* CONTENIDO PRINCIPAL */
+.main-content {
+    flex: 1;
+    margin-left: 280px;
+    transition: all 0.3s;
+}
+.topbar {
+    background: #000000;
+    padding: 0.8rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #2C2C2C;
+}
+.company-info h2 {
+    color: white;
+    font-size: 1.3rem;
+    margin-bottom: 0;
+    font-weight: 600;
+}
+.company-info p {
+    color: #BBBBBB;
+    font-size: 0.75rem;
+    margin-bottom: 0;
+}
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.user-badge {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #1E1E1E;
+    padding: 0.4rem 1rem;
+    border-radius: 60px;
+}
+.user-badge i {
+    font-size: 1.5rem;
+    color: #A40706;
+}
+.user-badge span {
+    color: white;
+    font-weight: 500;
+}
+.btn-logout {
+    background: transparent;
+    border: 1px solid #A40706;
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 30px;
+    transition: 0.2s;
+}
+.btn-logout:hover {
+    background: #A40706;
+    color: white;
+}
+
+.dashboard-container {
+    padding: 2rem;
+}
+
+/* Tarjetas y componentes comunes */
+.card-modern {
+    background: white;
+    border-radius: 24px;
+    border: none;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+.card-header {
+    background: transparent;
+    border-bottom: 1px solid #EDF2F7;
+    padding: 1rem 1.5rem;
+    font-weight: 700;
+}
+.form-label {
+    font-weight: 600;
+    color: #1E293B;
+    margin-bottom: 0.5rem;
+}
+.form-control, .form-select {
+    border-radius: 16px;
+    border: 1.5px solid #E2E8F0;
+    padding: 0.7rem 1rem;
+    font-family: 'Poppins', sans-serif;
+}
+.form-control:focus, .form-select:focus {
+    border-color: #A40706;
+    box-shadow: 0 0 0 3px rgba(164, 7, 6, 0.2);
+}
+.btn-primary-corporate {
+    background: #A40706;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 40px;
+    font-weight: 600;
+    transition: 0.2s;
+    color: white !important;
+}
+.btn-primary-corporate:hover {
+    background: #8a0504;
+    transform: translateY(-2px);
+}
+.btn-outline-corporate {
+    border: 1.5px solid #A40706;
+    background: transparent;
+    color: #A40706;
+    padding: 0.6rem 1.5rem;
+    border-radius: 40px;
+    font-weight: 600;
+}
+.kpi-card {
+    background: white;
+    border-radius: 20px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+    border-left: 3px solid #A40706;
+}
+.kpi-card h3 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #A40706;
+    margin-bottom: 0;
+}
+.kpi-card .text-muted {
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+.badge-pending { background: #FFF3E0; color: #C77A00; }
+.badge-approved { background: #E0F2E9; color: #1E7B48; }
+.badge-rejected { background: #FEF2F0; color: #B91C1C; }
+
+.admin-request-card, .incapacidad-card {
+    background: white;
+    border-radius: 20px;
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+    border: 1px solid #EDF2F7;
+    transition: 0.2s;
+}
+.table-custom {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+}
+.table-custom thead {
+    background: #F8F9FC;
+}
+.toast-message {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1100;
+}
+footer {
+    text-align: center;
+    padding: 1rem;
+    color: #5F6C7A;
+    font-size: 0.75rem;
+    margin-top: 2rem;
+}
+
+/* Pestañas de novedades */
+.novedades-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #E9ECF3;
+    padding-bottom: 0.5rem;
+}
+.novedades-tab {
+    background: transparent;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    font-weight: 600;
+    border-radius: 40px;
+    transition: 0.2s;
+    color: #475569;
+}
+.novedades-tab i {
+    margin-right: 8px;
+}
+.novedades-tab.active {
+    background: #A40706;
+    color: white;
+}
+.tab-pane {
+    display: none;
+    animation: fadeIn 0.2s ease;
+}
+.tab-pane.active {
+    display: block;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 992px) {
+    .sidebar { margin-left: -280px; }
+    .sidebar.active { margin-left: 0; }
+    .main-content { margin-left: 0; }
+    .menu-toggle { display: block; background: black; color: white; border: none; padding: 0.5rem 1rem; margin-right: 1rem; border-radius: 12px; }
+}
+@media (min-width: 993px) {
+    .menu-toggle { display: none; }
+}

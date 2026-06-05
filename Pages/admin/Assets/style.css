@@ -88,7 +88,7 @@ button {
 .logo-icon {
   width: 75px;
   height: 65px;
-  border-radius: 12px;
+  /* border-radius: 12px; */
   overflow: hidden;
 }
 
