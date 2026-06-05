@@ -215,7 +215,7 @@ function handleEmpleadoLogin(event) {
     showMessage(`👋 Bienvenido ${empleado.nombre}. Accediendo...`, false);
 
     setTimeout(() => {
-        window.location.href = "./Pages/Empleado/landingEmpleado.html";
+        window.location.href = "../Pages/Empleado/landingEmpleado.html";
     }, 1000);
 }
 

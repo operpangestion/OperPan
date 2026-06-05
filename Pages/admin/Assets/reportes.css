@@ -90,8 +90,9 @@
 }
 
 .btn-primary-corporate {
-    background: #A40706;
-    border: none;
+    background: white;
+    color: #A40706;
+    border: 1px solid;
     padding: 0.6rem 1.5rem;
     border-radius: 40px;
     font-weight: 600;
@@ -100,6 +101,7 @@
 
 .btn-primary-corporate:hover {
     background: #8a0504;
+    color: white;
     transform: translateY(-2px);
 }
 
@@ -164,6 +166,10 @@
     padding: 1rem;
     text-align: center;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+}
+
+.kpi-card i {
+    color: #A40706;
 }
 
 .toast-message {
