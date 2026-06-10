@@ -65,6 +65,21 @@ html body #navbar.navbar.scrolled .nav-link:hover {
   color: #A40706 !important;
 }
 
+/* 
+Para hacer que la hamburguesa en Scroll
+  En el momento de la transición de Background de Blanco a Negro
+  Este icono se ponga de color blanco:
+Asegurar color base del icono del toggler (negro sobre fondo claro) */
+.navbar-toggler i {
+  color: #000000;
+  transition: color 0.3s ease;
+}
+
+/* Cuando el navbar está scrolled (fondo oscuro), el icono debe ser blanco */
+#navbar.navbar.scrolled .navbar-toggler i {
+  color: #ffffff;
+}
+
 .navbar-brand {
   display: flex !important;
   align-items: center !important;
@@ -139,14 +154,27 @@ html body .navbar .btn-nav-login {
   font-size: 0.875rem !important;
   font-weight: 600 !important;
   padding: 0.45rem 1.2rem !important;
-  transition: background-color 0.2s, transform 0.15s !important;
-  border: none !important;
+  transition: all 1s, transform 0.15s !important;
+  border: 1px solid #A40706 !important;
+  text-decoration: none;
 }
 
+/* Botón Iniciar Sesión del Navbar - Al pasar el cursor */
 html body .navbar .btn-nav-login:hover {
-  background-color: #8a0605 !important;
-  color: #FFFFFF !important;
-  transform: translateY(-1px) !important;
+  background-color: #FFFFFF !important;
+  color: #A40706 !important;
+  border: 1px solid #A40706 !important;
+}
+
+/* Asegurar que en navbar scrolled el hover sea consistente
+
+OJO: esto podria cambiar, podemos pensar en otros oclores si queremos.
+
+*/
+#navbar.navbar.scrolled .btn-nav-login:hover {
+  background-color: #FFFFFF !important;
+  color: #A40706 !important;
+  border: 1px solid #A40706 !important;
 }
 
 /* Enlace footer */
@@ -939,5 +967,21 @@ footer .footer-bottom span {
 
   .hero-img-wrap {
     margin-top: 40px !important;
+  }
+}
+
+/* 
+Mapa iframe de Google Maps de Estación Paisa 
+
+Ajuste responsive para el mapa en la sección CTA */
+@media (max-width: 1399px) and (min-width: 300px) {
+  #cta .row .col-lg-4 iframe {
+    width: 90% !important;
+    height: 100% !important;
+    max-width: 100%;
+  }
+  
+  #cta .row {
+    gap: 1.5rem !important;
   }
 }

@@ -24,7 +24,7 @@
     ];
   }
   function savePermisos(){ localStorage.setItem(STORAGE_PERMISOS, JSON.stringify(permisos)); }
-  function showMessage(msg){ const toast = document.getElementById("liveToast"); document.getElementById("toastMsg").innerText = msg; toast.style.display = "block"; setTimeout(()=>toast.style.display="none",3000); }
+  function showMessage(msg){ const toast = document.getElementById("liveToast"); if(toast){ document.getElementById("toastMsg").innerText = msg; toast.style.display = "block"; setTimeout(()=>toast.style.display="none",3000); } else alert(msg); }
   function updatePermisosKPIs(){
     const pend = permisos.filter(p=>p.estado==="pendiente").length;
     const now = new Date(); const mes=now.getMonth(), año=now.getFullYear();
@@ -41,7 +41,7 @@
     let html="";
     pend.forEach(p=>{
       const emp = empleados.find(e=>e.id===p.empleadoId) || { nombres:"Eddier Paz", apellidos:"" };
-      html+=`<div class="admin-request-card"><div class="d-flex justify-content-between"><div><strong>${emp.nombres} ${emp.apellidos}</strong><br><small>${p.tipo}</small><p class="mt-1 small">${p.justificacion.substring(0,80)}</p><div><small>📅 ${p.fechaInicio} → ${p.fechaFin}</small></div></div><div><button class="btn btn-sm btn-primary verPermisoBtn" data-id="${p.id}"><i class="bi bi-eye"></i> Ver</button></div></div></div>`;
+      html+=`<div class="admin-request-card"><div class="d-flex justify-content-between"><div><strong>${emp.nombres} ${emp.apellidos}</strong><br><small>${p.tipo}</small><p class="mt-1 small">${p.justificacion.substring(0,80)}</p><div><small><i class="bi bi-calendar-range date-icon"></i> ${p.fechaInicio} → ${p.fechaFin}</small></div></div><div><button class="btn btn-sm btn-primary-corporate verPermisoBtn" data-id="${p.id}"><i class="bi bi-eye"></i> Ver</button></div></div></div>`;
     });
     container.innerHTML = html;
     document.querySelectorAll(".verPermisoBtn").forEach(btn=>btn.addEventListener("click",()=>verDetallePermiso(btn.dataset.id)));
@@ -53,7 +53,15 @@
     todos.forEach(p=>{
       const emp = empleados.find(e=>e.id===p.empleadoId) || { nombres:"Eddier Paz", apellidos:"" };
       let badge = p.estado==="pendiente"? '<span class="badge badge-pending">Pendiente</span>' : (p.estado==="aprobado"? '<span class="badge badge-approved">Aprobado</span>' : '<span class="badge badge-rejected">Rechazado</span>');
-      tbody.innerHTML+=`<tr><td>${new Date(p.fechaSolicitud).toLocaleString()}</td><td>${emp.nombres} ${emp.apellidos}</td><td>${p.tipo}</td><td>${p.fechaInicio} - ${p.fechaFin}</td><td>${badge}</td><td>${p.decisionPor || "—"}</td><td><button class="btn btn-sm btn-outline-secondary verHistorialPermisoBtn" data-id="${p.id}"><i class="bi bi-eye"></i></button></td></tr>`;
+      tbody.innerHTML+=`<tr>
+        <td data-label="Fecha solicitud">${new Date(p.fechaSolicitud).toLocaleString()}</td>
+        <td data-label="Empleado">${emp.nombres} ${emp.apellidos}</td>
+        <td data-label="Tipo">${p.tipo}</td>
+        <td data-label="Fechas">${p.fechaInicio} - ${p.fechaFin}</td>
+        <td data-label="Estado">${badge}</td>
+        <td data-label="Aprobado por">${p.decisionPor || "—"}</td>
+        <td data-label="Acciones"><button class="btn btn-sm btn-outline-secondary verHistorialPermisoBtn" data-id="${p.id}"><i class="bi bi-eye"></i> Ver</button></td>
+      </tr>`;
     });
     document.querySelectorAll(".verHistorialPermisoBtn").forEach(btn=>btn.addEventListener("click",()=>verDetalleHistorialPermiso(btn.dataset.id)));
   }
@@ -62,14 +70,14 @@
     const p = permisos.find(p=>p.id===id);
     if(!p) return;
     const emp = empleados.find(e=>e.id===p.empleadoId);
-    document.getElementById("permisosModalBody").innerHTML = `<div class="row"><div class="col-md-6"><strong>Empleado:</strong><br>${emp.nombres} ${emp.apellidos}</div><div class="col-md-6"><strong>Tipo:</strong><br>${p.tipo}</div><div class="col-12"><strong>Justificación:</strong><br>${p.justificacion}</div><div class="col-6"><strong>Fechas:</strong><br>${p.fechaInicio} → ${p.fechaFin}</div>${p.nuevoHorario?`<div class="col-6"><strong>Nuevo horario:</strong><br>${p.nuevoHorario}</div>`:''}</div>`;
+    document.getElementById("permisosModalBody").innerHTML = `<div class="row"><div class="col-md-6"><strong>Empleado:</strong><br>${emp.nombres} ${emp.apellidos}</div><div class="col-md-6"><strong>Tipo:</strong><br>${p.tipo}</div><div class="col-12"><strong>Justificación:</strong><br>${p.justificacion}</div><div class="col-6"><strong>Fechas:</strong><br><i class="bi bi-calendar3"></i> ${p.fechaInicio} → ${p.fechaFin}</div>${p.nuevoHorario?`<div class="col-6"><strong>Nuevo horario:</strong><br>${p.nuevoHorario}</div>`:''}</div>`;
     const modal = new bootstrap.Modal(document.getElementById("permisosDetalleModal"));
     modal.show();
   }
   function verDetalleHistorialPermiso(id){
     const p = permisos.find(p=>p.id===id);
     const emp = empleados.find(e=>e.id===p.empleadoId);
-    document.getElementById("permisosModalBody").innerHTML = `<div class="row"><div class="col-md-6"><strong>Empleado:</strong><br>${emp.nombres} ${emp.apellidos}</div><div class="col-md-6"><strong>Tipo:</strong><br>${p.tipo}</div><div class="col-12"><strong>Justificación:</strong><br>${p.justificacion}</div><div class="col-6"><strong>Fechas:</strong><br>${p.fechaInicio} → ${p.fechaFin}</div>${p.motivoRechazo?`<div class="col-12 text-danger"><strong>Motivo rechazo:</strong><br>${p.motivoRechazo}</div>`:''}</div>`;
+    document.getElementById("permisosModalBody").innerHTML = `<div class="row"><div class="col-md-6"><strong>Empleado:</strong><br>${emp.nombres} ${emp.apellidos}</div><div class="col-md-6"><strong>Tipo:</strong><br>${p.tipo}</div><div class="col-12"><strong>Justificación:</strong><br>${p.justificacion}</div><div class="col-6"><strong>Fechas:</strong><br><i class="bi bi-calendar3"></i> ${p.fechaInicio} → ${p.fechaFin}</div>${p.motivoRechazo?`<div class="col-12 text-danger"><strong>Motivo rechazo:</strong><br>${p.motivoRechazo}</div>`:''}</div>`;
     document.getElementById("permisosAprobarBtn").disabled=true;
     document.getElementById("permisosRechazarBtn").disabled=true;
     const modal = new bootstrap.Modal(document.getElementById("permisosDetalleModal"));
@@ -78,11 +86,11 @@
   }
   function aprobarPermiso(id){
     const p = permisos.find(p=>p.id===id);
-    if(p && p.estado==="pendiente"){ p.estado="aprobado"; p.decisionFecha=new Date().toISOString(); p.decisionPor="Administrador"; savePermisos(); updatePermisosKPIs(); renderPermisosPendientes(); renderPermisosHistorial(); showMessage("✅ Permiso aprobado."); }
+    if(p && p.estado==="pendiente"){ p.estado="aprobado"; p.decisionFecha=new Date().toISOString(); p.decisionPor="Administrador"; savePermisos(); updatePermisosKPIs(); renderPermisosPendientes(); renderPermisosHistorial(); showMessage("Permiso aprobado correctamente."); }
   }
   function rechazarPermiso(id, motivo){
     const p = permisos.find(p=>p.id===id);
-    if(p && p.estado==="pendiente"){ p.estado="rechazado"; p.decisionFecha=new Date().toISOString(); p.decisionPor="Administrador"; p.motivoRechazo=motivo; savePermisos(); updatePermisosKPIs(); renderPermisosPendientes(); renderPermisosHistorial(); showMessage("❌ Permiso rechazado."); }
+    if(p && p.estado==="pendiente"){ p.estado="rechazado"; p.decisionFecha=new Date().toISOString(); p.decisionPor="Administrador"; p.motivoRechazo=motivo; savePermisos(); updatePermisosKPIs(); renderPermisosPendientes(); renderPermisosHistorial(); showMessage("Permiso rechazado."); }
   }
   document.getElementById("permisosAprobarBtn")?.addEventListener("click",()=>{
     const modal = bootstrap.Modal.getInstance(document.getElementById("permisosDetalleModal"));
@@ -124,7 +132,7 @@
     } else incapacidades = JSON.parse(stored);
   }
   function saveIncap(){ localStorage.setItem(STORAGE_INCAP, JSON.stringify(incapacidades)); }
-  function showMessage(msg){ const toast = document.getElementById("liveToast"); document.getElementById("toastMsg").innerText = msg; toast.style.display = "block"; setTimeout(()=>toast.style.display="none",3000); }
+  function showMessage(msg){ const toast = document.getElementById("liveToast"); if(toast){ document.getElementById("toastMsg").innerText = msg; toast.style.display = "block"; setTimeout(()=>toast.style.display="none",3000); } else alert(msg); }
   function updateIncapKPIs(){
     const pend = incapacidades.filter(i=>i.estado==="pendiente").length;
     const now = new Date(); const mes=now.getMonth(), año=now.getFullYear();
@@ -145,7 +153,7 @@
     let html="";
     filtradas.forEach(i=>{
       let badgeClass = i.estado==="pendiente"?"badge-pending":(i.estado==="aprobada"?"badge-approved":"badge-rejected");
-      html+=`<div class="incapacidad-card"><div class="d-flex justify-content-between"><div><strong>${i.empleadoNombre}</strong><br><small>${i.titulo}</small><p class="mt-1 small">${i.descripcion}</p><div><small>📅 ${i.fechaInicio} → ${i.fechaFin}</small> <span class="badge ${badgeClass}">${i.estado}</span></div></div><div><button class="btn btn-sm btn-primary verIncapBtn" data-id="${i.id}"><i class="bi bi-eye"></i> Ver</button></div></div>${i.motivoRechazo?`<div class="alert alert-danger mt-2 small">Motivo: ${i.motivoRechazo}</div>`:''}</div>`;
+      html+=`<div class="incapacidad-card"><div class="d-flex justify-content-between"><div><strong>${i.empleadoNombre}</strong><br><small>${i.titulo}</small><p class="mt-1 small">${i.descripcion}</p><div><small><i class="bi bi-calendar-range"></i> ${i.fechaInicio} → ${i.fechaFin}</small> <span class="badge ${badgeClass}">${i.estado}</span></div></div><div><button class="btn btn-sm btn-primary-corporate verIncapBtn" data-id="${i.id}"><i class="bi bi-eye"></i> Ver</button></div></div>${i.motivoRechazo?`<div class="alert alert-danger mt-2 small">Motivo: ${i.motivoRechazo}</div>`:''}</div>`;
     });
     container.innerHTML = html;
     document.querySelectorAll(".verIncapBtn").forEach(btn=>btn.addEventListener("click",()=>verDetalleIncapacidad(btn.dataset.id)));
@@ -153,7 +161,7 @@
   function verDetalleIncapacidad(id){
     currentIncapId = id;
     const i = incapacidades.find(i=>i.id===id);
-    document.getElementById("incapacidadesModalBody").innerHTML = `<p><strong>Empleado:</strong> ${i.empleadoNombre}</p><p><strong>Título:</strong> ${i.titulo}</p><p><strong>Descripción:</strong> ${i.descripcion}</p><p><strong>Período:</strong> ${i.fechaInicio} → ${i.fechaFin}</p><p><strong>Estado:</strong> ${i.estado}</p>${i.motivoRechazo?`<p class="text-danger"><strong>Motivo rechazo:</strong> ${i.motivoRechazo}</p>`:''}`;
+    document.getElementById("incapacidadesModalBody").innerHTML = `<p><strong>Empleado:</strong> ${i.empleadoNombre}</p><p><strong>Título:</strong> ${i.titulo}</p><p><strong>Descripción:</strong> ${i.descripcion}</p><p><strong>Período:</strong> <i class="bi bi-calendar3"></i> ${i.fechaInicio} → ${i.fechaFin}</p><p><strong>Estado:</strong> ${i.estado}</p>${i.motivoRechazo?`<p class="text-danger"><strong>Motivo rechazo:</strong> ${i.motivoRechazo}</p>`:''}`;
     const modal = new bootstrap.Modal(document.getElementById("incapacidadesDetalleModal"));
     const aprobarBtn = document.getElementById("incapacidadesAprobarBtn"), rechazarBtn = document.getElementById("incapacidadesRechazarBtn");
     if(i.estado!=="pendiente"){ aprobarBtn.disabled=true; rechazarBtn.disabled=true; } else { aprobarBtn.disabled=false; rechazarBtn.disabled=false; }
@@ -161,20 +169,48 @@
   }
   function aprobarIncapacidad(id){
     const i = incapacidades.find(i=>i.id===id);
-    if(i && i.estado==="pendiente"){ i.estado="aprobada"; i.decisionFecha=new Date().toISOString(); i.decisionPor="Administrador"; saveIncap(); updateIncapKPIs(); renderIncapacidadesLista(); showMessage("✅ Incapacidad aprobada."); }
+    if(i && i.estado==="pendiente"){ i.estado="aprobada"; i.decisionFecha=new Date().toISOString(); i.decisionPor="Administrador"; saveIncap(); updateIncapKPIs(); renderIncapacidadesLista(); renderHistorialIncapacidades(); showMessage("Incapacidad aprobada."); }
   }
   function rechazarIncapacidad(id, motivo){
     const i = incapacidades.find(i=>i.id===id);
-    if(i && i.estado==="pendiente"){ i.estado="rechazada"; i.decisionFecha=new Date().toISOString(); i.decisionPor="Administrador"; i.motivoRechazo=motivo; saveIncap(); updateIncapKPIs(); renderIncapacidadesLista(); showMessage("❌ Incapacidad rechazada."); }
+    if(i && i.estado==="pendiente"){ i.estado="rechazada"; i.decisionFecha=new Date().toISOString(); i.decisionPor="Administrador"; i.motivoRechazo=motivo; saveIncap(); updateIncapKPIs(); renderIncapacidadesLista(); renderHistorialIncapacidades(); showMessage("Incapacidad rechazada."); }
+  }
+  function renderHistorialIncapacidades(){
+    const tbody = document.getElementById("incapacidadesHistorialBody");
+    if(!tbody) return;
+    const todos = [...incapacidades].sort((a,b)=>new Date(b.fechaSolicitud)-new Date(a.fechaSolicitud));
+    tbody.innerHTML = "";
+    todos.forEach(inc => {
+      let badge = inc.estado==="pendiente"? '<span class="badge badge-pending">Pendiente</span>' : (inc.estado==="aprobada"? '<span class="badge badge-approved">Aprobada</span>' : '<span class="badge badge-rejected">Rechazada</span>');
+      tbody.innerHTML += `<tr>
+        <td data-label="Fecha solicitud">${new Date(inc.fechaSolicitud).toLocaleString()}</td>
+        <td data-label="Empleado">${inc.empleadoNombre}</td>
+        <td data-label="Diagnóstico">${inc.titulo}</td>
+        <td data-label="Período">${inc.fechaInicio} → ${inc.fechaFin}</td>
+        <td data-label="Estado">${badge}</td>
+        <td data-label="Aprobado por">${inc.decisionPor || "—"}</td>
+        <td data-label="Acciones"><button class="btn btn-sm btn-outline-secondary verHistorialIncapacidadBtn" data-id="${inc.id}"><i class="bi bi-eye"></i> Ver</button></td>
+      </tr>`;
+    });
+    document.querySelectorAll(".verHistorialIncapacidadBtn").forEach(btn => btn.addEventListener("click", () => {
+      const inc = incapacidades.find(i => i.id === btn.dataset.id);
+      if(inc) {
+        document.getElementById("incapacidadesModalBody").innerHTML = `<p><strong>Empleado:</strong> ${inc.empleadoNombre}</p><p><strong>Diagnóstico:</strong> ${inc.titulo}</p><p><strong>Descripción:</strong> ${inc.descripcion}</p><p><strong>Período:</strong> <i class="bi bi-calendar3"></i> ${inc.fechaInicio} → ${inc.fechaFin}</p><p><strong>Estado:</strong> ${inc.estado}</p>${inc.motivoRechazo?`<p class="text-danger"><strong>Motivo rechazo:</strong> ${inc.motivoRechazo}</p>`:''}`;
+        const modal = new bootstrap.Modal(document.getElementById("incapacidadesDetalleModal"));
+        document.getElementById("incapacidadesAprobarBtn").disabled = true;
+        document.getElementById("incapacidadesRechazarBtn").disabled = true;
+        modal.show();
+      }
+    }));
   }
   document.getElementById("incapacidadesAprobarBtn")?.addEventListener("click",()=>{ bootstrap.Modal.getInstance(document.getElementById("incapacidadesDetalleModal")).hide(); new bootstrap.Modal(document.getElementById("incapacidadesConfirmApproveModal")).show(); });
   document.getElementById("incapacidadesConfirmApprove")?.addEventListener("click",()=>{ aprobarIncapacidad(currentIncapId); bootstrap.Modal.getInstance(document.getElementById("incapacidadesConfirmApproveModal")).hide(); });
   document.getElementById("incapacidadesRechazarBtn")?.addEventListener("click",()=>{ bootstrap.Modal.getInstance(document.getElementById("incapacidadesDetalleModal")).hide(); new bootstrap.Modal(document.getElementById("incapacidadesConfirmRejectFirstModal")).show(); });
   document.getElementById("incapacidadesConfirmRejectFirst")?.addEventListener("click",()=>{ bootstrap.Modal.getInstance(document.getElementById("incapacidadesConfirmRejectFirstModal")).hide(); new bootstrap.Modal(document.getElementById("incapacidadesRejectModal")).show(); });
   document.getElementById("incapacidadesConfirmReject")?.addEventListener("click",()=>{ const reason = document.getElementById("incapacidadesRejectReason").value.trim(); if(!reason){ showMessage("Debe ingresar un motivo de rechazo."); return; } rechazarIncapacidad(currentIncapId, reason); bootstrap.Modal.getInstance(document.getElementById("incapacidadesRejectModal")).hide(); });
-  document.getElementById("incapacidadesFiltroEstado")?.addEventListener("change", renderIncapacidadesLista);
-  document.getElementById("incapacidadesBuscarEmpleado")?.addEventListener("input", renderIncapacidadesLista);
-  loadIncapData(); updateIncapKPIs(); renderIncapacidadesLista();
+  document.getElementById("incapacidadesFiltroEstado")?.addEventListener("change", ()=>{ renderIncapacidadesLista(); renderHistorialIncapacidades(); });
+  document.getElementById("incapacidadesBuscarEmpleado")?.addEventListener("input", ()=>{ renderIncapacidadesLista(); renderHistorialIncapacidades(); });
+  loadIncapData(); updateIncapKPIs(); renderIncapacidadesLista(); renderHistorialIncapacidades();
 })();
 
 // ============================== MÓDULO CERTIFICADOS ==============================
@@ -215,7 +251,13 @@
     const sinRes = document.getElementById("certificadosSinResultados");
     if(filtrados.length===0){ tbody.innerHTML=""; sinRes.classList.remove("d-none"); return; }
     sinRes.classList.add("d-none");
-    tbody.innerHTML = filtrados.map(c=>`<tr><td><strong>${c.empleado}</strong></td><td>${c.cargo}</td><td><span class="badge badge-approved">${c.tipo}</span></td><td>${new Date(c.fechaISO).toLocaleString()}</td><td><span class="badge bg-success bg-opacity-10 text-success">${c.estado}</span></td></tr>`).join("");
+    tbody.innerHTML = filtrados.map(c=>`<tr>
+      <td data-label="Empleado"><strong>${c.empleado}</strong></td>
+      <td data-label="Cargo">${c.cargo}</td>
+      <td data-label="Tipo de certificado"><span class="badge badge-approved">${c.tipo}</span></td>
+      <td data-label="Fecha de emisión">${new Date(c.fechaISO).toLocaleString()}</td>
+      <td data-label="Estado"><span class="badge bg-success bg-opacity-10 text-success">${c.estado}</span></td>
+    </tr>`).join("");
   }
   document.getElementById("certificadosFiltroEmpleado")?.addEventListener("change", renderCertificados);
   document.getElementById("certificadosFiltroTipo")?.addEventListener("change", renderCertificados);
@@ -242,7 +284,7 @@ document.querySelectorAll(".novedades-tab").forEach(tab=>{
   });
 });
 
-// Logout y toggle sidebar (funcionalidad común)
+// Logout y toggle sidebar
 document.getElementById("logoutBtn")?.addEventListener("click",()=>{ setTimeout(()=>window.location.href="../../login.html",800); });
 const menuToggle = document.getElementById("menuToggle"), sidebar = document.getElementById("sidebar");
 if(menuToggle){

@@ -5,14 +5,51 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>OperPan | Novedades</title>
+    
+  <!-- Meta Tags SEO -->
+  <meta name="description" content="OperPan — Sistema de Gestión de Personal para Estación Paisa. Automatiza procesos administrativos, control de asistencia, horarios, permisos y reportes." />
+  <meta name="keywords" content="gestión de personal, recursos humanos, control de asistencia, horarios, permisos, reportes, Estación Paisa, OperPan" />
+  <meta name="author" content="ClessLab: EddierPaz, Paula Herrera, Santiago Muñeton" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:title" content="OperPan — Sistema de Gestión de Personal · Estación Paisa" />
+  <meta property="og:description" content="Centraliza la gestión del personal y optimiza la operación administrativa de Estación Paisa. Todo en un solo lugar, seguro y organizado." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://github.com/operpangestion/OperPan/blob/main/Assets/img/logo/00-operpan.png" />
+  <meta property="og:url" content="https://operpangestion.github.io/OperPan/" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="OperPan — Sistema de Gestión de Personal" />
+  <meta name="twitter:description" content="Gestión integral de empleados, horarios, asistencia y permisos para Estación Paisa." />
+  <meta name="twitter:image" content="https://github.com/operpangestion/OperPan/blob/main/Assets/img/logo/00-operpan.png" />
+
+  <link rel="icon" type="image/png" href="../../../Assets/img/logo/00-operpan.png" />
+
   <!-- Bootstrap 5 + Icons + Google Fonts -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="../Assets/style.css">
   <link rel="stylesheet" href="../Assets/novedades.css">
+  <!-- Estilos adicionales para garantizar consistencia de botones -->
+  <style>
+    /* Asegurar que el botón "Ver" use color rojo corporativo */
+    .btn-primary-corporate, .btn-primary {
+      background: #A40706 !important;
+      border-color: #A40706 !important;
+    }
+    .btn-primary-corporate:hover, .btn-primary:hover {
+      background: #8a0504 !important;
+      border-color: #8a0504 !important;
+    }
+    /* Botón limpiar con transición suave */
+    .btn-outline-corporate {
+      transition: all 0.2s ease;
+    }
+  </style>
 </head>
 
 <body>
@@ -22,11 +59,7 @@
       <div class="sidebar-header">
         <div class="logo-area">
           <div class="logo-icon">
-            <img src="../../../Assets/img/img-login/LOGO EMPRESA.png" alt="Empresa">
-          </div>
-          <div class="logo-text">
-            <h4>Estación Paisa</h4>
-            <span>OperPan</span>
+            <img src="../../../Assets/img/logo/01-estacion-paisa.png" alt="Empresa">
           </div>
         </div>
       </div>
@@ -41,8 +74,7 @@
         </ul>
       </nav>
       <div class="p-3 border-top border-secondary">
-        <a class="soporte"
-          href="https://mail.google.com/mail/?view=cm&fs=1&to=eddierpaz9@gmail.com&su=Soporte%20OperPan">
+        <a class="soporte" href="https://mail.google.com/mail/?view=cm&fs=1&to=eddierpaz9@gmail.com&su=Soporte%20OperPan">
           <small><i class="bi bi-question-circle me-2"></i>Ayuda / Soporte</small>
         </a>
       </div>
@@ -69,10 +101,8 @@
       <main class="dashboard-container">
         <!-- Pestañas principales -->
         <div class="novedades-tabs">
-          <button class="novedades-tab active" data-tab="permisos"><i class="bi bi-file-earmark-text"></i>
-            Permisos</button>
-          <button class="novedades-tab" data-tab="incapacidades"><i class="bi bi-clipboard2-pulse"></i>
-            Incapacidades</button>
+          <button class="novedades-tab active" data-tab="permisos"><i class="bi bi-file-earmark-text"></i> Permisos</button>
+          <button class="novedades-tab" data-tab="incapacidades"><i class="bi bi-clipboard2-pulse"></i> Incapacidades</button>
           <button class="novedades-tab" data-tab="certificados"><i class="bi bi-award"></i> Certificados</button>
         </div>
 
@@ -80,19 +110,19 @@
         <div id="tabPermisos" class="tab-pane active">
           <!-- KPIs mensuales -->
           <div class="row g-3 mb-4">
-            <div class="col-md-4">
+            <div class="col-md-4 col-6">
               <div class="kpi-card">
                 <div class="text-muted">Pendientes</div>
                 <h3 id="permisosKpiPendientes">0</h3>
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 col-6">
               <div class="kpi-card">
                 <div class="text-muted">Aprobadas este mes</div>
                 <h3 id="permisosKpiAprobados">0</h3>
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 col-6">
               <div class="kpi-card">
                 <div class="text-muted">Rechazadas este mes</div>
                 <h3 id="permisosKpiRechazados">0</h3>
@@ -111,23 +141,21 @@
             <div class="card-header">
               <h3 class="mb-0"><i class="bi bi-table me-2"></i> Historial completo de permisos</h3>
             </div>
-            <div class="p-3">
-              <div class="table-responsive">
-                <table class="table table-custom">
-                  <thead>
-                    <tr>
-                      <th>Fecha solicitud</th>
-                      <th>Empleado</th>
-                      <th>Tipo</th>
-                      <th>Fechas</th>
-                      <th>Estado</th>
-                      <th>Aprobado por</th>
-                      <th>Acciones</th>
-                    </tr>
-                  </thead>
-                  <tbody id="permisosHistorialBody"></tbody>
-                </table>
-              </div>
+            <div class="p-3 table-responsive-stack">
+              <table class="table table-custom">
+                <thead>
+                  <tr>
+                    <th>Fecha solicitud</th>
+                    <th>Empleado</th>
+                    <th>Tipo</th>
+                    <th>Fechas</th>
+                    <th>Estado</th>
+                    <th>Aprobado por</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="permisosHistorialBody"></tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -138,19 +166,19 @@
             <h3><i class="bi bi-calendar-month me-2 text-danger"></i> Resumen mensual de incapacidades</h3>
           </div>
           <div class="row g-3 mb-4">
-            <div class="col-md-4">
+            <div class="col-md-4 col-6">
               <div class="kpi-card">
                 <div class="text-muted">Pendientes</div>
                 <h3 id="incapacidadesKpiPendientes">0</h3>
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 col-6">
               <div class="kpi-card">
                 <div class="text-muted">Aprobadas este mes</div>
                 <h3 id="incapacidadesKpiAprobadas">0</h3>
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 col-6">
               <div class="kpi-card">
                 <div class="text-muted">Rechazadas este mes</div>
                 <h3 id="incapacidadesKpiRechazadas">0</h3>
@@ -176,18 +204,41 @@
               <div id="incapacidadesListaContainer"></div>
             </div>
           </div>
+
+          <!-- Historial de incapacidades (nuevo) -->
+          <div class="card-modern">
+            <div class="card-header">
+              <h3 class="mb-0"><i class="bi bi-clock-history me-2"></i> Historial completo de incapacidades</h3>
+            </div>
+            <div class="p-3 table-responsive-stack">
+              <table class="table table-custom">
+                <thead>
+                  <tr>
+                    <th>Fecha solicitud</th>
+                    <th>Empleado</th>
+                    <th>Diagnóstico</th>
+                    <th>Período</th>
+                    <th>Estado</th>
+                    <th>Aprobado por</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="incapacidadesHistorialBody"></tbody>
+              </table>
+            </div>
+          </div>
         </div>
 
         <!-- ==================== PESTAÑA CERTIFICADOS ==================== -->
         <div id="tabCertificados" class="tab-pane">
           <div class="row g-4 mb-4">
-            <div class="col-md-6">
+            <div class="col-md-6 col-12">
               <div class="kpi-card">
                 <div class="kpi-number" id="certificadosKpiMes">0</div>
                 <div class="text-muted"><i class="bi bi-calendar-month me-1"></i> Certificados emitidos este mes</div>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-12">
               <div class="kpi-card">
                 <div class="kpi-number" id="certificadosKpiHoy">0</div>
                 <div class="text-muted"><i class="bi bi-calendar-day me-1"></i> Certificados emitidos hoy</div>
@@ -197,25 +248,25 @@
 
           <div class="filter-card card-modern p-3">
             <div class="row g-3 align-items-end">
-              <div class="col-md-3"><label class="form-label">Empleado</label><select id="certificadosFiltroEmpleado"
+              <div class="col-md-3 col-12"><label class="form-label">Empleado</label><select id="certificadosFiltroEmpleado"
                   class="form-select">
                   <option value="todos">Todos</option>
                   <option value="Santiago Muñeton">Santiago Muñeton</option>
                   <option value="Eddier Paz">Eddier Paz</option>
                   <option value="Andrea Herrera">Andrea Herrera</option>
                 </select></div>
-              <div class="col-md-3"><label class="form-label">Tipo de Certificado</label><select
+              <div class="col-md-3 col-12"><label class="form-label">Tipo de Certificado</label><select
                   id="certificadosFiltroTipo" class="form-select">
                   <option value="todos">Todos</option>
                   <option value="Certificado laboral">Certificado laboral</option>
                   <option value="Certificado de ingresos">Certificado de ingresos</option>
                   <option value="Certificado de antigüedad">Certificado de antigüedad</option>
                 </select></div>
-              <div class="col-md-2"><label class="form-label">Fecha desde</label><input type="date"
+              <div class="col-md-2 col-12"><label class="form-label">Fecha desde</label><input type="date"
                   id="certificadosFiltroDesde" class="form-control"></div>
-              <div class="col-md-2"><label class="form-label">Fecha hasta</label><input type="date"
+              <div class="col-md-2 col-12"><label class="form-label">Fecha hasta</label><input type="date"
                   id="certificadosFiltroHasta" class="form-control"></div>
-              <div class="col-md-2"><button id="certificadosBtnLimpiar" class="btn btn-outline-corporate w-100"><i
+              <div class="col-md-2 col-12"><button id="certificadosBtnLimpiar" class="btn btn-outline-corporate w-100"><i
                     class="bi bi-eraser"></i> Limpiar</button></div>
             </div>
           </div>
@@ -224,23 +275,21 @@
             <div class="card-header">
               <h3 class="mb-0"><i class="bi bi-table me-2"></i> Historial de certificados emitidos</h3>
             </div>
-            <div class="p-3">
-              <div class="table-responsive">
-                <table class="table table-custom">
-                  <thead>
-                    <tr>
-                      <th>Empleado</th>
-                      <th>Cargo</th>
-                      <th>Tipo de certificado</th>
-                      <th>Fecha de emisión</th>
-                      <th>Estado</th>
-                    </tr>
-                  </thead>
-                  <tbody id="certificadosTablaBody"></tbody>
-                </table>
-                <div id="certificadosSinResultados" class="text-center text-muted py-4 d-none">No se encontraron
-                  certificados con los filtros seleccionados.</div>
-              </div>
+            <div class="p-3 table-responsive-stack">
+              <table class="table table-custom">
+                <thead>
+                  <tr>
+                    <th>Empleado</th>
+                    <th>Cargo</th>
+                    <th>Tipo de certificado</th>
+                    <th>Fecha de emisión</th>
+                    <th>Estado</th>
+                  </tr>
+                </thead>
+                <tbody id="certificadosTablaBody"></tbody>
+              </table>
+              <div id="certificadosSinResultados" class="text-center text-muted py-4 d-none">No se encontraron
+                certificados con los filtros seleccionados.</div>
             </div>
           </div>
         </div>
@@ -254,14 +303,10 @@
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Detalle del permiso</h5><button type="button" class="btn-close"
-            data-bs-dismiss="modal"></button>
+          <h5 class="modal-title">Detalle del permiso</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body" id="permisosModalBody"></div>
-        <div class="modal-footer"><button type="button" class="btn btn-success"
-            id="permisosAprobarBtn">Aprobar</button><button type="button" class="btn btn-danger"
-            id="permisosRechazarBtn">Rechazar</button><button type="button" class="btn btn-secondary"
-            data-bs-dismiss="modal">Cerrar</button></div>
+        <div class="modal-footer"><button type="button" class="btn btn-success" id="permisosAprobarBtn">Aprobar</button><button type="button" class="btn btn-danger" id="permisosRechazarBtn">Rechazar</button><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button></div>
       </div>
     </div>
   </div>
@@ -269,13 +314,10 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Confirmar aprobación</h5><button type="button" class="btn-close"
-            data-bs-dismiss="modal"></button>
+          <h5 class="modal-title">Confirmar aprobación</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">¿Está seguro de aprobar este permiso?</div>
-        <div class="modal-footer"><button type="button" class="btn btn-secondary"
-            data-bs-dismiss="modal">Cancelar</button><button type="button" class="btn btn-success"
-            id="permisosConfirmApprove">Confirmar aprobación</button></div>
+        <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button><button type="button" class="btn btn-success" id="permisosConfirmApprove">Confirmar aprobación</button></div>
       </div>
     </div>
   </div>
@@ -283,13 +325,10 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Confirmar rechazo</h5><button type="button" class="btn-close"
-            data-bs-dismiss="modal"></button>
+          <h5 class="modal-title">Confirmar rechazo</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">¿Está seguro de rechazar este permiso?</div>
-        <div class="modal-footer"><button type="button" class="btn btn-secondary"
-            data-bs-dismiss="modal">Cancelar</button><button type="button" class="btn btn-danger"
-            id="permisosConfirmRejectFirst">Confirmar rechazo</button></div>
+        <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button><button type="button" class="btn btn-danger" id="permisosConfirmRejectFirst">Confirmar rechazo</button></div>
       </div>
     </div>
   </div>
@@ -297,15 +336,12 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Rechazar solicitud</h5><button type="button" class="btn-close"
-            data-bs-dismiss="modal"></button>
+          <h5 class="modal-title">Rechazar solicitud</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body"><label class="form-label">Motivo del rechazo *</label><textarea class="form-control"
             id="permisosRejectReason" rows="3"
             placeholder="Explique al empleado por qué se rechaza la solicitud de permiso..."></textarea></div>
-        <div class="modal-footer"><button type="button" class="btn btn-secondary"
-            data-bs-dismiss="modal">Cancelar</button><button type="button" class="btn btn-danger"
-            id="permisosConfirmReject">Confirmar rechazo</button></div>
+        <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button><button type="button" class="btn btn-danger" id="permisosConfirmReject">Confirmar rechazo</button></div>
       </div>
     </div>
   </div>
@@ -315,14 +351,10 @@
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Detalle de incapacidad</h5><button type="button" class="btn-close"
-            data-bs-dismiss="modal"></button>
+          <h5 class="modal-title">Detalle de incapacidad</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body" id="incapacidadesModalBody"></div>
-        <div class="modal-footer"><button type="button" class="btn btn-success"
-            id="incapacidadesAprobarBtn">Aprobar</button><button type="button" class="btn btn-danger"
-            id="incapacidadesRechazarBtn">Rechazar</button><button type="button" class="btn btn-secondary"
-            data-bs-dismiss="modal">Cerrar</button></div>
+        <div class="modal-footer"><button type="button" class="btn btn-success" id="incapacidadesAprobarBtn">Aprobar</button><button type="button" class="btn btn-danger" id="incapacidadesRechazarBtn">Rechazar</button><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button></div>
       </div>
     </div>
   </div>
@@ -330,13 +362,10 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Confirmar aprobación</h5><button type="button" class="btn-close"
-            data-bs-dismiss="modal"></button>
+          <h5 class="modal-title">Confirmar aprobación</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">¿Está seguro de aprobar esta incapacidad?</div>
-        <div class="modal-footer"><button type="button" class="btn btn-secondary"
-            data-bs-dismiss="modal">Cancelar</button><button type="button" class="btn btn-success"
-            id="incapacidadesConfirmApprove">Confirmar aprobación</button></div>
+        <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button><button type="button" class="btn btn-success" id="incapacidadesConfirmApprove">Confirmar aprobación</button></div>
       </div>
     </div>
   </div>
@@ -344,13 +373,10 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Confirmar rechazo</h5><button type="button" class="btn-close"
-            data-bs-dismiss="modal"></button>
+          <h5 class="modal-title">Confirmar rechazo</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">¿Está seguro de rechazar esta incapacidad?</div>
-        <div class="modal-footer"><button type="button" class="btn btn-secondary"
-            data-bs-dismiss="modal">Cancelar</button><button type="button" class="btn btn-danger"
-            id="incapacidadesConfirmRejectFirst">Confirmar rechazo</button></div>
+        <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button><button type="button" class="btn btn-danger" id="incapacidadesConfirmRejectFirst">Confirmar rechazo</button></div>
       </div>
     </div>
   </div>
@@ -358,21 +384,24 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Rechazar incapacidad</h5><button type="button" class="btn-close"
-            data-bs-dismiss="modal"></button>
+          <h5 class="modal-title">Rechazar incapacidad</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body"><label class="form-label">Motivo del rechazo *</label><textarea class="form-control"
             id="incapacidadesRejectReason" rows="3"
             placeholder="Explique al empleado por qué se rechaza la incapacidad..."></textarea></div>
-        <div class="modal-footer"><button type="button" class="btn btn-secondary"
-            data-bs-dismiss="modal">Cancelar</button><button type="button" class="btn btn-danger"
-            id="incapacidadesConfirmReject">Confirmar rechazo</button></div>
+        <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button><button type="button" class="btn btn-danger" id="incapacidadesConfirmReject">Confirmar rechazo</button></div>
       </div>
+    </div>
+  </div>
+
+  <!-- Toast (se crea dinámicamente si no existe) -->
+  <div class="toast-message" id="liveToast" style="display:none;">
+    <div class="bg-white rounded-3 shadow p-3 border-start border-4 border-danger">
+      <div class="d-flex gap-2"><i class="bi bi-info-circle-fill text-danger fs-5"></i><span id="toastMsg"></span></div>
     </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../Scripts/novedades.js"></script>
 </body>
-
 </html>

@@ -69,44 +69,67 @@ button {
   /* Oculta la barra en Internet Explorer/Edge */
 }
 
+/* SIDEBAR NEGRA CORPORATIVA */
+.sidebar {
+width: 280px;
+background-color: #000000;
+color: #FFFFFF;
+transition: all 0.3s;
+position: fixed;
+height: 100vh;
+z-index: 1000;
+display: flex;
+flex-direction: column;
+
+/* Habilitar el scroll pero ocultar la barra */
+overflow-y: auto;
+overflow-x: hidden;
+scrollbar-width: none;
+/* Oculta la barra en Firefox */
+-ms-overflow-style: none;
+/* Oculta la barra en Internet Explorer/Edge */
+}
+
 /* Oculta la barra en Chrome, Safari y navegadores basados en Chromium (como Brave o Edge) */
 .sidebar::-webkit-scrollbar {
-  display: none;
+display: none;
 }
 
 .sidebar-header {
-  padding: 1.8rem 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+padding: 1.8rem 1.5rem;
+border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .logo-area {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 12px;
 }
 
 .logo-icon {
-  width: 75px;
-  height: 65px;
-  /* border-radius: 12px; */
-  overflow: hidden;
+width: 145px;
+height: 135px;
+/* border-radius: 12px; */
+overflow: hidden;
+
 }
 
 .logo-icon img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+width: 100%;
+height: 100%;
+object-fit: cover;
 }
 
 .logo-text h4 {
-  color: white;
-  margin-bottom: 0;
-  font-size: 1.3rem;
+color: white;
+margin-bottom: 0;
+font-size: 1.3rem;
 }
 
 .logo-text span {
-  font-size: 0.7rem;
-  color: #ccc;
+font-size: 0.7rem;
+color: #ccc;
 }
 
 .nav-menu {

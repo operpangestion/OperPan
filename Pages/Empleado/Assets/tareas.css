@@ -1,0 +1,365 @@
+/* ==============================================
+    GLOBALES Y RESET (OperPan - Estación Paisa)
+============================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #F4F7FC;
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-weight: 700;
+    color: #000000;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+p,
+span,
+a,
+li,
+input,
+button,
+label {
+    font-size: 1rem;
+}
+
+/* Layout principal (sidebar + contenido) */
+.wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+.nav-menu {
+    flex: 1;
+    padding: 2rem 0;
+}
+
+.nav-menu ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.nav-menu li {
+    margin-bottom: 0.5rem;
+}
+
+.nav-menu a {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 0.8rem 1.8rem;
+    color: #E0E0E0;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+}
+
+.nav-menu a i {
+    font-size: 1.3rem;
+    width: 28px;
+}
+
+.nav-menu a:hover {
+    background: rgba(164, 7, 6, 0.15);
+    color: white;
+    border-left-color: #A40706;
+}
+
+.nav-menu .active a {
+    background: rgba(164, 7, 6, 0.2);
+    color: white;
+    border-left-color: #A40706;
+    font-weight: 600;
+}
+
+.soporte {
+    color: #ffffff80;
+    text-decoration: none;
+}
+
+.soporte:hover {
+    transition: 1s;
+    text-decoration: none;
+    color: #A40706;
+}
+
+/* CONTENIDO PRINCIPAL */
+.main-content {
+    flex: 1;
+    margin-left: 280px;
+    transition: all 0.3s;
+}
+
+/* TOPBAR NEGRO */
+.topbar {
+    background: #000000;
+    padding: 0.8rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.company-info h2 {
+    color: white;
+    font-size: 1.3rem;
+    margin-bottom: 0;
+    font-weight: 600;
+}
+
+.company-info p {
+    color: #BBBBBB;
+    font-size: 0.75rem;
+    margin-bottom: 0;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.user-badge a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0.4rem 1rem;
+    border-radius: 60px;
+}
+
+.user-badge:hover span {
+    transition: 1s;
+    color: #A40706;
+}
+
+.user-badge:hover i {
+    transition: 1s;
+    color: #A40706;
+}
+
+
+.user-badge i {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.user-badge span {
+    color: white;
+    font-weight: 500;
+}
+
+.btn-logout {
+    background: #A40706;
+    border: 1px solid #A40706;
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 30px;
+    transition: 0.2s;
+}
+
+.btn-logout:hover {
+    background: white;
+    color: #A40706;
+}
+
+/* DASHBOARD */
+.dashboard-container {
+    padding: 2rem;
+}
+
+/* Cards resumen */
+.stat-card {
+    background: white;
+    border-radius: 20px;
+    padding: 1rem 1.2rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
+    border: 1px solid #EDF2F7;
+    transition: 0.2s;
+}
+
+.stat-card i {
+    font-size: 2rem;
+    color: #A40706;
+}
+
+/* Filtros y tabs */
+.filter-bar {
+    background: white;
+    border-radius: 60px;
+    padding: 0.3rem;
+    display: inline-flex;
+    margin-bottom: 1.5rem;
+}
+
+/* Tarjetas de tareas */
+.task-card {
+    background: white;
+    border-radius: 24px;
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    transition: 0.2s;
+    border: 1px solid #F0F2F5;
+}
+
+.task-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.05);
+}
+
+.badge {
+    padding: 0.4rem 0.9rem;
+    border-radius: 40px;
+    font-weight: 500;
+}
+
+.badge-pending {
+    background: #FFF3E0;
+    color: #C77A00;
+}
+
+.badge-progress {
+    background: #E6F0FA;
+    color: #1A5D9C;
+}
+
+.badge-completed {
+    background: #E0F2E9;
+    color: #1E7B48;
+}
+
+.badge-expired {
+    background: #FEF2F0;
+    color: #B91C1C;
+}
+
+#taskActions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-action {
+    background: transparent;
+    border: 1px solid #CBD5E1;
+    border-radius: 10px;
+    padding: 0.4rem 1rem;
+    transition: 0.7s;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #1E293B;
+}
+
+.btn-action:hover {
+    background: #A40706;
+    color: white;
+    border-color: #A40706;
+}
+
+/* Modal personalizado (coherente con diseño) */
+.modal-content {
+    border-radius: 24px;
+    border: none;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+    background: transparent;
+    padding: 1.5rem 1.5rem 0 1.5rem;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.modal-footer {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+}
+
+.btn-cerrar-tarea {
+    color: #A40706;
+    background: transparent;
+    border:1px solid #A40706;
+    transition: 0.7s all;    
+}
+
+.btn-cerrar-tarea:hover {
+    color: #F0F2F5;
+    background: #A40706;
+    border:1px solid #A40706;
+}
+
+/* Toast */
+.toast-message {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1100;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .sidebar {
+        margin-left: -280px;
+    }
+
+    .sidebar.active {
+        margin-left: 0;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .menu-toggle {
+        display: block;
+        background: black;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        margin-right: 1rem;
+        border-radius: 12px;
+    }
+}
+
+@media (min-width: 993px) {
+    .menu-toggle {
+        display: none;
+    }
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    color: #5F6C7A;
+    font-size: 0.75rem;
+}
+
+.file-info {
+    font-size: 0.7rem;
+    color: #6c757d;
+}
