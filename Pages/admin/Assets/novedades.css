@@ -180,7 +180,7 @@ p, span, a, li, input, button, label { font-size: 1rem; }
     border-color: #A40706;
     box-shadow: 0 0 0 3px rgba(164, 7, 6, 0.2);
 }
-.btn-primary-corporate {
+.btn-primary-corporate, .btn-primary {
     background: #A40706;
     border: none;
     padding: 0.6rem 1.5rem;
@@ -189,7 +189,7 @@ p, span, a, li, input, button, label { font-size: 1rem; }
     transition: 0.2s;
     color: white !important;
 }
-.btn-primary-corporate:hover {
+.btn-primary-corporate:hover, .btn-primary:hover {
     background: #8a0504;
     transform: translateY(-2px);
 }
@@ -200,6 +200,12 @@ p, span, a, li, input, button, label { font-size: 1rem; }
     padding: 0.6rem 1.5rem;
     border-radius: 40px;
     font-weight: 600;
+    transition: all 0.2s ease;
+}
+.btn-outline-corporate:hover {
+    background: #A40706;
+    color: white;
+    border-color: #A40706;
 }
 .kpi-card {
     background: white;
@@ -235,6 +241,7 @@ p, span, a, li, input, button, label { font-size: 1rem; }
     background: white;
     border-radius: 20px;
     overflow: hidden;
+    width: 100%;
 }
 .table-custom thead {
     background: #F8F9FC;
@@ -260,6 +267,7 @@ footer {
     margin-bottom: 1.5rem;
     border-bottom: 1px solid #E9ECF3;
     padding-bottom: 0.5rem;
+    flex-wrap: wrap;
 }
 .novedades-tab {
     background: transparent;
@@ -289,6 +297,65 @@ footer {
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* Responsive tables: scroll horizontal y conversión a cards en móvil */
+.table-responsive-stack {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+@media (max-width: 767.98px) {
+    .table-custom thead {
+        display: none;
+    }
+    .table-custom tbody tr {
+        display: block;
+        margin-bottom: 1rem;
+        border: 1px solid #EDF2F7;
+        border-radius: 16px;
+        padding: 0.75rem;
+        background: white;
+    }
+    .table-custom tbody td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 0;
+        border: none;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    .table-custom tbody td:last-child {
+        border-bottom: none;
+    }
+    .table-custom tbody td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        width: 40%;
+        color: #1E293B;
+    }
+    .admin-request-card, .incapacidad-card {
+        padding: 1rem;
+    }
+    .novedades-tab {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+    }
+    .kpi-card h3 {
+        font-size: 1.5rem;
+    }
+    .dashboard-container {
+        padding: 1rem;
+    }
+}
+@media (max-width: 576px) {
+    .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    .user-info {
+        width: 100%;
+        justify-content: flex-start;
+    }
+}
 @media (max-width: 992px) {
     .sidebar { margin-left: -280px; }
     .sidebar.active { margin-left: 0; }
